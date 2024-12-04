@@ -2,6 +2,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
+// echo urlencode("axel+e1@careerlaunch.academy");
+// echo json_encode($_GET);
 
 function fetch_data($base_url,$url,$data){
     $url = $base_url.$url;
@@ -26,30 +28,54 @@ $data = $filters;
 
 $filter_data = json_decode(fetch_data($base_url,"student-filters",$data),true);
 
-// Check if the data was decoded successfully and is an array
-if (is_array($filter_data)) {
-    // Get the first key and its first value
-    $imp_time = array_key_first($filter_data);
-    $student_filter = $filter_data[$imp_time][0];
-} else {
-    echo "Error decoding JSON data.";
+if(isset($_POST['filterData'])){
+    // echo json_encode($_POST['filterData']);
+    $filter = $_POST['filterData'];
+    $type = explode("//", $filter);
+    $filters->implementation_type = $type[0];
+    $filters->filter = $type[1];
+}
+else{
+    if(isset($_GET['type']))
+        $filters->implementation_type = $_GET['type'];
+    else{
+        // Check if the data was decoded successfully and is an array
+        if (is_array($filter_data)) {
+            $imp_time = array_key_first($filter_data);
+            $student_filter = $filter_data[$imp_time][0];
+            $filters->implementation_type = $imp_time;
+            $filters->filter = $student_filter;
+        } else {
+            echo "Error decoding JSON data.";
+        }
+    }
+    if(isset($_GET['filter']))
+        $filters->filter = $_GET['filter'];
 }
 
-$filters->implementation_type = $imp_time;
-// $filters->evaluator_email = "mad6065@psu.edu";
-$filters->filter = $student_filter;
-// $filter = json_encode($filters);
+// if(isset($_GET['evaluator']))
+    $filters->evaluator_email = "axel+e1@careerlaunch.academy";
 
-echo json_encode($filters);
-$data = new stdClass();
-$data = $filters;
+// echo json_encode($filters);
+
+
+// $data = new stdClass();
+// $data = $filters;
 
 $student_details = json_decode(fetch_data($base_url,"student-details",$data),true);
+// $type = explode("//", $_GET['filter']);
+// if($type[0] == "work-exp")
+//     $filters->evaluator_email = $student_details["Evaluator Email"];
 
+
+//  echo json_encode($filters->evaluator_email);
+// $data = new stdClass();
+$data = $filters;
 $competency_data = json_decode(fetch_data($base_url,"student-competency",$data),true);
-echo intval(json_encode($competency_data["communication_results"]["pre"]));
+// echo intval(json_encode($competency_data["communication_results"]["pre"]));
 
-
+// echo json_encode($data);
+// echo generate_competency($competency_data["communication"]);
 function verifyLevel($data, $category, $subCategory, $key) {
     return isset($data[$category][$subCategory][$key]) ? 
         ($data[$category][$subCategory][$key] == "1" ? 10.5 : 
@@ -64,60 +90,152 @@ function returnLevel($level) {
         ($level == "Early" ? "65.5" : "85.5"))) : null;
 }
 
-function generate_filters($filter_data) {
+// function generate_filters($value,$filter_data) {
+//     foreach ($filter_data as $key => $values) {
+//         foreach ($values as $value) {
+//             echo "<option value=\"{$key}//{$value}\">{$value}</option>\n";
+//         }
+//     }
+// }
+
+// Function to generate filters with selected value
+function generate_filters($selected_value, $filter_data) {
+    $html = '';
     foreach ($filter_data as $key => $values) {
         foreach ($values as $value) {
-            echo "<option value=\"{$key}:{$value}\">{$value}</option>\n";
+            // Check if the current value matches the selected value
+            $is_selected = ($selected_value === "{$key}//{$value}") ? 'selected' : '';
+            $html .= "<option value=\"{$key}//{$value}\" {$is_selected}>{$value}</option>\n";
         }
     }
+    return $html;
 }
 
-function generate_competency($level) {
-    foreach($level as $key => $value) 
-    {
-        echo '<div class="card border-2"
-                style="box-shadow: 7px 7px 14px 0px rgba(0,0,0,0.15);">
-                <div class="card-body">
-                    <div class="row w-100 align-items-center">
-                        <div class="col-sm-3 text-center mb-0 align-content-center">
-                            <p class="px-2 icon-text text-dark mb-0"
-                                style="font-size: 18px;font-weight: 700;">'.$key.'
-                            </p>
-                        </div>
-                        <div class="col-sm-9 mt-4 p-0">
-                            <div class="progress mb-3 bg-white"
-                                style="width:90%;margin:auto">
-                                <div class="progress-bar bg-dark " role="progressbar"
-                                    aria-valuenow="80" value="80" aria-valuemin="0"
-                                    aria-valuemax="100"
-                                    style="width:'.returnLevel($value['pre']).'%">
-                                </div>
-                                <div class="progress-value" style="background-color:#000;font-size:16px">
-                                </div>
-                                <p style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                    <b>'.$value["pre"].'</b>
-                                </p>
-                                <!-- /.progress-bar .progress-bar-danger -->
-                                </div><!-- /.progress .no-rounded -->
-                                <div style="margin-top:32px">
-                                    <div class="progress mb-3 bg-white" style="width:90%;margin:auto">
-                                        <div class="progress-bar bg-info" role="progressbar" aria-valuenow="80" value="80" aria-valuemin="0"
-                                            aria-valuemax="100"
-                                            style="width:'.returnLevel($value['post']).'%">
-</div>
-<div class="progress-value bg-info" style="font-size:16px">
-</div>
-<p style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-    <b>'.$value["post"].'</b>
-</p>
-<!-- /.progress-bar .progress-bar-danger -->
-</div><!-- /.progress .no-rounded -->
-</div>
-</div>
-</div>
-</div>
+// Get the selected value from the POST request
+$selected_value = $_POST['filterData'] ?? ''; // Use null coalescing operator
+
+$selected_filter = isset($_POST['filterData']) ? $_POST['filterData'] : '';
+
+function generate_competency($level,$color) {
+foreach($level as $key => $value)
+{
+echo '
+<div class="card border-2" style="box-shadow: 7px 7px 14px 0px rgba(0,0,0,0.15);">
+    <div class="card-body">
+        <div class="row w-100 align-items-center">
+            <div class="col-sm-3 text-center mb-0 align-content-center">
+                <p class="px-2 icon-text text-dark mb-0" style="font-size: 18px;font-weight: 700;">'.$key.'
+                </p>
+            </div>
+            <div class="col-sm-9 mt-4 p-0">';
+                if(isset($value["evaluator"]) && $value["evaluator"] != null){
+                echo '<div class="progress mb-5 bg-white evalu" style="width:90%;margin-bottom:32px;margin:auto">
+                    <div class="progress-bar animated-progress bg-dark " role="progressbar"
+                        data-width="'.returnLevel($value['evaluator']).'" aria-valuemin="0" aria-valuemax="100"
+                        style="width:'.returnLevel($value['evaluator']).'%">
+                    </div>
+                    <div class="progress-value" style="background-color:#000;font-size:16px">
+                    </div>
+                    <p style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
+                        <b>'.$value["evaluator"].'</b>
+                    </p>
+                </div>';
+                }
+                if(isset($value["post"]) && $value["post"] != null){
+                echo '<div class="progress mb-3 bg-white" style="width:90%;margin:auto">
+                    <div class="progress-bar animated-progress" role="progressbar"
+                        data-width="'.returnLevel($value['post']).'" aria-valuemin="0" aria-valuemax="100"
+                        style="width:'.returnLevel($value['post']).'%;background-color:'.$color.'">
+                    </div>
+                    <div class="progress-value" style="background-color:'.$color.';font-size:16px">
+                    </div>
+                    <p style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
+                        <b>'.$value["post"].'</b>
+                    </p>
+                </div>';
+                }
+                else if(isset($value["pre"]) && $value["pre"] != null){
+                echo '<div class="progress mb-3 bg-white" style="width:90%;margin:auto">
+                    <div class="progress-bar animated-progress" role="progressbar"
+                        data-width="'.returnLevel($value['pre']).'" aria-valuemin="0" aria-valuemax="100"
+                        style="width:'.returnLevel($value['pre']).'%;background-color:'.$color.'">
+                    </div>
+                    <div class="progress-value" style="background-color:'.$color.';font-size:16px">
+                    </div>
+                    <p style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
+                        <b>'.$value["pre"].'</b>
+                    </p>
+                </div>';
+                }
+                echo '</div>
+        </div>
+    </div>
 </div>';
 }
+}
+
+function generate_competency_results($competency_data, $competency,$color, $label, $icon){
+
+echo '<div class="row align-items-center p-0 w-100">
+    <div class="col-sm-3 d-flex p-3 mb-0 align-items-center card align-content-center"
+        style="background-color:'.$color.'!important">
+        <img class="img-fluid" src="'.$icon.'" style="height: 70px;width: 70px;margin: auto;">
+        <h3 class="px-2 icon-text text-dark mb-0" style="color: white!important;font-size: 18px;font-weight: 700;">
+            '.$label.'
+        </h3>
+    </div>
+    <div class="col-sm-8 p-3" style="margin-top:20px;">';
+    // echo json_encode($competency_data["evaluator"]);
+    // echo json_encode($competency_data[$competency]['pre'] != null);
+        if(json_encode($competency_data["evaluator"]) == "true")
+        {
+        echo '<div class="progress mb-3 bg-white evalu" style="width:90%;margin-bottom:32px!important;margin:auto">
+            <div class="progress-bar animated-progress bg-dark " role="progressbar"
+                data-width="'.intval(json_encode($competency_data[$competency]["evaluator"])).'" aria-valuemin="0"
+                aria-valuemax="100" style="width:'.intval(json_encode($competency_data[$competency]["evaluator"])).'%">
+            </div>
+            <div class="progress-value" style="background-color:#000;font-size:16px">
+                '.intval(json_encode($competency_data[$competency]["evaluator"])).'
+            </div>
+            <p style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
+                <b>Evaluator</b>
+            </p>
+        </div>';
+        }
+        if(json_encode($competency_data["post"]) == "true")
+        {
+        $self_label = $competency_data[$competency]['evaluator'] == null ? "Post" : "Self";
+        echo '<div class="progress bg-white" style="width:90%;margin:auto">
+            <div class="progress-bar animated-progress" role="progressbar"
+                data-width="'.intval(json_encode($competency_data[$competency]["post"])).'" aria-valuemin="0"
+                aria-valuemax="100" style="width:'.intval(json_encode($competency_data[$competency]["post"])).'%;background-color:'.$color.'">
+            </div>
+            <div class="progress-value" style="background-color:'.$color.';font-size:16px">
+                '.intval(json_encode($competency_data[$competency]["post"])).'
+            </div>
+            <p style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
+                <b class="self_label">'.$self_label.'</b>
+            </p>
+        </div>';
+        }
+        if(json_encode($competency_data["pre"]) == "true")
+        {
+        $self_label = $competency_data[$competency]['evaluator'] == null ? "Pre" : "Self";
+        echo '<div class="progress mb-3 bg-white" style="width:90%;margin:auto">
+            <div class="progress-bar animated-progress" role="progressbar"
+                data-width="'.intval(json_encode($competency_data[$competency]["pre"])).'" aria-valuemin="0"
+                aria-valuemax="100" style="width:'.intval(json_encode($competency_data[$competency]["pre"])).'%;background-color:'.$color.'">
+            </div>
+            <div class="progress-value" style="font-size:16px;background-color:'.$color.'">
+                '.intval(json_encode($competency_data[$competency]["pre"])).'
+            </div>
+            <p style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
+                <b class="self_label">'.$self_label.'</b>
+            </p>
+        </div>';
+        }
+        echo '</div>
+</div>';
 }
 
 ?>
@@ -135,41 +253,19 @@ function generate_competency($level) {
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 
-    <!-- jquery.vectormap css -->
-    <link href="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet"
-        type="text/css" />
-
-    <link rel="stylesheet" href="assets/libs/morris.js/morris.css">
-
     <!-- Icons Css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-
-    <!-- DataTables -->
-    <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-
-    <!-- Responsive datatable examples -->
-    <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet"
-        type="text/css" />
-
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     <!-- Bootstrap Css -->
     <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/custom-css.css" rel="stylesheet" type="text/css" />
-    <!-- App Css-->
-    <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
         rel="stylesheet">
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/highcharts-more.js"></script>
-    <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-
     <style>
     .grid1 {
         display: grid;
@@ -232,6 +328,24 @@ function generate_competency($level) {
         font-size: 18px;
         margin-left: 9px;
     }
+
+    .animated-progress {
+        animation: progress-animation 1s ease-out forwards;
+    }
+
+    @keyframes progress-animation {
+        from {
+            width: 0%;
+        }
+
+        to {
+            width: var(--progress-width, 100%);
+        }
+    }
+
+    .recommendations-headings {
+        font-size: 16px !important;
+    }
     </style>
 </head>
 
@@ -256,10 +370,17 @@ function generate_competency($level) {
                             <h5 style="margin-left:20px"><b><?= $student_details['Organisation'] ?></b></h5>
                         </div>
                         <div class="col-sm-4">
-                            <select class="form-select">
-                                <option> All Responses </option>
-                                <?= generate_filters($filter_data); ?>
-                                <select>
+                            <!-- <form method="POST">
+                                <select name="filterData" class="form-select" onchange="this.form.submit()">
+                                    <?= generate_filters($selected_value,$filter_data); ?>
+                                     <select>
+                                </form> -->
+
+                            <form method="POST">
+                                <select name="filterData" class="form-select" onchange="this.form.submit()">
+                                    <?= generate_filters($selected_value, $filter_data); ?>
+                                </select>
+                            </form>
                         </div>
                     </div>
 
@@ -294,13 +415,17 @@ function generate_competency($level) {
                         </div>
                     </div>
 
+                    <?php 
+                    if($student_details["work_experience"] != null && isset($student_details["Evaluator Email"])){                            
+                        ?>
                     <div class="d-flex justify-content-between">
+
                         <div class="card border-1" style="width:55%">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div>
-                                            <h5> <b> Evaluator: Manager (Supervisor) </b>
+                                            <h5> <b> Evaluator: <?= $student_details['Evaluator Relation'] ?> </b>
                                             </h5>
                                             <h5><?= $student_details['Evaluator Name'] ?> </h5>
                                         </div>
@@ -319,11 +444,21 @@ function generate_competency($level) {
                             </div>
                         </div>
                         <div class="d-flex pr-5" style="width:20%">
-                            <img src=" <?= $student_details['Logo'] ?>" class="img-fluid rounded"
-                                alt=" <?= $student_details['Logo'] ?>" style="object-fit: contain;width:100%">
+                            <img src="<?= $student_details['Logo'] == "NULL" ? "assets/images/logo.png" : $student_details['Logo'] ?>"
+                                class="img-fluid rounded" alt="Org Logo" style="object-fit: contain;width:100%">
                         </div>
-
                     </div>
+                    <?php } 
+                        else{
+                            ?>
+                    <div class="float-end pb-3 mt-3" style="width:20%">
+                        <img src="<?= $student_details['Logo'] == "NULL" ? "assets/images/logo.png" : $student_details['Logo'] ?>"
+                            class="img-fluid rounded" alt=" <?= $student_details['Organisation'] ?>"
+                            style="object-fit: contain;width:100%">
+                    </div>
+                    <?php
+                        }
+                        ?>
                 </div>
             </div>
 
@@ -407,6 +542,8 @@ function generate_competency($level) {
                     <div class="col-sm-12 p-0">
                         <div class="card px-3">
                             <div class="card-body pt-0 pe-0">
+                                <?php 
+                                if($competency_data["overall_career_readiness_results"]["evaluator"] != null){ ?>
                                 <div class="row p-0 mt-2">
                                     <div class="col-sm-12 p-0">
                                         <div class="d-flex float-end align-content-center">
@@ -416,7 +553,8 @@ function generate_competency($level) {
                                             <div style="margin-left:5px">
                                                 <div class="form-check form-switch" style="width:fit-content!important">
                                                     <input class="form-check-input bg-success" type="checkbox"
-                                                        role="switch" id="flexSwitchCheckChecked" checked>
+                                                        role="switch" id="evaluator_switch" onclick="eval_toggle()"
+                                                        checked>
                                                     <label class="form-check-label"
                                                         for="flexSwitchCheckChecked"></label>
                                                 </div>
@@ -424,6 +562,7 @@ function generate_competency($level) {
                                         </div>
                                     </div>
                                 </div>
+                                <?php } ?>
                                 <div class="row align-items-center p-0">
                                     <div
                                         class="col-sm-3 d-flex flex-row p-3 mb-0 align-items-center card bg-dark align-content-center">
@@ -435,42 +574,66 @@ function generate_competency($level) {
                                             Readiness </h3>
                                     </div>
                                     <div class="col-sm-8 mt-4 px-3">
-                                        <div class="progress mb-3 bg-white" style="width:93%;margin:auto">
-                                            <div class="progress-bar bg-dark " role="progressbar" aria-valuenow="80"
-                                                value="80" aria-valuemin="0" aria-valuemax="100"
-                                                style="width:<?= intval(json_encode($competency_data["overall_career_readiness_results"]["post"])); ?>%">
+                                        <?php 
+                                        if(intval(json_encode($competency_data["overall_career_readiness_results"]["evaluator"])) != null)
+                                        {
+                                        ?>
+                                        <div class="progress mb-3 bg-white evalu"
+                                            style="width:93%;margin-bottom:32px!important;margin:auto">
+                                            <div class="progress-bar animated-progress bg-dark " role="progressbar"
+                                                data-width="<?= intval(json_encode($competency_data["overall_career_readiness_results"]["evaluator"])); ?>"
+                                                aria-valuemin="0" aria-valuemax="100"
+                                                style="width:<?= intval(json_encode($competency_data["overall_career_readiness_results"]["evaluator"])); ?>%">
                                             </div>
                                             <div class="progress-value" style="background-color:#000;font-size:16px">
-                                                <?= intval(json_encode($competency_data["overall_career_readiness_results"]["post"])); ?>
+                                                <?= intval(json_encode($competency_data["overall_career_readiness_results"]["evaluator"])); ?>
                                             </div>
                                             <p
                                                 style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
                                                 <b>Evaluator</b>
                                             </p>
+                                        </div>
+                                        <?php } 
+                                         if(intval(json_encode($competency_data["overall_career_readiness_results"]["post"])) != null)
+                                        {
+                                        ?>
+                                        <div class="progress mb-3 bg-white" style="width:93%;margin:auto">
+                                            <div class="progress-bar animated-progress bg-warning " role="progressbar"
+                                                data-width="<?= intval(json_encode($competency_data["overall_career_readiness_results"]["post"])); ?>"
+                                                aria-valuemin="0" aria-valuemax="100"
+                                                style="width:<?= intval(json_encode($competency_data["overall_career_readiness_results"]["post"])); ?>%">
+                                            </div>
+                                            <div class="progress-value bg-warning" style="font-size:16px">
+                                                <?= intval(json_encode($competency_data["overall_career_readiness_results"]["post"])); ?>
+                                            </div>
+                                            <p
+                                                style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
+                                                <b>
+                                                    <?= $competency_data["overall_career_readiness_results"]['evaluator'] == null ? "Post" : "Self" ?></b>
+                                            </p>
                                             <!-- /.progress-bar .progress-bar-danger -->
                                         </div><!-- /.progress .no-rounded -->
-
-
-                                        <div class="mt-4">
-                                            <div class="progress mb-3 bg-white" style="width:93%;margin:auto">
-                                                <div class="progress-bar bg-warning " role="progressbar"
-                                                    aria-valuenow="80" value="80" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width:<?= intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])); ?>%">
-                                                </div>
-                                                <div class="progress-value bg-warning" style="font-size:16px">
-                                                    <?= intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])); ?>
-                                                </div>
-                                                <p
-                                                    style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                    <b>Self</b>
-                                                </p>
-                                                <!-- /.progress-bar .progress-bar-danger -->
-                                            </div><!-- /.progress .no-rounded -->
-
-                                            <!-- <p style="margin-top:-36px;margin-left:59.5%;font-size:18px;color:black">
-                                                <b>Self</b>
-                                            </p> -->
-                                        </div>
+                                        <?php } 
+                                        else if(intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])) != null)
+                                        {
+                                            ?>
+                                        <div class="progress mb-3 bg-white" style="width:93%;margin:auto">
+                                            <div class="progress-bar animated-progress bg-warning " role="progressbar"
+                                                data-width="<?= intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])); ?>"
+                                                aria-valuemin="0" aria-valuemax="100"
+                                                style="width:<?= intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])); ?>%">
+                                            </div>
+                                            <div class="progress-value bg-warning" style="font-size:16px">
+                                                <?= intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])); ?>
+                                            </div>
+                                            <p
+                                                style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
+                                                <b>
+                                                    <?= $competency_data["overall_career_readiness_results"]['evaluator'] == null ? "Pre" : "Self" ?></b>
+                                            </p>
+                                            <!-- /.progress-bar .progress-bar-danger -->
+                                        </div><!-- /.progress .no-rounded -->
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
@@ -484,106 +647,65 @@ function generate_competency($level) {
                                         <button class="accordion-button collapsed btn-up" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseZero"
                                             aria-expanded="false" aria-controls="flush-collapseZero">
-                                            <div class="row align-items-center p-0 w-100">
-                                                <div
-                                                    class="col-sm-3 d-flex p-3 mb-0 align-items-center card bg-info align-content-center">
-                                                    <img class="img-fluid"
-                                                        src="./assets/images/nace-icons/nace-communication-black-line-art-icon.png"
-                                                        style="height: 70px;width: 70px;margin: auto;">
-                                                    <h3 class="px-2 icon-text text-dark mb-0"
-                                                        style="color: white!important;font-size: 18px;font-weight: 700;">
-                                                        Communication
-                                                    </h3>
-                                                </div>
-                                                <div class="col-sm-8 p-3" style="margin-top:20px;">
-                                                    <div class="progress mb-3 bg-white" style="width:90%;margin:auto">
-                                                        <div class="progress-bar bg-dark " role="progressbar"
-                                                            aria-valuenow="80" value="80" aria-valuemin="0"
-                                                            aria-valuemax="100"
-                                                            style="width:<?= intval(json_encode($competency_data["communication_results"]["post"])); ?>%">
-                                                        </div>
-                                                        <div class="progress-value"
-                                                            style="background-color:#000;font-size:16px">
-                                                            <?= intval(json_encode($competency_data["communication_results"]["post"])); ?>
-                                                        </div>
-                                                        <p
-                                                            style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                            <b>Evaluator</b>
-                                                        </p>
-                                                        <!-- /.progress-bar .progress-bar-danger -->
-                                                    </div><!-- /.progress .no-rounded -->
-                                                    <div style="margin-top:35px">
-                                                        <div class="progress mb-3 bg-white"
-                                                            style="width:90%;margin:auto">
-                                                            <div class="progress-bar bg-info" role="progressbar"
-                                                                aria-valuenow="80" value="80" aria-valuemin="0"
-                                                                aria-valuemax="100"
-                                                                style="width:<?= intval(json_encode($competency_data["communication_results"]["pre"])); ?>%">
-                                                            </div>
-                                                            <div class="progress-value bg-info" style="font-size:16px">
-                                                                <?= intval(json_encode($competency_data["communication_results"]["pre"])); ?>
-                                                            </div>
-                                                            <p
-                                                                style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                                <b>Self</b>
-                                                            </p>
-                                                            <!-- /.progress-bar .progress-bar-danger -->
-                                                        </div><!-- /.progress .no-rounded -->
-                                                    </div>
-                                                </div>
-                                            </div>
+
+                                            <?= generate_competency_results($competency_data, "communication_results","#3ca4fe", "Communication", "./assets/images/nace-icons/nace-communication-black-line-art-icon.png") ?>
                                         </button>
                                     </h2>
                                     <div id="flush-collapseZero" class="accordion-collapse collapse"
                                         aria-labelledby="flush-flush-collapseZero"
                                         data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">
-                                            <?= generate_competency($competency_data["communication"]); ?>
-                                            <h5 class="card-title text-black mb-3">
-                                                Recommendations
-                                            </h5>
+                                        <?= generate_competency($competency_data["communication"],"#3ca4fe"); ?>
+                                        <h5 class="card-title text-black mb-3">
+                                            Recommendations
+                                        </h5>
 
-                                            <div class="card border-2">
-                                                <div class="card-body" style="color:black">
-                                                    <p dir="ltr"><strong>Engage in Class Discussions</strong></p>
-                                                    <p dir="ltr">💬 Actively participate in class discussions and group
-                                                        projects. When possible, prepare insightful questions and
-                                                        comments beforehand to contribute meaningfully to the
-                                                        conversation. You will deepen your understanding of the subject
-                                                        matter and improve your communication skills.</p>
-                                                    <p dir="ltr"><strong><br></strong><strong>Be Mindful of Nonverbal
-                                                            Communication</strong></p>
-                                                    <p dir="ltr">👀 Pay attention to your body language, facial
-                                                        expressions, and eye contact during interactions, as well as the
-                                                        nonverbal communication of others. <a class="text-primary"
-                                                            href="https://www.google.com/" target="_blank">Advance tip
-                                                        </a>: mirror positive
-                                                        nonverbal cues of others to show understanding and
-                                                        attentiveness.</p>
-                                                    <p dir="ltr"><strong><br></strong><strong>Prepare and Deliver
-                                                            Presentations</strong></p>
-                                                    <p dir="ltr">🎤 Volunteer to present in class, at meetings, or other
-                                                        situations to practice your verbal and non-verbal communication
-                                                        skills. By honing your presentation behaviors, you become a more
-                                                        effective communicator.</p>
-                                                    <p dir="ltr"><strong><br></strong><strong>Practice Active Listening
-                                                            Skills</strong></p>
-                                                    <p dir="ltr">👂Practice active listening during conversations by
-                                                        giving your full attention to the speaker and genuinely engaging
-                                                        with their message. Avoid interrupting and focus on
-                                                        understanding their perspective before formulating a response.
-                                                        Reflect back on what the speaker has said to demonstrate
-                                                        comprehension and empathy. You will build strong relationships
-                                                        when you consistently use active listening behaviors. </p>
-                                                    <p dir="ltr"><strong><br></strong><strong>Talk to Professionals in
-                                                            Career Roles that Interest You</strong></p>
-                                                    <p dir="ltr">🕵🏼 Set up time to talk with professionals in careers
-                                                        you're interested in to gain information. Utilize your school
-                                                        resources and guidance from your career center to connect with
-                                                        individuals in your desired field.</p>
-
-
-                                                </div>
+                                        <div class="card border-2">
+                                            <div class="card-body" style="color:black">
+                                                <p class="recommendations-headings" dir="ltr"><strong>Engage in Class
+                                                        Discussions</strong></p>
+                                                <p dir="ltr">💬 Actively participate in class discussions and group
+                                                    projects. When possible, prepare insightful questions and
+                                                    comments beforehand to contribute meaningfully to the
+                                                    conversation. You will deepen your understanding of the subject
+                                                    matter and improve your communication skills.</p>
+                                                <p class="recommendations-headings" dir="ltr">
+                                                    <strong><br></strong><strong>Be Mindful of Nonverbal
+                                                        Communication</strong>
+                                                </p>
+                                                <p dir="ltr">👀 Pay attention to your body language, facial
+                                                    expressions, and eye contact during interactions, as well as the
+                                                    nonverbal communication of others. <a class="text-primary"
+                                                        href="https://www.google.com/" target="_blank">Advance tip
+                                                    </a>: mirror positive
+                                                    nonverbal cues of others to show understanding and
+                                                    attentiveness.</p>
+                                                <p class="recommendations-headings" dir="ltr">
+                                                    <strong><br></strong><strong>Prepare and Deliver
+                                                        Presentations</strong>
+                                                </p>
+                                                <p dir="ltr">🎤 Volunteer to present in class, at meetings, or other
+                                                    situations to practice your verbal and non-verbal communication
+                                                    skills. By honing your presentation behaviors, you become a more
+                                                    effective communicator.</p>
+                                                <p class="recommendations-headings" dir="ltr">
+                                                    <strong><br></strong><strong>Practice Active Listening
+                                                        Skills</strong>
+                                                </p>
+                                                <p dir="ltr">👂Practice active listening during conversations by
+                                                    giving your full attention to the speaker and genuinely engaging
+                                                    with their message. Avoid interrupting and focus on
+                                                    understanding their perspective before formulating a response.
+                                                    Reflect back on what the speaker has said to demonstrate
+                                                    comprehension and empathy. You will build strong relationships
+                                                    when you consistently use active listening behaviors. </p>
+                                                <p class="recommendations-headings" dir="ltr">
+                                                    <strong><br></strong><strong>Talk to Professionals in
+                                                        Career Roles that Interest You</strong>
+                                                </p>
+                                                <p dir="ltr">🕵🏼 Set up time to talk with professionals in careers
+                                                    you're interested in to gain information. Utilize your school
+                                                    resources and guidance from your career center to connect with
+                                                    individuals in your desired field.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -594,61 +716,14 @@ function generate_competency($level) {
                                         <button class="accordion-button collapsed btn-up" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
                                             aria-expanded="false" aria-controls="flush-collapseTwo">
-                                            <div class="row align-items-center p-0 w-100">
-                                                <div class="col-sm-3 d-flex p-3 mb-0 align-items-center card align-content-center"
-                                                    style="background-color: #E06B60;">
-                                                    <img class="img-fluid"
-                                                        src="./assets/images/nace-icons/nace-teamwork-black-line-art-icon.png"
-                                                        style="height: 70px;width: 70px;margin: auto;">
-                                                    <h3 class="px-2 icon-text text-dark mb-0"
-                                                        style="color: white!important;">
-                                                        Teamwork
-                                                    </h3>
-                                                </div>
-                                                <div class="col-sm-8 p-3" style="margin-top:20px;">
-                                                    <div class="progress mb-3 bg-white" style="width:90%;margin:auto">
-                                                        <div class="progress-bar bg-dark " role="progressbar"
-                                                            aria-valuenow="80" value="80" aria-valuemin="0"
-                                                            aria-valuemax="100" style="width:22%">
-                                                        </div>
-                                                        <div class="progress-value"
-                                                            style="background-color:#000;font-size:16px">
-                                                            20
-                                                        </div>
-                                                        <p
-                                                            style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                            <b>Evaluator</b>
-                                                        </p>
-                                                        <!-- /.progress-bar .progress-bar-danger -->
-                                                    </div><!-- /.progress .no-rounded -->
-                                                    <div style="margin-top:35px">
-                                                        <div class="progress mb-3 bg-white"
-                                                            style="width:90%;margin:auto">
-                                                            <div class="progress-bar " role="progressbar"
-                                                                aria-valuenow="80" value="80" aria-valuemin="0"
-                                                                aria-valuemax="100"
-                                                                style="width:55%;background-color: #E06B60">
-                                                            </div>
-                                                            <div class="progress-value"
-                                                                style="font-size:16px;background-color: #E06B60">
-                                                                50
-                                                            </div>
-                                                            <p
-                                                                style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                                <b>Self</b>
-                                                            </p>
-                                                            <!-- /.progress-bar .progress-bar-danger -->
-                                                        </div><!-- /.progress .no-rounded -->
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <?= generate_competency_results($competency_data, "teamwork_results","#E06B60", "Teamwork","./assets/images/nace-icons/nace-teamwork-black-line-art-icon.png") ?>
                                         </button>
                                     </h2>
                                     <div id="flush-collapseTwo" class="accordion-collapse collapse"
                                         aria-labelledby="flush-flush-collapseTwo"
                                         data-bs-parent="#accordionFlushExample">
                                         <div class="accordion-body">
-                                            <?= generate_competency($competency_data["teamwork"]); ?>
+                                            <?= generate_competency($competency_data["teamwork"], "#E06B60"); ?>
 
                                             <h5 class="card-title text-black mb-3">
                                                 Recommendations
@@ -659,35 +734,45 @@ function generate_competency($level) {
                                                     <p><strong><span
                                                                 class="font-large">Recommendations</span></strong><strong></strong>
                                                     </p>
-                                                    <p dir="ltr"><strong>Participate in Study Groups</strong></p>
+                                                    <p class="recommendations-headings" dir="ltr"><strong>Participate in
+                                                            Study Groups</strong></p>
                                                     <p dir="ltr">👥 Collaborate with peers by creating or joining study
                                                         groups. </p>
-                                                    <p dir="ltr"><strong><br></strong><strong>Be Thoughtful About
-                                                            Supporting Others</strong></p>
+                                                    <p class="recommendations-headings" dir="ltr">
+                                                        <strong><br></strong><strong>Be Thoughtful About
+                                                            Supporting Others</strong>
+                                                    </p>
                                                     <p dir="ltr">🤝In group and team settings, think about what you can
                                                         do or say to support your teammates.</p>
-                                                    <p dir="ltr"><strong><br></strong><strong>Join Relevant Communities
-                                                            or Organizations</strong></p>
+                                                    <p class="recommendations-headings" dir="ltr">
+                                                        <strong><br></strong><strong>Join Relevant Communities
+                                                            or Organizations</strong>
+                                                    </p>
                                                     <p dir="ltr">🚀 If you currently do not have many opportunities to
                                                         work in groups, think about joining communities or organizations
                                                         related to your fields of interest. These experiences will
                                                         provide opportunities to practice your teamwork skills.</p>
-                                                    <p dir="ltr"><strong><br></strong><strong>Use Teamwork Apps</strong>
+                                                    <p class="recommendations-headings" dir="ltr">
+                                                        <strong><br></strong><strong>Use Teamwork Apps</strong>
                                                     </p>
                                                     <p dir="ltr">📱For team projects, utilize collaboration tools like
                                                         Trello, Asana, or Slack to enhance your teamwork and
                                                         communication skills. These apps allow you to practice
                                                         organizing and managing group tasks. </p>
-                                                    <p dir="ltr"><strong><br></strong><strong>Participate in
-                                                            Team-Building Exercises</strong></p>
+                                                    <p class="recommendations-headings" dir="ltr">
+                                                        <strong><br></strong><strong>Participate in
+                                                            Team-Building Exercises</strong>
+                                                    </p>
                                                     <p dir="ltr">🎯 Take the lead or participate in team-building
                                                         exercises to strengthen your relationships with the people in
                                                         your group or on your team. Spending time with people on your
                                                         team in different environments can provide you the opportunity
                                                         to get to know each other better, which can make you a better
                                                         teammate.</p>
-                                                    <p dir="ltr"><strong><br></strong><strong>Participate in Team
-                                                            Sports</strong></p>
+                                                    <p class="recommendations-headings" dir="ltr">
+                                                        <strong><br></strong><strong>Participate in Team
+                                                            Sports</strong>
+                                                    </p>
                                                     <p dir="ltr">🏀 Engage in recreational sports teams to develop
                                                         essential teamwork skills such as communication, coordination,
                                                         and mutual support. Participating in team sports can provide
@@ -704,60 +789,14 @@ function generate_competency($level) {
                                         <button class="accordion-button collapsed btn-up" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
                                             aria-expanded="false" aria-controls="flush-collapseOne">
-                                            <div class="row align-items-center p-0 w-100">
-                                                <div
-                                                    class="col-sm-3 d-flex p-3 mb-0 align-items-center card bg-warning align-content-center">
-                                                    <img class="img-fluid"
-                                                        src="./assets/images/nace-icons/nace-career-and-self-development-black-line-art-icon.png"
-                                                        style="height: 70px;width: 70px;margin: auto;">
-                                                    <h5 class="px-2 icon-text text-center text-dark mb-0"
-                                                        style="color: white!important;">
-                                                        Career & Self
-                                                        Development
-                                                    </h5>
-                                                </div>
-                                                <div class="col-sm-8 p-3" style="margin-top:20px;">
-                                                    <div class="progress mb-3 bg-white" style="width:90%;margin:auto">
-                                                        <div class="progress-bar bg-dark " role="progressbar"
-                                                            aria-valuenow="80" value="80" aria-valuemin="0"
-                                                            aria-valuemax="100" style="width:22%">
-                                                        </div>
-                                                        <div class="progress-value"
-                                                            style="background-color:#000;font-size:16px">
-                                                            20
-                                                        </div>
-                                                        <p
-                                                            style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                            <b>Evaluator</b>
-                                                        </p>
-                                                        <!-- /.progress-bar .progress-bar-danger -->
-                                                    </div><!-- /.progress .no-rounded -->
-                                                    <div style="margin-top:35px">
-                                                        <div class="progress mb-3 bg-white"
-                                                            style="width:90%;margin:auto">
-                                                            <div class="progress-bar bg-warning " role="progressbar"
-                                                                aria-valuenow="80" value="80" aria-valuemin="0"
-                                                                aria-valuemax="100" style="width:55%">
-                                                            </div>
-                                                            <div class="progress-value bg-warning"
-                                                                style="font-size:16px">50
-                                                            </div>
-                                                            <p
-                                                                style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                                <b>Self</b>
-                                                            </p>
-                                                            <!-- /.progress-bar .progress-bar-danger -->
-                                                        </div><!-- /.progress .no-rounded -->
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <?= generate_competency_results($competency_data, "self_development_results","#f8b603", "Career & Self Development","./assets/images/nace-icons/nace-career-and-self-development-black-line-art-icon.png") ?>
                                         </button>
                                     </h2>
                                     <div id="flush-collapseOne" class="accordion-collapse collapse"
                                         aria-labelledby="flush-flush-collapseOne"
                                         data-bs-parent="#accordionFlushExample">
                                         <div class="accordion-body">
-                                            <?= generate_competency($competency_data["self_development"]); ?>
+                                            <?= generate_competency($competency_data["self_development"],"#f8b603"); ?>
 
                                             <h5 class="card-title text-black mb-3">
                                                 Recommendations
@@ -815,61 +854,14 @@ function generate_competency($level) {
                                         <button class="accordion-button collapsed btn-up" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseFour"
                                             aria-expanded="false" aria-controls="flush-collapseFour">
-                                            <div class="row align-items-center p-0 w-100">
-                                                <div class="col-sm-3 d-flex p-3 mb-0 align-items-center card align-content-center"
-                                                    style="background-color:#609866">
-                                                    <img class="img-fluid"
-                                                        src="./assets/images/nace-icons/nace-professionalism-black-line-art-icon.png"
-                                                        style="height: 70px;width: 70px;margin: auto;">
-                                                    <h5 class="px-2 icon-text text-center text-dark mb-0"
-                                                        style="color: white!important;">
-                                                        Professionalism
-                                                    </h5>
-                                                </div>
-                                                <div class="col-sm-8 p-3" style="margin-top:20px;">
-                                                    <div class="progress mb-3 bg-white" style="width:90%;margin:auto">
-                                                        <div class="progress-bar bg-dark " role="progressbar"
-                                                            aria-valuenow="80" value="80" aria-valuemin="0"
-                                                            aria-valuemax="100" style="width:22%">
-                                                        </div>
-                                                        <div class="progress-value"
-                                                            style="background-color:#000;font-size:16px">
-                                                            20
-                                                        </div>
-                                                        <p
-                                                            style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                            <b>Evaluator</b>
-                                                        </p>
-                                                        <!-- /.progress-bar .progress-bar-danger -->
-                                                    </div><!-- /.progress .no-rounded -->
-                                                    <div style="margin-top:35px">
-                                                        <div class="progress mb-3 bg-white"
-                                                            style="width:90%;margin:auto">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                aria-valuenow="80" value="80" aria-valuemin="0"
-                                                                aria-valuemax="100"
-                                                                style="width:55%;background-color:#609866">
-                                                            </div>
-                                                            <div class="progress-value"
-                                                                style="font-size:16px;background-color:#609866">
-                                                                50
-                                                            </div>
-                                                            <p
-                                                                style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                                <b>Self</b>
-                                                            </p>
-                                                            <!-- /.progress-bar .progress-bar-danger -->
-                                                        </div><!-- /.progress .no-rounded -->
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <?= generate_competency_results($competency_data, "professionalism_results","#609866", "Professionalism","./assets/images/nace-icons/nace-professionalism-black-line-art-icon.png") ?>
                                         </button>
                                     </h2>
                                     <div id="flush-collapseFour" class="accordion-collapse collapse"
                                         aria-labelledby="flush-flush-collapseFour"
                                         data-bs-parent="#accordionFlushExample">
                                         <div class="accordion-body">
-                                            <?= generate_competency($competency_data["professionalism"]); ?>
+                                            <?= generate_competency($competency_data["professionalism"],"#609866"); ?>
                                             <h5 class="card-title text-black mb-3">
                                                 Recommendations
                                             </h5>
@@ -930,61 +922,14 @@ function generate_competency($level) {
                                         <button class="accordion-button collapsed btn-up" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseFive"
                                             aria-expanded="false" aria-controls="flush-collapseFive">
-                                            <div class="row align-items-center p-0 w-100">
-                                                <div class="col-sm-3 d-flex p-3 mb-0 align-items-center card align-content-center"
-                                                    style="background-color:#796258">
-                                                    <img class="img-fluid"
-                                                        src="./assets/images/nace-icons/nace-leadership-black-line-art-icon.png"
-                                                        style="height: 70px;width: 70px;margin: auto;">
-                                                    <h5 class="px-2 icon-text text-center text-dark mb-0"
-                                                        style="color: white!important;">
-                                                        Leadership
-                                                    </h5>
-                                                </div>
-                                                <div class="col-sm-8 p-3" style="margin-top:20px;">
-                                                    <div class="progress mb-3 bg-white" style="width:90%;margin:auto">
-                                                        <div class="progress-bar bg-dark " role="progressbar"
-                                                            aria-valuenow="80" value="80" aria-valuemin="0"
-                                                            aria-valuemax="100" style="width:22%">
-                                                        </div>
-                                                        <div class="progress-value"
-                                                            style="background-color:#000;font-size:16px">
-                                                            20
-                                                        </div>
-                                                        <p
-                                                            style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                            <b>Evaluator</b>
-                                                        </p>
-                                                        <!-- /.progress-bar .progress-bar-danger -->
-                                                    </div><!-- /.progress .no-rounded -->
-                                                    <div style="margin-top:35px">
-                                                        <div class="progress mb-3 bg-white"
-                                                            style="width:90%;margin:auto">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                aria-valuenow="80" value="80" aria-valuemin="0"
-                                                                aria-valuemax="100"
-                                                                style="width:55%;background-color:#796258">
-                                                            </div>
-                                                            <div class="progress-value"
-                                                                style="font-size:16px;background-color:#796258">
-                                                                50
-                                                            </div>
-                                                            <p
-                                                                style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                                <b>Self</b>
-                                                            </p>
-                                                            <!-- /.progress-bar .progress-bar-danger -->
-                                                        </div><!-- /.progress .no-rounded -->
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <?= generate_competency_results($competency_data, "leadership_results","#796258", "Leadership","./assets/images/nace-icons/nace-leadership-black-line-art-icon.png") ?>
                                         </button>
                                     </h2>
                                 </div>
                                 <div id="flush-collapseFive" class="accordion-collapse collapse"
                                     aria-labelledby="flush-flush-collapseFive" data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body">
-                                        <?= generate_competency($competency_data["leadership"]); ?>
+                                        <?= generate_competency($competency_data["leadership"],"#796258"); ?>
                                         <h5 class="card-title text-black mb-3">
                                             Recommendations
                                         </h5>
@@ -1034,55 +979,7 @@ function generate_competency($level) {
                                         <button class="accordion-button collapsed btn-up" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseSix"
                                             aria-expanded="false" aria-controls="flush-collapseSix">
-                                            <div class="row align-items-center p-0 w-100">
-                                                <div class="col-sm-3 d-flex p-3 mb-0 align-items-center card align-content-center"
-                                                    style="background-color:#705181">
-                                                    <img class="img-fluid"
-                                                        src="./assets/images/nace-icons/nace-critical-thinking-black-line-art-icon.png"
-                                                        style="height: 70px;width: 70px;margin: auto;">
-                                                    <h5 class="px-2 icon-text text-center text-dark mb-0"
-                                                        style="color: white!important;">
-                                                        Critical
-                                                        Thinking
-                                                    </h5>
-                                                </div>
-                                                <div class="col-sm-8 p-3" style="margin-top:20px;">
-                                                    <div class="progress mb-3 bg-white" style="width:90%;margin:auto">
-                                                        <div class="progress-bar bg-dark " role="progressbar"
-                                                            aria-valuenow="80" value="80" aria-valuemin="0"
-                                                            aria-valuemax="100" style="width:22%">
-                                                        </div>
-                                                        <div class="progress-value"
-                                                            style="background-color:#000;font-size:16px">
-                                                            20
-                                                        </div>
-                                                        <p
-                                                            style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                            <b>Evaluator</b>
-                                                        </p>
-                                                        <!-- /.progress-bar .progress-bar-danger -->
-                                                    </div><!-- /.progress .no-rounded -->
-                                                    <div style="margin-top:35px">
-                                                        <div class="progress mb-3 bg-white"
-                                                            style="width:90%;margin:auto">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                aria-valuenow="80" value="80" aria-valuemin="0"
-                                                                aria-valuemax="100"
-                                                                style="width:55%;background-color:#705181">
-                                                            </div>
-                                                            <div class="progress-value"
-                                                                style="font-size:16px;background-color:#705181">
-                                                                50
-                                                            </div>
-                                                            <p
-                                                                style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                                <b>Self</b>
-                                                            </p>
-                                                            <!-- /.progress-bar .progress-bar-danger -->
-                                                        </div><!-- /.progress .no-rounded -->
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <?= generate_competency_results($competency_data, "critical_thinking_results","#705181", "Critical Thinking","./assets/images/nace-icons/nace-critical-thinking-black-line-art-icon.png") ?>
                                         </button>
                                     </h2>
                                 </div>
@@ -1090,7 +987,7 @@ function generate_competency($level) {
                                 <div id="flush-collapseSix" class="accordion-collapse collapse"
                                     aria-labelledby="flush-flush-collapseSix" data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body">
-                                        <?= generate_competency($competency_data["critical_thinking"]); ?>
+                                        <?= generate_competency($competency_data["critical_thinking"],"#705181"); ?>
 
                                         <h5 class="card-title text-black mb-3">
                                             Recommendations
@@ -1139,61 +1036,14 @@ function generate_competency($level) {
                                         <button class="accordion-button collapsed btn-up" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven"
                                             aria-expanded="false" aria-controls="flush-collapseSeven">
-                                            <div class="row align-items-center p-0 w-100">
-                                                <div class="col-sm-3 d-flex p-3 mb-0 align-items-center card align-content-center"
-                                                    style="background-color:#3c4b6c">
-                                                    <img class="img-fluid"
-                                                        src="./assets/images/nace-icons/nace-technology-black-line-art-icon.png"
-                                                        style="height: 70px;width: 70px;margin: auto;">
-                                                    <h5 class="px-2 icon-text text-center text-dark mb-0"
-                                                        style="color: white!important;">
-                                                        Technology
-                                                    </h5>
-                                                </div>
-                                                <div class="col-sm-8 p-3" style="margin-top:20px;">
-                                                    <div class="progress mb-3 bg-white" style="width:90%;margin:auto">
-                                                        <div class="progress-bar bg-dark " role="progressbar"
-                                                            aria-valuenow="80" value="80" aria-valuemin="0"
-                                                            aria-valuemax="100" style="width:22%">
-                                                        </div>
-                                                        <div class="progress-value"
-                                                            style="background-color:#000;font-size:16px">
-                                                            20
-                                                        </div>
-                                                        <p
-                                                            style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                            <b>Evaluator</b>
-                                                        </p>
-                                                        <!-- /.progress-bar .progress-bar-danger -->
-                                                    </div><!-- /.progress .no-rounded -->
-                                                    <div style="margin-top:35px">
-                                                        <div class="progress mb-3 bg-white"
-                                                            style="width:90%;margin:auto">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                aria-valuenow="80" value="80" aria-valuemin="0"
-                                                                aria-valuemax="100"
-                                                                style="width:55%;background-color:#3c4b6c">
-                                                            </div>
-                                                            <div class="progress-value"
-                                                                style="font-size:16px;background-color:#3c4b6c">
-                                                                50
-                                                            </div>
-                                                            <p
-                                                                style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                                <b>Self</b>
-                                                            </p>
-                                                            <!-- /.progress-bar .progress-bar-danger -->
-                                                        </div><!-- /.progress .no-rounded -->
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <?= generate_competency_results($competency_data, "technology_results","#3c4b6c", "Technology","./assets/images/nace-icons/nace-technology-black-line-art-icon.png") ?>
                                         </button>
                                     </h2>
                                     <div id="flush-collapseSeven" class="accordion-collapse collapse"
                                         aria-labelledby="flush-flush-collapseSeven"
                                         data-bs-parent="#accordionFlushExample">
                                         <div class="accordion-body">
-                                            <?= generate_competency($competency_data["technology"]); ?>
+                                            <?= generate_competency($competency_data["technology"],"#3c4b6c"); ?>
 
                                             <h5 class="card-title text-black mb-3">
                                                 Recommendations
@@ -1248,62 +1098,14 @@ function generate_competency($level) {
                                         <button class="accordion-button collapsed btn-up" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseEight"
                                             aria-expanded="false" aria-controls="flush-collapseEight">
-                                            <div class="row align-items-center p-0 w-100">
-                                                <div class="col-sm-3 d-flex p-3 mb-0 align-items-center card align-content-center"
-                                                    style="background-color:#ad3131">
-                                                    <img class="img-fluid"
-                                                        src="./assets/images/nace-icons/nace-equity-and-inclusion-black-line-art-icon.png"
-                                                        style="height: 70px;width: 70px;margin: auto;">
-                                                    <h5 class="px-2 icon-text text-center text-dark mb-0"
-                                                        style="color: white!important;">
-                                                        Equity &
-                                                        Inclusion
-                                                    </h5>
-                                                </div>
-                                                <div class="col-sm-8 p-3" style="margin-top:20px;">
-                                                    <div class="progress mb-3 bg-white" style="width:90%;margin:auto">
-                                                        <div class="progress-bar bg-dark " role="progressbar"
-                                                            aria-valuenow="80" value="80" aria-valuemin="0"
-                                                            aria-valuemax="100" style="width:22%">
-                                                        </div>
-                                                        <div class="progress-value"
-                                                            style="background-color:#000;font-size:16px">
-                                                            20
-                                                        </div>
-                                                        <p
-                                                            style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                            <b>Evaluator</b>
-                                                        </p>
-                                                        <!-- /.progress-bar .progress-bar-danger -->
-                                                    </div><!-- /.progress .no-rounded -->
-                                                    <div style="margin-top:35px">
-                                                        <div class="progress mb-3 bg-white"
-                                                            style="width:90%;margin:auto">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                aria-valuenow="80" value="80" aria-valuemin="0"
-                                                                aria-valuemax="100"
-                                                                style="width:55%;background-color:#ad3131">
-                                                            </div>
-                                                            <div class="progress-value"
-                                                                style="font-size:16px;background-color:#ad3131">
-                                                                50
-                                                            </div>
-                                                            <p
-                                                                style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                                <b>Self</b>
-                                                            </p>
-                                                            <!-- /.progress-bar .progress-bar-danger -->
-                                                        </div><!-- /.progress .no-rounded -->
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <?= generate_competency_results($competency_data, "equity_results","#ad3131", "Equity & Inclusion","./assets/images/nace-icons/nace-equity-and-inclusion-black-line-art-icon.png") ?>
                                         </button>
                                     </h2>
                                     <div id="flush-collapseEight" class="accordion-collapse collapse"
                                         aria-labelledby="flush-flush-collapseEight"
                                         data-bs-parent="#accordionFlushExample">
                                         <div class="accordion-body">
-                                            <?= generate_competency($competency_data["equity"]); ?>
+                                            <?= generate_competency($competency_data["equity"],"#ad3131"); ?>
 
                                             <h5 class="card-title text-black mb-3">
                                                 Recommendations
@@ -1355,6 +1157,7 @@ function generate_competency($level) {
                         <!-- END layout-wrapper -->
                         <!-- end row -->
 
+                        <hr style="opacity:1">
                         <footer class="footer container"
                             style="left: 1px!important;border-radius: 24px 24px 0px 0px;top:101%!important">
                             <div class="container-fluid">
@@ -1378,855 +1181,36 @@ function generate_competency($level) {
                         <!-- JAVASCRIPT -->
                         <script src="assets/libs/jquery/jquery.min.js"></script>
                         <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-                        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
-                        <script src="assets/libs/simplebar/simplebar.min.js"></script>
-                        <script src="assets/libs/node-waves/waves.min.js"></script>
 
-                        <!-- morris chart -->
-                        <script src="assets/libs/morris.js/morris.min.js"></script>
-                        <script src="assets/libs/raphael/raphael.min.js"></script>
-
-                        <!-- jquery.vectormap map -->
-                        <script src="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js">
-                        </script>
-                        <script src="assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-us-merc-en.js">
-                        </script>
-
-                        <!-- Required datatable js -->
-                        <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-                        <script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-
-                        <!-- Responsive examples -->
-                        <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-                        <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js">
-                        </script>
-
-                        <script src="assets/js/pages/index.init.js"></script>
-
-                        <script src="assets/libs/jquery-knob/jquery.knob.min.js"></script>
-
-                        <script src="assets/js/pages/jquery-knob.init.js"></script>
+                        <!-- <script src="assets/js/pages/index.init.js"></script> -->
 
                         <!-- materialdesign icon js-->
                         <script src="assets/js/pages/materialdesign.init.js"></script>
 
-                        <!-- App js -->
-                        <script src="assets/js/app.js"></script>
-                        <!-- <script type="text/javascript">
-            var options = {
-          series: [{
-          data: [2.7, 3, 3.4, 3, 2, 4, 3.3, 3.7]
-        }],
-          chart: {
-          type: 'bar',
-          height: 450
-        },
-        plotOptions: {
-          bar: {
-            barHeight: '80%',
-            distributed: true,
-            horizontal: true,
-            dataLabels: {
-              position: 'bottom'
-            },
-          }
-        },
-        colors: ['#ebb93b', '#56a9dd', '#705181', '#ad3131', '#796258', '#609866', '#e06b60', '#3c4b6c'],
-        dataLabels: {
-          enabled: true,
-          textAnchor: 'start',
-          style: {
-            colors: ['#fff'],
-            fontSize: '12px',
-            fontWeight: '500',
-            fontFamily : 'Mulish'
-          },
-          formatter: function (val, opt) {
-            return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val
-          },
-          offsetX: 0,
-          dropShadow: {
-            enabled: true
-          }
-        },
-        stroke: {
-          width: 0,
-          colors: ['#fff']
-        },
-        xaxis: {
-          categories: ['Career & Self-Development', 'Communication', 'Critical Thinking', 'Equity & Inclusion', 'Leadership', 'Professionalism', 'Teamwork',
-            'Technology'
-          ],
-        },
-        yaxis: {
-          labels: {
-            show: false
-          }
-        },
-        title: {
-            text: 'Career Readiness Inventory',
-            align: 'center',
-            floating: true
-        },
-        subtitle: {
-            text: '',
-            align: 'center',
-        },
-        legend: {
-            show : false
-        },
-        tooltip: {
-          theme: 'dark',
-          x: {
-            show: false
-          },
-          y: {
-            title: {
-              formatter: function () {
-                return ''
-              }
-            }
-          }
-        }
-        };
-
-        var chart = new ApexCharts(document.querySelector("#inventorychart"), options);
-        chart.render();
-
-</script> -->
-
-                        <!-- <script>
-    options = ((chart = new ApexCharts(document.querySelector("#radial_chart"), options)).render(), {
-        chart: {
-            height: 320,
-            type: "pie"
-        },
-        series: [44, 55],
-        labels: ["Series 1", "Series 4"],
-        colors: ["#1cbb8c", "#4aa3ff"],
-        legend: {
-            show: !0,
-            position: "bottom",
-            horizontalAlign: "center",
-            verticalAlign: "middle",
-            floating: !1,
-            fontSize: "14px",
-            offsetX: 0,
-            offsetY: 5
-        },
-        responsive: [{
-            breakpoint: 600,
-            options: {
-                chart: {
-                    height: 240
-                },
-                legend: {
-                    show: !1
-                }
-            }
-        }]
-    })
-</script> -->
-
                         <script>
-                        var options = {
-                            series: [{
-                                name: 'Emerging Knowledge',
-                                data: [44, 55, 41, 37, 22, 43, 21, 10]
-                            }, {
-                                name: 'Understanding',
-                                data: [53, 32, 33, 52, 13, 43, 32, 20]
-                            }, {
-                                name: 'Early Application',
-                                data: [12, 17, 11, 9, 15, 11, 20, 30]
-                            }, {
-                                name: 'Advanced Application',
-                                data: [9, 7, 5, 8, 6, 9, 4, 40]
-                            }, ],
-                            chart: {
-                                type: 'bar',
-                                height: 350,
-                                stacked: true,
-                                stackType: '100%'
-                            },
-                            plotOptions: {
-                                bar: {
-                                    horizontal: true,
-                                },
-                            },
-                            stroke: {
-                                width: 1,
-                                colors: ['#fff']
-                            },
-                            title: {
-                                text: 'Inventory Chart'
-                            },
-                            xaxis: {
-                                categories: ['Career & Self-Development', 'Communication', 'Critical Thinking',
-                                    'Equity & Inclusion',
-                                    'Leadership', 'Professionalism', 'Teamwork',
-                                    'Technology'
-                                ],
-                            },
-                            tooltip: {
-                                y: {
-                                    formatter: function(val) {
-                                        return val + "K"
-                                    }
-                                }
-                            },
-                            fill: {
-                                opacity: 1
-
-                            },
-                            legend: {
-                                position: 'top',
-                                horizontalAlign: 'left',
-                                offsetX: 40
+                        function eval_toggle() {
+                            // $(".evalu").hide()
+                            if (document.getElementById('evaluator_switch').checked) {
+                                $(".evalu").show();
+                                $(".self_label").html("Self");
+                            } else {
+                                $(".evalu").hide();
+                                $(".self_label").html("Pre");
                             }
-                        };
 
-                        var chart = new ApexCharts(document.querySelector("#inventorychart"), options);
-                        chart.render();
-
-                        var options = {
-                            series: [{
-                                name: 'Emerging Knowledge',
-                                data: [44, 55, 41]
-                            }, {
-                                name: 'Understanding',
-                                data: [53, 32, 33]
-                            }, {
-                                name: 'Early Application',
-                                data: [12, 17, 11]
-                            }, {
-                                name: 'Advanced Application',
-                                data: [9, 7, 5]
-                            }, ],
-                            chart: {
-                                type: 'bar',
-                                height: 250,
-                                stacked: true,
-                                stackType: '100%'
-                            },
-                            plotOptions: {
-                                bar: {
-                                    horizontal: true,
-                                },
-                            },
-                            stroke: {
-                                width: 1,
-                                colors: ['#fff']
-                            },
-                            title: {
-                                text: 'Career & Self Development'
-                            },
-                            xaxis: {
-                                categories: ['Awareness of Strengths & Challenges', 'Professional Development',
-                                    'Networking'
-                                ],
-                                color: '#000'
-                            },
-                            tooltip: {
-                                y: {
-                                    formatter: function(val) {
-                                        return val + "K"
-                                    }
-                                }
-                            },
-                            fill: {
-                                opacity: 1
-
-                            },
-                            legend: {
-                                position: 'bottom',
-                                horizontalAlign: 'left',
-                                offsetX: 40
-                            }
-                        };
-
-                        var chart = new ApexCharts(document.querySelector("#inventorychart1"), options);
-                        chart.render();
-
-                        var options = {
-                            series: [{
-                                data: [400, 430, 448, 470, 540, 240, 20]
-                            }],
-                            chart: {
-                                type: 'bar',
-                            },
-                            plotOptions: {
-                                bar: {
-                                    borderRadius: 4,
-                                    borderRadiusApplication: 'end',
-                                    horizontal: true,
-                                }
-                            },
-                            colors: ["#1cbb8c"],
-                            grid: {
-                                borderColor: "#f1f1f1",
-                                padding: {
-                                    bottom: 5
-                                }
-                            },
-                            dataLabels: {
-                                enabled: false
-                            },
-                            xaxis: {
-                                categories: ["Bachelor's - 1st Year",
-                                    "Bachelor's - 2nd Year",
-                                    "Bachelor's - 3rd Year",
-                                    "Bachelor's - 4th Year",
-                                    "Bachelor's - 5th Year or Beyond",
-                                    "Masters",
-                                    "Doctoral"
-                                ]
-                            }
-                        };
-
-                        var chart = new ApexCharts(document.querySelector("#bar_chart2"), options);
-                        chart.render();
-
-                        var options = {
-                            series: [{
-                                data: [40, 30, 48, 47, 40, 20, 50]
-                            }],
-                            chart: {
-                                type: 'bar',
-                            },
-                            plotOptions: {
-                                bar: {
-                                    borderRadius: 4,
-                                    borderRadiusApplication: 'end',
-                                    horizontal: true,
-                                }
-                            },
-                            colors: ["#1cbb8c"],
-                            grid: {
-                                borderColor: "#f1f1f1",
-                                padding: {
-                                    bottom: 5
-                                }
-                            },
-                            dataLabels: {
-                                enabled: false
-                            },
-                            xaxis: {
-                                categories: ["Accounting and Computer Science",
-                                    "Accounting and Related Services",
-                                    "Aerospace, Aeronautical and Astronautical Engineering",
-                                    "African Languages, Literatures, and Linguistics",
-                                    "Agricultural and Domestic Animal Services",
-                                    "Agricultural and Food Products Processing",
-                                    "Agricultural Engineering"
-                                ]
-                            }
-                        };
-
-                        var chart = new ApexCharts(document.querySelector("#bar_chart3"), options);
-                        chart.render();
-
-                        var options = {
-                            series: [44, 55, 41, 10],
-                            chart: {
-                                type: 'donut',
-                                height: 400
-                            },
-                            legend: {
-                                position: 'bottom',
-                            },
-                            labels: ['Male', 'Female', 'Non-binary', 'Prefer not to respond'],
-                            responsive: [{
-                                breakpoint: 480,
-                                options: {
-                                    chart: {
-                                        width: 100
-                                    },
-                                    legend: {
-                                        position: 'bottom'
-                                    }
-                                }
-                            }]
-                        };
-
-                        var chart = new ApexCharts(document.querySelector("#bar_chart4"), options);
-                        chart.render();
-
-                        var options = {
-                            series: [{
-                                data: [40, 30, 48, 47, 40, 20, 50, 10, 10]
-                            }],
-                            chart: {
-                                type: 'bar',
-                            },
-                            plotOptions: {
-                                bar: {
-                                    borderRadius: 4,
-                                    borderRadiusApplication: 'end',
-                                    horizontal: true,
-                                }
-                            },
-                            colors: ["#1cbb8c"],
-                            grid: {
-                                borderColor: "#f1f1f1",
-                                padding: {
-                                    bottom: 5
-                                }
-                            },
-                            dataLabels: {
-                                enabled: false
-                            },
-                            xaxis: {
-                                categories: ["Prefer not to respond",
-                                    "Asian",
-                                    "Black",
-                                    "Hispanic or Latinx",
-                                    "International student with non-immigrant (visa) status in the U.S.",
-                                    "Multiracial",
-                                    "Native Hawaiian or Other Pacific Islander",
-                                    "Native American or Native Alaskan",
-                                    "White"
-                                ]
-                            }
-                        };
-
-                        var chart = new ApexCharts(document.querySelector("#bar_chart5"), options);
-                        chart.render();
-
-                        var options = {
-                            series: [{
-                                data: [40, 30, 48, 47, 40, 20, 50, 10]
-                            }],
-                            chart: {
-                                type: 'bar',
-                            },
-                            plotOptions: {
-                                bar: {
-                                    borderRadius: 4,
-                                    borderRadiusApplication: 'end',
-                                    horizontal: true,
-                                }
-                            },
-                            colors: ["#1cbb8c"],
-                            grid: {
-                                borderColor: "#f1f1f1",
-                                padding: {
-                                    bottom: 5
-                                }
-                            },
-                            dataLabels: {
-                                enabled: false
-                            },
-                            xaxis: {
-                                categories: ["Prefer not to respond",
-                                    "Grade School",
-                                    "High School",
-                                    "Some School",
-                                    "College Graduate (Associate/Bachelor's Degree)",
-                                    "Graduate or Professional School",
-                                    "Unknown",
-                                    "None of the above (College experience outside the US, etc.)"
-                                ]
-                            }
-                        };
-
-                        var chart = new ApexCharts(document.querySelector("#bar_chart6"), options);
-                        chart.render();
-
-                        var options = {
-                            series: [55, 38, 10],
-                            chart: {
-                                type: 'donut',
-                                height: 400
-                            },
-                            legend: {
-                                position: 'bottom',
-                            },
-                            labels: ['Yes', 'No', 'Prefer not to respond'],
-                            responsive: [{
-                                breakpoint: 480,
-                                options: {
-                                    chart: {
-                                        width: 100
-                                    },
-                                    legend: {
-                                        position: 'bottom'
-                                    }
-                                }
-                            }]
-                        };
-
-                        var chart = new ApexCharts(document.querySelector("#chart7"), options);
-                        chart.render();
-
-                        var options = {
-                            series: [20, 70, 10],
-                            chart: {
-                                type: 'donut',
-                                height: 400
-                            },
-                            legend: {
-                                position: 'bottom',
-                            },
-                            labels: ['Yes', 'No', 'Prefer not to respond'],
-                            responsive: [{
-                                breakpoint: 480,
-                                options: {
-                                    chart: {
-                                        width: 100
-                                    },
-                                    legend: {
-                                        position: 'bottom'
-                                    }
-                                }
-                            }]
-                        };
-
-                        var chart = new ApexCharts(document.querySelector("#chart8"), options);
-                        chart.render();
-
-                        var options = {
-                            series: [20, 70, 10],
-                            chart: {
-                                type: 'donut',
-                                height: 400
-                            },
-                            legend: {
-                                position: 'bottom',
-                            },
-                            labels: ['Yes', 'No', 'Prefer not to respond'],
-                            responsive: [{
-                                breakpoint: 480,
-                                options: {
-                                    chart: {
-                                        width: 100
-                                    },
-                                    legend: {
-                                        position: 'bottom'
-                                    }
-                                }
-                            }]
-                        };
-
-                        var chart = new ApexCharts(document.querySelector("#chart9"), options);
-                        chart.render();
-
-                        var options = {
-                            series: [20, 70, 10],
-                            chart: {
-                                type: 'donut',
-                                height: 400
-                            },
-                            legend: {
-                                position: 'bottom',
-                            },
-                            labels: ['Yes', 'No', 'Prefer not to respond'],
-                            responsive: [{
-                                breakpoint: 480,
-                                options: {
-                                    chart: {
-                                        width: 100
-                                    },
-                                    legend: {
-                                        position: 'bottom'
-                                    }
-                                }
-                            }]
-                        };
-
-                        var chart = new ApexCharts(document.querySelector("#chart10"), options);
-                        chart.render();
-
-                        var options = {
-                            series: [{
-                                data: [40, 30, 48, 47, 40]
-                            }],
-                            chart: {
-                                type: 'bar',
-                            },
-                            plotOptions: {
-                                bar: {
-                                    borderRadius: 4,
-                                    borderRadiusApplication: 'end',
-                                    horizontal: true,
-                                }
-                            },
-                            colors: ["#1cbb8c"],
-                            grid: {
-                                borderColor: "#f1f1f1",
-                                padding: {
-                                    bottom: 5
-                                }
-                            },
-                            dataLabels: {
-                                enabled: false
-                            },
-                            xaxis: {
-                                categories: ["Prefer not to respond",
-                                    "Never served in the military",
-                                    "Only on active duty for training in the Reserves or National Guard",
-                                    "Now on active duty",
-                                    "On active duty in the past, but not now"
-                                ]
-                            }
-                        };
-
-                        var chart = new ApexCharts(document.querySelector("#chart11"), options);
-                        chart.render();
-
-                        var options = {
-                            series: [20, 70, 10],
-                            chart: {
-                                type: 'donut',
-                                height: 400
-                            },
-                            legend: {
-                                position: 'bottom',
-                            },
-                            labels: ['Yes', 'No', 'Prefer not to respond'],
-                            responsive: [{
-                                breakpoint: 480,
-                                options: {
-                                    chart: {
-                                        width: 100
-                                    },
-                                    legend: {
-                                        position: 'bottom'
-                                    }
-                                }
-                            }]
-                        };
-
-                        var chart = new ApexCharts(document.querySelector("#chart12"), options);
-                        chart.render();
-
-                        var options = {
-                            series: [{
-                                data: [40, 30, 28, 47, 40, 50, 13, 20, 16, 6]
-                            }],
-                            chart: {
-                                type: 'bar',
-                            },
-                            plotOptions: {
-                                bar: {
-                                    borderRadius: 4,
-                                    borderRadiusApplication: 'end',
-                                    horizontal: true,
-                                }
-                            },
-                            colors: ["#1cbb8c"],
-                            grid: {
-                                borderColor: "#f1f1f1",
-                                padding: {
-                                    bottom: 5
-                                }
-                            },
-                            dataLabels: {
-                                enabled: false
-                            },
-                            xaxis: {
-                                categories: ["Federal Student Loans",
-                                    "Private Student Loans",
-                                    "Family / Personal Money",
-                                    "Merit-based Scholarships and Grants",
-                                    "Income-based Scholarships and Grants",
-                                    "Pell Grant",
-                                    "My Own Employment",
-                                    "529 Investment Account",
-                                    "Tuition waivers or reductions due to family or yourself being employed at the college",
-                                    "Others"
-                                ]
-                            }
-                        };
-
-                        var chart = new ApexCharts(document.querySelector("#chart13"), options);
-                        chart.render();
-
-                        var options = {
-                            series: [{
-                                data: [40, 30, 16, 6]
-                            }],
-                            chart: {
-                                type: 'bar',
-                            },
-                            plotOptions: {
-                                bar: {
-                                    borderRadius: 4,
-                                    borderRadiusApplication: 'end',
-                                    horizontal: true,
-                                }
-                            },
-                            colors: ["#1cbb8c"],
-                            grid: {
-                                borderColor: "#f1f1f1",
-                                padding: {
-                                    bottom: 5
-                                }
-                            },
-                            dataLabels: {
-                                enabled: false
-                            },
-                            xaxis: {
-                                categories: ["below 18",
-                                    "18-25",
-                                    "25-30",
-                                    "30+",
-                                ]
-                            }
-                        };
-
-                        var chart = new ApexCharts(document.querySelector("#chart14"), options);
-                        chart.render();
-                        </script>
-
-                        <script>
-                        /**
-                         * In the chart render event, add icons on top of the circular shapes
-                         */
-                        function renderIcons() {
-
-                            this.series.forEach(series => {
-                                if (!series.icon) {
-                                    series.icon = this.renderer
-                                        .text(
-                                            `<i class="fa fa-${series.options.custom.icon}"></i>`,
-                                            0,
-                                            0,
-                                            true
-                                        )
-                                        .attr({
-                                            zIndex: 10
-                                        })
-                                        .css({
-                                            color: series.options.custom.iconColor,
-                                            fontSize: '1.5em'
-                                        })
-                                        .add(this.series[2].group);
-                                }
-                                series.icon.attr({
-                                    x: this.chartWidth / 2 - 15,
-                                    y: this.plotHeight / 2 -
-                                        series.points[0].shapeArgs.innerR -
-                                        (
-                                            series.points[0].shapeArgs.r -
-                                            series.points[0].shapeArgs.innerR
-                                        ) / 2 +
-                                        8
-                                });
-                            });
                         }
 
-                        const trackColors = Highcharts.getOptions().colors.map(color =>
-                            new Highcharts.Color(color).setOpacity(0.3).get()
-                        );
-
-                        Highcharts.chart('container', {
-
-                            chart: {
-                                type: 'solidgauge',
-                                height: '110%',
-                                events: {
-                                    render: renderIcons
-                                }
-                            },
-
-                            title: {
-                                text: 'Emerging Knowledge',
-                                style: {
-                                    fontSize: '14px'
-                                }
-                            },
-
-                            tooltip: {
-                                borderWidth: 0,
-                                backgroundColor: 'none',
-                                shadow: false,
-                                style: {
-                                    fontSize: '16px'
-                                },
-                                valueSuffix: '%',
-                                pointFormat: '{series.name}<br>' +
-                                    '<span style="font-size: 2em; color: {point.color}; ' +
-                                    'font-weight: bold">{point.y}</span>',
-                                positioner: function(labelWidth) {
-                                    return {
-                                        x: (this.chart.chartWidth - labelWidth) / 2,
-                                        y: (this.chart.plotHeight / 2) + 15
-                                    };
-                                }
-                            },
-
-                            pane: {
-                                startAngle: 0,
-                                endAngle: 360,
-                                background: [{ // Track for Conversion
-                                    outerRadius: '112%',
-                                    innerRadius: '88%',
-                                    backgroundColor: trackColors[0],
-                                    borderWidth: 0
-                                }, { // Track for Engagement
-                                    outerRadius: '87%',
-                                    innerRadius: '63%',
-                                    backgroundColor: trackColors[1],
-                                    borderWidth: 0
-                                }, ]
-                            },
-
-                            yAxis: {
-                                min: 0,
-                                max: 100,
-                                lineWidth: 0,
-                                tickPositions: []
-                            },
-
-                            plotOptions: {
-                                solidgauge: {
-                                    dataLabels: {
-                                        enabled: false
-                                    },
-                                    linecap: 'round',
-                                    stickyTracking: false,
-                                    rounded: true
-                                }
-                            },
-
-                            series: [{
-                                name: 'Post',
-                                data: [{
-                                    color: Highcharts.getOptions().colors[0],
-                                    radius: '112%',
-                                    innerRadius: '88%',
-                                    y: 80
-                                }],
-                                custom: {
-                                    icon: 'filter',
-                                    iconColor: '#303030'
-                                }
-                            }, {
-                                name: 'Pre',
-                                data: [{
-                                    color: Highcharts.getOptions().colors[1],
-                                    radius: '87%',
-                                    innerRadius: '63%',
-                                    y: 65
-                                }],
-                                custom: {
-                                    icon: 'comments-o',
-                                    iconColor: '#ffffff'
-                                }
-                            }]
+                        document.addEventListener("DOMContentLoaded", () => {
+                            const progressBars = document.querySelectorAll('.animated-progress');
+                            progressBars.forEach(bar => {
+                                const targetWidth = bar.getAttribute('data-width');
+                                bar.style.setProperty('--progress-width', `${targetWidth}%`);
+                            });
                         });
                         </script>
 
-                        <script>
-                        $(".knob").knob({
-                                    'format': function(value) {
-                                        return value + '%';
-                                    }
-                        </script>
-
                         <!-- apexcharts init -->
-                        <script src="assets/js/pages/apexcharts.init.js"></script>
+                        <!-- <script src="assets/js/pages/apexcharts.init.js"></script> -->
 </body>
 
 </html>

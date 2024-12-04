@@ -398,10 +398,10 @@ include("./models/filters/dropdowns.php");
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6 col-lg-3">
-                            <div class="card text-center" style="height: 86%;">
+                            <div class="card text-center" style="height: 153px;">
                                 <div class="card-body" style="height: 100%;align-content: center;">
-                                    <img class="lazy" src="<?= $org_logo ?>" alt="logo-dark"
-                                        style="object-fit: cover;width: 100%;">
+                                    <img class="img img-fluid lazy" src="<?= $org_logo ?>" alt="logo-dark"
+                                        style="object-fit: cover;max-height:100%">
                                 </div>
                             </div>
                         </div>
@@ -465,14 +465,20 @@ include("./models/filters/dropdowns.php");
                                         <?= $selected_values['implementation_time'] === '' ? 'selected' : ''; ?>>
                                         All Time</option>
 
+                                    <!-- <?php foreach($implementation_type as $i): ?>
+                                    <option value="<?= $i ?>"
+                                        <?= $selected_values['implementation_time'] === $i ? 'selected' : ''; ?>>
+                                        <?= ucwords($i) ?></option>
+                                    <?php endforeach; ?> -->
+
                                     <option value="pre"
                                         <?= $selected_values['implementation_time'] === 'pre' ? 'selected' : ''; ?>>
                                         Pre-Experience</option>
                                     <option value="post"
                                         <?= $selected_values['implementation_time'] === 'post' ? 'selected' : ''; ?>>
                                         Post-Experience</option>
-                                    <option value="prepost"
-                                        <?= $selected_values['implementation_time'] === 'prepost' ? 'selected' : ''; ?>>
+                                    <option value="Student : Pre vs. Post"
+                                        <?= $selected_values['implementation_time'] === 'Student : Pre vs. Post' ? 'selected' : ''; ?>>
                                         Student : Pre vs. Post</option>
                                     <?php if(isset($_POST['implementation_type']) && $_POST['implementation_type'] == "work-exp"){ ?>
                                     <option value="eval"
@@ -567,8 +573,13 @@ include("./models/filters/dropdowns.php");
                                     Filters</button>
                             </center>
                         </div>
+
+                        <!-- Hidden fields to store second form values -->
+                        <input type="hidden" name="demographics_questions[]" id="demographics_questions">
+                        <input type="hidden" name="demographics_condition[]" id="demographics_condition">
+                        <input type="hidden" name="demographics_answers[]" id="demographics_answers">
                     </form>
-                    <!-- Modal -->
+
                     <div class="modal modal-lg fade bs-example-modal-center" tabindex="-1" role="dialog"
                         aria-labelledby="mySmallModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -580,123 +591,167 @@ include("./models/filters/dropdowns.php");
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body p-5">
-                                    <div class="card p-3 border-2">
-                                        <div class=" row mb-4">
-                                            <div class="col-sm-11">
-                                                <select class="form-select" style="color:#000032">
-                                                    <option value="d61f96be-29e6-4a26-bf62-55993bb6b8ac">Gender</option>
-                                                    <option value="a54979a3-daed-4b76-8968-663daa743786">
-                                                        Demographic Category</option>
-                                                    <option value="dd5c1e33-8813-46af-9f79-75f10e9d69ff">Preset Groups
-                                                    </option>
-                                                    <option value="9a149e36-a5e8-4602-b6a4-e47aab952508">Disability
-                                                    </option>
-                                                    <option value="bd7e349a-4e0a-435d-9a68-551cc7999981">LGBTQ</option>
-                                                    <option value="d16579f7-ec39-4c00-b8e9-4b297a62c10d">Language
-                                                    </option>
-                                                    <option value="37963d7a-dd81-4366-9ec0-5e02b0dadf63">Parent</option>
-                                                    <option value="af505188-1f22-405c-88e0-d953591f0a6b">Military
-                                                    </option>
-                                                    <option value="c2436b4e-8084-4346-b78e-372b063aa9d4">Caregiver
-                                                    </option>
-                                                    <option value="ba35d9d9-8265-4e8e-8bc5-49264505917c">Finance Sources
-                                                    </option>
-                                                    <option value="a7dab9b7-a07d-430c-a8c7-3113f12d2c00">Age</option>
-                                                    <option value="d9b64530-72b3-45b2-b714-2016c5ac7626">Program
-                                                    </option>
-                                                    <option value="c974a276-95a6-4237-869e-5161234da62d">Academic Level
-                                                    </option>
-                                                </select>
-                                                <center>
-                                                    <select class="form-select mt-4 mb-4"
-                                                        style="width:20%;border-color: #000032;border-radius: 20px;border:2px solid;color:#000032">
-                                                        <option>is equal
-                                                            to</option>
-                                                        <option>not equal
-                                                            to</option>
-                                                    </select>
-                                                </center>
-                                                <select class="form-select" style="color:#000032">
-                                                    <option>Option
-                                                        A</option>
-                                                    <option>Option
-                                                        B</option>
-                                                    <option>Option
-                                                        C</option>
-                                                </select>
+                                    <form>
+                                        <div id="demographic_modal">
+                                            <div class="card p-3 border-2">
+                                                <div class=" row mb-4">
+                                                    <div class="col-sm-11">
+                                                        <select name="demographic_question[]" class="form-select"
+                                                            style="color:#000032">
+                                                            <option value="d61f96be-29e6-4a26-bf62-55993bb6b8ac">Gender
+                                                            </option>
+                                                            <option value="a54979a3-daed-4b76-8968-663daa743786">
+                                                                Demographic Category</option>
+                                                            <option value="dd5c1e33-8813-46af-9f79-75f10e9d69ff">Preset
+                                                                Groups
+                                                            </option>
+                                                            <option value="9a149e36-a5e8-4602-b6a4-e47aab952508">
+                                                                Disability
+                                                            </option>
+                                                            <option value="bd7e349a-4e0a-435d-9a68-551cc7999981">LGBTQ
+                                                            </option>
+                                                            <option value="d16579f7-ec39-4c00-b8e9-4b297a62c10d">
+                                                                Language
+                                                            </option>
+                                                            <option value="37963d7a-dd81-4366-9ec0-5e02b0dadf63">Parent
+                                                            </option>
+                                                            <option value="af505188-1f22-405c-88e0-d953591f0a6b">
+                                                                Military
+                                                            </option>
+                                                            <option value="c2436b4e-8084-4346-b78e-372b063aa9d4">
+                                                                Caregiver
+                                                            </option>
+                                                            <option value="ba35d9d9-8265-4e8e-8bc5-49264505917c">Finance
+                                                                Sources
+                                                            </option>
+                                                            <option value="a7dab9b7-a07d-430c-a8c7-3113f12d2c00">Age
+                                                            </option>
+                                                            <option value="d9b64530-72b3-45b2-b714-2016c5ac7626">Program
+                                                            </option>
+                                                            <option value="c974a276-95a6-4237-869e-5161234da62d">
+                                                                Academic
+                                                                Level
+                                                            </option>
+                                                        </select>
+                                                        <center>
+                                                            <select name="demographic_condition[]"
+                                                                class="form-select mt-4 mb-4"
+                                                                style="width:20%;border-color: #000032;border-radius: 20px;border:2px solid;color:#000032">
+                                                                <option>is equal
+                                                                    to</option>
+                                                                <option>not equal
+                                                                    to</option>
+                                                            </select>
+                                                        </center>
+                                                        <select name="demographic_answers[]" class="form-select"
+                                                            style="color:#000032">
+                                                            <option>Option
+                                                                A</option>
+                                                            <option>Option
+                                                                B</option>
+                                                            <option>Option
+                                                                C</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-1 align-content-center">
+                                                        <a href="#" style="color:red;"><i class="fa fa-trash"></i></a>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-1 align-content-center">
-                                                <a href="#" style="color:red;"><i class="fa fa-trash"></i></a>
+                                            <h4 class="text-center mb-4">AND</h4>
+                                            <!-- <hr style="color: rgba(108, 108, 108, 0.629);height:1px;opacity:1"> -->
+                                            <div class="card p-3 border-2">
+                                                <div id="questions_modal" class="row mb-4">
+                                                    <div class="col-sm-11">
+                                                        <select name="demographic_question[]" class="form-select"
+                                                            style="color:#000032">
+                                                            <option value="d61f96be-29e6-4a26-bf62-55993bb6b8ac">Gender
+                                                            </option>
+                                                            <option value="a54979a3-daed-4b76-8968-663daa743786">
+                                                                Demographic Category</option>
+                                                            <option value="dd5c1e33-8813-46af-9f79-75f10e9d69ff">Preset
+                                                                Groups
+                                                            </option>
+                                                            <option value="9a149e36-a5e8-4602-b6a4-e47aab952508">
+                                                                Disability
+                                                            </option>
+                                                            <option value="bd7e349a-4e0a-435d-9a68-551cc7999981">LGBTQ
+                                                            </option>
+                                                            <option value="d16579f7-ec39-4c00-b8e9-4b297a62c10d">
+                                                                Language
+                                                            </option>
+                                                            <option value="37963d7a-dd81-4366-9ec0-5e02b0dadf63">Parent
+                                                            </option>
+                                                            <option value="af505188-1f22-405c-88e0-d953591f0a6b">
+                                                                Military
+                                                            </option>
+                                                            <option value="c2436b4e-8084-4346-b78e-372b063aa9d4">
+                                                                Caregiver
+                                                            </option>
+                                                            <option value="ba35d9d9-8265-4e8e-8bc5-49264505917c">Finance
+                                                                Sources
+                                                            </option>
+                                                            <option value="a7dab9b7-a07d-430c-a8c7-3113f12d2c00">Age
+                                                            </option>
+                                                            <option value="d9b64530-72b3-45b2-b714-2016c5ac7626">Program
+                                                            </option>
+                                                            <option value="c974a276-95a6-4237-869e-5161234da62d">
+                                                                Academic
+                                                                Level
+                                                            </option>
+                                                        </select>
+                                                        <center>
+                                                            <select name="demographic_condition[]"
+                                                                class="form-select mt-4 mb-4"
+                                                                style="width:20%;border-color: #000032;border-radius: 20px;border:2px solid;color:#000032">
+                                                                <option>is equal
+                                                                    to</option>
+                                                                <option>not equal
+                                                                    to</option>
+                                                            </select>
+                                                        </center>
+                                                        <select name="demographic_answers[]" class="form-select"
+                                                            style="color:#000032">
+                                                            <option>Option
+                                                                A</option>
+                                                            <option>Option
+                                                                B</option>
+                                                            <option>Option
+                                                                C</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-1 align-content-center">
+                                                        <a href="#" style="color:red;"><i class="fa fa-trash"></i></a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <h4 class="text-center mb-4">AND</h4>
-                                    <!-- <hr style="color: rgba(108, 108, 108, 0.629);height:1px;opacity:1"> -->
-                                    <div class="card p-3 border-2">
-                                        <div id="questions_modal" class="row mb-4">
-                                            <div class="col-sm-11">
-                                                <select class="form-select" style="color:#000032">
-                                                    <option value="d61f96be-29e6-4a26-bf62-55993bb6b8ac">Gender</option>
-                                                    <option value="a54979a3-daed-4b76-8968-663daa743786">
-                                                        Demographic Category</option>
-                                                    <option value="dd5c1e33-8813-46af-9f79-75f10e9d69ff">Preset Groups
-                                                    </option>
-                                                    <option value="9a149e36-a5e8-4602-b6a4-e47aab952508">Disability
-                                                    </option>
-                                                    <option value="bd7e349a-4e0a-435d-9a68-551cc7999981">LGBTQ</option>
-                                                    <option value="d16579f7-ec39-4c00-b8e9-4b297a62c10d">Language
-                                                    </option>
-                                                    <option value="37963d7a-dd81-4366-9ec0-5e02b0dadf63">Parent</option>
-                                                    <option value="af505188-1f22-405c-88e0-d953591f0a6b">Military
-                                                    </option>
-                                                    <option value="c2436b4e-8084-4346-b78e-372b063aa9d4">Caregiver
-                                                    </option>
-                                                    <option value="ba35d9d9-8265-4e8e-8bc5-49264505917c">Finance Sources
-                                                    </option>
-                                                    <option value="a7dab9b7-a07d-430c-a8c7-3113f12d2c00">Age</option>
-                                                    <option value="d9b64530-72b3-45b2-b714-2016c5ac7626">Program
-                                                    </option>
-                                                    <option value="c974a276-95a6-4237-869e-5161234da62d">Academic Level
-                                                    </option>
-                                                </select>
-                                                <center>
-                                                    <select class="form-select mt-4 mb-4"
-                                                        style="width:20%;border-color: #000032;border-radius: 20px;border:2px solid;color:#000032">
-                                                        <option>is equal
-                                                            to</option>
-                                                        <option>not equal
-                                                            to</option>
-                                                    </select>
-                                                </center>
-                                                <select class="form-select" style="color:#000032">
-                                                    <option>Option
-                                                        A</option>
-                                                    <option>Option
-                                                        B</option>
-                                                    <option>Option
-                                                        C</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-1 align-content-center">
-                                                <a href="#" onclick="generate_question()" style="color:red;"><i
-                                                        class="fa fa-trash"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <center>
-                                        <button type="button"
-                                            class="btn p-2 mt-3 rounded-circle btn-lg align-content-center text-center align-items-center"
-                                            data-bs-toggle="modal" data-bs-target=".bs-example-modal-center"
-                                            style="height: 45px; font-size: 25px; width: 45px; line-height: 112%; color: white;background-color: #000032;"><i
-                                                class="fa fa-plus"></i>
-                                        </button>
-                                    </center>
+                                        <center>
+                                            <button type="button"
+                                                class="btn p-2 mt-3 rounded-circle btn-lg align-content-center text-center align-items-center"
+                                                onclick="generate_question()"
+                                                style="height: 45px; font-size: 25px; width: 45px; line-height: 112%; color: white;background-color: #000032;"><i
+                                                    class="fa fa-plus"></i>
+                                            </button>
+                                        </center>
+                                    </form>
                                     <!-- <hr style="color: rgba(108, 108, 108, 0.629);"> -->
                                 </div>
                                 <hr class="mt-5 mb-0" style="color: rgba(108, 108, 108, 0.629);">
                                 <div class="py-3 px-3 d-flex justify-content-around">
 
-                                    <button type="button" class="btn btn-secondary">Apply
+                                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                                        data-bs-target=".bs-example-modal-center"
+                                        onclick="
+                                        const values = Array.from(document.querySelectorAll('select[name=\'demographic_question[]\']'))
+                                                            .map(select => select.value);
+                                        document.getElementById('demographics_questions').value = JSON.stringify(values);
+                                         const values1 = Array.from(document.querySelectorAll('select[name=\'demographic_condition[]\']'))
+                                                            .map(select => select.value);
+                                        document.getElementById('demographics_condition').value = JSON.stringify(values1);
+                                         const values2 = Array.from(document.querySelectorAll('select[name=\'demographic_answers[]\']'))
+                                                            .map(select => select.value);
+                                        document.getElementById('demographics_answers').value = JSON.stringify(values2);">Apply
                                         Filter</button>
                                     <!-- <button type="button" class="btn" style="background-color: #000032;color: white;">Save
                                     Group</button> -->
@@ -704,55 +759,70 @@ include("./models/filters/dropdowns.php");
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
-                </div>
 
 
-
-                <?php
-            if(isset($_POST['implementation_time'])){
-                if($_POST['implementation_time'] == "prepost")
-                    include("prepost.php");
-                if($_POST['implementation_time'] == "eval")
-                    include("student_eval.php");
-                else if($_POST['data_type'] == "nace")
-                    include("nace-board.php");
-                else if($_POST['data_type'] == "plus")
-                    include("plus-board.php");
-            }
-            else{
-               include("nace-board.php");
-            }
-                
+                    <?php
+                    if($total_students[0] == 0){
+                        echo "<div class='p-5'>
+                        <div class='card-body'>
+                        <div class='row'>
+                         <div class='col-sm-3'></div>
+                        <div class='col-sm-3'>
+                            <div style='margin:auto'>
+                             <img class='img img-fluid' src='assets/images/no_folder.svg' />
+                            </div>
+                        </div>
+                        <div class='col-sm-4 text-center align-content-center'>
+                            <h2> <b>NO DATA FOUND! </b></h2>
+                        </div>
+                        </div>
+                        </div>
+                        </div>";
+                    }                        
+                    else{
+                        if(isset($_POST['implementation_time'])){
+                            if($_POST['implementation_time'] == "Student : Pre vs. Post")
+                                include("prepost.php");
+                            if($_POST['implementation_time'] == "eval")
+                                include("student_eval.php");
+                            else if($_POST['data_type'] == "nace")
+                                include("nace-board.php");
+                            else if($_POST['data_type'] == "plus")
+                                include("plus-board.php");
+                            }
+                            else{
+                                include("nace-board.php");
+                            }
+                    }    
                 ?>
-
-                <!-- <?php
+                    <!-- <?php
                 if($_POST['data_type'] == "plus")
                     include("plus-board.php");
                 ?> -->
+                </div>
             </div>
-        </div>
-        <!-- End Page-content -->
+            <!-- End Page-content -->
 
-        <footer class="footer container" style="left: 20px!important;border-radius: 24px 24px 0px 0px;">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <script>
-                        document.write(new Date().getFullYear())
-                        </script> © Career Launch.
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="text-sm-end d-none d-sm-block">
-                            Crafted with <i class="mdi mdi-heart text-danger"></i>
-                            by Team Career Launch
+            <footer class="footer container" style="left: 20px!important;border-radius: 24px 24px 0px 0px;">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <script>
+                            document.write(new Date().getFullYear())
+                            </script> © Career Launch.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Crafted with <i class="mdi mdi-heart text-danger"></i>
+                                by Team Career Launch
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
 
-    </div>
-    <!-- end main content-->
+        </div>
+        <!-- end main content-->
 
     </div>
     <!-- END layout-wrapper -->
@@ -760,10 +830,6 @@ include("./models/filters/dropdowns.php");
     <!-- JAVASCRIPT -->
     <script src="assets/libs/jquery/jquery.min.js"></script>
     <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- morris chart -->
-    <!-- <script src="assets/libs/morris.js/morris.min.js"></script>
-    <script src="assets/libs/raphael/raphael.min.js"></script> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"
         integrity="sha512-jNDtFf7qgU0eH/+Z42FG4fw3w7DM/9zbgNPe3wfJlCylVDTT3IgKW5r92Vy9IHa6U50vyMz5gRByIu4YIXFtaQ=="
@@ -995,7 +1061,26 @@ include("./models/filters/dropdowns.php");
         $("img.lazy").lazyload();
     });
     </script>
-    <!-- apexcharts init -->
+
+
+    <script>
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+
+    function generate_question() {
+        demo_id = "demo" + getRandomInt(9999999);
+        $("#demographic_modal").append(
+            '<div id="' + demo_id +
+            '" ><h4 class="text-center mb-4">AND</h4><div class="card p-3 border-2"> <div class="row mb-4"> <div class="col-sm-11"> <select name="demographic_question[]" class="form-select" style="color:#000032"> <option value="d61f96be-29e6-4a26-bf62-55993bb6b8ac">Gender </option> <option value="a54979a3-daed-4b76-8968-663daa743786"> Demographic Category</option> <option value="dd5c1e33-8813-46af-9f79-75f10e9d69ff">Preset Groups </option> <option value="9a149e36-a5e8-4602-b6a4-e47aab952508">Disability </option> <option value="bd7e349a-4e0a-435d-9a68-551cc7999981">LGBTQ </option> <option value="d16579f7-ec39-4c00-b8e9-4b297a62c10d">Language </option> <option value="37963d7a-dd81-4366-9ec0-5e02b0dadf63">Parent </option> <option value="af505188-1f22-405c-88e0-d953591f0a6b">Military </option> <option value="c2436b4e-8084-4346-b78e-372b063aa9d4">Caregiver </option> <option value="ba35d9d9-8265-4e8e-8bc5-49264505917c">Finance Sources </option> <option value="a7dab9b7-a07d-430c-a8c7-3113f12d2c00">Age </option> <option value="d9b64530-72b3-45b2-b714-2016c5ac7626">Program </option> <option value="c974a276-95a6-4237-869e-5161234da62d">Academic Level </option> </select> <center> <select name="demographic_condition[]" class="form-select mt-4 mb-4" style="width:20%;border-color: #000032;border-radius: 20px;border:2px solid;color:#000032"> <option>is equal to</option> <option>not equal to</option> </select> </center> <select name="demographic_answers[]" class="form-select" style="color:#000032"> <option>Option A</option> <option>Option B</option> <option>Option C</option> </select> </div> <div class="col-sm-1 align-content-center"> <a href="#" onclick="remove_question(' +
+            demo_id + ')" style="color:red;"><i class="fa fa-trash"></i></a> </div> </div> </div> </div>'
+        );
+    }
+
+    function remove_question(demo_id) {
+        $(demo_id).remove();
+    }
+    </script>
 </body>
 
 </html>

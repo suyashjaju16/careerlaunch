@@ -19,7 +19,7 @@ $base_url = "https://7gv0oagg0c.execute-api.us-east-1.amazonaws.com/dev/";
 $filters = new stdClass();
 
 // Student Details START
-$filters->org_id = "efb383d9-2b47-4dcc-ac2f-8b6e93568b74";
+$filters->org_id = $_GET['organization'];
 $data = new stdClass();
 $data = $filters;
 echo json_encode($data);
@@ -390,9 +390,9 @@ $students_data = json_decode(fetch_data($base_url,"get-students",$data),true);
                                         <!-- <th scope="col" style="width:20px">1</th> -->
                                         <td> <?= $name[0] ?> </td>
                                         <td> <?= $name[1] ?> </td>
-                                        <td> - </td>
-                                        <td> - </td>
-                                        <td> - </td>
+                                        <td> <?= $values["Email"] ?> </td>
+                                        <td> <?= $values["Score"] ?> </td>
+                                        <td> <?= $values["Time"] ?> </td>
                                         <td><a href='./student.php?id=<?= $values["Id"] ?>' target="_blank">
                                                 <i class='ri-eye-fill' style='color:#000033;font-size:20px'></i>
                                             </a>
@@ -401,54 +401,7 @@ $students_data = json_decode(fetch_data($base_url,"get-students",$data),true);
                                     <?php 
                                     }
                                     ?>
-                                    <tr>
-                                        <!-- <th scope="col" style="width:20px">2</th> -->
-                                        <td>Rohan</td>
-                                        <td>Balda</td>
-                                        <td>rbaldha@scu.edu</td>
-                                        <td>2.5</td>
-                                        <td>15th June 2024</td>
-                                        <td><a href='#' style='text-align:center!important'>
-                                                <i class='ri-eye-fill' style='color:#000033;font-size:20px'></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <!-- <th scope="col" style="width:20px">3</th> -->
-                                        <td>Suyash</td>
-                                        <td>Jaju</td>
-                                        <td>sjaju@scu.edu</td>
-                                        <td>2.5</td>
-                                        <td>15th June 2024</td>
-                                        <td><a href='#'>
-                                                <i class='ri-eye-fill' style='color:#000033;font-size:20px'></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <!-- <th scope="col" style="width:20px">4</th> -->
-                                        <td>Axel</td>
-                                        <td>Ruano</td>
-                                        <td>aruanou@career.academy</td>
-                                        <td>2.5</td>
-                                        <td>15th June 2024</td>
-                                        <td><a href='#'>
-                                                <i class='ri-eye-fill' style='color:#000033;font-size:20px'></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <!-- <th scope="col" style="width:20px">5</th> -->
-                                        <td>Muskan</td>
-                                        <td>Panchal</td>
-                                        <td>mpanchal@scu.edu</td>
-                                        <td>2.5</td>
-                                        <td>15th June 2024</td>
-                                        <td><a href='#'>
-                                                <i class='ri-eye-fill' style='color:#000033;font-size:20px'></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
