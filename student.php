@@ -54,7 +54,7 @@ else{
 }
 
 // if(isset($_GET['evaluator']))
-    $filters->evaluator_email = "axel+e1@careerlaunch.academy";
+    // $filters->evaluator_email = "axel+e1@careerlaunch.academy";
 
 // echo json_encode($filters);
 
@@ -63,10 +63,11 @@ else{
 // $data = $filters;
 
 $student_details = json_decode(fetch_data($base_url,"student-details",$data),true);
+// echo json_encode($student_details);
 // $type = explode("//", $_GET['filter']);
-// if($type[0] == "work-exp")
-//     $filters->evaluator_email = $student_details["Evaluator Email"];
-
+if($student_details["Evaluator Email"] != null)
+    $filters->evaluator_email = $student_details["Evaluator Email"];
+//  echo json_encode($student_details);
 
 //  echo json_encode($filters->evaluator_email);
 // $data = new stdClass();
@@ -74,7 +75,7 @@ $data = $filters;
 $competency_data = json_decode(fetch_data($base_url,"student-competency",$data),true);
 // echo intval(json_encode($competency_data["communication_results"]["pre"]));
 
-// echo json_encode($data);
+echo json_encode($data);
 // echo generate_competency($competency_data["communication"]);
 function verifyLevel($data, $category, $subCategory, $key) {
     return isset($data[$category][$subCategory][$key]) ? 
@@ -89,14 +90,6 @@ function returnLevel($level) {
         ($level == "Understanding" ? "35.5" : 
         ($level == "Early" ? "65.5" : "85.5"))) : null;
 }
-
-// function generate_filters($value,$filter_data) {
-//     foreach ($filter_data as $key => $values) {
-//         foreach ($values as $value) {
-//             echo "<option value=\"{$key}//{$value}\">{$value}</option>\n";
-//         }
-//     }
-// }
 
 // Function to generate filters with selected value
 function generate_filters($selected_value, $filter_data) {
@@ -128,6 +121,7 @@ echo '
                 </p>
             </div>
             <div class="col-sm-9 mt-4 p-0">';
+            // echo json_encode($value);
                 if(isset($value["evaluator"]) && $value["evaluator"] != null){
                 echo '<div class="progress mb-5 bg-white evalu" style="width:90%;margin-bottom:32px;margin:auto">
                     <div class="progress-bar animated-progress bg-dark " role="progressbar"
@@ -136,8 +130,22 @@ echo '
                     </div>
                     <div class="progress-value" style="background-color:#000;font-size:16px">
                     </div>
-                    <p style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
+                    <p style="position:relative;margin-top:-8px;left:1%;font-size:18px;color:black">
                         <b>'.$value["evaluator"].'</b>
+                    </p>
+                </div>';
+                }
+                if(isset($value["pre"]) && $value["pre"] != null){
+                    $pre_hide = $value['pre'] == null ? "" : "display:none";
+                echo '<div class="progress pre-bar mb-3 bg-white" style="width:90%;margin-bottom:32px!important;margin:auto;'.$pre_hide.'">
+                    <div class="progress-bar animated-progress" role="progressbar"
+                        data-width="'.returnLevel($value['pre']).'" aria-valuemin="0" aria-valuemax="100"
+                        style="width:'.returnLevel($value['pre']).'%;background-color:'.$color.'">
+                    </div>
+                    <div class="progress-value" style="background-color:'.$color.';font-size:16px">
+                    </div>
+                    <p style="position:relative;margin-top:-8px;left:1%;font-size:18px;color:black">
+                        <b>'.$value["pre"].'</b>
                     </p>
                 </div>';
                 }
@@ -149,21 +157,8 @@ echo '
                     </div>
                     <div class="progress-value" style="background-color:'.$color.';font-size:16px">
                     </div>
-                    <p style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
+                    <p style="position:relative;margin-top:-8px;left:1%;font-size:18px;color:black">
                         <b>'.$value["post"].'</b>
-                    </p>
-                </div>';
-                }
-                else if(isset($value["pre"]) && $value["pre"] != null){
-                echo '<div class="progress mb-3 bg-white" style="width:90%;margin:auto">
-                    <div class="progress-bar animated-progress" role="progressbar"
-                        data-width="'.returnLevel($value['pre']).'" aria-valuemin="0" aria-valuemax="100"
-                        style="width:'.returnLevel($value['pre']).'%;background-color:'.$color.'">
-                    </div>
-                    <div class="progress-value" style="background-color:'.$color.';font-size:16px">
-                    </div>
-                    <p style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                        <b>'.$value["pre"].'</b>
                     </p>
                 </div>';
                 }
@@ -197,31 +192,18 @@ echo '<div class="row align-items-center p-0 w-100">
             <div class="progress-value" style="background-color:#000;font-size:16px">
                 '.intval(json_encode($competency_data[$competency]["evaluator"])).'
             </div>
-            <p style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
+            <p style="position:relative;margin-top:-8px;left:1%;font-size:18px;color:black">
                 <b>Evaluator</b>
-            </p>
-        </div>';
-        }
-        if(json_encode($competency_data["post"]) == "true")
-        {
-        $self_label = $competency_data[$competency]['evaluator'] == null ? "Post" : "Self";
-        echo '<div class="progress bg-white" style="width:90%;margin:auto">
-            <div class="progress-bar animated-progress" role="progressbar"
-                data-width="'.intval(json_encode($competency_data[$competency]["post"])).'" aria-valuemin="0"
-                aria-valuemax="100" style="width:'.intval(json_encode($competency_data[$competency]["post"])).'%;background-color:'.$color.'">
-            </div>
-            <div class="progress-value" style="background-color:'.$color.';font-size:16px">
-                '.intval(json_encode($competency_data[$competency]["post"])).'
-            </div>
-            <p style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                <b class="self_label">'.$self_label.'</b>
             </p>
         </div>';
         }
         if(json_encode($competency_data["pre"]) == "true")
         {
+        // $pre = json_encode($competency_data["evaluator"]) == "true" ? "hide" : "";
+        // echo "Pre : ".$pre;
         $self_label = $competency_data[$competency]['evaluator'] == null ? "Pre" : "Self";
-        echo '<div class="progress mb-3 bg-white" style="width:90%;margin:auto">
+        $pre_hide = $competency_data[$competency]['evaluator'] == null ? "" : "display:none";
+        echo '<div class="progress pre-bar mb-3 bg-white" style="width:90%;margin-bottom:32px!important;margin:auto;'.$pre_hide.'">
             <div class="progress-bar animated-progress" role="progressbar"
                 data-width="'.intval(json_encode($competency_data[$competency]["pre"])).'" aria-valuemin="0"
                 aria-valuemax="100" style="width:'.intval(json_encode($competency_data[$competency]["pre"])).'%;background-color:'.$color.'">
@@ -229,8 +211,24 @@ echo '<div class="row align-items-center p-0 w-100">
             <div class="progress-value" style="font-size:16px;background-color:'.$color.'">
                 '.intval(json_encode($competency_data[$competency]["pre"])).'
             </div>
-            <p style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                <b class="self_label">'.$self_label.'</b>
+            <p style="position:relative;margin-top:-8px;left:1%;font-size:18px;color:black">
+                <b class="self_label pre-label">'.$self_label.'</b>
+            </p>
+        </div>';
+        }
+        if(json_encode($competency_data["post"]) == "true")
+        {
+        $self_label = $competency_data[$competency]['evaluator'] == null ? "Post" : "Self";
+        echo '<div class="progress post-bar bg-white" style="width:90%;margin-bottom:32px!important;margin:auto">
+            <div class="progress-bar animated-progress" role="progressbar"
+                data-width="'.intval(json_encode($competency_data[$competency]["post"])).'" aria-valuemin="0"
+                aria-valuemax="100" style="width:'.intval(json_encode($competency_data[$competency]["post"])).'%;background-color:'.$color.'">
+            </div>
+            <div class="progress-value" style="background-color:'.$color.';font-size:16px">
+                '.intval(json_encode($competency_data[$competency]["post"])).'
+            </div>
+            <p style="position:relative;margin-top:-8px;left:1%;font-size:18px;color:black">
+                <b class="self_label post-label">'.$self_label.'</b>
             </p>
         </div>';
         }
@@ -266,6 +264,8 @@ echo '<div class="row align-items-center p-0 w-100">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
         rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style>
     .grid1 {
         display: grid;
@@ -365,7 +365,7 @@ echo '<div class="row align-items-center p-0 w-100">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-8">
-                            <h3 style="margin-left:20px"><b>CAREER READINESS
+                            <h3 style="margin-left:20px"><b>NACE CAREER READINESS
                                     INVENTORY REPORT</b></h3>
                             <h5 style="margin-left:20px"><b><?= $student_details['Organisation'] ?></b></h5>
                         </div>
@@ -395,28 +395,33 @@ echo '<div class="row align-items-center p-0 w-100">
                                         </a>
                                     </div>
                                     <div class="col-sm-9 align-content-center">
-                                        <h4 style="margin-left:20px"><b><?= $student_details['Name'] ?></b>
+                                        <h4 class="animate__animated animate__fadeInDown" style="margin-left:20px">
+                                            <b><?= $student_details['Name'] ?></b>
                                         </h4>
                                     </div>
                                 </div>
                                 <div>
                                     <h5><b>Area of Study</b></h5>
-                                    <h5><?= $student_details['program'] ?></h5>
+                                    <h5 class="animate__animated animate__fadeInDown"><?= $student_details['program'] ?>
+                                    </h5>
                                 </div>
                                 <div>
                                     <h5><b>Academic Level</b></h5>
-                                    <h5><?= $student_details['degree'] ?></h5>
+                                    <h5 class="animate__animated animate__fadeInDown"><?= $student_details['degree'] ?>
+                                    </h5>
                                 </div>
                                 <div>
                                     <h5><b>Report Date</b></h5>
-                                    <h5> <?= date('m/d/Y', strtotime($student_details['timestamp'])) ?> </h5>
+                                    <h5 class="animate__animated animate__fadeInDown">
+                                        <?= date('m/d/Y', strtotime($student_details['timestamp'])) ?> </h5>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <?php 
-                    if($student_details["work_experience"] != null && isset($student_details["Evaluator Email"])){                            
+                    // echo $student_details["work_experience"];
+                    if($student_details["work_experience"] != null){                            
                         ?>
                     <div class="d-flex justify-content-between">
 
@@ -425,14 +430,18 @@ echo '<div class="row align-items-center p-0 w-100">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div>
-                                            <h5> <b> Evaluator: <?= $student_details['Evaluator Relation'] ?> </b>
+                                            <h5> <b> Evaluator:
+                                                    <?= isset($student_details["Evaluator Relation"]) ? $student_details['Evaluator Relation'] : "" ?>
+                                                </b>
                                             </h5>
-                                            <h5><?= $student_details['Evaluator Name'] ?> </h5>
+                                            <h5><?= isset($student_details["Evaluator Name"]) ? $student_details['Evaluator Name'] : "Not Assigned" ?>
+                                            </h5>
                                         </div>
                                         <div class="d-flex">
                                             <i class="mdi mdi-email" style="font-size:18px;"></i>
                                             <h5 class="ml-5">
-                                                <?= $student_details['Evaluator Email'] ?></h5>
+                                                <?= isset($student_details['Evaluator Email']) ? $student_details['Evaluator Email'] : "N/A" ?>
+                                            </h5>
                                         </div>
                                     </div>
                                     <div class="col-sm-6 align-content-center">
@@ -445,7 +454,8 @@ echo '<div class="row align-items-center p-0 w-100">
                         </div>
                         <div class="d-flex pr-5" style="width:20%">
                             <img src="<?= $student_details['Logo'] == "NULL" ? "assets/images/logo.png" : $student_details['Logo'] ?>"
-                                class="img-fluid rounded" alt="Org Logo" style="object-fit: contain;width:100%">
+                                class="img-fluid rounded" alt="Org Logo"
+                                style="object-fit: contain;width:100%;max-height:140px">
                         </div>
                     </div>
                     <?php } 
@@ -470,8 +480,8 @@ echo '<div class="row align-items-center p-0 w-100">
 
                                 <div class="row  p-0">
                                     <div class="col-sm-3 align-content-center">
-                                        <h3>Career Readiness
-                                            Level</h3>
+                                        <h4>NACE Career Readiness
+                                            Level</h4>
                                     </div>
                                     <div class="col-sm-8">
                                         <div class="d-flex justify-content-around p-2 mt-3"
@@ -594,10 +604,33 @@ echo '<div class="row align-items-center p-0 w-100">
                                             </p>
                                         </div>
                                         <?php } 
-                                         if(intval(json_encode($competency_data["overall_career_readiness_results"]["post"])) != null)
+                                         if(intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])) != null)
                                         {
                                         ?>
-                                        <div class="progress mb-3 bg-white" style="width:93%;margin:auto">
+                                        <div class="progress mb-3 pre-bar bg-white"
+                                            style="width:93%;margin-bottom:32px!important;margin:auto;display:none">
+                                            <div class="progress-bar animated-progress bg-warning " role="progressbar"
+                                                data-width="<?= intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])); ?>"
+                                                aria-valuemin="0" aria-valuemax="100"
+                                                style="width:<?= intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])); ?>%;">
+                                            </div>
+                                            <div class="progress-value bg-warning" style="font-size:16px">
+                                                <?= intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])); ?>
+                                            </div>
+                                            <p
+                                                style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
+                                                <b class="self_label pre-label">
+                                                    <?= $competency_data["overall_career_readiness_results"]['evaluator'] == null ? "Pre" : "Self" ?></b>
+                                            </p>
+                                            <!-- /.progress-bar .progress-bar-danger -->
+                                        </div><!-- /.progress .no-rounded -->
+                                        <?php } 
+                                        if(json_encode($competency_data["post"]) == "true")
+                                        {
+                                            ?>
+
+                                        <div class="progress mb-3 post-bar bg-white"
+                                            style="width:93%;margin-bottom:32px!important;margin:auto">
                                             <div class="progress-bar animated-progress bg-warning " role="progressbar"
                                                 data-width="<?= intval(json_encode($competency_data["overall_career_readiness_results"]["post"])); ?>"
                                                 aria-valuemin="0" aria-valuemax="100"
@@ -608,28 +641,8 @@ echo '<div class="row align-items-center p-0 w-100">
                                             </div>
                                             <p
                                                 style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                <b>
+                                                <b class="self_label post-label">
                                                     <?= $competency_data["overall_career_readiness_results"]['evaluator'] == null ? "Post" : "Self" ?></b>
-                                            </p>
-                                            <!-- /.progress-bar .progress-bar-danger -->
-                                        </div><!-- /.progress .no-rounded -->
-                                        <?php } 
-                                        else if(intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])) != null)
-                                        {
-                                            ?>
-                                        <div class="progress mb-3 bg-white" style="width:93%;margin:auto">
-                                            <div class="progress-bar animated-progress bg-warning " role="progressbar"
-                                                data-width="<?= intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])); ?>"
-                                                aria-valuemin="0" aria-valuemax="100"
-                                                style="width:<?= intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])); ?>%">
-                                            </div>
-                                            <div class="progress-value bg-warning" style="font-size:16px">
-                                                <?= intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])); ?>
-                                            </div>
-                                            <p
-                                                style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
-                                                <b>
-                                                    <?= $competency_data["overall_career_readiness_results"]['evaluator'] == null ? "Pre" : "Self" ?></b>
                                             </p>
                                             <!-- /.progress-bar .progress-bar-danger -->
                                         </div><!-- /.progress .no-rounded -->
@@ -1192,12 +1205,17 @@ echo '<div class="row align-items-center p-0 w-100">
                             // $(".evalu").hide()
                             if (document.getElementById('evaluator_switch').checked) {
                                 $(".evalu").show();
-                                $(".self_label").html("Self");
+                                $(".pre-bar").hide();
+                                // $(".post-bar").hide();
+                                $(".pre-label").html("Self");
+                                $(".post-label").html("Self");
                             } else {
+                                $(".pre-bar").show();
+                                $(".post-bar").show();
                                 $(".evalu").hide();
-                                $(".self_label").html("Pre");
+                                $(".pre-label").html("Pre");
+                                $(".post-label").html("Post");
                             }
-
                         }
 
                         document.addEventListener("DOMContentLoaded", () => {
