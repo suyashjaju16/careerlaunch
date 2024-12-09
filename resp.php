@@ -275,18 +275,16 @@ $students_data = json_decode(fetch_data($base_url,"get-students",$data),true);
                 <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 100px;">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="./workexp.php?organization=efb383d9-2b47-4dcc-ac2f-8b6e93568b74"
+                            <a class="nav-link" href="./dashboard?organization=<?= $_GET['organization']?>"
                                 style="font-size:18px;color:white!important;">Dashboard
                                 <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item card" style="margin-left: 100px;">
                             <div class="card-body py-1">
-                                <a class="nav-link text-dark"
-                                    href="./resp.php?organization=efb383d9-2b47-4dcc-ac2f-8b6e93568b74"
+                                <a class="nav-link text-dark" href="./resp?organization=<?= $_GET['organization']?>"
                                     style="font-size:18px;">Responses</a>
                             </div>
                         </li>
-
                     </ul>
                     <select class="form-select bg-light" style="width:20%;margin-left:45%;display:none">
                         <option> All </option>
@@ -393,7 +391,7 @@ $students_data = json_decode(fetch_data($base_url,"get-students",$data),true);
                                         <td> <?= $values["Email"] ?> </td>
                                         <td> <?= $values["Score"] ?> </td>
                                         <td> <?= $values["Time"] ?> </td>
-                                        <td><a href='./student.php?id=<?= $values["Id"] ?>' target="_blank">
+                                        <td><a href='./student?id=<?= $values["Id"] ?>' target="_blank">
                                                 <i class='ri-eye-fill' style='color:#000033;font-size:20px'></i>
                                             </a>
                                         </td>

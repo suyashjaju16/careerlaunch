@@ -371,12 +371,14 @@ include("./models/filters/dropdowns.php");
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item card">
                             <div class="card-body py-1">
-                                <a class="nav-link text-dark" href="./index.html" style="font-size:18px;">Dashboard
+                                <a class="nav-link text-dark"
+                                    href="./dashboard?organization=<?= $_GET['organization']?>"
+                                    style="font-size:18px;">Dashboard
                                     <span class="sr-only">(current)</span></a>
                             </div>
                         </li>
                         <li class="nav-item" style="margin-left: 100px;">
-                            <a class="nav-link" href="./resp.php?organization=efb383d9-2b47-4dcc-ac2f-8b6e93568b74"
+                            <a class="nav-link" href="./resp?organization=<?= $_GET['organization']?>"
                                 style="font-size:18px;color:white!important;">Responses</a>
                         </li>
                     </ul>
