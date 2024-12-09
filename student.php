@@ -1210,9 +1210,9 @@ echo '<div class="row align-items-center p-0 w-100">
                         <!-- JAVASCRIPT -->
                         <script src="assets/libs/jquery/jquery.min.js"></script>
                         <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-                        <!-- <script src="assets/js/pages/index.init.js"></script> -->
-
+                        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+                        <script src="assets/js/pages/index.init.js"></script>
+                        <script src="assets/js/app.js"></script>
                         <!-- materialdesign icon js-->
                         <script src="assets/js/pages/materialdesign.init.js"></script>
 
