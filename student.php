@@ -75,13 +75,17 @@ $data = $filters;
 $competency_data = json_decode(fetch_data($base_url,"student-competency",$data),true);
 // echo intval(json_encode($competency_data["communication_results"]["pre"]));
 
-echo json_encode($data);
+// echo json_encode($data);
 // echo generate_competency($competency_data["communication"]);
 function verifyLevel($data, $category, $subCategory, $key) {
     return isset($data[$category][$subCategory][$key]) ? 
         ($data[$category][$subCategory][$key] == "1" ? 10.5 : 
         ($data[$category][$subCategory][$key] == "2" ? 35.5 : 
         ($data[$category][$subCategory][$key] == "3" ? 65.5 : 85.5))) : null;
+}
+
+function returnColor($val) {
+    return ($val <= 25) ? "#01a2b2" : (($val <= 50) ? "#66d202" : (($val <= 75) ? "#ffb601" : "#e66060"));
 }
 
 function returnLevel($level) {
@@ -126,7 +130,7 @@ echo '
                 echo '<div class="progress mb-5 bg-white evalu" style="width:90%;margin-bottom:32px;margin:auto">
                     <div class="progress-bar animated-progress bg-dark " role="progressbar"
                         data-width="'.returnLevel($value['evaluator']).'" aria-valuemin="0" aria-valuemax="100"
-                        style="width:'.returnLevel($value['evaluator']).'%">
+                        style="max-width:90%">
                     </div>
                     <div class="progress-value" style="background-color:#000;font-size:16px">
                     </div>
@@ -136,11 +140,11 @@ echo '
                 </div>';
                 }
                 if(isset($value["pre"]) && $value["pre"] != null){
-                    $pre_hide = $value['pre'] == null ? "" : "display:none";
+                    $pre_hide = isset($value['evaluator']) ? "display:none" : "";
                 echo '<div class="progress pre-bar mb-3 bg-white" style="width:90%;margin-bottom:32px!important;margin:auto;'.$pre_hide.'">
                     <div class="progress-bar animated-progress" role="progressbar"
                         data-width="'.returnLevel($value['pre']).'" aria-valuemin="0" aria-valuemax="100"
-                        style="width:'.returnLevel($value['pre']).'%;background-color:'.$color.'">
+                        style="max-width:90%;background-color:'.$color.'">
                     </div>
                     <div class="progress-value" style="background-color:'.$color.';font-size:16px">
                     </div>
@@ -153,7 +157,7 @@ echo '
                 echo '<div class="progress mb-3 bg-white" style="width:90%;margin:auto">
                     <div class="progress-bar animated-progress" role="progressbar"
                         data-width="'.returnLevel($value['post']).'" aria-valuemin="0" aria-valuemax="100"
-                        style="width:'.returnLevel($value['post']).'%;background-color:'.$color.'">
+                        style="max-width:90%;background-color:'.$color.'">
                     </div>
                     <div class="progress-value" style="background-color:'.$color.';font-size:16px">
                     </div>
@@ -187,7 +191,7 @@ echo '<div class="row align-items-center p-0 w-100">
         echo '<div class="progress mb-3 bg-white evalu" style="width:90%;margin-bottom:32px!important;margin:auto">
             <div class="progress-bar animated-progress bg-dark " role="progressbar"
                 data-width="'.intval(json_encode($competency_data[$competency]["evaluator"])).'" aria-valuemin="0"
-                aria-valuemax="100" style="width:'.intval(json_encode($competency_data[$competency]["evaluator"])).'%">
+                aria-valuemax="100" style="max-width:90%">
             </div>
             <div class="progress-value" style="background-color:#000;font-size:16px">
                 '.intval(json_encode($competency_data[$competency]["evaluator"])).'
@@ -206,7 +210,7 @@ echo '<div class="row align-items-center p-0 w-100">
         echo '<div class="progress pre-bar mb-3 bg-white" style="width:90%;margin-bottom:32px!important;margin:auto;'.$pre_hide.'">
             <div class="progress-bar animated-progress" role="progressbar"
                 data-width="'.intval(json_encode($competency_data[$competency]["pre"])).'" aria-valuemin="0"
-                aria-valuemax="100" style="width:'.intval(json_encode($competency_data[$competency]["pre"])).'%;background-color:'.$color.'">
+                aria-valuemax="100" style="max-width:90%;background-color:'.$color.'">
             </div>
             <div class="progress-value" style="font-size:16px;background-color:'.$color.'">
                 '.intval(json_encode($competency_data[$competency]["pre"])).'
@@ -222,7 +226,7 @@ echo '<div class="row align-items-center p-0 w-100">
         echo '<div class="progress post-bar bg-white" style="width:90%;margin-bottom:32px!important;margin:auto">
             <div class="progress-bar animated-progress" role="progressbar"
                 data-width="'.intval(json_encode($competency_data[$competency]["post"])).'" aria-valuemin="0"
-                aria-valuemax="100" style="width:'.intval(json_encode($competency_data[$competency]["post"])).'%;background-color:'.$color.'">
+                aria-valuemax="100" style="max-width:90%;background-color:'.$color.'">
             </div>
             <div class="progress-value" style="background-color:'.$color.';font-size:16px">
                 '.intval(json_encode($competency_data[$competency]["post"])).'
@@ -551,9 +555,13 @@ echo '<div class="row align-items-center p-0 w-100">
                 <div class="row">
                     <div class="col-sm-12 p-0">
                         <div class="card px-3">
-                            <div class="card-body pt-0 pe-0">
+                            <?php 
+                            $eval_pad = $competency_data['overall_career_readiness_results']['evaluator'] == null ? "" : "pt-0";
+                            ?>
+                            <div class="card-body <?=$eval_pad?> pe-0">
                                 <?php 
-                                if($competency_data["overall_career_readiness_results"]["evaluator"] != null){ ?>
+                                if($competency_data["overall_career_readiness_results"]["evaluator"] != null){ 
+                                    ?>
                                 <div class="row p-0 mt-2">
                                     <div class="col-sm-12 p-0">
                                         <div class="d-flex float-end align-content-center">
@@ -572,8 +580,10 @@ echo '<div class="row align-items-center p-0 w-100">
                                         </div>
                                     </div>
                                 </div>
-                                <?php } ?>
-                                <div class="row align-items-center p-0">
+                                <?php } 
+                                
+                                ?>
+                                <div class="row align-items-center">
                                     <div
                                         class="col-sm-3 d-flex flex-row p-3 mb-0 align-items-center card bg-dark align-content-center">
                                         <img class="img-fluid" src="./assets/images/ocr.png"
@@ -606,15 +616,19 @@ echo '<div class="row align-items-center p-0 w-100">
                                         <?php } 
                                          if(intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])) != null)
                                         {
+                                            $pre_hide = $competency_data['overall_career_readiness_results']['evaluator'] == null ? "" : "display:none";
+                                            $val = intval(json_encode($competency_data["overall_career_readiness_results"]["pre"]));
+                                            $color = returnColor($val);
                                         ?>
                                         <div class="progress mb-3 pre-bar bg-white"
-                                            style="width:93%;margin-bottom:32px!important;margin:auto;display:none">
-                                            <div class="progress-bar animated-progress bg-warning " role="progressbar"
+                                            style="width:93%;margin-bottom:32px!important;margin:auto;<?=$pre_hide?>">
+                                            <div class="progress-bar animated-progress" role="progressbar"
                                                 data-width="<?= intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])); ?>"
                                                 aria-valuemin="0" aria-valuemax="100"
-                                                style="width:<?= intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])); ?>%;">
+                                                style="width:<?= intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])); ?>%;background-color:<?=$color?>">
                                             </div>
-                                            <div class="progress-value bg-warning" style="font-size:16px">
+                                            <div class="progress-value"
+                                                style="font-size:16px;background-color:<?=$color?>">
                                                 <?= intval(json_encode($competency_data["overall_career_readiness_results"]["pre"])); ?>
                                             </div>
                                             <p
@@ -627,16 +641,18 @@ echo '<div class="row align-items-center p-0 w-100">
                                         <?php } 
                                         if(json_encode($competency_data["post"]) == "true")
                                         {
+                                            $val = intval(json_encode($competency_data["overall_career_readiness_results"]["post"]));
+                                            $color = returnColor($val);
                                             ?>
-
                                         <div class="progress mb-3 post-bar bg-white"
                                             style="width:93%;margin-bottom:32px!important;margin:auto">
-                                            <div class="progress-bar animated-progress bg-warning " role="progressbar"
+                                            <div class="progress-bar animated-progress" role="progressbar"
                                                 data-width="<?= intval(json_encode($competency_data["overall_career_readiness_results"]["post"])); ?>"
                                                 aria-valuemin="0" aria-valuemax="100"
-                                                style="width:<?= intval(json_encode($competency_data["overall_career_readiness_results"]["post"])); ?>%">
+                                                style="width:<?= intval(json_encode($competency_data["overall_career_readiness_results"]["post"])); ?>%;background-color:<?=$color?>">
                                             </div>
-                                            <div class="progress-value bg-warning" style="font-size:16px">
+                                            <div class="progress-value"
+                                                style="font-size:16px;background-color:<?=$color?>">
                                                 <?= intval(json_encode($competency_data["overall_career_readiness_results"]["post"])); ?>
                                             </div>
                                             <p
