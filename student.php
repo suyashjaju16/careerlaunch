@@ -45,6 +45,7 @@ else{
             $student_filter = $filter_data[$imp_time][0];
             $filters->implementation_type = $imp_time;
             $filters->filter = $student_filter;
+            $implementation_time = $imp_time;
         } else {
             echo "Error decoding JSON data.";
         }
@@ -52,6 +53,16 @@ else{
     if(isset($_GET['filter']))
         $filters->filter = $_GET['filter'];
 }
+
+if(isset($_POST['filterData'])){
+    $implementation_time = explode("//", $_POST['filterData']);
+    $implementation_time = $implementation_time[0];
+}
+if(isset( $_GET['type'])){
+    $implementation_time = $_GET['type'];
+}
+
+// echo $implementation_time;
 
 // if(isset($_GET['evaluator']))
     // $filters->evaluator_email = "axel+e1@careerlaunch.academy";
@@ -65,10 +76,11 @@ else{
 $student_details = json_decode(fetch_data($base_url,"student-details",$data),true);
 // echo json_encode($student_details);
 // $type = explode("//", $_GET['filter']);
-if($student_details["Evaluator Email"] != null)
+if(isset($student_details["Evaluator Email"]) && $student_details["Evaluator Email"] != null)
     $filters->evaluator_email = $student_details["Evaluator Email"];
 //  echo json_encode($student_details);
 
+// echo json_encode($student_details);
 //  echo json_encode($filters->evaluator_email);
 // $data = new stdClass();
 $data = $filters;
@@ -92,7 +104,7 @@ function returnLevel($level) {
     return isset($level) ? 
         ($level == "Emerging" ? "10.5" : 
         ($level == "Understanding" ? "35.5" : 
-        ($level == "Early" ? "65.5" : "85.5"))) : null;
+        ($level == "Early" ? "60" : "85.5"))) : null;
 }
 
 // Function to generate filters with selected value
@@ -174,7 +186,7 @@ echo '
 }
 
 function generate_competency_results($competency_data, $competency,$color, $label, $icon){
-
+// echo $GLOBALS["implementation_time"];
 echo '<div class="row align-items-center p-0 w-100">
     <div class="col-sm-3 d-flex p-3 mb-0 align-items-center card align-content-center"
         style="background-color:'.$color.'!important">
@@ -207,6 +219,8 @@ echo '<div class="row align-items-center p-0 w-100">
         // echo "Pre : ".$pre;
         $self_label = $competency_data[$competency]['evaluator'] == null ? "Pre" : "Self";
         $pre_hide = $competency_data[$competency]['evaluator'] == null ? "" : "display:none";
+        $self_label = $GLOBALS["implementation_time"] == "general" ? "" : $self_label;
+        // echo $self_label;
         echo '<div class="progress pre-bar mb-3 bg-white" style="width:90%;margin-bottom:32px!important;margin:auto;'.$pre_hide.'">
             <div class="progress-bar animated-progress" role="progressbar"
                 data-width="'.intval(json_encode($competency_data[$competency]["pre"])).'" aria-valuemin="0"
@@ -350,6 +364,10 @@ echo '<div class="row align-items-center p-0 w-100">
     .recommendations-headings {
         font-size: 16px !important;
     }
+
+    .popover-headings {
+        font-weight: 800;
+    }
     </style>
 </head>
 
@@ -468,7 +486,7 @@ echo '<div class="row align-items-center p-0 w-100">
                     <div class="float-end pb-3 mt-3" style="width:20%">
                         <img src="<?= $student_details['Logo'] == "NULL" ? "assets/images/logo.png" : $student_details['Logo'] ?>"
                             class="img-fluid rounded" alt=" <?= $student_details['Organisation'] ?>"
-                            style="object-fit: contain;width:100%">
+                            style="object-fit: contain;width:100%;max-height:140px">
                     </div>
                     <?php
                         }
@@ -540,8 +558,9 @@ echo '<div class="row align-items-center p-0 w-100">
                                         </div>
                                     </div>
                                     <div class="col-sm-1 align-content-center">
-                                        <a href="#" data-bs-toggle="popover" data-bs-html="true" data-trigger="focus"
-                                            data-bs-content="<div class='btn btn-primary btn-sm' style='width:22%;margin:auto;font-size:14px;font-weight:bold;color:black'> Emerging Knowledge</div> <p class='mt-2 mb-2'>The student has an emerging awareness of the behavior, its importance, and related concepts.</p> <div class='btn btn-success btn-sm' style='width:22%;margin:auto;font-size:14px;font-weight:bold;color:black'> Understanding </div> <p class='mt-2 mb-2'>The student demonstrates an understanding of the behavior and related concepts.</p> <div class='btn btn-warning btn-sm' style='width:22%;margin:auto;font-size:14px;font-weight:bold;color:black'> Early Application</div><p class='mt-2 mb-2'>The student sometimes applies the behavior.</p> <div class='btn btn-sm btn-danger' style='width:23%;margin:auto;font-size:10px;margin-right:5px!important;font-weight:bold;color:black'> Advanced Application</div><p class='mt-2 mb-2'>The behavior is consistent and integrated into the student’s workplace behaviors.</p>"
+                                        <a tabindex="0" href="#" data-bs-toggle="popover" data-bs-html="true"
+                                            data-placement="right" data-trigger="focus"
+                                            data-bs-content="<div class='btn btn-primary btn-sm text-dark popover-headings' style='width:22%;margin:auto;font-size:14px;font-weight:bold;color:black!important'> Emerging Knowledge</div> <p class='mt-2 mb-2'>The student has an emerging awareness of the behavior, its importance, and related concepts.</p> <div class='btn btn-success btn-sm text-dark popover-headings' style='width:22%;margin:auto;font-size:14px;font-weight:bold;color:black'> Understanding </div> <p class='mt-2 mb-2'>The student demonstrates an understanding of the behavior and related concepts.</p> <div class='btn btn-warning btn-sm text-dark popover-headings' style='width:22%;margin:auto;font-size:14px;font-weight:bold;color:black'> Early Application</div><p class='mt-2 mb-2'>The student sometimes applies the behavior.</p> <div class='btn btn-sm btn-danger text-dark popover-headings' style='width:23%;margin:auto;font-size:10px;margin-right:5px!important;font-weight:bold;color:black'> Advanced Application</div><p class='mt-2 mb-2'>The behavior is consistent and integrated into the student’s workplace behaviors.</p>"
                                             style="margin-top:20px">
                                             <i class="mdi mdi-information-outline"
                                                 style="font-size:45px;color:black;margin-left:20px"></i>
@@ -619,6 +638,8 @@ echo '<div class="row align-items-center p-0 w-100">
                                             $pre_hide = $competency_data['overall_career_readiness_results']['evaluator'] == null ? "" : "display:none";
                                             $val = intval(json_encode($competency_data["overall_career_readiness_results"]["pre"]));
                                             $color = returnColor($val);
+                                            $self_label = $competency_data["overall_career_readiness_results"]['evaluator'] == null ? "Pre" : "Self";
+                                            $self_label = $GLOBALS["implementation_time"] == "general" ? "" : $self_label;
                                         ?>
                                         <div class="progress mb-3 pre-bar bg-white"
                                             style="width:93%;margin-bottom:32px!important;margin:auto;<?=$pre_hide?>">
@@ -634,7 +655,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                             <p
                                                 style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
                                                 <b class="self_label pre-label">
-                                                    <?= $competency_data["overall_career_readiness_results"]['evaluator'] == null ? "Pre" : "Self" ?></b>
+                                                    <?= $self_label ?></b>
                                             </p>
                                             <!-- /.progress-bar .progress-bar-danger -->
                                         </div><!-- /.progress .no-rounded -->
@@ -643,6 +664,8 @@ echo '<div class="row align-items-center p-0 w-100">
                                         {
                                             $val = intval(json_encode($competency_data["overall_career_readiness_results"]["post"]));
                                             $color = returnColor($val);
+                                            $self_label = $competency_data["overall_career_readiness_results"]['evaluator'] == null ? "Post" : "Self";
+                                            $self_label = $GLOBALS["implementation_time"] == "general" ? "" : $self_label;
                                             ?>
                                         <div class="progress mb-3 post-bar bg-white"
                                             style="width:93%;margin-bottom:32px!important;margin:auto">
@@ -658,7 +681,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                             <p
                                                 style="position:relative;margin-top:-12px;left:1%;font-size:18px;color:black">
                                                 <b class="self_label post-label">
-                                                    <?= $competency_data["overall_career_readiness_results"]['evaluator'] == null ? "Post" : "Self" ?></b>
+                                                    <?= $self_label ?></b>
                                             </p>
                                             <!-- /.progress-bar .progress-bar-danger -->
                                         </div><!-- /.progress .no-rounded -->
@@ -760,9 +783,7 @@ echo '<div class="row align-items-center p-0 w-100">
 
                                             <div class="card border-2">
                                                 <div class="card-body" style="color:black">
-                                                    <p><strong><span
-                                                                class="font-large">Recommendations</span></strong><strong></strong>
-                                                    </p>
+
                                                     <p class="recommendations-headings" dir="ltr"><strong>Participate in
                                                             Study Groups</strong></p>
                                                     <p dir="ltr">👥 Collaborate with peers by creating or joining study
@@ -771,7 +792,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                                         <strong><br></strong><strong>Be Thoughtful About
                                                             Supporting Others</strong>
                                                     </p>
-                                                    <p dir="ltr">🤝In group and team settings, think about what you can
+                                                    <p dir="ltr">🤝 In group and team settings, think about what you can
                                                         do or say to support your teammates.</p>
                                                     <p class="recommendations-headings" dir="ltr">
                                                         <strong><br></strong><strong>Join Relevant Communities
@@ -833,9 +854,6 @@ echo '<div class="row align-items-center p-0 w-100">
 
                                             <div class="card border-2">
                                                 <div class="card-body" style="color:black">
-                                                    <p><strong><span
-                                                                class="font-large">Recommendations</span></strong><strong></strong><strong></strong>
-                                                    </p>
                                                     <p dir="ltr"><strong>Attend Professional Events</strong></p>
                                                     <p dir="ltr">🚙 Attending industry events, whether in person or
                                                         virtually, can offer valuable learning and networking
@@ -897,9 +915,7 @@ echo '<div class="row align-items-center p-0 w-100">
 
                                             <div class="card border-2">
                                                 <div class="card-body" style="color:black">
-                                                    <p><strong><span
-                                                                class="font-large">Recommendations</span></strong><strong></strong>
-                                                    </p>
+
                                                     <p dir="ltr"><strong>Talking About Your Professional
                                                             Interests</strong></p>
                                                     <p dir="ltr">⭐ Your professional interests will likely change over
@@ -965,9 +981,6 @@ echo '<div class="row align-items-center p-0 w-100">
 
                                         <div class="card border-2">
                                             <div class="card-body" style="color:black">
-                                                <p><strong><span
-                                                            class="font-large">Recommendations</span></strong><strong></strong>
-                                                </p>
                                                 <p dir="ltr"><strong>Participate in Student Organizations</strong></p>
                                                 <p dir="ltr">🎓 Engage actively in clubs and organizations that align
                                                     with your interests. Consider taking on leadership roles such as
@@ -1024,7 +1037,6 @@ echo '<div class="row align-items-center p-0 w-100">
 
                                         <div class="card border-2">
                                             <div class="card-body" style="color:black">
-                                                <p><strong><span class="font-large">Recommendations</span></strong></p>
                                                 <p><strong></strong><strong>Engage in Class Discussions</strong></p>
                                                 <p dir="ltr">💬 Contribute actively to class discussions by sharing your
                                                     perspectives and respectfully challenging ideas presented by peers
@@ -1080,8 +1092,6 @@ echo '<div class="row align-items-center p-0 w-100">
 
                                             <div class="card border-2">
                                                 <div class="card-body" style="color:black">
-                                                    <p><strong><span class="font-large">Recommendations</span></strong>
-                                                    </p>
                                                     <p dir="ltr"><strong></strong><strong>Understand Technology Trends
                                                             and Uses</strong></p>
                                                     <p dir="ltr">🗞️ Keep yourself informed about the latest industry
@@ -1142,8 +1152,6 @@ echo '<div class="row align-items-center p-0 w-100">
 
                                             <div class="card border-2">
                                                 <div class="card-body" style="color:black">
-                                                    <p><strong><span class="font-large">Recommendations</span></strong>
-                                                    </p>
                                                     <p><strong></strong><strong>Participate in Multicultural Workshops
                                                             and Trainings</strong></p>
                                                     <p dir="ltr">🌎 Attend workshops and training sessions that address

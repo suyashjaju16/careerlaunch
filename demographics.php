@@ -365,7 +365,7 @@
     </div>
 </div>
 
-<!-- <script>
+<script>
 Highcharts.chart('bar_chart2', {
     chart: {
         type: 'bar'
@@ -1226,9 +1226,9 @@ Highcharts.chart('chart14', {
         showInLegend: false
     }]
 });
-</script> -->
+</script>
 
-<script>
+<!-- <script>
 const COMMON_CHART_CONFIG = {
     chart: {
         type: 'bar'
@@ -1408,6 +1408,6 @@ createDonutChart('chart7',
     <?= json_encode($dataArray['Do you have a diagnosed disability?']['values']);?>,
     <?= json_encode($dataArray['Do you have a diagnosed disability?']['labels']);?>
 );
-</script>
+</script> -->
 
 <!-- <?= json_encode($demo_data['Do you have a diagnosed disability?']['labels']); ?> -->

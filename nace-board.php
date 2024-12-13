@@ -1354,7 +1354,8 @@ function renderCompetencyQuestion($categoryName, $categoryData) {
                         </div>
                     </div>
                     <div class="row bg-light mt-2 comp">
-                        <div class="col-sm-3 p-3 align-items-center text-center bg-danger text-white">
+                        <div class="col-sm-3 p-3 align-items-center text-center text-white"
+                            style="background-color:#ad3131">
                             5 </div>
                         <div class="col-sm-9 p-3 align-items-center text-center equity-hov">Equity
                             & Inclusion</div>
@@ -1387,20 +1388,37 @@ function renderCompetencyQuestion($categoryName, $categoryData) {
                     <h5 class="card-title text-black mb-2">
                         How Students Rated Themselves
                     </h5>
-                    <div class="row bg-light comp">
-                        <?php
+                    <!-- <div class="row bg-light comp"> -->
+                    <?php
                     $count = 1;
+                    // Colors hashmap for each category
+                    $hoverColorsClass = [
+                        "Communication" => "comm-hov",
+                        "Teamwork" => "team-hov",
+                        "Career & Self Development" => "career-hov",
+                        "Professionalism" => "professionalism-hov",
+                        "Leadership" => "leadership-hov",
+                        "Critical Thinking" => "critical-hov",
+                        "Technology" => "tech-hov",
+                        "Equity & Inclusion" => "equity-hov"
+                    ];
+
+                    // echo $competency_colors["foo"];
                     foreach ($averages as $category => $info) {
-                            echo "$category : {$info['color']}<br>";
+                            // echo "$category : {$info['color']}<br>";
+                            if($category != "overall_career_readiness_results"){
                     ?>
-                        <!-- <div class="col-sm-3 mt-2 p-3 align-items-center text-center text-white"
+                    <div class="row bg-light mt-2 comp">
+                        <div class="col-sm-3 p-3 align-items-center text-center text-white"
                             style="background-color:<?=$info['color']?>">
                             <?= $count ?> </div>
-                        <div class="col-sm-9 p-3 align-items-center text-center comm-hov"> <?= $category ?>
-                        </div> -->
-                        <?php $count++; } ?>
+                        <div class="col-sm-9 p-3 align-items-center text-center <?= $hoverColorsClass[$category] ?>">
+                            <?= $category ?>
+                        </div>
                     </div>
-                    <div class="row bg-light mt-2 comp">
+                    <?php $count++; } } ?>
+                    <!-- </div> -->
+                    <!-- <div class="row bg-light mt-2 comp">
                         <div class="col-sm-3 p-3 align-items-center text-center text-white"
                             style="background-color: #E06B60;">
                             2 </div>
@@ -1448,7 +1466,7 @@ function renderCompetencyQuestion($categoryName, $categoryData) {
                         <div class="col-sm-9 p-3 align-items-center text-center leadership-hov">
                             Leadership
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
             </div>

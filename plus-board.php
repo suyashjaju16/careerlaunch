@@ -647,7 +647,7 @@ var options = {
         width: 300
     },
     fill: {
-        colors: ['#2a4c09', '#457010', '#385b4f', '#b1d8b7']
+        colors: ['#2a4c09', '#31542c', '#385b4f', '#b1d8b7']
     },
     legend: {
         show: false
