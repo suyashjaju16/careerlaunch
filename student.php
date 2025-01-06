@@ -202,7 +202,7 @@ echo '<div class="row align-items-center p-0 w-100">
         {
         echo '<div class="progress px-3 mb-3 bg-white evalu" style="margin-bottom:32px!important;margin-left:20px">
             <div class="progress-bar animated-progress bg-dark " role="progressbar"
-                data-width="'.intval(json_encode($competency_data[$competency]["evaluator"])).'" aria-valuemin="0"
+                data-width="'.(intval(json_encode($competency_data[$competency]["evaluator"]))-3).'" aria-valuemin="0"
                 aria-valuemax="100">
             </div>
             <div class="progress-value" style="background-color:#000;font-size:16px">
@@ -218,7 +218,7 @@ echo '<div class="row align-items-center p-0 w-100">
         // echo $self_label;
         echo '<div class="progress px-3 pre-bar mb-3 bg-white" style="margin-bottom:32px!important;margin-left:20px;'.$pre_hide.'">
             <div class="progress-bar animated-progress" role="progressbar"
-                data-width="'.intval(json_encode($competency_data[$competency]["pre"])).'" aria-valuemin="0"
+                data-width="'.(intval(json_encode($competency_data[$competency]["pre"]))-3).'" aria-valuemin="0"
                 aria-valuemax="100" style="background-color:'.$color.'">
             </div>
             <div class="progress-value" style="font-size:16px;background-color:'.$color.'">
@@ -230,7 +230,7 @@ echo '<div class="row align-items-center p-0 w-100">
         {
         echo '<div class="progress px-3 post-bar bg-white" style="margin-bottom:32px!important;margin-left:20px">
             <div class="progress-bar animated-progress" role="progressbar"
-                data-width="'.intval(json_encode($competency_data[$competency]["post"])).'" aria-valuemin="0"
+                data-width="'.(intval(json_encode($competency_data[$competency]["post"]))-3).'" aria-valuemin="0"
                 aria-valuemax="100" style="background-color:'.$color.'">
             </div>
             <div class="progress-value" style="background-color:'.$color.';font-size:16px">
@@ -260,7 +260,7 @@ echo '<div class="row align-items-center p-0 w-100">
     <meta content="Career Readiness Inventory" name="description" />
     <meta content="Career Launch" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="assets/images/favicon.png">
 
     <!-- Icons Css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
@@ -596,9 +596,9 @@ echo '<div class="row align-items-center p-0 w-100">
                                 <?php } 
                                 
                                 ?>
-                                <div class="row align-items-center" style="padding-left: 12px; padding-right: 81px;">
-                                    <div
-                                        class="col-sm-3 d-flex p-3 mb-0 align-items-center card bg-dark align-content-center">
+                                <div class="row align-items-center" style="padding-left: 12px;">
+                                    <div class="col-sm-3 d-flex p-3 mb-0 align-items-center card bg-dark align-content-center"
+                                        style="width:23.5%">
                                         <img class="img-fluid" src="./assets/images/ocr.png"
                                             style="height: 70px;width: 70px;margin: auto;">
                                         <h3 class="px-2 icon-text text-dark mb-0"
@@ -615,7 +615,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                         <div class="progress mb-3 bg-white evalu"
                                             style="margin-bottom:32px!important;margin-left:37px;">
                                             <div class="progress-bar animated-progress " role="progressbar"
-                                                data-width="<?= $evaluator_value-8; ?>" aria-valuemin="0"
+                                                data-width="<?= $evaluator_value-10.5; ?>" aria-valuemin="0"
                                                 aria-valuemax="100" style="max-width:86%;background-color:#000000">
                                             </div>
                                             <div class="progress-value" style="background-color:#000;font-size:16px">
@@ -641,7 +641,8 @@ echo '<div class="row align-items-center p-0 w-100">
                                         <div class="progress mb-3 pre-bar bg-white"
                                             style="margin-bottom:32px!important;margin-left:37px;width:94%;<?=$pre_hide?>;">
                                             <div class="progress-bar animated-progress" role="progressbar"
-                                                data-width="<?= $pre_value-6; ?>" aria-valuemin="0" aria-valuemax="100"
+                                                data-width="<?= $pre_value-10.5; ?>" aria-valuemin="0"
+                                                aria-valuemax="100"
                                                 style="width:<?= $pre_value; ?>%;max-width:86%;background-color:<?=$color?>">
                                             </div>
                                             <div class="progress-value"
@@ -665,8 +666,8 @@ echo '<div class="row align-items-center p-0 w-100">
                                         <div class="progress mb-3 post-bar bg-white"
                                             style="margin-bottom:32px!important;margin-left:37px;width:94%">
                                             <div class="progress-bar animated-progress" role="progressbar"
-                                                data-width="<?= $post_value-6 ?>" aria-valuemin="0" aria-valuemax="100"
-                                                style="max-width:86%;background-color:<?=$color?>">
+                                                data-width="<?= $post_value-10.5 ?>" aria-valuemin="0"
+                                                aria-valuemax="100" style="max-width:86%;background-color:<?=$color?>">
                                             </div>
                                             <div class="progress-value"
                                                 style="font-size:16px;background-color:<?=$color?>">
