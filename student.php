@@ -597,8 +597,8 @@ echo '<div class="row align-items-center p-0 w-100">
                                 
                                 ?>
                                 <div class="row align-items-center" style="padding-left: 12px;">
-                                    <div class="col-sm-3 d-flex p-3 mb-0 align-items-center card bg-dark align-content-center"
-                                        style="width:23.5%">
+                                    <div class="col-sm-3 d-flex p-3 mb-0 align-items-center card align-content-center"
+                                        style="width:23.5%;background-color:#323c48!important">
                                         <img class="img-fluid" src="./assets/images/ocr.png"
                                             style="height: 70px;width: 70px;margin: auto;">
                                         <h3 class="px-2 icon-text text-dark mb-0"
