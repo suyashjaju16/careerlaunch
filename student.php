@@ -615,7 +615,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                         <div class="progress mb-3 bg-white evalu"
                                             style="margin-bottom:32px!important;margin-left:37px;">
                                             <div class="progress-bar animated-progress " role="progressbar"
-                                                data-width="<?= $evaluator_value-10.5; ?>" aria-valuemin="0"
+                                                data-width="<?= $evaluator_value-6; ?>" aria-valuemin="0"
                                                 aria-valuemax="100" style="max-width:86%;background-color:#000000">
                                             </div>
                                             <div class="progress-value" style="background-color:#000;font-size:16px">
@@ -639,10 +639,9 @@ echo '<div class="row align-items-center p-0 w-100">
                                             $self_label = $GLOBALS["implementation_time"] == "general" ? "" : $self_label;
                                         ?>
                                         <div class="progress mb-3 pre-bar bg-white"
-                                            style="margin-bottom:32px!important;margin-left:37px;width:94%;<?=$pre_hide?>;">
+                                            style="margin-bottom:32px!important;margin-left:37px;<?=$pre_hide?>;">
                                             <div class="progress-bar animated-progress" role="progressbar"
-                                                data-width="<?= $pre_value-10.5; ?>" aria-valuemin="0"
-                                                aria-valuemax="100"
+                                                data-width="<?= $pre_value-6; ?>" aria-valuemin="0" aria-valuemax="100"
                                                 style="width:<?= $pre_value; ?>%;max-width:86%;background-color:<?=$color?>">
                                             </div>
                                             <div class="progress-value"
@@ -664,10 +663,10 @@ echo '<div class="row align-items-center p-0 w-100">
                                             $self_label = $GLOBALS["implementation_time"] == "general" ? "" : $self_label;
                                             ?>
                                         <div class="progress mb-3 post-bar bg-white"
-                                            style="margin-bottom:32px!important;margin-left:37px;width:94%">
+                                            style="margin-bottom:32px!important;margin-left:37px;">
                                             <div class="progress-bar animated-progress" role="progressbar"
-                                                data-width="<?= $post_value-10.5 ?>" aria-valuemin="0"
-                                                aria-valuemax="100" style="max-width:86%;background-color:<?=$color?>">
+                                                data-width="<?= $post_value-6 ?>" aria-valuemin="0" aria-valuemax="100"
+                                                style="max-width:86%;background-color:<?=$color?>">
                                             </div>
                                             <div class="progress-value"
                                                 style="font-size:16px;background-color:<?=$color?>">
