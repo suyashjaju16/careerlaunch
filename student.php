@@ -360,6 +360,15 @@ echo '<div class="row align-items-center p-0 w-100">
 
     .popover-headings {
         font-weight: 800;
+        color: #000 !important;
+    }
+
+    .text-black {
+        color: #000 !important;
+    }
+
+    .bg-dark {
+        background-color: #000 !important;
     }
     </style>
 </head>
@@ -487,7 +496,7 @@ echo '<div class="row align-items-center p-0 w-100">
 
                                 <div class="row  p-0">
                                     <div class="col-sm-3 align-content-center">
-                                        <h4>NACE Career Readiness
+                                        <h4 class="text-black">NACE Career Readiness
                                             Level</h4>
                                     </div>
                                     <div class="col-sm-8">
@@ -545,7 +554,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                     <div class="col-sm-1 align-content-center">
                                         <a tabindex="0" href="#" data-bs-toggle="popover" data-bs-html="true"
                                             data-placement="right" data-trigger="focus"
-                                            data-bs-content="<div class='btn btn-primary btn-sm text-dark popover-headings' style='width:22%;margin:auto;font-size:14px;font-weight:bold;color:black!important'> Emerging Knowledge</div> <p class='mt-2 mb-2'>The student has an emerging awareness of the behavior, its importance, and related concepts.</p> <div class='btn btn-success btn-sm text-dark popover-headings' style='width:22%;margin:auto;font-size:14px;font-weight:bold;color:black'> Understanding </div> <p class='mt-2 mb-2'>The student demonstrates an understanding of the behavior and related concepts.</p> <div class='btn btn-warning btn-sm text-dark popover-headings' style='width:22%;margin:auto;font-size:14px;font-weight:bold;color:black'> Early Application</div><p class='mt-2 mb-2'>The student sometimes applies the behavior.</p> <div class='btn btn-sm btn-danger text-dark popover-headings' style='width:23%;margin:auto;font-size:10px;margin-right:5px!important;font-weight:bold;color:black'> Advanced Application</div><p class='mt-2 mb-2'>The behavior is consistent and integrated into the student’s workplace behaviors.</p>"
+                                            data-bs-content="<div class='btn btn-primary btn-sm popover-headings' style='width:22%;margin:auto;font-size:14px;font-weight:bold;color:#000!important'> Emerging Knowledge</div> <p class='mt-2 mb-2 text-black'>The student has an emerging awareness of the behavior, its importance, and related concepts.</p> <div class='btn btn-success btn-sm popover-headings' style='width:22%;margin:auto;font-size:14px;font-weight:bold;color:black'> Understanding </div> <p class='mt-2 mb-2 text-black'>The student demonstrates an understanding of the behavior and related concepts.</p> <div class='btn btn-warning btn-sm popover-headings' style='width:22%;margin:auto;font-size:14px;font-weight:bold;color:black'> Early Application</div><p class='mt-2 mb-2 text-black'>The student sometimes applies the behavior.</p> <div class='btn btn-sm btn-danger popover-headings' style='width:23%;margin:auto;font-size:10px;margin-right:5px!important;font-weight:bold;color:black'> Advanced Application</div><p class='mt-2 mb-2 text-black'>The behavior is consistent and integrated into the student’s workplace behaviors.</p>"
                                             style="margin-top:20px">
                                             <i class="mdi mdi-information-outline"
                                                 style="font-size:45px;color:black;margin-left:20px"></i>
@@ -587,15 +596,15 @@ echo '<div class="row align-items-center p-0 w-100">
                                 <?php } 
                                 
                                 ?>
-                                <div class="row align-items-center">
+                                <div class="row align-items-center" style="padding-left: 12px; padding-right: 81px;">
                                     <div
-                                        class="col-sm-3 d-flex flex-row p-3 mb-0 align-items-center card bg-dark align-content-center">
+                                        class="col-sm-3 d-flex p-3 mb-0 align-items-center card bg-dark align-content-center">
                                         <img class="img-fluid" src="./assets/images/ocr.png"
                                             style="height: 70px;width: 70px;margin: auto;">
                                         <h3 class="px-2 icon-text text-dark mb-0"
                                             style="color: white!important;font-size: 18px;font-weight: 700;">
-                                            Overall <br>Career
-                                            Readiness </h3>
+                                            Overall Career Readiness
+                                        </h3>
                                     </div>
                                     <div class="col-sm-9 mt-4 px-3">
                                         <?php
@@ -604,10 +613,10 @@ echo '<div class="row align-items-center p-0 w-100">
                                         {
                                         ?>
                                         <div class="progress mb-3 bg-white evalu"
-                                            style="margin-bottom:32px!important;margin-left:20px;">
-                                            <div class="progress-bar animated-progress bg-dark " role="progressbar"
+                                            style="margin-bottom:32px!important;margin-left:37px;">
+                                            <div class="progress-bar animated-progress " role="progressbar"
                                                 data-width="<?= $evaluator_value-8; ?>" aria-valuemin="0"
-                                                aria-valuemax="100" style="max-width:86%;">
+                                                aria-valuemax="100" style="max-width:86%;background-color:#000000">
                                             </div>
                                             <div class="progress-value" style="background-color:#000;font-size:16px">
                                                 <?= $evaluator_value; ?>
@@ -630,7 +639,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                             $self_label = $GLOBALS["implementation_time"] == "general" ? "" : $self_label;
                                         ?>
                                         <div class="progress mb-3 pre-bar bg-white"
-                                            style="margin-bottom:32px!important;margin-left:20px;width:94%;<?=$pre_hide?>;">
+                                            style="margin-bottom:32px!important;margin-left:37px;width:94%;<?=$pre_hide?>;">
                                             <div class="progress-bar animated-progress" role="progressbar"
                                                 data-width="<?= $pre_value-6; ?>" aria-valuemin="0" aria-valuemax="100"
                                                 style="width:<?= $pre_value; ?>%;max-width:86%;background-color:<?=$color?>">
@@ -654,7 +663,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                             $self_label = $GLOBALS["implementation_time"] == "general" ? "" : $self_label;
                                             ?>
                                         <div class="progress mb-3 post-bar bg-white"
-                                            style="margin-bottom:32px!important;margin-left:20px;width:94%">
+                                            style="margin-bottom:32px!important;margin-left:37px;width:94%">
                                             <div class="progress-bar animated-progress" role="progressbar"
                                                 data-width="<?= $post_value-6 ?>" aria-valuemin="0" aria-valuemax="100"
                                                 style="max-width:86%;background-color:<?=$color?>">
