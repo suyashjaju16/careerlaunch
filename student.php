@@ -255,7 +255,7 @@ echo '<div class="row align-items-center p-0 w-100">
 <head>
 
     <meta charset="utf-8" />
-    <title>Career Readiness Inventory</title>
+    <title><?= $student_details['Name'] ?> - Inventory Report</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Career Readiness Inventory" name="description" />
     <meta content="Career Launch" name="author" />
@@ -277,6 +277,21 @@ echo '<div class="row align-items-center p-0 w-100">
         rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KN2V1VKJZ9"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-KN2V1VKJZ9');
+    </script>
+
+
     <style>
     .grid1 {
         display: grid;
