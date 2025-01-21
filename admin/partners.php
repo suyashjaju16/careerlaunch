@@ -1,12 +1,10 @@
 <?php 
 session_start();
-// session_unset();
-// session_destroy();
 // error_reporting(E_ALL);
 // ini_set('display_errors', '1');
 
 if(isset($_POST['create_dashboard'])){
-    header('Location: .././dashboard.php?organization='.$_POST['org'].'&implementation_type='.$_POST['implementation_type'].'&semester='.$_POST['semester'].'&use_case_id='.$_POST['use_case_id']);
+    header('Location: .././dashboard.php?organization='.$_POST['org'].'&inventory='.$_POST['implementation_type'].'&semester='.$_POST['semester'].'&use_case_id='.$_POST['use_case_id'].'&source=ZmlsdGVyZWQ');
 }
 
 $base_url = "https://7gv0oagg0c.execute-api.us-east-1.amazonaws.com/dev/";
@@ -19,10 +17,7 @@ curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 $data = curl_exec($ch);
 curl_close($ch);
 
-// echo json_encode($_POST);
-
-echo "<hr>";
-
+$jsondata = new stdClass();
 
 $filters = new stdClass();
 
@@ -50,30 +45,26 @@ $_SESSION['implementation_type'] = $type;
 }
 
 if(isset($_POST['semester'])){
-$semester = preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $_POST['semester']);
+$semester = $_POST['semester'];
 if($_POST['semester'] != "")
 {
-    $filters->semester =  $semester;
+    $jsondata->semester =  $semester;
     $_SESSION['semester'] = $semester;
 }
 }
 
 if(isset($_POST['use_case_id'])){
-$use_case_id = preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $_POST['use_case_id']);
+// $use_case_id = preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $_POST['use_case_id']);
 if($_POST['use_case_id'] != "")
 {
-    $filters->use_case_id =  $use_case_id;
+    $jsondata->use_case_id =  $use_case_id;
 $_SESSION['use_case_id'] = $use_case_id;
 
 }
 }
 
-// echo json_encode($_SESSION);
-echo "<hr>";
-
 $filter = json_encode($filters);
 
-$jsondata = new stdClass();
 $jsondata->type = "field";
 $jsondata->dropdown = "implementation_type";
 $jsondata->filters = json_decode($filter);
@@ -87,10 +78,6 @@ curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 $implementation_type = json_decode(curl_exec($ch), true);
 curl_close($ch);
 
-// echo json_encode($jsondata);
-
-echo "<hr>";
-
 $jsondata->dropdown = "semester";
 $jsondata->filters = json_decode($filter);
 
@@ -102,12 +89,9 @@ curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
 curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 $semester = json_decode(curl_exec($ch), true);
 curl_close($ch);
-
-// echo json_encode($semester);
-
 $jsondata->dropdown = "use_case_id";
 $jsondata->filters = json_decode($filter);
-
+// echo "<hr>";
 $url = $base_url."dropdowns";
 $ch = curl_init( $url );
 $payload = json_encode($jsondata);
@@ -116,6 +100,17 @@ curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
 curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 $use_case_id = json_decode(curl_exec($ch), true);
 curl_close($ch);
+// echo json_encode($jsondata);
+// echo "<hr>";
+// echo json_encode($data);
+// echo "<hr>";
+// echo json_encode($implementation_type);
+// echo "<hr>";
+// echo json_encode($semester);
+// echo "<hr>";
+// echo json_encode($use_case_id);
+// echo "<hr>";
+// echo json_encode($_SESSION);
 
 ?>
 
@@ -151,7 +146,7 @@ curl_close($ch);
     }
 
     .text-white {
-        color: white ! !important;
+        color: white !important;
     }
 
     .form-select {
@@ -232,7 +227,7 @@ curl_close($ch);
                                                 <select id="implementation" name="implementation_type"
                                                     class="form-select select-light" style="border-radius: 20px;"
                                                     onchange="this.form.submit()">
-                                                    <option value="" disabled selected> All Data
+                                                    <option value=""> All Data
                                                     </option>
                                                     <?php
                                         foreach($implementation_type as $i){
@@ -259,11 +254,12 @@ curl_close($ch);
                                                         style="border-radius: 20px;" onchange="this.form.submit()">
                                                         <option value=""> All Time</option>
                                                         <?php
+                                                        echo $_SESSION['semester'];
                                                 foreach($semester as $i){
-                                                    if($i == strtolower($_SESSION['semester']))
-                                                        echo "<option value=".$i." selected> ".ucwords($i)." </option>";
+                                                    if($i == $_SESSION['semester'])
+                                                        echo "<option value='".$i."' selected> ".ucwords($i)." </option>";
                                                     else
-                                                        echo "<option value=".$i."> ".ucwords($i)." </option>";
+                                                        echo "<option value='".$i."'> ".ucwords($i)." </option>";
                                                 }
                                             ?>
                                                     </select>
@@ -275,32 +271,17 @@ curl_close($ch);
                                                 <h5 class="text-white mb-2"
                                                     style="font-size:16px;color:white!important">Use Case ID</h5> <br>
                                                 <select name="use_case_id" class="form-select select-light"
-                                                    style="border-radius: 20px;" onchange="this.form.submit()">
+                                                    style="border-radius: 20px;">
                                                     <option value=""> All
                                                         Student Cohort</option>
                                                     <?php
                                                 foreach($use_case_id as $i){
-                                                    echo "<option value=".$i."> ".ucwords($i)." </option>";
+                                                    if($i == $_SESSION['use_case_id'])
+                                                        echo "<option value='".$i."' selected> ".ucwords($i)." </option>";
+                                                    else
+                                                        echo "<option value='".$i."'> ".ucwords($i)." </option>";
                                                 }
                                             ?>
-                                                    <!-- </option> -->
-                                                    <!-- <option> Lead
-                                                        Cohort </option>
-                                                    <option> IVC Cohort</option>
-                                                    <option> ISS Cohort </option>
-                                                    <option> Department C </option>
-                                                    <option disabled> Embedded
-                                                        Courses</option>
-                                                    <option> BUSN 79 </option>
-                                                    <option> CSCI 10 </option>
-                                                    <option> COEN 42 </option>
-                                                    <option disabled> General
-                                                    </option>
-                                                    <option> Orientation - Class of
-                                                        2028 </option>
-                                                    <option> Welcome Meeting
-                                                        Orientation - Class of 2027
-                                                    </option> -->
                                                 </select>
                                             </center>
                                         </div>
@@ -321,6 +302,7 @@ curl_close($ch);
                                                 </div>
                                             </center>
                                         </div>
+                                        <input type="hidden" value="ZmlsdGVyZWQ">
                                     </form>
 
                                     <table class="table table-hover p-5">
@@ -340,9 +322,9 @@ curl_close($ch);
                                                     echo "<tr>
                                                 <th scope='row'>".$i."</th>
                                                 <td>" . $key . "</td>
-                                                <td style='text-align:center'><a href='./../dashboard.php?organization=" . $value . "' target='_blank' class='btn btn-sm btn-dark'>View
+                                                <td style='text-align:center'><a href='./../dashboard.php?organization=" . $value . "&source=ZGFzaGJvYXJk' target='_blank' class='btn btn-sm btn-dark'>View
                                                         Dashboard</a>
-                                                        <div id='url".$i."' style='display:none'> http://da.careerreadinessinventory.academy/workexp.php?organization=" . $value . " </div>
+                                                        <div id='url".$i."' style='display:none'> http://da.careerreadinessinventory.academy/workexp.php?organization=" . $value . "&source=ZGFzaGJvYXJk </div>
                                                         <a href='#' onclick='copy(`url".$i."`,`" . $key . "`)' class='btn btn-sm btn-link' style='color:black;font-size:20px'>
                                                         <i class='ri-file-copy-line'></i>
                                                         </a>
@@ -399,9 +381,9 @@ curl_close($ch);
 
         // aux.select();
 
-        document.execCommand('http://da.careerreadinessinventory.academy/workexp.php?organization=' +
-            <?= $_POST['org'] ?> + '&implementation_type=' + <?=$_POST['implementation_type']?> + '&semester=' +
-            <?=$_POST['semester']?> + '&use_case_id=' + <?=$_POST['use_case_id']?>);
+        document.execCommand('http://da.careerreadinessinventory.academy/dashboard.php?organization=' +
+            <?= $_POST['org'] ?> + '&inventory=' + <?=$_POST['implementation_type']?> + '&semester=' +
+            <?=$_POST['semester']?> + '&use_case_id=' + <?=$_POST['use_case_id']?> + "&source=ZmlsdGVyZWQ");
 
         // document.body.removeChild(aux);
         // $('#copyalert').append(

@@ -1,30 +1,8 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
-
-
-function fetch_data($base_url,$url,$data){
-    $url = $base_url.$url;
-    $ch = curl_init( $url );
-    $payload = json_encode($data);
-    curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-    curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-    $response = curl_exec($ch);
-    curl_close($ch);
-    return $response;
-}
-
-$base_url = "https://7gv0oagg0c.execute-api.us-east-1.amazonaws.com/dev/";
-$filters = new stdClass();
-
-// Student Details START
-$filters->org_id = $_GET['organization'];
-$data = new stdClass();
-$data = $filters;
-echo json_encode($data);
-$students_data = json_decode(fetch_data($base_url,"get-students",$data),true);
-// echo json_encode($students_data);
+include("./models/config.php");
+$kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
 ?>
 <!doctype html>
 <html lang="en">
@@ -275,13 +253,13 @@ $students_data = json_decode(fetch_data($base_url,"get-students",$data),true);
                 <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 100px;">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="./dashboard?organization=<?= $_GET['organization']?>"
+                            <a class="nav-link" href="./dashboard?organization=<?= $_GET['organization']?>&source=<?=$_GET['source']?>"
                                 style="font-size:18px;color:white!important;">Dashboard
                                 <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item card" style="margin-left: 100px;">
                             <div class="card-body py-1">
-                                <a class="nav-link text-dark" href="./resp?organization=<?= $_GET['organization']?>"
+                                <a class="nav-link text-dark" href="./resp?organization=<?= $_GET['organization']?>&source=<?=$_GET['source']?>"
                                     style="font-size:18px;">Responses</a>
                             </div>
                         </li>
@@ -292,69 +270,14 @@ $students_data = json_decode(fetch_data($base_url,"get-students",$data),true);
                         <option>This Month</option>
                         <option>This year</option>
                     </select>
-
-                    <!-- <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form> -->
                 </div>
             </nav>
 
             <div class="page-content" style="padding-top: 27px!important;">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="card text-center" style="height: 86%;">
-                                <div class="card-body" style="height: 100%;align-content: center;">
-                                    <img src="<?= $org_logo ?>" alt="logo-dark" style="object-fit: cover;width: 100%;">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="card text-center">
-                                <div class="card-body p-t-10">
-                                    <h4 class="card-title text-muted mb-0">Total Students</h4>
-                                    <h2 class="mt-3 mb-2"><i class="mdi mdi-arrow-up text-success me-2"></i><b>
-                                            <!-- <?=$total_students[0]?> --> 1233
-                                        </b></h2>
-                                    <!-- <p class="mb-0 text-black mt-3"><b><?=$total_students[1]?>%</b>
-                                        from Last Week</p> -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="card text-center">
-                                <div class="card-body p-t-10">
-                                    <h4 class="card-title text-muted mb-0">Total Responses</h4>
-                                    <h2 class="mt-3 mb-2"><i class="mdi mdi-arrow-up text-success me-2"></i><b>
-                                            <!-- <?=$total_student_responses[0]?> -->
-                                            1231
-                                        </b></h2>
-                                    <!-- <p class="mb-0 text-black mt-3"><b> <?=$total_student_responses[1]?>%</b>
-                                        from Last Week</p> -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="card text-center">
-                                <div class="card-body p-t-10">
-                                    <h4 class="card-title text-muted mb-0">Average
-                                        Duration</h4>
-                                    <h2 class="mt-3 mb-2"><i class="mdi mdi-arrow-down text-danger me-2"></i><b>
-                                            <!-- <?=$minutes?> min <?=$seconds?>s -->
-                                            12 min 2 s
-                                        </b>
-                                    </h2>
-                                    <!-- <p class="mb-0 text-black mt-3"><b><?=$average_duration[1]?>%</b>
-                                        from Last Week</p> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end row -->
+                    <!-- KPI Row Start -->
+                    <?php include("components/kpi.php"); ?>
+                    <!-- KPI Row End -->
 
                     <div class="card" style="border-radius:20px">
                         <div class="card-body">
@@ -362,46 +285,7 @@ $students_data = json_decode(fetch_data($base_url,"get-students",$data),true);
                             <p class="card-title-desc">Click on the <i class='ri-eye-fill'
                                     style='color:#000033;font-size:14px'></i> icon in the last column to view the
                                 detailed student report.</p>
-
-                            <table id="datatable" class="table table-bordered dt-responsive nowrap"
-                                style="border-collapse: collapse; border-spacing: 0; width: 100%;"
-                                data-page-length='25'>
-                                <thead class="bg-dark text-white">
-                                    <tr style="color:white!important">
-                                        <!-- <th scope="col" style="width:20px">#</th> -->
-                                        <th style="color:white!important">First Name </th>
-                                        <th style="color:white!important">Last Name</th>
-                                        <th style="color:white!important">Email</th>
-                                        <th style="color:white!important">Overall Score</th>
-                                        <th style="color:white!important">Date</th>
-                                        <th style="width:20px;color:white!important">Details</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <?php 
-                                    foreach ($students_data as $key => $values) {
-                                        // echo $values["Id"]."<br>";
-                                        $name = explode(" ",$values["Name"]);
-                                    ?>
-                                    <tr>
-                                        <!-- <th scope="col" style="width:20px">1</th> -->
-                                        <td> <?= $name[0] ?> </td>
-                                        <td> <?= $name[1] ?> </td>
-                                        <td> <?= $values["Email"] ?> </td>
-                                        <td> <?= $values["Score"] ?> </td>
-                                        <td> <?= $values["Time"] ?> </td>
-                                        <td><a href='./student?id=<?= $values["Id"] ?>' target="_blank">
-                                                <i class='ri-eye-fill' style='color:#000033;font-size:20px'></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <?php 
-                                    }
-                                    ?>
-
-                                </tbody>
-                            </table>
+                            <?php include("components/responsesTable.php") ?>
                         </div>
                     </div>
                 </div>
