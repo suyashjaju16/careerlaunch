@@ -102,9 +102,10 @@ function returnColor($val) {
 
 function returnLevel($level) {
     return isset($level) ? 
+        ($level == "Not Observed" ? "0" : 
         ($level == "Emerging" ? "10.5" : 
         ($level == "Understanding" ? "35.5" : 
-        ($level == "Early" ? "60" : "85.5"))) : null;
+        ($level == "Early" ? "60" : "85.5")))) : null;
 }
 
 // Function to generate filters with selected value
@@ -119,6 +120,8 @@ function generate_filters($selected_value, $filter_data) {
     }
     return $html;
 }
+
+echo json_encode($data);
 
 // Get the selected value from the POST request
 $selected_value = $_POST['filterData'] ?? ''; // Use null coalescing operator
