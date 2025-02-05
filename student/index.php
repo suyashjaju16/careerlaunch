@@ -1202,7 +1202,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                         aria-labelledby="flush-flush-collapseEight"
                                         data-bs-parent="#accordionFlushExample">
                                         <div class="accordion-body">
-                                            <?= isset($competency_data[$competency_tag]) ? generate_competency($competency_data["equity"],"#ad3131") : "" ?>
+                                            <?= isset($competency_data["equity"]) ? generate_competency($competency_data["equity"],"#ad3131") : "" ?>
 
                                             <h5 class="card-title text-black mb-3">
                                                 Recommendations
