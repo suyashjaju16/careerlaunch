@@ -200,18 +200,20 @@ echo '<div class="row align-items-center p-0 w-100">
     // echo json_encode($competency_data[$competency]['pre'] != null);
         if(json_encode($competency_data["evaluator"]) == "true")
         {
+            $value = intval(json_encode($competency_data[$competency]["evaluator"])) > 0 ? intval(json_encode($competency_data[$competency]["evaluator"])) : "";
         echo '<div class="progress px-3 mb-3 bg-white evalu" style="margin-bottom:32px!important;margin-left:20px">
             <div class="progress-bar animated-progress bg-dark " role="progressbar"
                 data-width="'.(intval(json_encode($competency_data[$competency]["evaluator"]))-3).'" aria-valuemin="0"
                 aria-valuemax="100">
             </div>
             <div class="progress-value" style="background-color:#000;font-size:16px">
-                '.intval(json_encode($competency_data[$competency]["evaluator"])).'
+                '.$value.'
             </div>
         </div>';
         }
         if(json_encode($competency_data["pre"]) == "true")
         {
+            $value = intval(json_encode($competency_data[$competency]["pre"])) > 0 ? intval(json_encode($competency_data[$competency]["pre"])) : "";
         // $pre = json_encode($competency_data["evaluator"]) == "true" ? "hide" : "";
         // echo "Pre : ".$pre;
         $pre_hide = $competency_data[$competency]['evaluator'] == null ? "" : "display:none";
@@ -222,19 +224,20 @@ echo '<div class="row align-items-center p-0 w-100">
                 aria-valuemax="100" style="background-color:'.$color.'">
             </div>
             <div class="progress-value" style="font-size:16px;background-color:'.$color.'">
-                '.intval(json_encode($competency_data[$competency]["pre"])).'
+                '.$value.'
             </div>
         </div>';
         }
         if(json_encode($competency_data["post"]) == "true")
         {
+            $value = intval(json_encode($competency_data[$competency]["post"])) > 0 ? intval(json_encode($competency_data[$competency]["post"])) : "";
         echo '<div class="progress px-3 post-bar bg-white" style="margin-bottom:32px!important;margin-left:20px">
             <div class="progress-bar animated-progress" role="progressbar"
                 data-width="'.(intval(json_encode($competency_data[$competency]["post"]))-3).'" aria-valuemin="0"
                 aria-valuemax="100" style="background-color:'.$color.'">
             </div>
             <div class="progress-value" style="background-color:'.$color.';font-size:16px">
-                '.intval(json_encode($competency_data[$competency]["post"])).'
+                '.$value.'
             </div>
         </div>';
         }
