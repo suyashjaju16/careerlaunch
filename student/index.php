@@ -142,12 +142,13 @@ echo '
             <div class="col-sm-9 mt-4 p-0">';
             // echo json_encode($value);
                 if(isset($value["evaluator"]) && $value["evaluator"] != null){
-                echo '<div class="progress mb-5 bg-white evalu" style="width:90%;margin-bottom:32px;margin:auto">
+                    $eval_hide = returnLevel($value['evaluator']) < 1 ? "display:none!important;" : "";
+                echo '<div class="progress mb-5 bg-white evalu" style="width:90%;margin-bottom:32px;margin:auto;">
                     <div class="progress-bar animated-progress bg-dark " role="progressbar"
                         data-width="'.returnLevel($value['evaluator']).'" aria-valuemin="0" aria-valuemax="100"
                         style="max-width:90%">
                     </div>
-                    <div class="progress-value" style="background-color:#000;font-size:16px">
+                    <div class="progress-value" style="background-color:#000;font-size:16px;'.$eval_hide.'">
                     </div>
                     <p style="position:relative;margin-top:-8px;left:1%;font-size:18px;color:black">
                         <b>'.$value["evaluator"].'</b>
