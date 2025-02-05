@@ -635,7 +635,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                     <div class="col-sm-9 mt-4 px-3">
                                         <?php
                                         $evaluator_value = intval(json_encode($competency_data["overall_career_readiness_results"]["evaluator"])); 
-                                        if($evaluator_value != null)
+                                        if($competency_data["evaluator"])
                                         {
                                         ?>
                                         <div class="progress mb-3 bg-white evalu"
@@ -645,7 +645,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                                 aria-valuemax="100" style="max-width:86%;background-color:#000000">
                                             </div>
                                             <div class="progress-value" style="background-color:#000;font-size:16px">
-                                                <?= $evaluator_value; ?>
+                                                <?= $evaluator_value > 0 ? $evaluator_value : "" ?>
                                             </div>
                                             <?php 
                                             ?>
@@ -656,7 +656,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                         <?php } 
 
                                         $pre_value = intval(json_encode($competency_data["overall_career_readiness_results"]["pre"]));
-                                         if($pre_value != null)
+                                         if($competency_data["pre"])
                                         {
                                             $pre_hide = $competency_data['overall_career_readiness_results']['evaluator'] == null ? "" : "display:none";
                                             $val = intval(json_encode($competency_data["overall_career_readiness_results"]["pre"]));
@@ -672,7 +672,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                             </div>
                                             <div class="progress-value"
                                                 style="font-size:16px;background-color:<?=$color?>">
-                                                <?= $pre_value ?>
+                                                <?= $pre_value > 0 ? $pre_value : "" ?>
                                             </div>
                                             <p style="position:relative;margin-top:-12px;font-size:18px;color:black">
                                                 <b class="self_label pre-label">
@@ -682,7 +682,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                         </div><!-- /.progress .no-rounded -->
                                         <?php } 
                                         $post_value = intval(json_encode($competency_data["overall_career_readiness_results"]["post"]));
-                                        if(json_encode($competency_data["post"]) == "true")
+                                        if($competency_data["post"])
                                         {
                                             $color = returnColor($post_value);
                                             $self_label = $competency_data["overall_career_readiness_results"]['evaluator'] == null ? "Post" : "Self";
@@ -696,7 +696,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                             </div>
                                             <div class="progress-value"
                                                 style="font-size:16px;background-color:<?=$color?>">
-                                                <?= $post_value; ?>
+                                                <?= $post_value > 0 ? $post_value : ""?>
                                             </div>
                                             <p style="position:relative;margin-top:-12px;font-size:18px;color:black">
                                                 <b class="self_label post-label">
