@@ -129,6 +129,7 @@ $selected_value = $_POST['filterData'] ?? ''; // Use null coalescing operator
 $selected_filter = isset($_POST['filterData']) ? $_POST['filterData'] : '';
 
 function generate_competency($level,$color) {
+if(isset($level)){
 foreach($level as $key => $value)
 {
 echo '
@@ -188,9 +189,12 @@ echo '
 </div>';
 }
 }
+}
 
-function generate_competency_results($competency_data, $competency,$color, $label, $icon){
+function generate_competency_results($competency_data, $competency,$color, $label, $icon, $competency_tag){
 // echo $GLOBALS["implementation_time"];
+if(isset($competency_data[$competency_tag])){
+// echo $competency_tag;
 echo '<div class="row align-items-center p-0 w-100">
     <div class="col-sm-3 d-flex p-3 mb-0 align-items-center card align-content-center"
         style="background-color:'.$color.'!important">
@@ -248,7 +252,7 @@ echo '<div class="row align-items-center p-0 w-100">
         echo '</div>
 </div>';
 }
-
+}
 // if($student_details["Organisation"] == "Cutco")
 //     echo "Its Cutco";
 // else
@@ -751,7 +755,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseZero"
                                             aria-expanded="false" aria-controls="flush-collapseZero">
 
-                                            <?= generate_competency_results($competency_data, "communication_results","#3ca4fe", "Communication", "./assets/images/nace-icons/nace-communication-black-line-art-icon.png") ?>
+                                            <?= generate_competency_results($competency_data, "communication_results","#3ca4fe", "Communication", "./assets/images/nace-icons/nace-communication-black-line-art-icon.png","communication") ?>
                                         </button>
                                     </h2>
                                     <div id="flush-collapseZero" class="accordion-collapse collapse"
@@ -819,7 +823,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                         <button class="accordion-button collapsed btn-up" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
                                             aria-expanded="false" aria-controls="flush-collapseTwo">
-                                            <?= generate_competency_results($competency_data, "teamwork_results","#E06B60", "Teamwork","./assets/images/nace-icons/nace-teamwork-black-line-art-icon.png") ?>
+                                            <?= generate_competency_results($competency_data, "teamwork_results","#E06B60", "Teamwork","./assets/images/nace-icons/nace-teamwork-black-line-art-icon.png","teamwork") ?>
                                         </button>
                                     </h2>
                                     <div id="flush-collapseTwo" class="accordion-collapse collapse"
@@ -890,7 +894,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                         <button class="accordion-button collapsed btn-up" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
                                             aria-expanded="false" aria-controls="flush-collapseOne">
-                                            <?= generate_competency_results($competency_data, "self_development_results","#f8b603", "Career & Self Development","./assets/images/nace-icons/nace-career-and-self-development-black-line-art-icon.png") ?>
+                                            <?= generate_competency_results($competency_data, "self_development_results","#f8b603", "Career & Self Development","./assets/images/nace-icons/nace-career-and-self-development-black-line-art-icon.png","self_development") ?>
                                         </button>
                                     </h2>
                                     <div id="flush-collapseOne" class="accordion-collapse collapse"
@@ -952,7 +956,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                         <button class="accordion-button collapsed btn-up" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseFour"
                                             aria-expanded="false" aria-controls="flush-collapseFour">
-                                            <?= generate_competency_results($competency_data, "professionalism_results","#609866", "Professionalism","./assets/images/nace-icons/nace-professionalism-black-line-art-icon.png") ?>
+                                            <?= generate_competency_results($competency_data, "professionalism_results","#609866", "Professionalism","./assets/images/nace-icons/nace-professionalism-black-line-art-icon.png","professionalism") ?>
                                         </button>
                                     </h2>
                                     <div id="flush-collapseFour" class="accordion-collapse collapse"
@@ -1018,7 +1022,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                         <button class="accordion-button collapsed btn-up" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseFive"
                                             aria-expanded="false" aria-controls="flush-collapseFive">
-                                            <?= generate_competency_results($competency_data, "leadership_results","#796258", "Leadership","./assets/images/nace-icons/nace-leadership-black-line-art-icon.png") ?>
+                                            <?= generate_competency_results($competency_data, "leadership_results","#796258", "Leadership","./assets/images/nace-icons/nace-leadership-black-line-art-icon.png","leadership") ?>
                                         </button>
                                     </h2>
                                 </div>
@@ -1072,7 +1076,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                         <button class="accordion-button collapsed btn-up" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseSix"
                                             aria-expanded="false" aria-controls="flush-collapseSix">
-                                            <?= generate_competency_results($competency_data, "critical_thinking_results","#705181", "Critical Thinking","./assets/images/nace-icons/nace-critical-thinking-black-line-art-icon.png") ?>
+                                            <?= generate_competency_results($competency_data, "critical_thinking_results","#705181", "Critical Thinking","./assets/images/nace-icons/nace-critical-thinking-black-line-art-icon.png","critical_thinking") ?>
                                         </button>
                                     </h2>
                                 </div>
@@ -1128,7 +1132,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                         <button class="accordion-button collapsed btn-up" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven"
                                             aria-expanded="false" aria-controls="flush-collapseSeven">
-                                            <?= generate_competency_results($competency_data, "technology_results","#3c4b6c", "Technology","./assets/images/nace-icons/nace-technology-black-line-art-icon.png") ?>
+                                            <?= generate_competency_results($competency_data, "technology_results","#3c4b6c", "Technology","./assets/images/nace-icons/nace-technology-black-line-art-icon.png","technology") ?>
                                         </button>
                                     </h2>
                                     <div id="flush-collapseSeven" class="accordion-collapse collapse"
@@ -1183,19 +1187,22 @@ echo '<div class="row align-items-center p-0 w-100">
                                     </div>
                                 </div>
 
+                                <?php 
+                                    if(isset($competency_data["equity"])){                                
+                                ?>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="flush-headingEight">
                                         <button class="accordion-button collapsed btn-up" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#flush-collapseEight"
                                             aria-expanded="false" aria-controls="flush-collapseEight">
-                                            <?= generate_competency_results($competency_data, "equity_results","#ad3131", "Equity & Inclusion","./assets/images/nace-icons/nace-equity-and-inclusion-black-line-art-icon.png") ?>
+                                            <?= generate_competency_results($competency_data, "equity_results","#ad3131", "Equity & Inclusion","./assets/images/nace-icons/nace-equity-and-inclusion-black-line-art-icon.png","equity") ?>
                                         </button>
                                     </h2>
                                     <div id="flush-collapseEight" class="accordion-collapse collapse"
                                         aria-labelledby="flush-flush-collapseEight"
                                         data-bs-parent="#accordionFlushExample">
                                         <div class="accordion-body">
-                                            <?= generate_competency($competency_data["equity"],"#ad3131"); ?>
+                                            <?= isset($competency_data[$competency_tag]) ? generate_competency($competency_data["equity"],"#ad3131") : "" ?>
 
                                             <h5 class="card-title text-black mb-3">
                                                 Recommendations
@@ -1239,6 +1246,7 @@ echo '<div class="row align-items-center p-0 w-100">
                                         </div>
                                     </div>
                                 </div>
+                                <?php } ?>
                             </div>
                         </div>
 
