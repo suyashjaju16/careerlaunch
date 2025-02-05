@@ -253,9 +253,11 @@ $kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
                 <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 100px;">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
+                        <div class="card-body border border-2 py-1 px-2" style="border-radius:20px">
                             <a class="nav-link" href="./dashboard?organization=<?= $_GET['organization']?>&source=<?=$_GET['source']?>"
                                 style="font-size:18px;color:white!important;">Dashboard
                                 <span class="sr-only">(current)</span></a>
+</div>
                         </li>
                         <li class="nav-item card" style="margin-left: 100px;">
                             <div class="card-body py-1">

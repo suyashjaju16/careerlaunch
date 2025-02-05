@@ -1,18 +1,26 @@
 <?php 
 // KPI Data
 
-
 // Individually setting KPI Data (Will change as per filters)
+
+use function PHPSTORM_META\type;
+
 $org_logo = $kpi_data['logo'];
 $total_student_responses = $kpi_data['total_student_responses'];
 $total_students = $kpi_data['total_students'];
 $average_duration = $kpi_data['average_duration'];
+$org_name = $kpi_data['org_name'];
+$logoExists = False;
+if($org_logo != "https://cri-organization-logos.s3.amazonaws.com/general/career-launch.png"):
+    $logoExists = True;
+endif;
 
 // Break time from Seconds of Minutes and Seconds
 if(is_numeric($average_duration[0])){
     $minutes = floor($average_duration[0] / 60);
     $seconds = $average_duration[0] % 60;        
 }
+
 else{
     $minutes = 0;
     $seconds = 0;
@@ -21,14 +29,29 @@ else{
 // echo json_encode($kpi_data);
 ?>
 <div class="row">
-    <div class="col-sm-6 col-lg-3">
+    <!-- <div class="col-sm-6 col-lg-3">
         <div class="card text-center" style="height: 153px;">
             <div class="card-body" style="height: 100%;align-content: center;">
                 <img class="img img-fluid lazy" src="<?= $org_logo ?>" alt="logo-dark"
                     style="object-fit: cover;max-height:100%">
             </div>
         </div>
+    </div> -->
+
+    <div class="col-sm-6 col-lg-3">
+        <div class="card text-center" style="height: 153px;">
+            <div class="card-body d-flex justify-content-center align-items-center text-container">
+                <?php if (!empty($org_logo) && $logoExists):  ?>
+                    <img class="img img-fluid lazy" src="<?= $org_logo ?>" alt="org_logo"
+                        style="object-fit: cover; max-height: 100%;">
+                <?php else : ?>
+                    <span class="org-name"><?= htmlspecialchars($org_name) ?></span>
+                <?php endif; ?>
+            </div>
+        </div>
     </div>
+
+
 
     <div class="col-sm-6 col-lg-3">
         <div class="card text-center">

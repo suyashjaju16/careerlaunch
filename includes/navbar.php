@@ -22,8 +22,10 @@
                     </div>
                 </li>
                 <li class="nav-item" style="margin-left: 100px;">
+                    <div class="card-body border border-2 py-1 px-2" style="border-radius:20px">
                     <a class="nav-link" href="./resp?organization=<?= $_GET['organization']?>&source=<?=$_GET['source']?>"
                         style="font-size:18px;color:white!important;">Responses</a>
+                    </div>
                 </li>
             </ul>
             <select class="form-select bg-light" style="width:20%;margin-left:45%;display:none">

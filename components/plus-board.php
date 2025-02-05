@@ -139,24 +139,25 @@ function getValuesOrLabelsInJson($mainKey, $subKey, $type) {
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="col-sm-8 m-auto d-flex justify-content-between">
                                                 <div class="d-flex">
                                                     <div class="div mt-1"
-                                                        style="height:10px;width:10px;background-color:#2a4c09!important">
+                                                        style="height:10px;width:10px;background-color:#006f3d!important">
                                                     </div>
                                                     <div style="margin-left:10px;color:black">Not yet
                                                     </div>
                                                 </div>
                                                 <div class="d-flex ml-5">
                                                     <div class="div mt-1"
-                                                        style="height:10px;width:10px;background-color:#457010!important">
+                                                        style="height:10px;width:10px;background-color:#1aa968!important">
                                                     </div>
                                                     <div style="margin-left:10px;color:black">1
                                                         Relationship</div>
                                                 </div>
                                                 <div class="d-flex ml-5">
                                                     <div class="div mt-1"
-                                                        style="height:10px;width:10px;background-color:#385b4f!important">
+                                                        style="height:10px;width:10px;background-color:#5ccc99!important">
                                                     </div>
                                                     <div style="margin-left:10px;color:black">2
                                                         Relationship</div>

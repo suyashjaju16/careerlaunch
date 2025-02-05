@@ -542,6 +542,7 @@ include("./models/filters/dropdowns.php");
                     implementation_type: implementationType
                 },
                 success: function(response) {
+                    // console.log(response)
                     if (response.use_case_id_options) {
                         var useCaseIdDropdown = $('#use_case_id');
                         useCaseIdDropdown.empty(); // Clear existing options
@@ -558,13 +559,7 @@ include("./models/filters/dropdowns.php");
                     console.error("AJAX Error: " + error);
                 }
             });
-        });
-    });
 
-    $(document).ready(function() {
-        $('#implementation_type').on('change', function() {
-            var implementationType = $(this).val();
-            var orgName = "<?php echo $_GET['organization']; ?>";
             $.ajax({
                 url: 'load_semester_dropdown.php?org_name=' + encodeURIComponent(
                     orgName), // Add org_name as query parameter
@@ -596,7 +591,16 @@ include("./models/filters/dropdowns.php");
                 $("#implementation_time").append(new Option("Evaluator vs. Student (Post)"),
                     "studenteval");
         });
-    });
+        });
+ 
+
+    // $(document).ready(function() {
+    //     $('#implementation_type').on('change', function() {
+    //         alert("Works")
+    //         var implementationType = $(this).val();
+    //         var orgName = "<?php echo $_GET['organization']; ?>";
+            
+    // });
     </script>
 
 

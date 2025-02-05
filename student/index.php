@@ -482,8 +482,6 @@ echo '<div class="row align-items-center p-0 w-100">
                                     <div class="col-sm-6 align-content-center">
                                         <h5><b>Work Experience</b></h5>
                                         <h5><?= $student_details['work_experience'] ?></h5>
-                                        <input class="btn btn-success" type="button" onclick="printDiv('printableArea')"
-                                            value="Print Report" />
                                     </div>
                                 </div>
 
