@@ -121,8 +121,6 @@ function generate_filters($selected_value, $filter_data) {
     return $html;
 }
 
-echo json_encode($data);
-
 // Get the selected value from the POST request
 $selected_value = $_POST['filterData'] ?? ''; // Use null coalescing operator
 
