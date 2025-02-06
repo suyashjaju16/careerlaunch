@@ -320,14 +320,6 @@ echo '<div class="row align-items-center p-0 w-100">
         grid-area: 1 / 1 / 2 / 5;
     }
 
-    .ruler {
-        position: relative;
-        width: 100%;
-        height: 2px;
-        background-color: #eaeaea;
-        border: 1px solid #000;
-    }
-
     .tick {
         position: absolute;
         width: 2px;
@@ -533,22 +525,22 @@ echo '<div class="row align-items-center p-0 w-100">
                                         <div class="d-flex justify-content-around p-2 mt-3"
                                             style="margin-left:30px!important">
                                             <!-- ;color:black;-webkit-text-stroke: 1px white; -->
-                                            <div class="btn btn-primary"
+                                            <div class="btn btn-primary disable-events "
                                                 style="width:22%;margin:auto;font-size:14px;font-weight:bold;color:black">
                                                 Emerging
                                                 Knowledge</div>
 
-                                            <div class="btn btn-success"
+                                            <div class="btn btn-success disable-events "
                                                 style="width:22%;margin:auto;font-size:14px;font-weight:bold;color:black">
                                                 Understanding
                                             </div>
 
-                                            <div class="btn btn-warning"
+                                            <div class="btn btn-warning disable-events "
                                                 style="width:22%;margin:auto;font-size:14px;font-weight:bold;color:black">
                                                 Early
                                                 Application</div>
 
-                                            <div class="btn btn-danger"
+                                            <div class="btn btn-danger disable-events "
                                                 style="width:23%;margin:auto;font-size:14px;margin-right:5px!important;font-weight:bold;color:black">
                                                 Advanced
                                                 Application</div>
@@ -1319,6 +1311,12 @@ echo '<div class="row align-items-center p-0 w-100">
 
                             document.body.innerHTML = originalContents;
                         }
+                        document.addEventListener("DOMContentLoaded", function () {
+                            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+                            var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+                                return new bootstrap.Popover(popoverTriggerEl);
+                            });
+                        });
                         </script>
 
                         <!-- apexcharts init -->
