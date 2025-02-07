@@ -457,7 +457,7 @@ echo '<div class="row align-items-center p-0 w-100">
 
                     <?php 
                     // echo $student_details["work_experience"];
-                    if($student_details["work_experience"] != null){                            
+                    if(isset($student_details["Evaluator Relation"])){                            
                         ?>
                     <div class="d-flex justify-content-between">
 
