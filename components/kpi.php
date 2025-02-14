@@ -1,4 +1,6 @@
 <?php 
+error_reporting(E_ALL);
+ini_set('display_errors', '0');
 // KPI Data
 
 // Individually setting KPI Data (Will change as per filters)
@@ -57,10 +59,10 @@ else{
         <div class="card text-center">
             <div class="card-body p-t-10">
                 <h4 class="card-title text-muted mb-0">Students</h4>
-                <h2 class="mt-3 mb-2"><i class="mdi mdi-arrow-up text-success me-2"></i><b>
+                <h2 class="mt-3 mb-2"><b>
                         <?=$total_students[0]?> </b></h2>
-                <p class="mb-0 text-black mt-3"><b><?=$total_students[1]?>%</b>
-                    from Last Week</p>
+                <p class="mb-0 text-black mt-3"><b><?=$total_students[1]?></b>
+                    New Today</p>
             </div>
         </div>
     </div>
@@ -69,10 +71,10 @@ else{
         <div class="card text-center">
             <div class="card-body p-t-10">
                 <h4 class="card-title text-muted mb-0">Responses</h4>
-                <h2 class="mt-3 mb-2"><i class="mdi mdi-arrow-up text-success me-2"></i><b>
+                <h2 class="mt-3 mb-2"><b>
                         <?=$total_student_responses[0]?></b></h2>
-                <p class="mb-0 text-black mt-3"><b> <?=$total_student_responses[1]?>%</b>
-                    from Last Week</p>
+                <p class="mb-0 text-black mt-3"><b> <?=$total_student_responses[1]?></b>
+                   New Today</p>
             </div>
         </div>
     </div>
@@ -82,7 +84,7 @@ else{
             <div class="card-body p-t-10">
                 <h4 class="card-title text-muted mb-0">Average
                     Duration</h4>
-                <h2 class="mt-3 mb-2"><i class="mdi mdi-arrow-down text-danger me-2"></i><b>
+                <h2 class="mt-3 mb-2"><b>
                         <?=$minutes?> min <?=$seconds?>s </b>
                 </h2>
                 <p class="mb-0 text-black mt-3"><b><?=$average_duration[1]?>%</b>

@@ -26,4 +26,5 @@
     <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
         rel="stylesheet">
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="assets/libs/jquery/jquery.min.js"></script>
 </head>

@@ -7,7 +7,7 @@ if(isset($_POST['create_dashboard'])){
     header('Location: .././dashboard.php?organization='.$_POST['org'].'&inventory='.$_POST['implementation_type'].'&semester='.$_POST['semester'].'&use_case_id='.$_POST['use_case_id'].'&source=ZmlsdGVyZWQ');
 }
 
-$base_url = "https://7gv0oagg0c.execute-api.us-east-1.amazonaws.com/dev/";
+$base_url = "https://ged4f9bmkk.execute-api.us-east-1.amazonaws.com/dev/";
 
 
 $url = $base_url."get-org";

@@ -1851,7 +1851,6 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
   body {
     padding: 0;
     margin: 0;
-    background-color: #e7e7e7;
   }
   .card {
     border: 0;

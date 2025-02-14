@@ -13,7 +13,9 @@ $selected_values = [
     'academic_level' => $_POST['academic_level'] ?? '',
     'demographics' => $_POST['demographics'] ?? ''
 ];
+
 $kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
+
 // echo json_encode($data);
 // Get Compentency Data
 $comp_data = json_decode(fetch_data(API_COMPETENCY_ENDPOINT,$data),true);
@@ -75,7 +77,18 @@ if (is_array($comp_data)) {
 // Fetching competency questions values
 $comp_q_data = json_decode(fetch_data(API_COMPETENCY_QUESTIONS_ENDPOINT,$data),true);
 
-include("./models/filters/dropdowns.php");
+// include("./models/filters/dropdowns.php");
+
+$allfilters = json_decode(fetch_data(API_ALL_DROPDOWNS_ENDPOINT,$data),true);
+// echo json_encode($allfilters);
+
+$implementation_time = $allfilters["implementationTimes"];
+$implementation_type = $allfilters["implementationTypes"];
+$version = $allfilters["inventoryVersions"];
+$semester = $allfilters["semesters"];
+$use_case_id = $allfilters["useCaseIds"];
+$academics = $allfilters["academicLevels"];
+$demographics = $allfilters["demographicGroups"];
 ?>
 <!doctype html>
 <html lang="en">
@@ -87,7 +100,7 @@ include("./models/filters/dropdowns.php");
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
-
+        <div class="container">
         <?php include("includes/navbar.php") ?>
         <!-- Navbar End -->
         <div class="page-content" style="padding-top: 27px!important;">
@@ -101,8 +114,8 @@ include("./models/filters/dropdowns.php");
                     <div class="col col-lg-3 px-4 py-5">
                         <center>
                             <h5 class="mb-2 text-white" style="font-size:20px">Data Type</h5><br>
-                            <select name="data_type" class="form-select select-light" style="border-radius: 20px;">
-                                <option value="nace" <?= $selected_values['data_type'] === 'nace' ? 'selected' : ''; ?>>
+                            <select id="inventory_version" name="data_type" class="dynamic-dropdown form-select select-light" style="border-radius: 20px;">
+                                <option value="" <?= $selected_values['data_type'] === '' ? 'selected' : ''; ?>>
                                     NACE Career
                                     Readiness Competencies</option>
                                 <option value="plus" <?= $selected_values['data_type'] === 'plus' ? 'selected' : ''; ?>>
@@ -110,69 +123,54 @@ include("./models/filters/dropdowns.php");
                                     Capital + Life Design + Career Mobility </option>
                             </select>
                             <select id="implementation_time" name="implementation_time"
-                                class="form-select select-light mt-3" style="border-radius: 20px;">
+                                class="dynamic-dropdown form-select select-light mt-3" style="border-radius: 20px;">
                                 <option value=""
                                     <?= $selected_values['implementation_time'] === '' ? 'selected' : ''; ?>>
-                                    All Time</option>
+                                    All Data</option>
 
-                                <!-- <?php foreach($implementation_type as $i): ?>
-                                    <option value="<?= $i ?>"
-                                        <?= $selected_values['implementation_time'] === $i ? 'selected' : ''; ?>>
-                                        <?= ucwords($i) ?></option>
-                                    <?php endforeach; ?> -->
-
-                                <option value="pre"
-                                    <?= $selected_values['implementation_time'] === 'pre' ? 'selected' : ''; ?>>
-                                    Pre-Experience</option>
-                                <option value="post"
-                                    <?= $selected_values['implementation_time'] === 'post' ? 'selected' : ''; ?>>
-                                    Post-Experience</option>
-                                <option value="Student : Pre vs. Post"
-                                    <?= $selected_values['implementation_time'] === 'Student : Pre vs. Post' ? 'selected' : ''; ?>>
-                                    Student : Pre vs. Post</option>
-                                <?php if(isset($_POST['implementation_type']) && $_POST['implementation_type'] == "work-exp"){ ?>
-                                <option value="eval"
-                                    <?= $selected_values['implementation_time'] === 'eval' ? 'selected' : ''; ?>>
-                                    Evaluator vs. Student (Post)</option>
-                                <?php } ?>
+                                <?php foreach($implementation_time as $key=>$value): ?>
+                                    <option value="<?= $key ?>"
+                                        <?= $selected_values['implementation_time'] === $key ? 'selected' : ''; ?>>
+                                        <?= ucwords($value) ?></option>
+                                    <?php endforeach; ?> 
                             </select>
                         </center>
                     </div>
                     <div class="col col-lg-3 px-4 py-5">
                         <center>
                             <h5 class="text-white mb-2" style="font-size:20px">Implementation Type</h5><br>
-                            <select id="implementation_type" name="implementation_type" class="form-select select-light"
+                            <select id="implementation_type" name="implementation_type" class="dynamic-dropdown form-select select-light"
                                 style="border-radius: 20px;" <?= INVENTORY ? "disabled" : "" ?>>
                                 <option value=""><?= INVENTORY ? ucfirst($_GET['inventory']) : "All Data" ?>
                                 </option>
-                                <?php foreach($implementation_type as $i): ?>
-                                <option value="<?= $i ?>"
-                                    <?= $selected_values['implementation_type'] === $i ? 'selected' : ''; ?>>
-                                    <?= ucwords($i) ?></option>
+                                <?php foreach($implementation_type as $key=>$value): ?>
+                                <option value="<?= $key ?>"
+                                    <?= $selected_values['implementation_type'] === $key ? 'selected' : ''; ?>>
+                                    <?= ucwords($value) ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <div class="d-flex">
                                 <div class="col-sm-6">
-                                    <select id="semester" name="semester" class="form-select select-light mt-3"
+                                    <select id="semester" name="semester" class="dynamic-dropdown form-select select-light mt-3"
                                         style="border-radius: 20px;" <?= SEMESTER ? "disabled" : "" ?>>
                                         <option value=""><?= SEMESTER ? $_GET['semester'] : "All Time" ?></option>
-                                        <?php foreach($semester as $i): ?>
-                                        <option value="<?= base64_encode($i) ?>"
-                                            <?= $selected_values['semester'] === base64_encode($i) ? 'selected' : ''; ?>>
-                                            <?= ucwords($i) ?></option>
+                                        <?php foreach($semester as $key=>$value): ?>
+                                        <option value="<?= base64_encode($key) ?>"
+                                            <?= $selected_values['semester'] === base64_encode($key) ? 'selected' : ''; ?>>
+                                            <?= ucwords($value) ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
-                                    <select id="use_case_id" name="use_case_id" class="form-select select-light mt-3"
+                                    <select id="use_case_id" name="use_case_id" class="dynamic-dropdown form-select select-light mt-3"
                                         style="border-radius: 20px;" <?= USE_CASE_ID ? "disabled" : "" ?>>
                                         <option value="">
                                             <?= USE_CASE_ID ? $_GET['use_case_id'] : "All Student Cohort" ?>
                                         </option>
-                                        <?php foreach($use_case_id as $i): ?>
-                                        <option value="<?= $i ?>"
-                                            <?= $selected_values['use_case_id'] === $i ? 'selected' : ''; ?>>
-                                            <?= ucwords($i) ?></option>
+                                        <?php foreach($use_case_id as $key=>$value): ?>
+                                        <option value="<?= $key ?>"
+                                            <?= $selected_values['use_case_id'] === $key ? 'selected' : ''; ?>>
+                                            <?= ucwords($value) ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -182,12 +180,13 @@ include("./models/filters/dropdowns.php");
                     <div class="col col-lg-3 px-4 py-5">
                         <center>
                             <h5 class="text-white mb-2" style="font-size:20px">Academic Level</h5><br>
-                            <select name="academic_level" class="form-select select-light" style="border-radius: 20px;">
+                            <select id="academic_level" name="academic_level" class="dynamic-dropdown form-select select-light" style="border-radius: 20px;">
                                 <option value="">All Levels</option>
-                                <?php foreach($academics as $i): ?>
-                                <option value="<?= $i ?>"
-                                    <?= $selected_values['academic_level'] === $i ? 'selected' : ''; ?>>
-                                    <?= ucwords($i) ?></option>
+                                <?php foreach($academics as $key=>$value): ?>
+                                    <?= $key ?>
+                                <option value="<?= $key ?>"
+                                    <?= $selected_values['academic_level'] === $key ? 'selected' : ''; ?>>
+                                    <?= ucwords($key) ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </center>
@@ -195,19 +194,19 @@ include("./models/filters/dropdowns.php");
                     <div class="col col-lg-3 px-4 py-5">
                         <center>
                             <h5 class="text-white mb-2" style="font-size:20px">Demographic Group</h5><br>
-                            <select name="demographics" class="form-select select-light" style="border-radius: 20px;">
+                            <select name="demographics" class="dynamic-dropdown form-select select-light" style="border-radius: 20px;">
                                 <option value="">All Students</option>
-                                <option value="First Generation"
+                                <!-- <option value="First Generation"
                                     <?= $selected_values['demographics'] === 'First Generation' ? 'selected' : ''; ?>>
                                     First Generation Students</option>
                                 <option value="International"
                                     <?= $selected_values['demographics'] === 'International' ? 'selected' : ''; ?>>
-                                    International Student</option>
-                                <!-- <?php foreach($demographics as $i): ?>
-                                    <option value="<?= $i ?>"
-                                        <?= $selected_values['demographics'] === $i ? 'selected' : ''; ?>>
-                                        <?= ucwords($i) ?></option>
-                                    <?php endforeach; ?> -->
+                                    International Student</option> -->
+                                <?php foreach($demographics as $key=>$value): ?>
+                                    <option value="<?= $key ?>"
+                                        <?= $selected_values['demographics'] === $key ? 'selected' : ''; ?>>
+                                        <?= ucwords($value) ?></option>
+                                <?php endforeach; ?>
                             </select>
                             <button type="button" class="btn bg-white p-2 mt-3 rounded-circle btn-lg"
                                 data-bs-toggle="modal" data-bs-target=".bs-example-modal-center"
@@ -412,7 +411,6 @@ include("./models/filters/dropdowns.php");
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
 
-
                 <?php
                     if($total_students[0] == 0){
                         echo "<div class='p-5'>
@@ -434,11 +432,12 @@ include("./models/filters/dropdowns.php");
                     else{
                         // echo json_encode($_POST);
                         if(isset($_POST['implementation_time']) || isset($_POST['data_type'])){
+                            
                             if($_POST['implementation_time'] == "Student : Pre vs. Post")
                                 include("components/prepost.php");
                             else if($_POST['implementation_time'] == "eval")
                                 include("components/student_eval.php");
-                            else if($_POST['data_type'] == "nace")
+                            else if($_POST['data_type'] == "")
                                 include("components/nace-board.php");
                             else if($_POST['data_type'] == "plus"){
                                 include("components/plus-board.php");
@@ -466,7 +465,7 @@ include("./models/filters/dropdowns.php");
     <!-- END layout-wrapper -->
 
     <!-- JAVASCRIPT -->
-    <script src="assets/libs/jquery/jquery.min.js"></script>
+    
     <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"
@@ -529,79 +528,79 @@ include("./models/filters/dropdowns.php");
     </script>
 
     <script>
-    $(document).ready(function() {
-        $('#implementation_type').on('change', function() {
-            var implementationType = $(this).val();
-            var orgName = "<?php echo $_GET['organization']; ?>";
-            $.ajax({
-                url: 'load_caseid_dropdowns.php?org_name=' + encodeURIComponent(
-                    orgName), // Add org_name as query parameter
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    implementation_type: implementationType
-                },
-                success: function(response) {
-                    // console.log(response)
-                    if (response.use_case_id_options) {
-                        var useCaseIdDropdown = $('#use_case_id');
-                        useCaseIdDropdown.empty(); // Clear existing options
-                        useCaseIdDropdown.append(new Option("All", ""));
-                        // Populate the dropdown with new options from the response
-                        $.each(response.use_case_id_options, function(index, option) {
-                            useCaseIdDropdown.append(new Option(option, option));
-                        });
-                    } else if (response.error) {
-                        console.error(response.error);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error("AJAX Error: " + error);
-                }
-            });
-
-            $.ajax({
-                url: 'load_semester_dropdown.php?org_name=' + encodeURIComponent(
-                    orgName), // Add org_name as query parameter
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    implementation_type: implementationType
-                },
-                success: function(response) {
-                    if (response.semester_options) {
-                        var semesterDropdown = $('#semester');
-                        semesterDropdown.empty(); // Clear existing options
-
-                        semesterDropdown.append(new Option("All Time", ""));
-                        // Populate the dropdown with new options from the response
-                        $.each(response.semester_options, function(index, option) {
-                            semesterDropdown.append(new Option(option, option));
-                        });
-                    } else if (response.error) {
-                        console.error(response.error);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error("AJAX Error: " + error);
-                }
-            });
-
-            if (implementationType == "work-exp")
-                $("#implementation_time").append(new Option("Evaluator vs. Student (Post)"),
-                    "studenteval");
-        });
-        });
- 
-
     // $(document).ready(function() {
     //     $('#implementation_type').on('change', function() {
-    //         alert("Works")
     //         var implementationType = $(this).val();
     //         var orgName = "<?php echo $_GET['organization']; ?>";
+    //         $.ajax({
+    //             url: 'load_caseid_dropdowns.php?org_name=' + encodeURIComponent(
+    //                 orgName), // Add org_name as query parameter
+    //             type: 'POST',
+    //             dataType: 'json',
+    //             data: {
+    //                 implementation_type: implementationType
+    //             },
+    //             success: function(response) {
+    //                 // console.log(response)
+    //                 if (response.use_case_id_options) {
+    //                     var useCaseIdDropdown = $('#use_case_id');
+    //                     useCaseIdDropdown.empty(); // Clear existing options
+    //                     useCaseIdDropdown.append(new Option("All", ""));
+    //                     // Populate the dropdown with new options from the response
+    //                     $.each(response.use_case_id_options, function(index, option) {
+    //                         useCaseIdDropdown.append(new Option(option, option));
+    //                     });
+    //                 } else if (response.error) {
+    //                     console.error(response.error);
+    //                 }
+    //             },
+    //             error: function(xhr, status, error) {
+    //                 console.error("AJAX Error: " + error);
+    //             }
+    //         });
+
+    //         $.ajax({
+    //             url: 'load_semester_dropdown.php?org_name=' + encodeURIComponent(
+    //                 orgName), // Add org_name as query parameter
+    //             type: 'POST',
+    //             dataType: 'json',
+    //             data: {
+    //                 implementation_type: implementationType
+    //             },
+    //             success: function(response) {
+    //                 if (response.semester_options) {
+    //                     var semesterDropdown = $('#semester');
+    //                     semesterDropdown.empty(); // Clear existing options
+
+    //                     semesterDropdown.append(new Option("All Time", ""));
+    //                     // Populate the dropdown with new options from the response
+    //                     $.each(response.semester_options, function(index, option) {
+    //                         semesterDropdown.append(new Option(option, option));
+    //                     });
+    //                 } else if (response.error) {
+    //                     console.error(response.error);
+    //                 }
+    //             },
+    //             error: function(xhr, status, error) {
+    //                 console.error("AJAX Error: " + error);
+    //             }
+    //         });
+
+    //         if (implementationType == "work-exp")
+    //             $("#implementation_time").append(new Option("Evaluator vs. Student (Post)"),
+    //                 "studenteval");
+    //     });
+    //     });
+ 
+
+    // // $(document).ready(function() {
+    // //     $('#implementation_type').on('change', function() {
+    // //         alert("Works")
+    // //         var implementationType = $(this).val();
+    // //         var orgName = "<?php echo $_GET['organization']; ?>";
             
-    // });
-    </script>
+    // // });
+    // </script>
 
 
     <script>
@@ -635,6 +634,119 @@ include("./models/filters/dropdowns.php");
         observer.observe(container);
     });
     </script>
+
+
+<script>
+    $(document).ready(function () {
+    function updateDropdowns() {
+        // alert("Change");
+        let selectedValues = {
+            org : "<?= $_GET["organization"] ?>",
+            inventory_version: $("#inventory_version").val(),
+            implementation_time: $("#implementation_time").val(),
+            implementation_type: $("#implementation_type").val(),
+            semester: $("#semester").val(),
+            use_case_id: $("#use_case_id").val(),
+            academic_level: $("#academic_level").val(),
+        };
+//         selectedValues = {
+//     "org": "efb383d9-2b47-4dcc-ac2f-8b6e93568b74",
+//     "inventory_version": "",
+//     "implementation_time": "",
+//     "implementation_type": "cohort",
+//     "semester": "Fall 24",
+//     "use_case_id": "Experience Circles",
+//     "academic_level": ""
+// }
+        console.log(selectedValues);
+        $.ajax({    
+            url: "fetch_filters.php?",
+            type: "POST",
+            data: selectedValues,
+            // dataType: "json",
+            success: function (response) {
+                // alert(response)
+                result = JSON.parse(response)
+                console.log(result);
+                updateDropdown("#implementation_time", result.implementationTimes);
+                updateDropdown("#implementation_type", result.implementationTypes);
+                updateDropdown("#semester", result.semesters);
+                updateDropdown("#use_case_id", result.useCaseIds);
+                updateDropdown("#academic_level", result.academicLevels);
+                if($("implementation_type").val() == "general"){
+                    $("#implementation_time").prop('disabled', true);
+                }
+                else{
+                    $("#implementation_time").prop('disabled', false);
+                }
+            },
+            error: function (textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+        });
+    }
+
+    function updateDropdown(selector, options) {
+        // alert(options);
+        let $dropdown = $(selector);
+        let currentValue = $dropdown.val(); // Store current selection
+
+        $dropdown.empty().append('<option value="">Select</option>');
+
+        $.each(options, function (index, value) {
+            let isSelected = currentValue === index ? 'selected' : '';
+            $dropdown.append('<option value="' + index + '" ' + isSelected + '>' + value + '</option>');
+        });
+    }
+
+    // $(".dynamic-dropdown").on("change", function () {
+    //     updateDropdowns();
+    // });
+
+    $(".dynamic-dropdown").on("change", function () {
+        let changedDropdown = $(this).attr("id");
+
+        if (changedDropdown === "implementation_type") {
+            // Reset dropdown 3 and 4
+            // alert("Change BOTH");
+            $("#semester, #use_case_id").empty().append('<option value="">Select</option>');
+        }
+
+        // alert($("#semester").val())
+        
+        if (changedDropdown === "semester" && $("#use_case_id").val() !="") {
+            // alert("No Change");
+        }
+        else if (changedDropdown === "use_case_id" && $("#semester").val() !="") {
+            // $("#use_case_id").empty().append('<option value="">Select</option>');
+            // alert("No Change");
+        }
+        else if (changedDropdown === "use_case_id") {
+            // alert("Change Semester");
+            $("#semester").empty().append('<option value="" selected>Select</option>');
+        }
+        else if (changedDropdown === "semester"){
+            // alert("Change Case ID");
+            $("#use_case_id").empty().append('<option value="" selected>Select</option>');
+        }
+
+        updateDropdowns(); // Fetch new data
+    });
+
+    // updateDropdowns(); // Initial Load
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl, {
+            trigger: 'hover', 
+            html: true
+        });
+    });
+});
+
+</script>
 </body>
 
 </html>

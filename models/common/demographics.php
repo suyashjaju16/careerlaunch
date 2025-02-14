@@ -12,4 +12,3 @@ curl_close($ch);
 // echo "<pre>$demo</pre>";
 ?>
 
-API_DEMOGRAPHICS_ENDPOINT

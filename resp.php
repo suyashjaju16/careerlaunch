@@ -8,7 +8,6 @@ $kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8" />
     <title>Career Readiness Inventory</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,8 +32,6 @@ $kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet"
         type="text/css" />
 
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
     <!-- Bootstrap Css -->
     <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- <link href="assets/css/neumorphism.css" rel="stylesheet" type="text/css" /> -->
@@ -49,182 +46,37 @@ $kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
         rel="stylesheet">
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/highcharts-more.js"></script>
-    <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-    <script src="http://code.highcharts.com/modules/exporting.js"></script>
-
-
-    <style>
-    .grid1 {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: 1fr;
-        grid-column-gap: 16px;
-        grid-row-gap: 0px;
-    }
-
-    .grid1child {
-        grid-area: 1 / 1 / 2 / 5;
-    }
-
-    .highcharts-credits {
-        display: none !important;
-    }
-
-    .pie-text {
-        font-size: 19.2px;
-        font-weight: bold;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    }
-
-    .apexcharts-tooltip-y-group {
-        background-color: white !important;
-        /* Custom background color */
-        color: Black !important;
-        /* Custom text color */
-    }
-
-    .apexcharts-tooltip-series-group {
-        background-color: white !important;
-        border: black 2px;
-    }
-
-    .ruler {
-        position: relative;
-        width: 100%;
-        height: 2px;
-        background-color: #eaeaea;
-        border: 1px solid #000;
-    }
-
-    .tick {
-        position: absolute;
-        width: 3.5px;
-        height: 17px;
-        margin-top: -8px;
-        background-color: #000;
-    }
-
-    .tick:nth-child(1) {
-        left: -1px;
-    }
-
-    .tick:nth-child(2) {
-        left: 25%;
-    }
-
-    .tick:nth-child(3) {
-        left: 50%;
-    }
-
-    .tick:nth-child(4) {
-        left: 75%;
-    }
-
-
-    .tick:nth-child(5) {
-        left: 100%;
-        margin-left: -1px;
-        /* Adjust to center the last tick */
-    }
-
-    .digit-ruler {
-        position: relative;
-        width: 99%;
-        height: 2px;
-        /* opacity: 0; */
-    }
-
-    .digit {
-        position: absolute;
-        text-align: center;
-        margin-top: -8px;
-        font-weight: bolder;
-        color: black;
-    }
-
-    .digit:nth-child(1) {
-        left: -5px;
-    }
-
-    .digit:nth-child(2) {
-        left: 25%;
-    }
-
-    .digit:nth-child(3) {
-        left: 50%;
-    }
-
-    .digit:nth-child(4) {
-        left: 75%;
-    }
-
-    .digit:nth-child(5) {
-        left: 100%;
-        margin-left: -1px;
-        /* Adjust to center the last tick */
-    }
-
-
-
-    .shimmer-animation {
-        background: linear-gradient(-45deg, #eee 40%, #fafafa 50%, #eee 60%);
-        /* add the following line: */
-        background-attachment: fixed;
-        background-size: 300%;
-        animation-name: shimmer;
-        animation-duration: 1000ms;
-        animation-timing-function: linear;
-        animation-delay: 0;
-        animation-iteration-count: infinite;
-        animation-direction: normal;
-        animation-fill-mode: none;
-        animation-play-state: running;
-    }
-
-    @keyframes shimmer {
-        0% {
-            background-position-x: 100%;
+        <style>
+        .page-item.active .page-link {
+            color: #fff !important;
+            background-color: #000333 !important;
         }
 
-        100% {
-            background-position-x: 0%;
+        .page-link {
+            color: #000 !important;
+            background-color: #fff !important;
         }
-    }
 
-    select {
-        color: #000033 !important;
-    }
+        .page-link:hover {
+            color: #fff !important;
+            background-color: #000333 !important;
+        }
 
-    #SvgjsText1111 {
-        fill: #12171dbf !important;
-    }
+        .no-sort::after { 
+            display: none!important; 
+        }
 
-    #SvgjsText1124 {
-        fill: #12171dbf !important;
-    }
+        .no-sort::before { 
+            display: none!important; 
+        }
 
-    #SvgjsText1150 {
-        fill: #12171dbf !important;
-    }
-
-    #SvgjsText1163 {
-        fill: #12171dbf !important;
-    }
-
-    #SvgjsG1136 {
-        fill: #12171dbf !important;
-    }
-
-    #SvgjsG1175 {
-        fill: #12171dbf !important;
-    }
-    </style>
+        .no-sort { 
+            pointer-events: none!important; 
+            cursor: default!important; 
+        }
+        </style>
 </head>
-
-<body data-sidebar="dark" style="background-color:#dadadd59">
+<body style="background-color:#dadadd59">
 
     <!-- <body data-layout="horizontal" data-topbar="light"> -->
 
@@ -253,11 +105,11 @@ $kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
                 <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 100px;">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                        <div class="card-body border border-2 py-1 px-2" style="border-radius:20px">
+                        <div class="card-body border border-2 py-1 px-3" style="border-radius:20px">
                             <a class="nav-link" href="./dashboard?organization=<?= $_GET['organization']?>&source=<?=$_GET['source']?>"
                                 style="font-size:18px;color:white!important;">Dashboard
                                 <span class="sr-only">(current)</span></a>
-</div>
+                        </div>
                         </li>
                         <li class="nav-item card" style="margin-left: 100px;">
                             <div class="card-body py-1">
@@ -284,7 +136,7 @@ $kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
                     <div class="card" style="border-radius:20px">
                         <div class="card-body">
                             <h3 style="font-weight:600">Response Table</h3>
-                            <p class="card-title-desc">Click on the <i class='ri-eye-fill'
+                            <p class="card-title">Click on the <i class='ri-share-box-fill'
                                     style='color:#000033;font-size:14px'></i> icon in the last column to view the
                                 detailed student report.</p>
                             <?php include("components/responsesTable.php") ?>
@@ -345,10 +197,6 @@ $kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
     <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 
     <script src="assets/js/pages/index.init.js"></script>
-
-    <script src="assets/libs/jquery-knob/jquery.knob.min.js"></script>
-
-    <script src="assets/js/pages/jquery-knob.init.js"></script>
 
     <!-- materialdesign icon js-->
     <script src="assets/js/pages/materialdesign.init.js"></script>

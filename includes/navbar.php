@@ -1,4 +1,4 @@
-<div class="container px-4">
+
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg navbar-dark py-2 px-3"
         style="border-radius: 0px 0px 16px 16px;background-color:#000033!important;">
@@ -22,7 +22,7 @@
                     </div>
                 </li>
                 <li class="nav-item" style="margin-left: 100px;">
-                    <div class="card-body border border-2 py-1 px-2" style="border-radius:20px">
+                    <div class="card-body border border-2 py-1 px-3" style="border-radius:20px">
                     <a class="nav-link" href="./resp?organization=<?= $_GET['organization']?>&source=<?=$_GET['source']?>"
                         style="font-size:18px;color:white!important;">Responses</a>
                     </div>

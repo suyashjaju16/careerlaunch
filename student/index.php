@@ -17,7 +17,7 @@ function fetch_data($base_url,$url,$data){
     return $response;
 }
 
-$base_url = "https://7gv0oagg0c.execute-api.us-east-1.amazonaws.com/dev/";
+$base_url = "https://ged4f9bmkk.execute-api.us-east-1.amazonaws.com/dev/";
 $filters = new stdClass();
 
 // Student Details START

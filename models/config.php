@@ -1,6 +1,6 @@
 <?php 
 error_reporting(E_ALL);
-ini_set('display_errors', '1');
+ini_set('display_errors', '0');
 
 /**
  * config.php
@@ -49,13 +49,16 @@ else
     define('USE_CASE_ID',  false);
 
 // API Endpoints
-define('API_BASE_URL', 'https://7gv0oagg0c.execute-api.us-east-1.amazonaws.com/dev/');
+define('API_BASE_URL', 'https://ged4f9bmkk.execute-api.us-east-1.amazonaws.com/dev/');
 define('API_KPI_ENDPOINT', API_BASE_URL . '/summary');
 define('API_COMPETENCY_ENDPOINT', API_BASE_URL . '/competency');
 define('API_COMPETENCY_QUESTIONS_ENDPOINT', API_BASE_URL . '/competency-questions');
+define('API_WORKEXP_ENDPOINT', API_BASE_URL . '/work-experience');
+define('API_ALL_DROPDOWNS_ENDPOINT', API_BASE_URL . '/get-dropdown-filters-test');
 define('API_DROPDOWN_ENDPOINT', API_BASE_URL . '/dropdowns');
 define('API_DEMOGRAPHICS_ENDPOINT', API_BASE_URL . '/demographics');
 define('API_STUDENTS_ENDPOINT', API_BASE_URL . '/get-students');
+define('API_PREPOST_KPI_ENDPOINT', API_BASE_URL . '/pre-post-summary');
 define('API_PREPOST_ENDPOINT', API_BASE_URL . '/pre-post-competency');
 define('API_PREPOST_QUESTIONS_ENDPOINT', API_BASE_URL . '/pre-post-questions');
 
@@ -96,9 +99,8 @@ $filters = new stdClass();
 // $filters->inventory_version = "nace";
 // $filters->implementation_time = "pre";
 
-
 // Inventory Version (from POST)
-if (isset($_POST['data_type']) && $_POST['data_type'] !== "nace") {
+if (isset($_POST['data_type']) && $_POST['data_type'] !== "") {
     $filters->inventory_version = htmlspecialchars($_POST['data_type'], ENT_QUOTES, 'UTF-8');
 }
 
@@ -129,10 +131,10 @@ if (isset($_POST['inventory_version']) && $_POST['inventory_version'] !== "") {
 
 // Semester (from POST, base64-decoded)
 if (isset($_POST['semester']) && $_POST['semester'] !== "") {
-    $semester = base64_decode($_POST['semester']);
-    if ($semester !== "") {
-        $filters->semester = htmlspecialchars($semester, ENT_QUOTES, 'UTF-8');
-    }
+    // $semester = base64_decode($_POST['semester']);
+    // if ($semester !== "") {
+        $filters->semester = htmlspecialchars($_POST['semester'], ENT_QUOTES, 'UTF-8');
+    // }
 }
 
 // Use case ID (from POST)
@@ -149,6 +151,9 @@ if (isset($_POST['demographics']) && $_POST['demographics'] !== "") {
     $filters->demographic_group = htmlspecialchars($_POST['demographics'], ENT_QUOTES, 'UTF-8');
 }
 
+// $filters->implementation_time = "Student : Pre vs. Post";
+// $filters->implementation_type = "cohort";
+// $filters->use_case_id = "Zero-Check-1";
 // ********************** DEMOGRAPHIC FILTER [DONE] **********************
 // if (
 //     isset($_POST['demographics_questions'], $_POST['demographics_answers'], $_POST['demographics_condition']) &&

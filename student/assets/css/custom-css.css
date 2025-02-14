@@ -4,7 +4,6 @@
 
 body {
     font-family: "Mulish", sans-serif !important;
-	background-color: #e7e7e7;
 }
 
 th {
@@ -515,12 +514,8 @@ overflow: unset!important;
 	position: relative;
 	width: 100%;
 	height: 2px;
-	background-color: #000;
+	background-color: #eaeaea;
 	border: 1px solid #000;
-}
-
-.disable-events {
-	pointer-events: none;
 }
 
 .tick {

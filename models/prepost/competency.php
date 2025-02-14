@@ -15,7 +15,7 @@ ini_set('display_errors', '1');
 // }
 
 
-$url = $base_url."pre-post-competency";
+$url = BASE_URL."pre-post-competency";
 $ch = curl_init( $url );
 $payload = json_encode($data);
 curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );

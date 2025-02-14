@@ -15,7 +15,7 @@ ini_set('display_errors', '1');
 // }
 
 
-$url = $base_url."pre-post-questions";
+$url = BASE_URL."pre-post-questions";
 $ch = curl_init( $url );
 $payload = json_encode($data);
 curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
