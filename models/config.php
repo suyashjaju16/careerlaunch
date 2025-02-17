@@ -130,15 +130,19 @@ if (isset($_POST['inventory_version']) && $_POST['inventory_version'] !== "") {
 }
 
 // Semester (from POST, base64-decoded)
-if (isset($_POST['semester']) && $_POST['semester'] !== "") {
-    // $semester = base64_decode($_POST['semester']);
-    // if ($semester !== "") {
+if (isset($_GET['semester']) && $_GET['semester'] !== "") {
+    $filters->semester = htmlspecialchars($_GET['semester'], ENT_QUOTES, 'UTF-8');
+}
+
+else if (isset($_POST['semester']) && $_POST['semester'] !== "") {
         $filters->semester = htmlspecialchars($_POST['semester'], ENT_QUOTES, 'UTF-8');
-    // }
 }
 
 // Use case ID (from POST)
-if (isset($_POST['use_case_id']) && $_POST['use_case_id'] !== "") {
+if (isset($_GET['use_case_id']) && $_GET['use_case_id'] !== "") {
+    $filters->use_case_id = htmlspecialchars($_GET['use_case_id'], ENT_QUOTES, 'UTF-8');
+}
+else if (isset($_POST['use_case_id']) && $_POST['use_case_id'] !== "") {
     $filters->use_case_id = htmlspecialchars($_POST['use_case_id'], ENT_QUOTES, 'UTF-8');
 }
 // Academic Level (from POST)

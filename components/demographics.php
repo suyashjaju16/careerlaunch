@@ -10,6 +10,8 @@ $dataArray = json_decode(fetch_data(API_DEMOGRAPHICS_ENDPOINT,$data),true);
 
 $formattedData = [];
 
+// echo json_encode($data);
+
 foreach ($dataArray as $question => $details) {
     $formattedData['data'] = []; 
     
