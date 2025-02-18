@@ -152,7 +152,7 @@ $demographics = $allfilters["demographicGroups"];
                                     }
                                 ?>
                                     <option value="<?= $key ?>" <?= $isSelected ?: ($first ? 'selected' : ''); ?>>
-                                        <?= ucwords($value) ?>
+                                        <?= $value ?>
                                     </option>
                                 <?php 
                                     $first = false; // Ensure only the first option gets selected if no previous selection exists
