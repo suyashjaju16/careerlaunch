@@ -166,7 +166,7 @@ $demographics = $allfilters["demographicGroups"];
                             <h5 class="text-white mb-2" style="font-size:20px">Implementation Type</h5><br>
                             <select id="implementation_type" name="implementation_type" class="dynamic-dropdown form-select select-light"
                                 style="border-radius: 20px;" <?= INVENTORY ? "disabled" : "" ?>>
-                                <option value=""><?= INVENTORY ? ucfirst($_GET['inventory']) : "All Types Pre/Post" ?>
+                                <option value=""><?= INVENTORY ? ucfirst($_GET['inventory']) : "All Types Pre & Post" ?>
                                 </option>
                                 <?php foreach($implementation_type as $key=>$value): ?>
                                 <option value="<?= $key ?>"
@@ -614,7 +614,7 @@ $demographics = $allfilters["demographicGroups"];
                 // alert(response)
                 result = JSON.parse(response)
                 console.log(result);
-                updateDropdown("#implementation_time", result.implementationTimes, "All Time");
+                updateDropdown("#implementation_time", result.implementationTimes, "All Data");
                 var $_GET = <?php echo json_encode($_GET); ?>;
                 console.log($_GET);
                 if(!$_GET['inventory'])
@@ -644,13 +644,26 @@ $demographics = $allfilters["demographicGroups"];
         // alert(options);
         let $dropdown = $(selector);
         let currentValue = $dropdown.val(); // Store current selection
-
-        $dropdown.empty().append(`<option value="">${defaultText}</option>`);
-
+        let firstValue = null;
+        if (selector !== "#implementation_time") {
+            $dropdown.empty().append(`<option value="">${defaultText}</option>`);
+        }
+        else{
+            $dropdown.empty();
+            if($("#implementation_type").val() == "general"){
+                $dropdown.append(`<option value="">${defaultText}</option>`);
+            }
+        }
         $.each(options, function (index, value) {
+            if (firstValue === null) firstValue = index; // Store first value
             let isSelected = currentValue === index ? 'selected' : '';
             $dropdown.append('<option value="' + index + '" ' + isSelected + '>' + value + '</option>');
         });
+
+        // Only auto-select the first value for #implementation_time
+        if (selector === "#implementation_time" && !$dropdown.val() && firstValue !== null) {
+            $dropdown.val(firstValue);
+        }
     }
 
     $(".dynamic-dropdown").on("change", function () {
