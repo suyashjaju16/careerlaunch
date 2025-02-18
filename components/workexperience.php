@@ -1,5 +1,7 @@
  <?php 
 $work_data = json_decode(fetch_data(API_WORKEXP_ENDPOINT,$data),true);
+// echo json_encode($work_data);
+// echo json_encode($data);
  ?>
  <div class="accordion-item">
      <h2 class="accordion-header bg-white pt-4 px-4" id="headingWork">

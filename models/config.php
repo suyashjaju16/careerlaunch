@@ -183,6 +183,7 @@ if (isset($_POST['demographics']) && $_POST['demographics'] !== "") {
 // }
 
 
+
 // Convert filters object to JSON within a data structure
 $data = new stdClass();
 $data->filters = $filters;
@@ -190,6 +191,16 @@ $data->filters = $filters;
 // Output the payload for verification
 // echo json_encode($data);
 
+$general_exists = isset(json_decode(fetch_data(API_ALL_DROPDOWNS_ENDPOINT, $data), true)['implementationTypes']['general']);
+if(isset($_POST["implementation_type"]))
+    $filters->implementation_type = $_POST["implementation_type"];
+else if($general_exists)
+    $filters->implementation_type = "general";
+
+
+$data = new stdClass();
+$data->filters = $filters;
+echo json_encode($data);
 // Function to send data via cURL
 function fetch_data($url, $data) {
     $ch = curl_init($url);

@@ -7,12 +7,20 @@ include("./models/config.php");
 $selected_values = [
     'data_type' => $_POST['data_type'] ?? '',
     'implementation_time' => $_POST['implementation_time'] ?? '',
-    'implementation_type' => $_POST['implementation_type'] ?? '',
+    'implementation_type' => $_POST['implementation_type'] ?? $filters->implementation_type,
     'semester' => $_POST['semester'] ?? '',
     'use_case_id' => $_POST['use_case_id'] ?? '',
     'academic_level' => $_POST['academic_level'] ?? '',
     'demographics' => $_POST['demographics'] ?? ''
 ];
+// echo "<pre>".json_encode($selected_values)."</pre>";
+// echo "<pre>".json_encode($_POST)."</pre>";
+
+if($filters->implementation_type == "general"){
+    $selected_values["implementation_type"] = "general";
+    // echo "Should be general";
+}
+
 
 if($_POST['implementation_time'] == "prepost")
 $kpi_data = json_decode(fetch_data(API_PREPOST_KPI_ENDPOINT,$data),true);
@@ -83,6 +91,7 @@ $comp_q_data = json_decode(fetch_data(API_COMPETENCY_QUESTIONS_ENDPOINT,$data),t
 // include("./models/filters/dropdowns.php");
 
 $allfilters = json_decode(fetch_data(API_ALL_DROPDOWNS_ENDPOINT,$data),true);
+// echo json_encode($data);
 // echo json_encode($allfilters);
 
 $implementation_time = $allfilters["implementationTimes"];
@@ -132,6 +141,9 @@ $demographics = $allfilters["demographicGroups"];
                             <select id="implementation_time" name="implementation_time"
                                     class="dynamic-dropdown form-select select-light mt-3" style="border-radius: 20px;">
                                 <?php 
+                                if($general_exists || $selected_values["implementation_time"] == "general"){
+                                    echo '<option value="">All Data</option>';
+                                }
                                 $first = true;
                                 foreach ($implementation_time as $key => $value): 
                                     $isSelected = ($selected_values['implementation_time'] === $key) ? 'selected' : '';

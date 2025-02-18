@@ -1170,27 +1170,27 @@ function renderCompetencyQuestion($categoryName, $categoryData) {
                     <div class="row bg-light comp">
                         <div class="col-sm-3 p-3 align-items-center text-center bg-info text-white">
                             1 </div>
-                        <div class="col-sm-9 p-3 align-items-center text-center comm-hov">Communication
+                        <div class="col-sm-9 p-3 align-items-center text-center comm-hov text-black">Communication
                         </div>
                     </div>
                     <div class="row bg-light mt-2 comp">
                         <div class="col-sm-3 p-3 align-items-center text-center text-white"
                             style="background-color: #E06B60;">
                             2 </div>
-                        <div class="col-sm-9 p-3 align-items-center text-center team-hov">Teamwork</div>
+                        <div class="col-sm-9 p-3 align-items-center text-center team-hov text-black">Teamwork</div>
                     </div>
                     <div class="row bg-light mt-2 comp">
                         <div class="col-sm-3 p-3 align-items-center text-center text-white"
                             style="background-color: #A056E6;">
                             3 </div>
-                        <div class="col-sm-9 p-3 align-items-center text-center critical-hov">Critical
+                        <div class="col-sm-9 p-3 align-items-center text-center critical-hov text-black">Critical
                             Thinking
                         </div>
                     </div>
                     <div class="row bg-light mt-2 comp">
                         <div class="col-sm-3 p-3 align-items-center text-center bg-success text-white">
                             4 </div>
-                        <div class="col-sm-9 p-3 align-items-center text-center professionalism-hov">
+                        <div class="col-sm-9 p-3 align-items-center text-center professionalism-hov text-black">
                             Professionalism
                         </div>
                     </div>
@@ -1198,20 +1198,20 @@ function renderCompetencyQuestion($categoryName, $categoryData) {
                         <div class="col-sm-3 p-3 align-items-center text-center text-white"
                             style="background-color:#ad3131">
                             5 </div>
-                        <div class="col-sm-9 p-3 align-items-center text-center equity-hov">Equity
+                        <div class="col-sm-9 p-3 align-items-center text-center equity-hov text-black">Equity
                             & Inclusion</div>
                     </div>
                     <div class="row bg-light mt-2 comp">
                         <div class="col-sm-3 p-3 align-items-center text-center text-white"
                             style="background-color: #556B9B;">
                             6 </div>
-                        <div class="col-sm-9 p-3 align-items-center text-center tech-hov">Technology
+                        <div class="col-sm-9 p-3 align-items-center text-center tech-hov text-black">Technology
                         </div>
                     </div>
                     <div class="row bg-light mt-2 comp">
                         <div class="col-sm-3 p-3 align-items-center text-center bg-warning text-white">
                             7 </div>
-                        <div class="col-sm-9 p-3 align-items-center text-center career-hov">Career
+                        <div class="col-sm-9 p-3 align-items-center text-center career-hov text-black">Career
                             &
                             Self-Development</div>
                     </div>
@@ -1219,7 +1219,7 @@ function renderCompetencyQuestion($categoryName, $categoryData) {
                         <div class="col-sm-3 p-3 align-items-center text-center text-white"
                             style="background-color: #796258;">
                             8 </div>
-                        <div class="col-sm-9 p-3 align-items-center text-center leadership-hov">
+                        <div class="col-sm-9 p-3 align-items-center text-center leadership-hov text-black">
                             Leadership
                         </div>
                     </div>
@@ -1253,7 +1253,7 @@ function renderCompetencyQuestion($categoryName, $categoryData) {
                         <div class="col-sm-3 p-3 align-items-center text-center text-white"
                             style="background-color:<?=$info['color']?>">
                             <?= $count ?> </div>
-                        <div class="col-sm-9 p-3 align-items-center text-center <?= $hoverColorsClass[$category] ?>">
+                        <div class="col-sm-9 p-3 align-items-center text-black text-center <?= $hoverColorsClass[$category] ?>">
                             <?= $category ?>
                         </div>
                     </div>
