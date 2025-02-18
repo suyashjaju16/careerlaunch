@@ -119,7 +119,7 @@ else if (isset($_POST['implementation_type']) && $_POST['implementation_type'] !
 }
 
 // Implementation Time (from POST)
-else if (isset($_POST['implementation_time']) && $_POST['implementation_time'] !== "") {
+if (isset($_POST['implementation_time']) && $_POST['implementation_time'] !== "") {
     $filters->implementation_time = htmlspecialchars($_POST['implementation_time'], ENT_COMPAT, 'UTF-8');
 }
 
@@ -190,13 +190,20 @@ $data->filters = $filters;
 
 // Output the payload for verification
 // echo json_encode($data);
-
+$tempfilters = json_decode(fetch_data(API_ALL_DROPDOWNS_ENDPOINT, $data), true);
+echo json_encode($tempfilters["implementationTimes"][1]);
 $general_exists = isset(json_decode(fetch_data(API_ALL_DROPDOWNS_ENDPOINT, $data), true)['implementationTypes']['general']);
-if(isset($_POST["implementation_type"]))
+if(isset($_POST["implementation_type"])){
+    if($_POST["implementation_type"] !== "")
     $filters->implementation_type = $_POST["implementation_type"];
+}
 else if($general_exists)
     $filters->implementation_type = "general";
-
+else
+    if(isset($tempfilters["implementationTimes"]["pre"]))
+        $filters->implementation_time = "pre";
+    else if(isset($tempfilters["implementationTimes"]["post"]))
+        $filters->implementation_time = "post";
 
 $data = new stdClass();
 $data->filters = $filters;
