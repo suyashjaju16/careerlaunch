@@ -6,8 +6,9 @@ ini_set('display_errors', '0');
 // Individually setting KPI Data (Will change as per filters)
 
 $org_logo = $kpi_data['logo'];
-$pre_responses = $kpi_data['pre'];
-$post_responses = $kpi_data['post'];
+$student_count = $kpi_data["student_count"];
+$pre_responses = $kpi_data['pre'][0];
+$post_responses = $kpi_data['post'][0];
 $average_duration = $kpi_data['average_duration'];
 $org_name = $kpi_data['org_name'];
 $logoExists = False;
@@ -57,20 +58,8 @@ else{
         <div class="card text-center">
             <div class="card-body p-t-10">
                 <h4 class="card-title text-muted mb-0">Students</h4>
-                <h2 class="row mt-3 mb-2">
-                    <div class="col-sm-6 align-content-center">
-                        <b> <?=$pre_responses[0]?> </b>
-                    </div>
-                    <div class="col-sm-6 align-content-center">
-                        <b> <?=$pre_responses[1]?> </b>
-                    </div>
-                    <div class="col-sm-6 align-content-center">
-                        <h5> Pre </h5>
-                    </div>
-                    <div class="col-sm-6 align-content-center">
-                        <h5>Post </h5>
-                    </div>
-                </h2>
+                <h1 class="mt-3 mb-2" style="font-size: 54px!important"><b>
+                        <?=$student_count?> </b></h1>
             </div>
         </div>
     </div>
@@ -81,10 +70,10 @@ else{
                 <h4 class="card-title text-muted mb-0">Responses</h4>
                 <h2 class="row mt-3 mb-2">
                     <div class="col-sm-6 align-content-center">
-                        <b> <?=$post_responses[0]?> </b>
+                        <b> <?=$pre_responses?> </b>
                     </div>
                     <div class="col-sm-6 align-content-center">
-                        <b> <?=$post_responses[1]?> </b>
+                        <b> <?=$post_responses?> </b>
                     </div>
                     <div class="col-sm-6 align-content-center">
                         <h5> Pre </h5>
