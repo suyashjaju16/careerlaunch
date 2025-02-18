@@ -166,7 +166,7 @@ $demographics = $allfilters["demographicGroups"];
                             <h5 class="text-white mb-2" style="font-size:20px">Implementation Type</h5><br>
                             <select id="implementation_type" name="implementation_type" class="dynamic-dropdown form-select select-light"
                                 style="border-radius: 20px;" <?= INVENTORY ? "disabled" : "" ?>>
-                                <option value=""><?= INVENTORY ? ucfirst($_GET['inventory']) : "All Types with Pre & Post" ?>
+                                <option value=""><?= INVENTORY ? ucfirst($_GET['inventory']) : "All Types with Pre/Post" ?>
                                 </option>
                                 <?php foreach($implementation_type as $key=>$value): ?>
                                 <option value="<?= $key ?>"
@@ -618,7 +618,7 @@ $demographics = $allfilters["demographicGroups"];
                 var $_GET = <?php echo json_encode($_GET); ?>;
                 console.log($_GET);
                 if(!$_GET['inventory'])
-                    updateDropdown("#implementation_type", result.implementationTypes, "All Types with Pre & Post");
+                    updateDropdown("#implementation_type", result.implementationTypes, "All Types with Pre/Post");
                 
                 if(!$_GET['semester'])
                     updateDropdown("#semester", result.semesters, "All Time");
