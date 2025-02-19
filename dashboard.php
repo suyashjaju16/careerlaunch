@@ -24,7 +24,9 @@ if($filters->implementation_type == "general"){
 
 if($_POST['implementation_time'] == "prepost")
 $kpi_data = json_decode(fetch_data(API_PREPOST_KPI_ENDPOINT,$data),true);
-else
+else if($_POST['implementation_time'] == "evaluatorstudent")
+$kpi_data = json_decode(fetch_data(API_STUDENT_EVAL_KPI_ENDPOINT,$data),true);
+else 
 $kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
 
 // echo json_encode($data);
@@ -118,8 +120,11 @@ $demographics = $allfilters["demographicGroups"];
         <div class="page-content" style="padding-top: 27px!important;">
             <div class="container-fluid">
                 <!-- KPI Row Start -->
-               <?php if($_POST['implementation_time'] == "prepost")
+               <?php 
+                if($_POST['implementation_time'] == "prepost")
                 include("components/kpiPrePost.php"); 
+                else if($_POST['implementation_time'] == "evaluatorstudent")
+                include("components/kpiStudentEval.php"); 
                 else
                 include("components/kpi.php"); 
                 ?>
@@ -439,6 +444,9 @@ $demographics = $allfilters["demographicGroups"];
                 <?php
                 if($_POST['implementation_time'] == "prepost"){
                     include("components/prepost.php");
+                }
+                else if($_POST['implementation_time'] == "evaluatorstudent"){
+                    include("components/studentEval.php");
                 }
                 else{
                     if($total_students[0] == 0){

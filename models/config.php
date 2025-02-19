@@ -61,6 +61,9 @@ define('API_STUDENTS_ENDPOINT', API_BASE_URL . '/get-students');
 define('API_PREPOST_KPI_ENDPOINT', API_BASE_URL . '/pre-post-summary');
 define('API_PREPOST_ENDPOINT', API_BASE_URL . '/pre-post-competency');
 define('API_PREPOST_QUESTIONS_ENDPOINT', API_BASE_URL . '/pre-post-questions');
+define('API_STUDENT_EVAL_KPI_ENDPOINT', API_BASE_URL . '/student-evaluator-summary');
+define('API_STUDENT_EVAL_ENDPOINT', API_BASE_URL . '/student-evaluator-competency');
+define('API_STUDENT_EVAL_QUESTIONS_ENDPOINT', API_BASE_URL . '/student-evaluator-questions');
 
 
 // AWS Configuration
