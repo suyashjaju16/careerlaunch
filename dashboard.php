@@ -648,6 +648,9 @@ $demographics = $allfilters["demographicGroups"];
         });
     }
 
+    const capitalize = str => str.replace(/^./, char => char.toUpperCase());
+
+
     function updateDropdown(selector, options, defaultText) {
         // alert(options);
         let $dropdown = $(selector);
@@ -665,7 +668,7 @@ $demographics = $allfilters["demographicGroups"];
         $.each(options, function (index, value) {
             if (firstValue === null) firstValue = index; // Store first value
             let isSelected = currentValue === index ? 'selected' : '';
-            $dropdown.append('<option value="' + index + '" ' + isSelected + '>' + value + '</option>');
+            $dropdown.append('<option value="' + index + '" ' + isSelected + '>' + capitalize(value) + '</option>');
         });
 
         // Only auto-select the first value for #implementation_time
