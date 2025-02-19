@@ -43,132 +43,6 @@ td {
 	
 }
 
-.checkbox-group {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	width: 90%;
-	margin-left: auto;
-	margin-right: auto;
-	max-width: 600px;
-	user-select: none;
-	& > * {
-		margin: .5rem 0.5rem;
-	}
-}
-
-
-
-.checkbox-group-legend {
-	font-size: 1.5rem;
-	font-weight: 700;
-	color: #9c9c9c;
-	text-align: center;
-	line-height: 1.125;
-	margin-bottom: 1.25rem;
-}
-
-.checkbox-input {
-	clip: rect(0 0 0 0);
-	clip-path: inset(100%);
-	height: 1px;
-	overflow: hidden;
-	position: absolute;
-	white-space: nowrap;
-	width: 1px;
-
-	&:checked + .checkbox-tile {
-		border-color: #2260ff;
-		box-shadow: 0 5px 10px rgba(#000, 0.1);
-		color: #2260ff;
-		&:before {
-			transform: scale(1);
-			opacity: 1;
-			background-color: #2260ff;
-			border-color: #2260ff;
-		}
-		
-		.checkbox-icon, .checkbox-label {
-			color: #2260ff;
-		}
-	}
-	
-	&:focus + .checkbox-tile {
-		border-color: #2260ff;
-		box-shadow: 0 5px 10px rgba(#000, 0.1), 0 0 0 4px #b5c9fc;
-		&:before {
-			transform: scale(1);
-			opacity: 1;
-		}
-	}
-}
-
-.checkbox-tile {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: 11rem;
-	min-height: 7rem;
-	border-radius: 0.5rem;
-	border: 2px solid #b5bfd9;
-	background-color: #fff;
-	box-shadow: 0 5px 10px rgba(#000, 0.1);
-	transition: 0.15s ease;
-	cursor: pointer;
-	position: relative;
-
-	&:before {
-		content: "";
-		position: absolute;
-		display: block;
-		width: 1.25rem;
-		height: 1.25rem;
-		border: 2px solid #b5bfd9;
-		background-color: #fff;
-		border-radius: 50%;
-		top: 0.25rem;
-		left: 0.25rem;
-		opacity: 0;
-		transform: scale(0);
-		transition: 0.25s ease;
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' fill='%23FFFFFF' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'%3E%3C/rect%3E%3Cpolyline points='216 72.005 104 184 48 128.005' fill='none' stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'%3E%3C/polyline%3E%3C/svg%3E");
-		background-size: 12px;
-		background-repeat: no-repeat;
-		background-position: 50% 50%;
-	}
-
-	&:hover {
-		border-color: #2260ff;
-		&:before {
-			transform: scale(1);
-			opacity: 1;
-		}
-	}
-}
-
-.checkbox-icon {
-	transition: .375s ease;
-	color: #494949;
-	svg {
-		width: 3rem;
-		height: 3rem;
-	}
-}
-
-.checkbox-label {
-	color: #707070;
-	transition: .375s ease;
-	text-align: center;
-}
-
-.check-long{
-    width : 40rem!important;
-    min-height: 1rem;
-    flex-direction: unset!important;
-    justify-content: unset!important;
-}
-
 .sticky {
     position: -webkit-sticky;
     /* For Safari */
@@ -179,136 +53,6 @@ td {
     padding: 1em;
     /* border: 1px solid #ccc; */
     z-index: 100;
-}
-
-.progress-bar-marker {
-	background-image: linear-gradient(90deg, rgba(225, 225, 225, 0.1) 97%, rgb(0, 0, 0) 3%);
-	height: 20px;
-}
-
-.scale-mark{
-	height: 20px;
-	width:16px;
-	background-color: black;
-}
-
-
-.comp:hover{
-	color: white;
-	background-color: black!important;
-	cursor: pointer;
-}
-
-.hover-effect {
-	background-color: lightblue;
-	/* Same as your hover effect */
-}
-
-.comp:hover .comm-hov {
-	color: white;
-		background-color: #00a4fe;
-		cursor: pointer;
-}
-
-.comp .team-hov .click {
-	color: white;
-	background-color: #00a4fe;
-	cursor: pointer;
-}
-
-.comp:hover .team-hov {
-	color: white;
-	background-color: #E06B60;
-	cursor: pointer;
-}
-
-.comp:hover .critical-hov {
-	color: white;
-	background-color: #A056E6;
-	cursor: pointer;
-}
-
-.comp:hover .professionalism-hov {
-	color: white;
-	background-color: #66d203;
-	cursor: pointer;
-}
-
-.comp:hover .equity-hov {
-	color: white;
-	background-color: #e66060;
-	cursor: pointer;
-}
-
-.comp:hover .tech-hov {
-	color: white;
-	background-color: #556B9B;
-	cursor: pointer;
-}
-
-.comp:hover .career-hov {
-	color: white;
-	background-color: #ffb600;
-	cursor: pointer;
-}
-
-.comp:hover .leadership-hov {
-	color: white;
-	background-color: #796258;
-	cursor: pointer;
-}
-
-.comm-click {
-	color: white;
-	background-color: #00a4fe;
-	cursor: pointer;
-}
-
-.team-click {
-	color: white;
-	background-color: #E06B60;
-	cursor: pointer;
-}
-
-.critical-click {
-	color: white;
-	background-color: #A056E6;
-	cursor: pointer;
-}
-
-.professionalism-click {
-	color: white;
-	background-color: #66d203;
-	cursor: pointer;
-}
-
-.equity-click {
-	color: white;
-	background-color: #e66060;
-	cursor: pointer;
-}
-
-.tech-click {
-	color: white;
-	background-color: #556B9B;
-	cursor: pointer;
-}
-
-.career-click {
-	color: white;
-	background-color: #ffb600;
-	cursor: pointer;
-}
-
-.leadership-click {
-	color: white;
-	background-color: #796258;
-	cursor: pointer;
-}
-
-.hover-global .comp {
-	background-color: red;
-	/* Same hover effect applied globally */
 }
 
 .upcard{
@@ -347,116 +91,10 @@ td {
 	color: black!important;
 }
 
-.accordion-flush .accordion-item:first-child{
-	border-top:1px solid #ced4da!important;
-}
-
-.gauge-container {
-	width: 170px;
-	height: 170px;
-}
-
-.gauge {
-	width: 100%;
-	height: 100%;
-}
-
-.gauge-background {
-	fill: none;
-	stroke: #eee;
-	stroke-width: 8;
-	/* Thicker stroke width */
-}
-
-.gauge-foreground {
-	fill: none;
-	stroke: #FF5733;
-	/* Change to your desired color */
-	stroke-width: 8;
-	/* Thicker stroke width */
-	stroke-linecap: round;
-	transition: stroke-dasharray 0.6s ease;
-}
-
-.gauge-percentage {
-	fill: #343A40;
-	font-weight: 700;
-	font-size: 0.7em;
-	text-anchor: middle;
-	dominant-baseline: middle;
-}
-
-.gauge-emerging{
-	stroke: #008ffb;
-}
-
-.gauge-understanding {
-	stroke: #66d203;
-}
-
-.gauge-early {
-	stroke: #fcb92b;
-}
-
-.gauge-advanced {
-	stroke: #ff4560;
-}
-
-.highcharts-text-outline{
-	stroke-opacity: 0%;
-}
-
 .bg-primary{
-	background-color: rgb(0 143 251) !important;
+	background-color: #000333 !important;
 }
 
-.comm-hov .clicked {
-	color: white;
-	background-color: #00a4fe;
-	cursor: pointer;
-}
-
-.team-hov .clicked {
-	color: white;
-	background-color: #E06B60;
-	cursor: pointer;
-}
-
-.critical-hov .clicked {
-	color: white;
-	background-color: #A056E6;
-	cursor: pointer;
-}
-
-.professionalism-hov .clicked {
-	color: white;
-	background-color: #66d203;
-	cursor: pointer;
-}
-
-.equity-hov .clicked{
-	color: white;
-	background-color: #ad3131;
-	cursor: pointer;
-}
-
-.tech-hov .clicked {
-	color: white;
-	background-color: #556B9B;
-	cursor: pointer;
-}
-
-.career-hov .clicked {
-	color: white;
-	background-color: #ffb600;
-	cursor: pointer;
-}
-
-.leadership-hov .clicked {
-	color: white;
-	background-color: #796258;
-	cursor: pointer;
-}
 
 .max-border{
 	box-shadow: 0 0 0 2px #f3f5f6 inset;
@@ -479,37 +117,6 @@ overflow: unset!important;
 	width: 3rem!important;
 }
 
-.competency-grid {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	grid-template-rows: 1fr;
-	grid-column-gap: 16px;
-	grid-row-gap: 0px;
-}
-
-
-.highcharts-credits {
-	display: none !important;
-}
-
-.pie-text {
-	font-size: 19.2px;
-	font-weight: bold;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
-
-.apexcharts-tooltip-y-group {
-	background-color: white !important;
-	/* Custom background color */
-	color: Black !important;
-	/* Custom text color */
-}
-
-.apexcharts-tooltip-series-group {
-	background-color: white !important;
-	border: black 2px;
-}
-
 .ruler {
 	position: relative;
 	width: 100%;
@@ -520,7 +127,7 @@ overflow: unset!important;
 
 .tick {
 	position: absolute;
-	width: 3.5px;
+	width: 2px;
 	height: 17px;
 	margin-top: -8px;
 	background-color: #000;
@@ -528,25 +135,26 @@ overflow: unset!important;
 
 .tick:nth-child(1) {
 	left: -1px;
+	width: 3.5px;
 }
 
 .tick:nth-child(2) {
-	left: 25%;
+	left: 24.5%;
 }
 
 .tick:nth-child(3) {
-	left: 50%;
+	left: 49.5%;
 }
 
 .tick:nth-child(4) {
-	left: 75%;
+	left: 74%;
 }
-
 
 .tick:nth-child(5) {
 	left: 100%;
 	margin-left: -1px;
-	/* Adjust to center the last tick */
+	width: 3.5px
+		/* Adjust to center the last tick */
 }
 
 .digit-ruler {
@@ -591,26 +199,44 @@ select {
 	color: #000033 !important;
 }
 
-#SvgjsText1111 {
-	fill: #12171dbf !important;
+
+.form-check-input {
+	width: 1.5em;
+	height: 1.5em;
 }
 
-#SvgjsText1124 {
-	fill: #12171dbf !important;
+.form-check-label {
+	font-size: 18px;
+	margin-left: 9px;
 }
 
-#SvgjsText1150 {
-	fill: #12171dbf !important;
+.animated-progress {
+	animation: progress-animation 1s ease-out forwards;
 }
 
-#SvgjsText1163 {
-	fill: #12171dbf !important;
+@keyframes progress-animation {
+	from {
+		width: 0%;
+	}
+
+	to {
+		width: var(--progress-width, 100%);
+	}
 }
 
-#SvgjsG1136 {
-	fill: #12171dbf !important;
+.recommendations-headings {
+	font-size: 16px !important;
 }
 
-#SvgjsG1175 {
-	fill: #12171dbf !important;
+.popover-headings {
+	font-weight: 800;
+	color: #000 !important;
+}
+
+.text-black {
+	color: #000 !important;
+}
+
+.bg-dark {
+	background-color: #000 !important;
 }
