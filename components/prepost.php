@@ -94,7 +94,7 @@ function generate_competency($level,$color) {
                     </p>
                 </div>
                 <div class="col-sm-9 mt-4 p-0">';
-                    if(isset($value["pre"]) && $value["pre"] != null){
+                    if(isset($value["pre"])){
                         $pre_hide = isset($value['evaluator']) ? "display:none" : "";
                     echo '<div class="progress pre-bar mb-3 bg-white" style="width:90%;margin-bottom:32px!important;margin:auto;'.$pre_hide.'">
                         <div class="progress-bar animated-progress bg-dark" role="progressbar"
@@ -106,7 +106,7 @@ function generate_competency($level,$color) {
                         </div>
                     </div>';
                     }
-                    if(isset($value["post"]) && $value["post"] != null){
+                    if(isset($value["post"])){
                     echo '<div class="progress mb-3 bg-white" style="width:90%;margin:auto">
                         <div class="progress-bar animated-progress" role="progressbar"
                             data-width="'.$value['post'].'" aria-valuemin="0" aria-valuemax="100"
