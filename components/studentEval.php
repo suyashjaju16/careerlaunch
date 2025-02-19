@@ -94,7 +94,7 @@ function generate_competency($level,$color) {
                     </p>
                 </div>
                 <div class="col-sm-9 mt-4 p-0">';
-                    if(isset($value["evaluator"]) && $value["evaluator"] != null){
+                    if(isset($value["evaluator"])){
                     echo '<div class="progress pre-bar mb-3 bg-white" style="width:90%;margin-bottom:32px!important;margin:auto;">
                         <div class="progress-bar animated-progress bg-dark" role="progressbar"
                             data-width="'.$value['evaluator'].'" aria-valuemin="0" aria-valuemax="100"
@@ -105,7 +105,7 @@ function generate_competency($level,$color) {
                         </div>
                     </div>';
                     }
-                    if(isset($value["student"]) && $value["student"] != null){
+                    if(isset($value["student"])){
                     echo '<div class="progress mb-3 bg-white" style="width:90%;margin:auto">
                         <div class="progress-bar animated-progress" role="progressbar"
                             data-width="'.$value['student'].'" aria-valuemin="0" aria-valuemax="100"
