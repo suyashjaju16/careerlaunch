@@ -1,9 +1,4 @@
 <?php 
-// Student Details START
-$filters = new stdClass();
-$filters->org_id = $_GET['organization'];
-$data = new stdClass();
-$data = $filters;
 $students_data = json_decode(fetch_data(API_STUDENTS_ENDPOINT,$data),true);
 ?>
 

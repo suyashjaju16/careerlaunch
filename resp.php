@@ -1,7 +1,10 @@
 <?php 
+session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 include("./models/config.php");
+
+$data = $_SESSION["payload"];
 $kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
 ?>
 <!doctype html>

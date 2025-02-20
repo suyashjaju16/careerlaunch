@@ -3,6 +3,9 @@ include("./models/config.php");
 // include("./models/nace/kpi.php");
 // echo json_encode($data);
 
+session_start();
+$_SESSION["payload"] = $data;
+
 // Set Filters Dropdown
 $selected_values = [
     'data_type' => $_POST['data_type'] ?? '',

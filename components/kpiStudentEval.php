@@ -27,8 +27,8 @@ else{
     $minutes = 0;
     $seconds = 0;
 }
-// echo "KPI : ".json_encode($data);
-// echo json_encode($kpi_data);
+
+echo $org_name;
 ?>
 <div class="row">
     <!-- <div class="col-sm-6 col-lg-3">
