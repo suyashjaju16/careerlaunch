@@ -1,7 +1,7 @@
 <?php 
 session_start();
 error_reporting(E_ALL);
-ini_set('display_errors', '1');
+ini_set('display_errors', '0');
 include("./models/config.php");
 include("./functions/generate_csv.php");
 
@@ -142,9 +142,14 @@ $_SESSION["proxy_payload"] = $data;
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                             <h3 style="font-weight:600">Response Table</h3>
-                            <form method="POST" action="">
-                                    <button type="submit" class="btn btn-primary" style="background-color: #000033!important;" name="generate_csv">Download CSV</button>
+                            <div class="d-flex justify-content-between">
+                                <form method="POST" action="">
+                                        <button type="submit" class="btn btn-primary" style="background-color: #000033!important;" name="generate_csv">Download CSV</button>
                                 </form>
+                                <form method="POST" action="">
+                                    <button type="submit" class="btn btn-primary" style="background-color: #000033!important;margin-left:20px!important" name="generate_excel">Download Excel</button>
+                                </form>
+                            </div>
                             </div>
                            
                             <p class="card-title">Click on the <i class='ri-share-box-fill'
