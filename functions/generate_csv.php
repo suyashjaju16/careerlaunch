@@ -6,16 +6,22 @@ if (isset($_POST['generate_csv'])) {
     }
 
     header('Content-Type: text/csv');
-    header('Content-Disposition: attachment; filename="responses.csv"');
+    header('Content-Disposition: attachment; filename="'.$_SESSION["org_name"].'.csv"');
     header('Cache-Control: no-cache, no-store, must-revalidate');
     header('Pragma: no-cache');
     header('Expires: 0');
+    $data = json_decode(fetch_data(API_STUDENTS_ENDPOINT, $_SESSION["payload"]), true);
+    if ($data === null || empty($data)) {
+        header('HTTP/1.1 500 Internal Server Error');
+        echo 'Failed to fetch or decode CSV data';
+        exit();
+    }
 
-    $csvdata = json_decode(fetch_data(API_STUDENTS_ENDPOINT,$_SESSION["payload"]),true);
     $output = fopen('php://output', 'w');
-    fputcsv($output, ['Id', 'Name', 'Email', 'Time', 'Score']);
-    foreach ($csvdata as $row) {
-        fputcsv($output, [$row['Id'], $row['Name'], $row['Email'], $row['Time'], $row['Score']]);
+    $headers = array_keys($data[0]);
+    fputcsv($output, $headers);
+    foreach ($data as $row) {
+        fputcsv($output, array_values($row));
     }
     fclose($output);
     exit();
@@ -28,22 +34,23 @@ if (isset($_POST['generate_excel'])) {
     }
 
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment; filename="responses.xls"');
+    header('Content-Disposition: attachment; filename="'.$_SESSION["org_name"].'.xls"');
     header('Cache-Control: no-cache, no-store, must-revalidate');
     header('Pragma: no-cache');
     header('Expires: 0');
 
-    $excelData = json_decode(fetch_data(API_STUDENTS_ENDPOINT, $_SESSION["payload"]), true);
-    if ($excelData === null) {
+    $data = json_decode(fetch_data(API_STUDENTS_ENDPOINT, $_SESSION["payload"]), true);
+    if ($data === null || empty($data)) {
         header('HTTP/1.1 500 Internal Server Error');
         echo 'Failed to fetch or decode Excel data';
         exit();
     }
 
     $output = fopen('php://output', 'w');
-    fwrite($output, "Id\tName\tEmail\tTime\tScore\n");
-    foreach ($excelData as $row) {
-        fwrite($output, implode("\t", [$row['Id'], $row['Name'], $row['Email'], $row['Time'], $row['Score']]) . "\n");
+    $headers = array_keys($data[0]);
+    fwrite($output, implode("\t", $headers) . "\n");
+    foreach ($data as $row) {
+        fwrite($output, implode("\t", array_values($row)) . "\n");
     }
     fclose($output);
     exit();

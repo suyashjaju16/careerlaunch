@@ -7,6 +7,7 @@ include("./functions/generate_csv.php");
 
 $data = $_SESSION["payload"];
 $kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
+$_SESSION["org_name"] = $kpi_data['org_name'];
 $_SESSION["proxy_payload"] = $data;
 ?>
 <!doctype html>
