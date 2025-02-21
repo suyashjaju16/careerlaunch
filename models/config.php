@@ -194,11 +194,18 @@ $data->filters = $filters;
 // Output the payload for verification
 // echo json_encode($data);
 $tempfilters = json_decode(fetch_data(API_ALL_DROPDOWNS_ENDPOINT, $data), true);
-echo json_encode($tempfilters["implementationTimes"][1]);
+
 $general_exists = isset(json_decode(fetch_data(API_ALL_DROPDOWNS_ENDPOINT, $data), true)['implementationTypes']['general']);
 if(isset($_POST["implementation_type"])){
     if($_POST["implementation_type"] !== "")
     $filters->implementation_type = $_POST["implementation_type"];
+}
+else if(isset($_SESSION["proxy_payload"])){
+    if($_POST["implementation_type"] !== ""){
+        
+            $proxy_data = $_SESSION['proxy_payload'];
+            $filters->implementation_type = $proxy_data->filters->implementation_time;        
+    }
 }
 else if($general_exists)
     $filters->implementation_type = "general";
@@ -210,7 +217,7 @@ else
 
 $data = new stdClass();
 $data->filters = $filters;
-echo json_encode($data);
+echo "<pre>".json_encode($data)."</pre>";
 // Function to send data via cURL
 function fetch_data($url, $data) {
     $ch = curl_init($url);

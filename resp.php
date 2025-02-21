@@ -6,6 +6,7 @@ include("./models/config.php");
 
 $data = $_SESSION["payload"];
 $kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
+$_SESSION["proxy_payload"] = $data;
 ?>
 <!doctype html>
 <html lang="en">

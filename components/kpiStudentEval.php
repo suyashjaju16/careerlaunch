@@ -28,7 +28,7 @@ else{
     $seconds = 0;
 }
 
-echo $org_name;
+// echo $org_name;
 ?>
 <div class="row">
     <!-- <div class="col-sm-6 col-lg-3">

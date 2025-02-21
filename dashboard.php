@@ -1,7 +1,5 @@
 <?php 
 include("./models/config.php");
-// include("./models/nace/kpi.php");
-// echo json_encode($data);
 
 session_start();
 $_SESSION["payload"] = $data;
@@ -16,13 +14,29 @@ $selected_values = [
     'academic_level' => $_POST['academic_level'] ?? '',
     'demographics' => $_POST['demographics'] ?? ''
 ];
-// echo "<pre>".json_encode($selected_values)."</pre>";
-// echo "<pre>".json_encode($_POST)."</pre>";
 
 if($filters->implementation_type == "general"){
     $selected_values["implementation_type"] = "general";
     // echo "Should be general";
 }
+
+if($_SESSION["proxy_payload"]){
+    $data = $_SESSION['proxy_payload'];
+    // echo json_encode($data);
+    $selected_values = [
+        'data_type' => $data->filters->inventory_version ?? '',
+        'implementation_time' => $data->filters->implementation_time ?? '',
+        'implementation_type' => $data->filters->implementation_type ?? '',
+        'semester' => $data->filters->semester ?? '',
+        'use_case_id' => $data->filters->use_case_id ?? '',
+        'academic_level' => $data->filters->academic_level ?? '',
+        'demographics' => $data->filters->demographic_group ?? ''
+    ];
+    unset($_SESSION["proxy_payload"]);
+}
+
+// echo "<pre>".json_encode($selected_values)."</pre>";
+// echo "<pre>".json_encode($selected_values)."</pre>";
 
 
 if($_POST['implementation_time'] == "prepost")
@@ -443,12 +457,12 @@ $demographics = $allfilters["demographicGroups"];
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
-
+<div id="content">
                 <?php
                 if($_POST['implementation_time'] == "prepost"){
                     include("components/prepost.php");
                 }
-                else if($_POST['implementation_time'] == "evaluatorstudent"){
+                else if($_POST['implementa b  tion_time'] == "evaluatorstudent"){
                     include("components/studentEval.php");
                 }
                 else{
@@ -493,6 +507,7 @@ $demographics = $allfilters["demographicGroups"];
                 if($_POST['data_type'] == "plus")
                     include("cplus-board.php");
                 ?> -->
+            </div>
             </div>
         </div>
         <!-- End Page-content -->
