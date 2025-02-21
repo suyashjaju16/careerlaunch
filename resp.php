@@ -3,6 +3,7 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 include("./models/config.php");
+include("./functions/generate_csv.php");
 
 $data = $_SESSION["payload"];
 $kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
@@ -139,7 +140,13 @@ $_SESSION["proxy_payload"] = $data;
 
                     <div class="card" style="border-radius:20px">
                         <div class="card-body">
+                            <div class="d-flex justify-content-between">
                             <h3 style="font-weight:600">Response Table</h3>
+                            <form method="POST" action="">
+                                    <button type="submit" class="btn btn-primary" style="background-color: #000033!important;" name="generate_csv">Download CSV</button>
+                                </form>
+                            </div>
+                           
                             <p class="card-title">Click on the <i class='ri-share-box-fill'
                                     style='color:#000033;font-size:14px'></i> icon in the last column to view the
                                 detailed student report.</p>
