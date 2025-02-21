@@ -462,7 +462,7 @@ $demographics = $allfilters["demographicGroups"];
                 if($_POST['implementation_time'] == "prepost"){
                     include("components/prepost.php");
                 }
-                else if($_POST['implementa b  tion_time'] == "evaluatorstudent"){
+                else if($_POST['implementation_time'] == "evaluatorstudent"){
                     include("components/studentEval.php");
                 }
                 else{
