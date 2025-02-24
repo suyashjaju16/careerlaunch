@@ -658,3 +658,7 @@ select {
 	font-weight: 800;
 	color: #000 !important;
 }
+
+.disable-events{
+	pointer-events: none!important;
+}

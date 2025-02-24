@@ -64,7 +64,7 @@ define('API_PREPOST_QUESTIONS_ENDPOINT', API_BASE_URL . '/pre-post-questions');
 define('API_STUDENT_EVAL_KPI_ENDPOINT', API_BASE_URL . '/student-evaluator-summary');
 define('API_STUDENT_EVAL_ENDPOINT', API_BASE_URL . '/student-evaluator-competency');
 define('API_STUDENT_EVAL_QUESTIONS_ENDPOINT', API_BASE_URL . '/student-evaluator-questions');
-define('API_CSV_DATA_ENDPOINT', API_BASE_URL . '/get-students-download');
+define('API_CSV_DATA_ENDPOINT', API_BASE_URL . '/mock-api-2');
 
 // AWS Configuration
 define('AWS_REGION', 'us-west-2');
