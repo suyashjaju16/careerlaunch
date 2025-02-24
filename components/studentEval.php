@@ -427,6 +427,8 @@ function generate_competency($level,$color) {
      </div>
  </div>
  <!-- end row -->
+
+ <?php include("./components/studentEvaluatorComparison.php") ?>
  <script> 
      document.addEventListener("DOMContentLoaded", () => {
         const progressBars = document.querySelectorAll('.animated-progress');

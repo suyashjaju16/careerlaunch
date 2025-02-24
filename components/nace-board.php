@@ -1258,56 +1258,6 @@ function renderCompetencyQuestion($categoryName, $categoryData) {
                         </div>
                     </div>
                     <?php $count++; } } ?>
-                    <!-- </div> -->
-                    <!-- <div class="row bg-light mt-2 comp">
-                        <div class="col-sm-3 p-3 align-items-center text-center text-white"
-                            style="background-color: #E06B60;">
-                            2 </div>
-                        <div class="col-sm-9 p-3 align-items-center text-center team-hov">Teamwork</div>
-                    </div>
-                    <div class="row bg-light mt-2 comp">
-                        <div class="col-sm-3 p-3 align-items-center text-center text-white"
-                            style="background-color: #A056E6;">
-                            3 </div>
-                        <div class="col-sm-9 p-3 align-items-center text-center critical-hov">Critical
-                            Thinking
-                        </div>
-                    </div>
-                    <div class="row bg-light mt-2 comp">
-                        <div class="col-sm-3 p-3 align-items-center text-center bg-success text-white">
-                            4 </div>
-                        <div class="col-sm-9 p-3 align-items-center text-center professionalism-hov">
-                            Professionalism
-                        </div>
-                    </div>
-                    <div class="row bg-light mt-2 comp">
-                        <div class="col-sm-3 p-3 align-items-center text-center bg-danger text-white">
-                            5 </div>
-                        <div class="col-sm-9 p-3 align-items-center text-center equity-hov">Equity
-                            & Inclusion</div>
-                    </div>
-                    <div class="row bg-light mt-2 comp">
-                        <div class="col-sm-3 p-3 align-items-center text-center text-white"
-                            style="background-color: #556B9B;">
-                            6 </div>
-                        <div class="col-sm-9 p-3 align-items-center text-center tech-hov">Technology
-                        </div>
-                    </div>
-                    <div class="row bg-light mt-2 comp">
-                        <div class="col-sm-3 p-3 align-items-center text-center bg-warning text-white">
-                            7 </div>
-                        <div class="col-sm-9 p-3 align-items-center text-center career-hov">Career
-                            &
-                            Self-Development</div>
-                    </div>
-                    <div class="row bg-light mt-2 comp">
-                        <div class="col-sm-3 p-3 align-items-center text-center text-white"
-                            style="background-color: #796258;">
-                            8 </div>
-                        <div class="col-sm-9 p-3 align-items-center text-center leadership-hov">
-                            Leadership
-                        </div>
-                    </div> -->
                 </div>
 
             </div>

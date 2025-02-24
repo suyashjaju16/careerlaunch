@@ -80,8 +80,7 @@ if (is_array($comp_data)) {
         "Technology" => "#556B9B",
         "Equity & Inclusion" => "#ad3131"
     ];
-
-
+    
     // Loop through each category and add the human-readable name, average, and color to the averages array
     foreach ($comp_data as $category => $results) {
         if (isset($results['Average'])) {
