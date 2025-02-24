@@ -197,10 +197,6 @@ $_SESSION["proxy_payload"] = $data;
     <script src="assets/libs/simplebar/simplebar.min.js"></script>
     <script src="assets/libs/node-waves/waves.min.js"></script>
 
-    <!-- morris chart -->
-    <script src="assets/libs/morris.js/morris.min.js"></script>
-    <script src="assets/libs/raphael/raphael.min.js"></script>
-
     <!-- jquery.vectormap map -->
     <script src="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
     <script src="assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-us-merc-en.js"></script>
@@ -219,10 +215,7 @@ $_SESSION["proxy_payload"] = $data;
     <script src="assets/js/pages/materialdesign.init.js"></script>
 
     <!-- App js -->
-    <script src="assets/js/app.js"></script>
-
-    <!-- apexcharts init -->
-    <script src="assets/js/pages/apexcharts.init.js"></script>
+    <!-- <script src="assets/js/app.js"></script> -->
 
     <script src="assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
     <script src="assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
