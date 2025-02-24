@@ -10,7 +10,7 @@ if (isset($_POST['generate_csv'])) {
     header('Cache-Control: no-cache, no-store, must-revalidate');
     header('Pragma: no-cache');
     header('Expires: 0');
-    $data = json_decode(fetch_data(API_STUDENTS_ENDPOINT, $_SESSION["payload"]), true);
+    $data = json_decode(fetch_data(API_CSV_DATA_ENDPOINT, $_SESSION["payload"]), true);
     if ($data === null || empty($data)) {
         header('HTTP/1.1 500 Internal Server Error');
         echo 'Failed to fetch or decode CSV data';
@@ -39,7 +39,7 @@ if (isset($_POST['generate_excel'])) {
     header('Pragma: no-cache');
     header('Expires: 0');
 
-    $data = json_decode(fetch_data(API_STUDENTS_ENDPOINT, $_SESSION["payload"]), true);
+    $data = json_decode(fetch_data(API_CSV_DATA_ENDPOINT, $_SESSION["payload"]), true);
     if ($data === null || empty($data)) {
         header('HTTP/1.1 500 Internal Server Error');
         echo 'Failed to fetch or decode Excel data';
