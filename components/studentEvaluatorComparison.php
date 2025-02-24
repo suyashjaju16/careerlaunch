@@ -73,18 +73,19 @@ if (is_array($comp_data)) {
                     <div class="d-flex"
                         style="writing-mode: vertical-rl;text-orientation: mixed;">
                         <div class="card-title text-black row">
-                            <div class="col-sm-4"><i class="dripicons-arrow-thin-left"></i></div>
+                        <div class="col-sm-4"><h5><i class="dripicons-arrow-thin-left"></i></h5></div>
                             <div class="col-sm-8">
-                                <h5>Lowest</h5>
+                                <h5 style="transform: scale(-1, -1);">Highest</h5>
                             </div>
-                            <!-- <i class="ri-arrow-left-fill">Lowest </i> -->
                         </div>
                         <div class="card-title text-black row">
                             <div class="col-sm-8">
-                                <h5>Highest</h5>
+                                <h5 style="transform: scale(-1, -1);">Lowest</h5>
                             </div>
-                            <div class="col-sm-4"><i class="dripicons-arrow-thin-right"></i></div>
+                            <div class="col-sm-4"><h5><i class="dripicons-arrow-thin-right"></i></h5></div>
+                            <!-- <i class="ri-arrow-left-fill">Lowest </i> -->
                         </div>
+                        
                     </div>
                 </div>
                 <div class="p-4 border border-2" style="border-radius:20px">
