@@ -225,7 +225,12 @@ $_SESSION["proxy_payload"] = $data;
     <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 
     <!-- Datatable init js -->
-    <script src="assets/js/pages/datatables.init.js"></script>
+    <!-- <script src="assets/js/pages/datatables.init.js"></script> -->
+     <script>
+        $(document).ready( function () {
+            $('#datatable').DataTable();
+        } );
+        </script>
 </body>
 
 </html>
