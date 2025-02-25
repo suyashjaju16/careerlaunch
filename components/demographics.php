@@ -366,7 +366,7 @@ function createBarChart(container, question) {
                 formatter: function() {
                     barWidth = this.shapeArgs.width;
                     var max = demographicData[question]["total"];
-                    var color = this.y / max <= 0.5 ? 'black' : 'white'; // 5% width
+                    var color = this.y / max < 0.2 ? 'black' : 'white'; // 5% width
                     // var color = this.point.isInside == true ? 'white' : 'black'; // 5% width
                     perc = Number(((Math.round((this.y / max) * 100) / 100).toFixed(2))) * 100;
                     console.log(this.point.isInside);
