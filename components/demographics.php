@@ -14,19 +14,24 @@ $formattedData = [];
 
 foreach ($dataArray as $question => $details) {
     $formattedData['data'] = []; 
-    
+    $sum = 0;
     foreach ($details['values'] as $index => $value) {
         $formattedData['data'][] = [
             'y' => $value,
             'per' => intval($details['percentages'][$index])
         ];
+        $sum += $value;
     }
     $dataArray[$question]['formatted_data'] = $formattedData['data'];
+    $dataArray[$question]["total"] = $sum;
+    $sum = 0;
 }
 $updatedJson = json_encode($dataArray, JSON_PRETTY_PRINT);
 
 
 $dataArray = json_decode($updatedJson, true);
+
+// echo count($demographicData["what degree/certificate/class year are you currently enrolled?"]["formatted_data"]);
 // echo json_encode($dataArray);
 ?>
 <div class="accordion-item">
@@ -283,7 +288,6 @@ $dataArray = json_decode($updatedJson, true);
     </div>
 </div>
 
-
 <script>
 
 demographicData = <?= json_encode($dataArray)?>;
@@ -327,6 +331,9 @@ const COMMON_CHART_CONFIG = {
 };
 
 function createBarChart(container, question) {
+    
+    // const total =
+    // alert(total);
     Highcharts.chart(container, {
         ...COMMON_CHART_CONFIG,
         title: {
@@ -345,7 +352,10 @@ function createBarChart(container, question) {
             min: 0,
             title: {
                 text: 'Responses'
-            }
+            },
+            max : demographicData[question]["total"],
+            maxPadding: 0,
+            endOnTick: false
         },
         series: [{
             name: 'Responses',
@@ -354,9 +364,13 @@ function createBarChart(container, question) {
                 inside: false,
                 floating: true,
                 formatter: function() {
-                    var max = this.series.yAxis.max;
-                    var color = this.y / max <= 0.1 ? 'black' : 'white'; // 5% width
-                    perc = ((this.y / max).toFixed(2)) * 100;
+                    barWidth = this.shapeArgs.width;
+                    var max = demographicData[question]["total"];
+                    var color = this.y / max <= 0.5 ? 'black' : 'white'; // 5% width
+                    // var color = this.point.isInside == true ? 'white' : 'black'; // 5% width
+                    perc = Number(((Math.round((this.y / max) * 100) / 100).toFixed(2))) * 100;
+                    console.log(this.point.isInside);
+
                     return '<span style="color: ' + color + '">' + this.y + ' (' + perc +
                         '%)</span>';
                 },
@@ -366,6 +380,7 @@ function createBarChart(container, question) {
         }]
     });
 }
+
 
 function renderCharts() {
     const barChartQuestions = {
@@ -443,5 +458,4 @@ function renderDonutCharts() {
 }
 
 renderDonutCharts()
-
 </script>

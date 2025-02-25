@@ -137,10 +137,10 @@ $demographics = $allfilters["demographicGroups"];
             <div class="container-fluid">
                 <!-- KPI Row Start -->
                <?php 
-                if($_POST['implementation_time'] == "prepost")
-                include("components/kpiPrePost.php"); 
-                else if($_POST['implementation_time'] == "evaluatorstudent")
-                include("components/kpiStudentEval.php"); 
+                if($_POST['implementation_time'] == "prepost" || $selected_values["implementation_time"] == "prepost")
+                    include("components/kpiPrePost.php"); 
+                else if($_POST['implementation_time'] == "evaluatorstudent" || $selected_values["implementation_time"] == "evaluatorstudent")
+                    include("components/kpiStudentEval.php"); 
                 else
                 include("components/kpi.php"); 
                 ?>
@@ -456,7 +456,7 @@ $demographics = $allfilters["demographicGroups"];
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
-<div id="content">
+        <div id="content">
                 <?php
                 if($_POST['implementation_time'] == "prepost"){
                     include("components/prepost.php");
