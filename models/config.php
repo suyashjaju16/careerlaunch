@@ -65,6 +65,9 @@ define('API_STUDENT_EVAL_KPI_ENDPOINT', API_BASE_URL . '/student-evaluator-summa
 define('API_STUDENT_EVAL_ENDPOINT', API_BASE_URL . '/student-evaluator-competency');
 define('API_STUDENT_EVAL_QUESTIONS_ENDPOINT', API_BASE_URL . '/student-evaluator-questions');
 define('API_CSV_DATA_ENDPOINT', API_BASE_URL . '/mock-api-2');
+define('API_SOCIAL_CAPITAL_BAR_ENDPOINT', API_BASE_URL . '/social-capital-bars');
+define('API_SOCIAL_CAPITAL_PIE_ENDPOINT', API_BASE_URL . '/social-capital-pie');
+define('API_LIFE_DESIGN_ENDPOINT', API_BASE_URL . '/life-design');
 
 // AWS Configuration
 define('AWS_REGION', 'us-west-2');

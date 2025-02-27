@@ -123,7 +123,7 @@ $demographics = $allfilters["demographicGroups"];
 <!doctype html>
 <html lang="en">
 
-<body style="background-color:#dadadd59">
+<body style="background-color:#e7e7e7">
     <?php include("includes/header.php"); ?>
     <!-- Begin page -->
     <div id="layout-wrapper">
@@ -476,7 +476,7 @@ $demographics = $allfilters["demographicGroups"];
                             </div>
                         </div>
                         <div class='col-sm-4 text-center align-content-center'>
-                            <h2> <b>NO DATA FOUND! </b></h2>
+                            <h2> <b>No Data Available! </b></h2>
                         </div>
                         </div>
                         </div>

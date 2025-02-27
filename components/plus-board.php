@@ -1,6 +1,6 @@
 <?php 
 // include("./models/config.php");
-include("./models/plus/social-capital-bar.php");
+// include("./models/plus/social-capital-bar.php");
 
 function dataformatter($data){
     $dataArray = json_decode($data, true);
@@ -22,9 +22,12 @@ function dataformatter($data){
     return json_decode($updatedJson, true);
 }
 
+$social_capital_bars = fetch_data(API_SOCIAL_CAPITAL_BAR_ENDPOINT,$data);
 $social_bars_data = dataformatter($social_capital_bars);
+// echo "<pre>".json_encode($social_bars_data)."</pre>";
 
 include("./models/plus/life-design.php");
+$life_design = fetch_data(API_LIFE_DESIGN_ENDPOINT,$data);
 $life_design_data = dataformatter($life_design);
 
 include("./models/plus/career-mobility-bars.php");
@@ -42,11 +45,8 @@ include("./models/plus/social-capital-pie.php");
 
 // Access specific nested keys
 // $category = json_encode($data);
-// echo $social_capital_pie;
-
-$social_pie_data = json_decode($social_capital_pie, true);
-
-// echo json_encode($social_pie_data['I have proactively asked family members (other than parents/guardians) and friends about their job or career.']['Family Members (Choose Below)']['values']);
+// echo $social_capital_pie;`
+$social_pie_data = json_decode(fetch_data(API_SOCIAL_CAPITAL_PIE_ENDPOINT,$data),true);
 
 // Function to get values and labels for a specified key
 function getValuesOrLabelsInJson($mainKey, $subKey, $type) {

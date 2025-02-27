@@ -325,7 +325,8 @@ const COMMON_CHART_CONFIG = {
         backgroundColor: '#000033',
         style: {
             fontSize: '6px',
-            fontFamily: 'Mulish, sans-serif'
+            fontFamily: 'Mulish, sans-serif',
+            textOutline: 'none'
         },
     }
 };
@@ -371,8 +372,8 @@ function createBarChart(container, question) {
                     perc = Number(((Math.round((this.y / max) * 100) / 100).toFixed(2))) * 100;
                     console.log(this.point.isInside);
 
-                    return '<span style="color: ' + color + '">' + this.y + ' (' + perc +
-                        '%)</span>';
+                    return '<span style="color: ' + color + '">' + perc + '% (' + this.y +
+                        ')</span>';
                 },
             }],
             data: demographicData[question]["formatted_data"],

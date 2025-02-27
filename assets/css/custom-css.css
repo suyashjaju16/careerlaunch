@@ -662,3 +662,7 @@ select {
 .disable-events{
 	pointer-events: none!important;
 }
+
+.highcharts-text-outline{
+	display: none!important;
+}

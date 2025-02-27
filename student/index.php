@@ -27,7 +27,7 @@ $selected_filter = isset($_POST['filterData']) ? $_POST['filterData'] : '';
 
 <?php include("./components/header.php") ?>
 
-<body>
+<body style="background-color: #e7e7e7!important;">
 
     <!-- Begin page -->
     <div id="layout-wrapper">

@@ -29,7 +29,7 @@
                     <div class="text-center my-5">
                         <img src="assets/images/maintenance-bg.png" alt="error-img" class="error-img">
                         </h1>
-                        <h3 class="text-uppercase">Sorry, No data found for this university</h3>
+                        <h3 class="text-uppercase">Sorry, No data available</h3>
                         <!-- <div class="mt-5 text-center">
                                 <a class="btn btn-primary waves-effect waves-light" href="index.html">Back to Dashboard</a>
                             </div> -->

@@ -12,7 +12,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 100px;">
+        <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent" style="margin-left: 100px;">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item card">
                     <div class="card-body py-1">
@@ -28,6 +28,17 @@
                     </div>
                 </li>
             </ul>
+
+            <div class="px-3">
+                <center>
+                    <h5 class="text-white"> 
+                        <?php if(isset($selected_values["use_case_id"]) && $selected_values["use_case_id"]!="" ){ echo $selected_values["use_case_id"];}  else{ echo "All Cohorts";} ?> 
+                    </h5>
+                    <h5 class="text-white"> 
+                        <?php if(isset($selected_values["semester"])){ echo $selected_values["semester"];} ?> 
+                    </h5>
+            </center>
+            </div>
             <select class="form-select bg-light" style="width:20%;margin-left:45%;display:none">
                 <option> All </option>
                 <option selected>This Week</option>
