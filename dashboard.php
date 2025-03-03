@@ -187,13 +187,27 @@ $demographics = $allfilters["demographicGroups"];
                             <h5 class="text-white mb-2" style="font-size:20px">Implementation Type</h5><br>
                             <select id="implementation_type" name="implementation_type" class="dynamic-dropdown form-select select-light"
                                 style="border-radius: 20px;" <?= INVENTORY ? "disabled" : "" ?>>
-                                <option value=""><?= INVENTORY ? ucfirst($_GET['inventory']) : "All Types with Pre/Post" ?>
-                                </option>
-                                <?php foreach($implementation_type as $key=>$value): ?>
-                                <option value="<?= $key ?>"
-                                    <?= $selected_values['implementation_type'] === $key ? 'selected' : ''; ?>>
-                                    <?= ucwords($value) ?></option>
-                                <?php endforeach; ?>
+                                <?php 
+                                foreach ($implementation_type as $key => $value): 
+                                    if(!$general_exists){
+                                ?>
+                                <option value=""><?= INVENTORY ? ucfirst($_GET['inventory']) : "All Types with Pre/Post" ?></option>
+                                <?php } ?>
+                                    <option value="<?= $key ?>" <?= $selected_values['implementation_type'] === $key ? 'selected' : ''; ?>>
+                                        <?= ucwords($value) ?>
+                                    </option>
+                                    
+                                    <?php 
+                                    // If the current value is "general", insert the extra option right after it
+                                    if (strtolower($value) === "general"): 
+                                    ?>
+                                        <option value=""><?= INVENTORY ? ucfirst($_GET['inventory']) : "All Types with Pre/Post" ?></option>
+                                    <?php 
+                                    endif; 
+                                endforeach; 
+                                ?>
+
+
                             </select>
                             <div class="d-flex">
                                 <div class="col-sm-6">
