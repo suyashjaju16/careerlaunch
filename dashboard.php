@@ -39,12 +39,12 @@ if($_SESSION["proxy_payload"]){
 // echo "<pre>".json_encode($selected_values)."</pre>";
 
 
-if($_POST['implementation_time'] == "prepost")
-$kpi_data = json_decode(fetch_data(API_PREPOST_KPI_ENDPOINT,$data),true);
-else if($_POST['implementation_time'] == "evaluatorstudent")
-$kpi_data = json_decode(fetch_data(API_STUDENT_EVAL_KPI_ENDPOINT,$data),true);
+if($_POST['implementation_time'] == "prepost" ||  $selected_values["implementation_time"] == "prepost")
+    $kpi_data = json_decode(fetch_data(API_PREPOST_KPI_ENDPOINT,$data),true);
+else if($_POST['implementation_time'] == "evaluatorstudent" || $selected_values["implementation_time"] == "evaluatorstudent")
+    $kpi_data = json_decode(fetch_data(API_STUDENT_EVAL_KPI_ENDPOINT,$data),true);
 else 
-$kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
+    $kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
 
 // echo json_encode($data);
 // Get Compentency Data
@@ -458,10 +458,10 @@ $demographics = $allfilters["demographicGroups"];
                 </div><!-- /.modal -->
         <div id="content">
                 <?php
-                if($_POST['implementation_time'] == "prepost"){
+                if($_POST['implementation_time'] == "prepost" || $selected_values["implementation_time"] == "prepost"){
                     include("components/prepost.php");
                 }
-                else if($_POST['implementation_time'] == "evaluatorstudent"){
+                else if($_POST['implementation_time'] == "evaluatorstudent" || $selected_values["implementation_time"] == "evaluatorstudent"){
                     include("components/studentEval.php");
                 }
                 else{
