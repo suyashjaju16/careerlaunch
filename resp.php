@@ -1,12 +1,23 @@
 <?php 
 session_start();
 error_reporting(E_ALL);
-ini_set('display_errors', '0');
+ini_set('display_errors', '1');
 include("./models/config.php");
 include("./functions/generate_csv.php");
 
 $data = $_SESSION["payload"];
-$kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
+// $kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
+
+$implementation_time = $data->filters->implementation_time;
+
+if($implementation_time == "prepost")
+    $kpi_data = json_decode(fetch_data(API_PREPOST_KPI_ENDPOINT,$data),true);
+else if($implementation_time == "evaluatorstudent")
+    $kpi_data = json_decode(fetch_data(API_STUDENT_EVAL_KPI_ENDPOINT,$data),true);
+else 
+    $kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
+
+// echo json_encode($kpi_data);
 $_SESSION["org_name"] = $kpi_data['org_name'];
 $_SESSION["proxy_payload"] = $data;
 ?>
@@ -136,7 +147,16 @@ $_SESSION["proxy_payload"] = $data;
             <div class="page-content" style="padding-top: 27px!important;">
                 <div class="container-fluid">
                     <!-- KPI Row Start -->
-                    <?php include("components/kpi.php"); ?>
+
+
+                    <?php
+                    if($implementation_time == "prepost")
+                        include("components/kpiPrePost.php");
+                    else if($implementation_time == "evaluatorstudent")
+                        include("components/kpiStudentEval.php");
+                    else 
+                        include("components/kpi.php");
+                    ?>
                     <!-- KPI Row End -->
 
                     <div class="card" style="border-radius:20px">
