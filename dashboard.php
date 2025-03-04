@@ -519,10 +519,10 @@ $demographics = $allfilters["demographicGroups"];
                             include("components/workexperience.php");
                     }
 
-                    if(isset($_POST['implementation_time'])){
+                    // if(isset($_POST['implementation_time'])){
                         if($_POST['implementation_time'] != "prepost")
                             include("components/demographics.php");
-                    }
+                    // }
                     // include("components/demographics.php");
                     ?>
                 </div>
