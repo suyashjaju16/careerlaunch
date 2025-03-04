@@ -426,6 +426,7 @@ function generate_competency($level,$color) {
          </div>
      </div>
  </div>
+ </div>
  <!-- end row -->
 
  <?php include("./components/studentEvaluatorComparison.php") ?>
