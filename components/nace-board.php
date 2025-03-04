@@ -1263,17 +1263,4 @@ function renderCompetencyQuestion($categoryName, $categoryData) {
             </div>
         </div>
     </div>
-
-    <div class="accordion mb-3" id="accordionWork">
-        <?php 
-                    if(isset($_POST['implementation_type'])){
-                        if($_POST['implementation_type'] == "work-exp")
-                            include("components/workexperience.php");
-                    }
-
-                        
-
-                    include("components/demographics.php");
-                   ?>
-    </div>
 </div>

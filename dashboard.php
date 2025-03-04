@@ -499,12 +499,7 @@ $demographics = $allfilters["demographicGroups"];
                     else{
                         // echo json_encode($_POST);
                         if(isset($_POST['implementation_time']) || isset($_POST['data_type'])){
-                            
-                            if($_POST['implementation_time'] == "prepost")
-                                include("components/prepost.php");
-                            else if($_POST['implementation_time'] == "eval")
-                                include("components/student_eval.php");
-                            else if($_POST['data_type'] == "")
+                            if($_POST['data_type'] == "")
                                 include("components/nace-board.php");
                             else if($_POST['data_type'] == "plus"){
                                 include("components/plus-board.php");
@@ -516,6 +511,22 @@ $demographics = $allfilters["demographicGroups"];
                     }
                 }
                 ?>
+
+                <div class="accordion mb-3" id="accordionWork">
+                <?php 
+                    if(isset($_POST['implementation_type'])){
+                        if($_POST['implementation_type'] == "work-exp")
+                            include("components/workexperience.php");
+                    }
+
+                    if(isset($_POST['implementation_time'])){
+                        if($_POST['implementation_time'] != "prepost")
+                            include("components/demographics.php");
+                    }
+                    // include("components/demographics.php");
+                    ?>
+                </div>
+
                 <!-- <?php
                 if($_POST['data_type'] == "plus")
                     include("cplus-board.php");
