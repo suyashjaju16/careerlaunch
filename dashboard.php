@@ -158,8 +158,7 @@ $demographics = $allfilters["demographicGroups"];
                             <h5 class="mb-2 text-white" style="font-size:20px">Data Type</h5><br>
                             <select id="inventory_version" name="data_type" class="dynamic-dropdown form-select select-light" style="border-radius: 20px;">
                                 <option value="" <?= $selected_values['data_type'] === '' ? 'selected' : ''; ?>>
-                                    NACE Career
-                                    Readiness Competencies</option>
+                                    NACE Competencies</option>
                                     <?php if($plus_exists){?>
                                 <option value="plus" <?= $selected_values['data_type'] === 'plus' ? 'selected' : ''; ?>>
                                     Social
