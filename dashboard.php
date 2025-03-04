@@ -112,6 +112,11 @@ $allfilters = json_decode(fetch_data(API_ALL_DROPDOWNS_ENDPOINT,$data),true);
 // echo json_encode($data);
 // echo json_encode($allfilters);
 
+if (isset($allfilters["inventoryVersions"]["plus"]))
+    $plus_exists = true;
+else 
+    $plus_exists = false;
+
 $implementation_time = $allfilters["implementationTimes"];
 $implementation_type = $allfilters["implementationTypes"];
 $version = $allfilters["inventoryVersions"];
@@ -155,9 +160,11 @@ $demographics = $allfilters["demographicGroups"];
                                 <option value="" <?= $selected_values['data_type'] === '' ? 'selected' : ''; ?>>
                                     NACE Career
                                     Readiness Competencies</option>
+                                    <?php if($plus_exists){?>
                                 <option value="plus" <?= $selected_values['data_type'] === 'plus' ? 'selected' : ''; ?>>
                                     Social
                                     Capital + Life Design + Career Mobility </option>
+                                    <?php } ?>
                             </select>
                             <select id="implementation_time" name="implementation_time"
                                     class="dynamic-dropdown form-select select-light mt-3" style="border-radius: 20px;">
