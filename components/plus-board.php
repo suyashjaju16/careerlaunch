@@ -31,10 +31,11 @@ $life_design = fetch_data(API_LIFE_DESIGN_ENDPOINT,$data);
 $life_design_data = dataformatter($life_design);
 
 include("./models/plus/career-mobility-bars.php");
+$career_mobility_bars  =  fetch_data(API_CAREER_MOBILITY_BAR_ENDPOINT,$data);
 $career_mobility_data = dataformatter($career_mobility_bars);
 // echo "<hr>";
 include("./models/plus/career-mobility-pie.php");
-$career_mobility_pie_data = dataformatter($career_mobility_pie);
+$career_mobility_pie_data = json_decode(fetch_data(API_CAREER_MOBILITY_PIE_ENDPOINT,$data),true);
 // echo json_encode($career_mobility_data);
 // echo json_encode($career_mobility_pie_data['Career Counselor (Choose Below)'],JSON_PRETTY_PRINT);
 
@@ -251,46 +252,46 @@ function getValuesOrLabelsInJson($mainKey, $subKey, $type) {
                             </div>
 
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 d-flex flex-fill">
                                     <div class="card border-2">
                                         <div class="card-body">
-                                            <!-- <h6>Which of the following best represent your program or
-                                                                area of study?</h6> -->
+                                            <h6 class="pie-text">Which of the following best represent your program or
+                                                                area of study?</h6>
                                             <div id="social_chart5" class="apex-charts" dir="ltr" style="height:300px">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 d-flex flex-fill">
                                     <div class="card border-2">
                                         <div class="card-body">
-                                            <!-- <h6>Which of the following best represent your program or
-                                                                area of study?</h6> -->
+                                            <h6 class="pie-text">Which of the following best represent your program or
+                                                                area of study?</h6>
                                             <div id="social_chart6" class="apex-charts" dir="ltr" style="height:300px">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 d-flex flex-fill">
                                     <div class="card border-2">
                                         <div class="card-body">
-                                            <!-- <h6>I have proactively asked to have a career
+                                            <h6 class="pie-text">I have proactively asked to have a career
                                                                 conversation with a professional at an
-                                                                organization I’m interested in working for.</h6> -->
+                                                                organization I’m interested in working for.</h6>
                                             <div id="social_chart7" class="apex-charts" dir="ltr" style="height:300px">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 d-flex flex-fill">
                                     <div class="card border-2">
                                         <div class="card-body">
-                                            <!-- <h6>I have proactively asked someone I know to introduce me
+                                            <h6 class="pie-text">I have proactively asked someone I know to introduce me
                                                                 to someone they know so I can talk to them to learn
-                                                                about their career.</h6> -->
+                                                                about their career.</h6>
                                             <div id="social_chart8" class="apex-charts" dir="ltr" style="height:300px">
                                             </div>
                                         </div>
@@ -332,73 +333,73 @@ function getValuesOrLabelsInJson($mainKey, $subKey, $type) {
                     <div class="col-sm-12">
                         <div class="row p-4">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 d-flex flex-fill">
                                     <div class="card border-2">
                                         <div class="card-body">
-                                            <!-- <h6>When things don't go the way I had envisioned or
+                                            <h6 class="pie-text">When things don't go the way I had envisioned or
                                                                 when I encounter a setback, I recognize that the
                                                                 setback is an opportunity to learn and grow,
-                                                                rather than a “mistake."?</h6> -->
+                                                                rather than a “mistake."?</h6>
                                             <div id="life_chart1" class="apex-charts" dir="ltr" style="height:300px">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 d-flex flex-fill">
                                     <div class="card border-2">
                                         <div class="card-body">
-                                            <!-- <h6>When I feel stuck in life, I reach out to others
+                                            <h6 class="pie-text">When I feel stuck in life, I reach out to others
                                                                 who help me uncover new solutions or ways of
-                                                                thinking about the situation.</h6> -->
+                                                                thinking about the situation.</h6>
                                             <div id="life_chart2" class="apex-charts" dir="ltr" style="height:300px">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 d-flex flex-fill">
                                     <div class="card border-2">
                                         <div class="card-body">
-                                            <!-- <h6>When I feel stuck in regards to my career plans, I
+                                            <h6 class="pie-text">When I feel stuck in regards to my career plans, I
                                                                 have strategies I use to help me move forward
                                                                 (become “unstuck”).
-                                                            </h6> -->
+                                                            </h6>
                                             <div id="life_chart3" class="apex-charts" dir="ltr" style="height:300px">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 d-flex flex-fill">
                                     <div class="card border-2">
                                         <div class="card-body">
-                                            <!-- <h6>I think taking measured risks and learning to
+                                            <h6 class="pie-text">I think taking measured risks and learning to
                                                                 embrace failure is important in my career
-                                                                success.</h6> -->
+                                                                success.</h6>
                                             <div id="life_chart4" class="apex-charts" dir="ltr" style="height:300px">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 d-flex flex-fill">
                                     <div class="card border-2">
                                         <div class="card-body">
-                                            <!-- <h6>I have the tools I need to build a happy,
-                                                                meaningful, and successful life.</h6> -->
+                                            <h6 class="pie-text">I have the tools I need to build a happy,
+                                                                meaningful, and successful life.</h6>
                                             <div id="life_chart5" class="apex-charts" dir="ltr" style="height:300px">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 d-flex flex-fill">
                                     <div class="card border-2">
                                         <div class="card-body">
-                                            <!-- <h6>I often try to look at problems from different
+                                            <h6 class="pie-text">I often try to look at problems from different
                                                                 perspectives to find new ways to move forward.
-                                                            </h6> -->
+                                                            </h6>
                                             <div id="life_chart6" class="apex-charts" dir="ltr" style="height:300px">
                                             </div>
                                         </div>
@@ -442,7 +443,7 @@ function getValuesOrLabelsInJson($mainKey, $subKey, $type) {
                             <div class="p-3">
                                 <div class="card-title">
                                     <text class="highcharts-title"
-                                        style="font-size: 19.2px; color: rgb(51, 51, 51); font-weight: bold; fill: rgb(51, 51, 51);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji"">
+                                        style="font-size: 19.2px; color: rgb(51, 51, 51); font-weight: bold; fill: rgb(51, 51, 51);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji">
                                                         I have received helpful career
                                                         advice from a faculty member,
                                                         career
@@ -525,12 +526,12 @@ function getValuesOrLabelsInJson($mainKey, $subKey, $type) {
                         <div class="col-sm-12">
                             <div class="row p-4">
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 d-flex flex-fill">
                                         <div class="card border-2">
                                             <div class="card-body">
-                                                <!-- <h6>My college/university has helped me build
+                                                <h6 class="pie-text">My college/university has helped me build
                                                                     relationships with employers.
-                                                                </h6> -->
+                                                                </h6>
                                                 <div id="career_chart4" class="apex-charts" dir="ltr"
                                                     style="height:300px">
                                                 </div>
@@ -538,14 +539,14 @@ function getValuesOrLabelsInJson($mainKey, $subKey, $type) {
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 d-flex flex-fill">
                                         <div class="card border-2">
                                             <div class="card-body">
-                                                <!-- <h6>I have completed at least one experience
+                                                <h6 class="pie-text">I have completed at least one experience
                                                                     working in an environment similar to my career
                                                                     interests (internship, research position, part-
                                                                     time job, significant volunteering).
-                                                                </h6> -->
+                                                                </h6>
                                                 <div id="career_chart5" class="apex-charts" dir="ltr"
                                                     style="height:300px">
                                                 </div>
@@ -553,12 +554,12 @@ function getValuesOrLabelsInJson($mainKey, $subKey, $type) {
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 d-flex flex-fill">
                                         <div class="card border-2">
                                             <div class="card-body">
-                                                <!-- <h6>I have created career plans with guidance from a
+                                                <h6 class="pie-text">I have created career plans with guidance from a
                                                                     staff or faculty member at my college.
-                                                                </h6> -->
+                                                                </h6>
                                                 <div id="career_chart6" class="apex-charts" dir="ltr"
                                                     style="height:300px">
                                                 </div>
@@ -566,14 +567,14 @@ function getValuesOrLabelsInJson($mainKey, $subKey, $type) {
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 d-flex flex-fill">
                                         <div class="card border-2">
                                             <div class="card-body">
-                                                <!-- <h6>I have received feedback on my resume, and I
+                                                <h6 class="pie-text">I have received feedback on my resume, and I
                                                                     am confident that it effectively showcases my
                                                                     candidacy (from counselors, professionals
                                                                     and/or my school's resume software provider).
-                                                                </h6> -->
+                                                                </h6>
                                                 <div id="career_chart7" class="apex-charts" dir="ltr"
                                                     style="height:300px">
                                                 </div>
@@ -581,13 +582,13 @@ function getValuesOrLabelsInJson($mainKey, $subKey, $type) {
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 d-flex flex-fill">
                                         <div class="card border-2">
                                             <div class="card-body">
-                                                <!-- <h6>I feel prepared to land internships, jobs, or
+                                                <h6 class="pie-text">I feel prepared to land internships, jobs, or
                                                                     research positions that have not been posted
                                                                     online.
-                                                                </h6> -->
+                                                                </h6>
                                                 <div id="career_chart8" class="apex-charts" dir="ltr"
                                                     style="height:300px">
                                                 </div>

@@ -3754,14 +3754,9 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before {
   font-size: 13px !important;
 }
 
-.apexcharts-pie-label {
-  fill: #fff !important;
-}
-
 .apexcharts-yaxis text,
 .apexcharts-xaxis text {
   font-family: var(--bs-font-sans-serif) !important;
-  fill: #adb5bd;
 }
 
 .morris-charts text {

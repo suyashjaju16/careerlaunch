@@ -100,8 +100,8 @@ $work_data = json_decode(fetch_data(API_WORKEXP_ENDPOINT,$data),true);
                                  </div>
 
                                  <div class="col-sm-8 pb-3">
-                                     <div id="workexpchart2" class="apex-charts" dir="ltr"
-                                         style="height:200px;margin-top:-50px"></div>
+                                     <div id="workexpchart2" class="apex-charts label-dark" dir="ltr"
+                                         style="height:200px;margin-top:-50px;"></div>
                                  </div>
                              </div>
 
@@ -174,7 +174,6 @@ var options = {
         customLegendItems: [],
         offsetX: 0,
         offsetY: 0,
-
         labels: {
             colors: undefined,
             useSeriesColors: false
@@ -225,18 +224,21 @@ var options = {
     series: <?= json_encode($work_data['Pay Status']['percentages']) ?>,
     chart: {
         type: 'donut',
-        height: 200,
+        height: 200
+    },
+    dataLabels: {
+        enabled: true, // Ensuring data labels are visible
         style: {
-            colors: ['#000000'],
+            colors: ['#fff',] // Setting data label text color to black
         }
     },
     plotOptions: {
         pie: {
             dataLabels: {
-                offset: 25,
+                offset: 25, // Adjust label positioning
                 style: {
-                    colors: ['#000000'],
-                },
+                    colors: ['#fff'] // Ensure black color is applied
+                }
             }
         }
     },
@@ -244,8 +246,12 @@ var options = {
         show: false
     },
     labels: <?= json_encode($work_data['Pay Status']['labels']) ?>,
-    formatter: function(val) {
-        return val + "%"
+    tooltip: {
+        y: {
+            formatter: function(val) {
+                return val + "%"; // Moved inside tooltip where it belongs
+            }
+        }
     },
     responsive: [{
         breakpoint: 480,
@@ -264,6 +270,7 @@ var chart = new ApexCharts(document.querySelector("#workexpchart2"), options);
 chart.render();
 
 
+
 var options = {
     series: <?= json_encode($work_data['Academic Credit']['percentages']) ?>,
     chart: {
@@ -280,7 +287,7 @@ var options = {
     plotOptions: {
         pie: {
             dataLabels: {
-                offset: 40,
+                offset: 25,
                 style: {
                     colors: ['#000000'],
                 },

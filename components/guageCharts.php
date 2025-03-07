@@ -185,25 +185,38 @@
 function setEmergingGaugeValue(percentage) {
     const gauge = document.getElementById('gauge-emerging-foreground');
     const text = document.getElementById('gauge-emerging-percentage');
-
-    // Ensure percentage is between 0 and 100
     percentage = Math.max(0, Math.min(percentage, 100));
 
-    // Calculate stroke-dasharray value
-    const dashArrayValue = (percentage * 100) / 100;
-    // Set the strokeDasharray and update the text content
-    gauge.style.strokeDasharray = `${dashArrayValue + 7}, 100`;
+    let dashArrayValue = (percentage * 100) / 100;
+
+    // Special handling for 0% and 100%
+    if (percentage === 0) {
+        gauge.style.strokeDasharray = `0, 1000`;  // A small arc for 0%
+    } else if (percentage === 100) {
+        gauge.style.strokeDasharray = `0, 1`;  // Full gauge fill
+    } else {
+        gauge.style.strokeDasharray = `${dashArrayValue+6}, 100`;  // Dynamic gauge fill
+    }
     text.textContent = `${percentage}%`;
 }
-
 setEmergingGaugeValue(<?= intval($comp_data['overall_career_readiness_results']['Emerging Knowledge'][0]) ?>);
-// setEmergingGaugeValue(0);
+// setEmergingGaugeValue(75);
 
 function setUnderstandingGaugeValue(percentage) {
     const gauge = document.getElementById('gauge-understanding-foreground');
     const text = document.getElementById('gauge-understanding-percentage');
-    const offset = ((100 - percentage) / 100) * 100;
-    gauge.style.strokeDasharray = `${percentage+7}, 100`;
+    percentage = Math.max(0, Math.min(percentage, 100));  // Ensuring the percentage is between 0 and 100
+
+    let dashArrayValue = (percentage * 100) / 100;
+
+    // Special handling for 0% and 100%
+    if (percentage === 0) {
+        gauge.style.strokeDasharray = `0, 1000`;  // A small arc for 0%
+    } else if (percentage === 100) {
+        gauge.style.strokeDasharray = `0, 1`;  // Full gauge fill
+    } else {
+        gauge.style.strokeDasharray = `${dashArrayValue+6}, 100`;  // Dynamic gauge fill
+    }
     text.textContent = `${percentage}%`;
 }
 
@@ -212,8 +225,18 @@ setUnderstandingGaugeValue(<?= intval($comp_data['overall_career_readiness_resul
 function setEarlyGaugeValue(percentage) {
     const gauge = document.getElementById('gauge-early-foreground');
     const text = document.getElementById('gauge-early-percentage');
-    const offset = ((100 - percentage) / 100) * 100;
-    gauge.style.strokeDasharray = `${percentage+7}, 100`;
+    percentage = Math.max(0, Math.min(percentage, 100));  // Ensuring the percentage is between 0 and 100
+
+    let dashArrayValue = (percentage * 100) / 100;
+
+    // Special handling for 0% and 100%
+    if (percentage === 0) {
+        gauge.style.strokeDasharray = `0, 1000`;  // A small arc for 0%
+    } else if (percentage === 100) {
+        gauge.style.strokeDasharray = `0, 1`;  // Full gauge fill
+    } else {
+        gauge.style.strokeDasharray = `${dashArrayValue+6}, 100`;  // Dynamic gauge fill
+    }
     text.textContent = `${percentage}%`;
 }
 
@@ -222,8 +245,18 @@ setEarlyGaugeValue(<?= intval($comp_data['overall_career_readiness_results']['Ea
 function setAdvancedGaugeValue(percentage) {
     const gauge = document.getElementById('gauge-advanced-foreground');
     const text = document.getElementById('gauge-advanced-percentage');
-    const offset = ((100 - percentage) / 100) * 100;
-    gauge.style.strokeDasharray = `${percentage+7}, 100`;
+    percentage = Math.max(0, Math.min(percentage, 100));  // Ensuring the percentage is between 0 and 100
+
+    let dashArrayValue = (percentage * 100) / 100;
+
+    // Special handling for 0% and 100%
+    if (percentage === 0) {
+        gauge.style.strokeDasharray = `0, 1000`;  // A small arc for 0%
+    } else if (percentage === 100) {
+        gauge.style.strokeDasharray = `0, 1`;  // Full gauge fill
+    } else {
+        gauge.style.strokeDasharray = `${dashArrayValue+6}, 100`;  // Dynamic gauge fill
+    }
     text.textContent = `${percentage}%`;
 }
 

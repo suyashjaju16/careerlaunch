@@ -10,6 +10,7 @@
     <link rel="shortcut icon" href="assets/images/favicon.ico">
     <!-- Icons Css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     <!-- Bootstrap Css -->
@@ -27,4 +28,17 @@
         rel="stylesheet">
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="assets/libs/jquery/jquery.min.js"></script>
+    <style>
+        .apexcharts-pie-label{
+            fill: white!important;
+        }
+
+        #workexpchart2 .apexcharts-text, #chart1 .apexcharts-datalabel text {
+            fill: black !important;  /* Set to white for this chart */
+        }
+
+        #workexpchart3 .apexcharts-text, #chart1 .apexcharts-datalabel text {
+            fill: black !important;  /* Set to white for this chart */
+        }
+    </style>
 </head>
