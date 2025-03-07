@@ -29,7 +29,7 @@ $is_pre_post = $data->filters->implementation_time === "prepost" ? true : false;
             <td> <?= $name[0] ?> </td>
             <td> <?= $name[1] ?> </td>
             <td> <?= $values["Email"] ?> </td>
-            <?= $is_pre_post ? "<td>".$values["Type"]."</td>" : "";?>
+            <?= $is_pre_post ? "<td>".$values["type"]."</td>" : "";?>
             <td>
                 <center> <?= round($values["Score"],0) ?> <center>
             </td>

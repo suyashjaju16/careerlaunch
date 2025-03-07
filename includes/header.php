@@ -35,10 +35,16 @@
 
         #workexpchart2 .apexcharts-text, #chart1 .apexcharts-datalabel text {
             fill: black !important;  /* Set to white for this chart */
+            filter : unset!important;
         }
 
         #workexpchart3 .apexcharts-text, #chart1 .apexcharts-datalabel text {
             fill: black !important;  /* Set to white for this chart */
+            filter : unset!important;
         }
+
+        .apexcharts-legend-text{
+	color: black!important;
+}
     </style>
 </head>

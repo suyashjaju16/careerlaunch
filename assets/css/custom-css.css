@@ -666,3 +666,8 @@ select {
 .highcharts-text-outline{
 	display: none!important;
 }
+
+.bg-dark{
+	background-color: #000!important;
+}
+

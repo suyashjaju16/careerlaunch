@@ -726,6 +726,7 @@ $demographics = $allfilters["demographicGroups"];
     }
 
     $(".dynamic-dropdown").on("change", function () {
+        // alert("Changed")
         let changedDropdown = $(this).attr("id");
 
         if (changedDropdown === "implementation_type") {

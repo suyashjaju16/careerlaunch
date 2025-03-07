@@ -6,8 +6,8 @@ include("./models/config.php");
 include("./functions/generate_csv.php");
 
 $data = $_SESSION["payload"];
-// $kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
 
+// $kpi_data = json_decode(fetch_data(API_KPI_ENDPOINT,$data),true);
 $implementation_time = $data->filters->implementation_time;
 
 if($implementation_time == "prepost")

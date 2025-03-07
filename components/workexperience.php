@@ -18,7 +18,7 @@ $work_data = json_decode(fetch_data(API_WORKEXP_ENDPOINT,$data),true);
                      <div class="card border-2" style="height:720px">
                          <div class="card-body">
                              <div class="card-title">
-                                 <h6 style="font-size:18px">Experiential
+                                 <h6 class="text-black" style="font-size:18px">Experiential
                                      Learning Type</h6>
                              </div>
                              <div id="workexpchart1" class="apex-charts mt-5" dir="ltr" style="height:630px;"></div>
@@ -30,39 +30,39 @@ $work_data = json_decode(fetch_data(API_WORKEXP_ENDPOINT,$data),true);
                          <div class="">
                              <div class="row mt-3">
                                  <div class="col-sm-12 py-2">
-                                     <table class="table table-striped" style="line-height:220%;text-align:center">
+                                     <table class="table table-striped" style="line-height:220%;text-align:center;">
                                          <thead>
                                              <tr>
                                                  <th scope="col"></th>
-                                                 <th scope="col">Min</th>
-                                                 <th scope="col">Avg</th>
-                                                 <th scope="col">Max</th>
-                                                 <th scope="col">Responses</th>
+                                                 <th class="text-black" scope="col">Min</th>
+                                                 <th class="text-black" scope="col">Avg</th>
+                                                 <th class="text-black" scope="col">Max</th>
+                                                 <th class="text-black" scope="col">Responses</th>
                                              </tr>
                                          </thead>
                                          <tbody>
 
                                              <tr>
-                                                 <th scope="row">Avg Hours Per Week</th>
-                                                 <td><?=intval(json_encode($work_data['Average Hours and Weeks']['hours']['min']))?>
+                                                 <th  class="text-black"scope="row">Avg Hours Per Week</th>
+                                                 <td class="text-black"><?=intval(json_encode($work_data['Average Hours and Weeks']['hours']['min']))?>
                                                  </td>
-                                                 <td><?=intval(json_encode($work_data['Average Hours and Weeks']['hours']['avg']))?>
+                                                 <td class="text-black"><?=intval(json_encode($work_data['Average Hours and Weeks']['hours']['avg']))?>
                                                  </td>
-                                                 <td><?=intval(json_encode($work_data['Average Hours and Weeks']['hours']['max']))?>
+                                                 <td class="text-black"><?=intval(json_encode($work_data['Average Hours and Weeks']['hours']['max']))?>
                                                  </td>
-                                                 <td data-bs-toggle="tooltip" title="22 Students">
+                                                 <td class="text-black" data-bs-toggle="tooltip" title="22 Students">
                                                      <?= intval(json_encode($work_data['Average Hours and Weeks']['hours']['response']))?>%
                                                  </td>
                                              </tr>
                                              <tr>
-                                                 <th scope="row">Total Weeks</th>
-                                                 <td><?=intval(json_encode($work_data['Average Hours and Weeks']['weeks']['min']))?>
+                                                 <th class="text-black" scope="row">Total Weeks</th>
+                                                 <td class="text-black"><?=intval(json_encode($work_data['Average Hours and Weeks']['weeks']['min']))?>
                                                  </td>
-                                                 <td><?=intval(json_encode($work_data['Average Hours and Weeks']['weeks']['avg']))?>
+                                                 <td class="text-black"><?=intval(json_encode($work_data['Average Hours and Weeks']['weeks']['avg']))?>
                                                  </td>
-                                                 <td><?=intval(json_encode($work_data['Average Hours and Weeks']['weeks']['max']))?>
+                                                 <td class="text-black"><?=intval(json_encode($work_data['Average Hours and Weeks']['weeks']['max']))?>
                                                  </td>
-                                                 <td data-bs-toggle="tooltip" title="22 Students">
+                                                 <td class="text-black" data-bs-toggle="tooltip" title="22 Students">
                                                      <?= intval(json_encode($work_data['Average Hours and Weeks']['weeks']['response']))?>%
                                                  </td>
                                              </tr>
@@ -76,7 +76,7 @@ $work_data = json_decode(fetch_data(API_WORKEXP_ENDPOINT,$data),true);
                      <div class="card border-2" style="height:225px">
                          <div class="card-body">
                              <div class="card-title">
-                                 <h6 style="font-size:18px">Pay
+                                 <h6 class="text-black" style="font-size:18px">Pay
                                      Status</h6>
                              </div>
                              <div class="row py-3 px-1">
@@ -85,16 +85,16 @@ $work_data = json_decode(fetch_data(API_WORKEXP_ENDPOINT,$data),true);
                                          <div class="div mt-1"
                                              style="height:15px;width:15px;background-color:#008ffb!important">
                                          </div>
-                                         <div
-                                             style="margin-left: 10px; color: #12171dbf!important; font-weight: 600;font-size:16px">
+                                         <div class="text-black"
+                                             style="margin-left: 10px;font-weight: 600;font-size:16px">
                                              Paid</div>
                                      </div>
                                      <div class="d-flex mt-3">
                                          <div class="div mt-1"
                                              style="height:15px;width:15px;background-color:#00e397!important">
                                          </div>
-                                         <div
-                                             style="margin-left: 10px; color: #12171dbf!important; font-weight: 600;font-size:16px">
+                                         <div class="text-black"
+                                             style="margin-left: 10px;font-weight: 600;font-size:16px">
                                              Unpaid</div>
                                      </div>
                                  </div>
@@ -111,7 +111,7 @@ $work_data = json_decode(fetch_data(API_WORKEXP_ENDPOINT,$data),true);
                      <div class="card mb-0 border-2" style="height:225px">
                          <div class="card-body">
                              <div class="card-title">
-                                 <h6 style="font-size:18px">Academic
+                                 <h6 class="text-black" style="font-size:18px">Academic
                                      Credit</h6>
                              </div>
                              <div class="row py-3">
@@ -120,16 +120,16 @@ $work_data = json_decode(fetch_data(API_WORKEXP_ENDPOINT,$data),true);
                                          <div class="div mt-1"
                                              style="height:15px;width:15px;background-color:#008ffb!important">
                                          </div>
-                                         <div
-                                             style="margin-left: 10px; color: #12171dbf!important; font-weight: 600;font-size:16px">
+                                         <div class="text-black"
+                                             style="margin-left: 10px;font-weight: 600;font-size:16px">
                                              Credit</div>
                                      </div>
                                      <div class="d-flex mt-3">
                                          <div class="div mt-1"
                                              style="height:15px;width:15px;background-color:#00e397!important">
                                          </div>
-                                         <div
-                                             style="margin-left: 10px; color: #12171dbf!important; font-weight: 600;font-size:16px">
+                                         <div class="text-black"
+                                             style="margin-left: 10px;font-weight: 600;font-size:16px">
                                              Not to
                                              Credit</div>
                                      </div>
@@ -229,13 +229,13 @@ var options = {
     dataLabels: {
         enabled: true, // Ensuring data labels are visible
         style: {
+            textShadow: false,
             colors: ['#fff',] // Setting data label text color to black
         }
     },
     plotOptions: {
         pie: {
             dataLabels: {
-                offset: 25, // Adjust label positioning
                 style: {
                     colors: ['#fff'] // Ensure black color is applied
                 }
@@ -287,7 +287,6 @@ var options = {
     plotOptions: {
         pie: {
             dataLabels: {
-                offset: 25,
                 style: {
                     colors: ['#000000'],
                 },

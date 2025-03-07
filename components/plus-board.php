@@ -442,12 +442,12 @@ function getValuesOrLabelsInJson($mainKey, $subKey, $type) {
                         <div class="card border-2">
                             <div class="p-3">
                                 <div class="card-title">
-                                    <text class="highcharts-title"
+                                    <h6 class="pie-text"
                                         style="font-size: 19.2px; color: rgb(51, 51, 51); font-weight: bold; fill: rgb(51, 51, 51);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji">
                                                         I have received helpful career
                                                         advice from a faculty member,
                                                         career
-                                                        counselor, or employer.</text>
+                                                        counselor, or employer.</h6>
                                                 </div>
                                                 <div class=" row mt-3">
                                         <div class="col-sm-4">

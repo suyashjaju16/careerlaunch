@@ -371,7 +371,7 @@ function createBarChart(container, question) {
                     // var color = this.point.isInside == true ? 'white' : 'black'; // 5% width
                     perc = Number(((Math.round((this.y / max) * 100) / 100).toFixed(2))) * 100;
                     console.log(this.point.isInside);
-
+                    if(this.y > 0 && perc == 0){perc = "< 1"}
                     return '<span style="color: ' + color + '">' + perc + '% (' + this.y +
                         ')</span>';
                 },
