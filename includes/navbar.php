@@ -31,8 +31,20 @@
 
             <div class="px-3">
                 <center>
+                <h5 class="text-white"> 
+                        <?php if(isset($selected_values["implementation_type"]) && $selected_values["implementation_type"] === "general" ){ echo "All General Data";} ?> 
+                    </h5>
                     <h5 class="text-white"> 
-                        <?php if(isset($selected_values["use_case_id"]) && $selected_values["use_case_id"]!="" ){ echo $selected_values["use_case_id"];}  else{ echo "All Cohorts";} ?> 
+                        <?php if(isset($selected_values["implementation_type"]) && $selected_values["implementation_type"] =="" ){ echo "All Groups";} ?> 
+                    </h5>
+                    <h5 class="text-white"> 
+                        <?php if(isset($selected_values["implementation_type"]) && $selected_values["implementation_type"] === "work-exp" ){ echo "All Work Experience Groups";} ?> 
+                    </h5>
+                    <h5 class="text-white"> 
+                        <?php if(isset($selected_values["implementation_type"]) && $selected_values["implementation_type"] === "course" ){ echo "All Courses";} ?> 
+                    </h5>
+                    <h5 class="text-white"> 
+                        <?php if(isset($selected_values["use_case_id"]) && $selected_values["use_case_id"]!="" ){ echo $selected_values["use_case_id"];}  else{ if(isset($selected_values["implementation_type"]) && $selected_values["implementation_type"] === "cohort" ){ echo "All Cohorts";}} ?> 
                     </h5>
                     <h5 class="text-white"> 
                         <?php if(isset($selected_values["semester"])){ echo $selected_values["semester"];} ?> 
