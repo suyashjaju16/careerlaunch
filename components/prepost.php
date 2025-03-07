@@ -98,7 +98,7 @@ function generate_competency($level,$color) {
                         $pre_hide = isset($value['evaluator']) ? "display:none" : "";
                     echo '<div class="progress pre-bar mb-3 bg-white" style="width:90%;margin-bottom:32px!important;margin:auto;'.$pre_hide.'">
                         <div class="progress-bar animated-progress bg-dark" role="progressbar"
-                            data-width="'.$value['pre'].'" aria-valuemin="0" aria-valuemax="100"
+                            data-width="'.($value['pre']-3).'" aria-valuemin="0" aria-valuemax="100"
                             style="max-width:90%;background-color:'.$color.'">
                         </div>
                         <div class="progress-value bg-dark" style="font-size:16px">
@@ -109,7 +109,7 @@ function generate_competency($level,$color) {
                     if(isset($value["post"])){
                     echo '<div class="progress mb-3 bg-white" style="width:90%;margin:auto">
                         <div class="progress-bar animated-progress" role="progressbar"
-                            data-width="'.$value['post'].'" aria-valuemin="0" aria-valuemax="100"
+                            data-width="'.($value['post']-3).'" aria-valuemin="0" aria-valuemax="100"
                             style="max-width:90%;background-color:'.$color.'">
                         </div>
                         <div class="progress-value" style="background-color:'.$color.';font-size:16px">

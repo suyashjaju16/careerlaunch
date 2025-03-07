@@ -97,7 +97,7 @@ function generate_competency($level,$color) {
                     if(isset($value["evaluator"])){
                     echo '<div class="progress pre-bar mb-3 bg-white" style="width:90%;margin-bottom:32px!important;margin:auto;">
                         <div class="progress-bar animated-progress bg-dark" role="progressbar"
-                            data-width="'.$value['evaluator'].'" aria-valuemin="0" aria-valuemax="100"
+                            data-width="'.($value['evaluator']-3).'" aria-valuemin="0" aria-valuemax="100"
                             style="max-width:90%;background-color:'.$color.'">
                         </div>
                         <div class="progress-value bg-dark" style="font-size:16px">
@@ -108,7 +108,7 @@ function generate_competency($level,$color) {
                     if(isset($value["student"])){
                     echo '<div class="progress mb-3 bg-white" style="width:90%;margin:auto">
                         <div class="progress-bar animated-progress" role="progressbar"
-                            data-width="'.$value['student'].'" aria-valuemin="0" aria-valuemax="100"
+                            data-width="'.($value['student']-3).'" aria-valuemin="0" aria-valuemax="100"
                             style="max-width:90%;background-color:'.$color.'">
                         </div>
                         <div class="progress-value" style="background-color:'.$color.';font-size:16px">
