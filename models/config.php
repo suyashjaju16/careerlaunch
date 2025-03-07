@@ -222,7 +222,7 @@ else
 
 $data = new stdClass();
 $data->filters = $filters;
-echo "<pre>".json_encode($data)."</pre>";
+// echo "<pre>".json_encode($data)."</pre>";
 // Function to send data via cURL
 function fetch_data($url, $data) {
     $ch = curl_init($url);
