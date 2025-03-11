@@ -24,22 +24,28 @@ td {
     color: white !important;
 }
 
+.animated-progress.progress-bar{
+	overflow: unset !important;
+	border-radius: 10px;
+}
+
+.progress{
+	overflow: unset!important;
+}
+
 .progress-value {
+	font-size: 16px;
     background-color: #01a2b2;
     border-radius: 50%;
-    height: 40px;
-    width: 40px;
+    height: 38px;
+    width: 38px;
     text-align: center;
     line-height: 38px;
     z-index: 3;
-    /* position: absolute; */
     color: white;
-    /* margin-left: 70%; */
-    margin-top: -18px;
-    /* border: solid;
-    border-color: black; */
-	position: relative!important;
-	left: -1%!important;;
+    margin-top: -16px;
+	position: relative;
+	left: -19px;
 	
 }
 
@@ -106,15 +112,6 @@ td {
 
 .bg-light-blue{
 	background-color: #ADD8E6!important;
-}
-
-.progress-bar{
-	overflow: unset !important;
-	border-radius: 0;
-}
-
-.progress{
-overflow: unset!important;
 }
 
 .form-switch .form-check-input{
@@ -243,4 +240,11 @@ select {
 
 .bg-dark {
 	background-color: #000 !important;
+}
+
+@media (min-width: 768px) { /* Apply only for md and larger */
+    .desktop-rounded {
+        border-bottom-left-radius: 20px !important;
+        border-bottom-right-radius: 20px !important;
+    }
 }

@@ -36,7 +36,7 @@ $selected_filter = isset($_POST['filterData']) ? $_POST['filterData'] : '';
             <div class="container-fluid">
                 <?php include("./components/sticky_header.php"); ?>
                 <div class="row">
-                    <div class="col-sm-12 p-0">
+                    <div class="col-12 px-0">
                         <?php include("./components/overall_career_readiness.php"); ?>
                     </div>
                     <div class="row card p-3" style="margin-bottom:80px;margin:auto">

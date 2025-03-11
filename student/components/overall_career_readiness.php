@@ -1,8 +1,8 @@
-<div class="card px-3">
+<div class="card">
                             <?php 
                             $eval_pad = $competency_data['overall_career_readiness_results']['evaluator'] == null ? "" : "pt-0";
                             ?>
-                            <div class="card-body <?=$eval_pad?> pe-0">
+                            <div class="card-body px-3 py-md-4 py-0">
                                 <?php 
                                 if($competency_data["overall_career_readiness_results"]["evaluator"] != null){ 
                                     ?>
@@ -27,17 +27,19 @@
                                 <?php } 
                                 
                                 ?>
-                                <div class="row align-items-center" style="padding-left: 12px;">
-                                    <div class="col-sm-3 d-flex p-3 mb-0 align-items-center card align-content-center"
-                                        style="width:23.5%;background-color:#323c48!important">
-                                        <img class="img-fluid" src="./assets/images/ocr.png"
-                                            style="height: 70px;width: 70px;margin: auto;">
-                                        <h3 class="px-2 icon-text text-dark mb-0"
-                                            style="color: white!important;font-size: 18px;font-weight: 700;">
-                                            Overall Career Readiness
-                                        </h3>
+                                <div class="row align-items-center" >
+
+                                    <div class="col-md-3 col-12 px-0 px-md-3">
+                                        <div class="d-flex flex-row flex-md-column align-items-center justify-content-center m-0 p-3 mx-md-3 desktop-rounded"
+                                            style="background-color: #323c48; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+
+                                            <img class="img-fluid" src="./assets/images/ocr.png" style="height: 50px; width: 50px; object-fit: contain;">
+
+                                            <h4 class="ms-2 ms-md-0 mt-md-2 mb-0 text-white text-nowrap text-center">Overall Career Readiness</h4>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-9 mt-4 px-3">
+
+                                    <div class="col-md-8 col-12 py-4">
                                         <?php
                                         $evaluator_value = intval(json_encode($competency_data["overall_career_readiness_results"]["evaluator"])); 
                                         if($competency_data["evaluator"])
@@ -69,22 +71,21 @@
                                             $self_label = $competency_data["overall_career_readiness_results"]['evaluator'] == null ? "Pre" : "Self";
                                             $self_label = $GLOBALS["implementation_time"] == "general" ? "" : $self_label;
                                         ?>
-                                        <div class="progress mb-3 pre-bar bg-white"
-                                            style="margin-bottom:32px!important;margin-left:37px;<?=$pre_hide?>;">
+                                        <div class="progress pre-bar bg-white"
+                                            style="<?=$pre_hide?>;">
                                             <div class="progress-bar animated-progress" role="progressbar"
-                                                data-width="<?= $pre_value-6; ?>" aria-valuemin="0" aria-valuemax="100"
-                                                style="width:<?= $pre_value; ?>%;max-width:86%;background-color:<?=$color?>">
+                                                data-width="<?= $pre_value; ?>" aria-valuemin="0" aria-valuemax="100"
+                                                style="width:<?= $pre_value; ?>%;max-width:100%;background-color:<?=$color?>">
                                             </div>
                                             <div class="progress-value"
-                                                style="font-size:16px;background-color:<?=$color?>">
+                                                style="background-color:<?=$color?>">
                                                 <?= $pre_value > 0 ? $pre_value : "" ?>
                                             </div>
                                             <p style="position:relative;margin-top:-12px;font-size:18px;color:black">
                                                 <b class="self_label pre-label">
                                                     <?= $self_label ?></b>
                                             </p>
-                                            <!-- /.progress-bar .progress-bar-danger -->
-                                        </div><!-- /.progress .no-rounded -->
+                                        </div>
                                         <?php } 
                                         $post_value = intval(json_encode($competency_data["overall_career_readiness_results"]["post"]));
                                         if($competency_data["post"])
