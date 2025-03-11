@@ -106,7 +106,7 @@ td {
 
 .progress-bar{
 	overflow: unset !important;
-	border-radius: 10px!important;
+	border-radius: 0;
 }
 
 .progress{
