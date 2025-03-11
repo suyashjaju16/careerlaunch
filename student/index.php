@@ -39,12 +39,18 @@ $selected_filter = isset($_POST['filterData']) ? $_POST['filterData'] : '';
                     <div class="col-12 px-0">
                         <?php include("./components/overall_career_readiness.php"); ?>
                     </div>
-                    <div class="row card p-3" style="margin-bottom:80px;margin:auto">
-                        <?php include("./components/student_competency.php") ?>
+                    <div class="col-12 px-0" >
+                        <div class="card">
+                            <?php include("./components/student_competency.php") ?>
 
-                        <hr style="opacity:1">
-                        <?php include("./components/footer.php"); ?>
-
+                            <hr style="opacity:1">
+                            <?php include("./components/footer.php"); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
                     
 </body>
 

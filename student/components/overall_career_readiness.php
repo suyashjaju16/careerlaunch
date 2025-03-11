@@ -77,7 +77,7 @@
                                                 data-width="<?= $pre_value; ?>" aria-valuemin="0" aria-valuemax="100"
                                                 style="width:<?= $pre_value; ?>%;max-width:100%;background-color:<?=$color?>">
                                             </div>
-                                            <div class="progress-value"
+                                            <div class="progress-value mobile-circle"
                                                 style="background-color:<?=$color?>">
                                                 <?= $pre_value > 0 ? $pre_value : "" ?>
                                             </div>

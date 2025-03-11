@@ -1,3 +1,29 @@
+
+
+@media (max-width: 767px) { /* Apply only for sm and smaller */
+	
+	.progress-value.mobile-circle {
+		font-size: 14px;
+		height: 30px;
+		width: 30px;
+		line-height: 30px;
+		margin-top: -12px;
+		position: relative;
+		left: -15px;
+		
+	}
+}
+
+
+
+@media (min-width: 768px) { /* Apply only for md and larger */
+    .desktop-rounded {
+        border-bottom-left-radius: 20px !important;
+        border-bottom-right-radius: 20px !important;
+    }
+}
+
+
 .card {
     border-radius: 20px !important;
 }
@@ -240,11 +266,4 @@ select {
 
 .bg-dark {
 	background-color: #000 !important;
-}
-
-@media (min-width: 768px) { /* Apply only for md and larger */
-    .desktop-rounded {
-        border-bottom-left-radius: 20px !important;
-        border-bottom-right-radius: 20px !important;
-    }
 }
