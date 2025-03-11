@@ -8,56 +8,30 @@
                         <h4 class="text-black">NACE Career Readiness Level</h4>
                     </div>
 
-                    <!-- <div class="col-md-8 col-12">
-
-                        <div class="d-none d-md-flex justify-content-between">
-                            <span class="badge text-dark text-center fw-bold" style="background-color: #ADD8E6; font-size: 16px; width: 25%;">Emerging Knowledge</span>
-                            <span class="badge bg-success text-dark text-center fw-bold" style="font-size: 16px; width: 25%;">Understanding</span>
-                            <span class="badge bg-warning text-dark text-center fw-bold" style="font-size: 16px; width: 25%;">Early Application</span>
-                            <span class="badge bg-danger text-dark text-center fw-bold" style="font-size: 16px; width: 25%;">Advanced Application</span>
-                        </div>
-
-                        <div class="progress mt-2" style="height: 18px;">
-                            <div class="progress-bar" style="width: 25%; background-color: #ADD8E6; border-top-left-radius: 10px; border-bottom-left-radius: 10px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            <div class="progress-bar bg-success" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            <div class="progress-bar bg-warning" style="width: 25%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            <div class="progress-bar bg-danger" style="width: 25%; border-top-right-radius: 10px; border-bottom-right-radius: 10px;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-
-                        <div class="d-flex justify-content-between mt-1">
-                            <span class="fw-bold text-dark small">0</span>
-                            <span class="fw-bold text-dark small">25</span>
-                            <span class="fw-bold text-dark small">50</span>
-                            <span class="fw-bold text-dark small">75</span>
-                            <span class="fw-bold text-dark small">100</span>
-                        </div>
-
-                    </div> -->
-
                     <div class="col-md-8 col-12">
 
                         <div class="d-none d-md-flex row gx-4 px-3 justify-content-between">
                             <div class="col-md-3 text-center">
                                 <span class="badge text-dark text-center fw-bolder fs-6 px-2 py-3 text-break w-100"
-                                    style="background-color: #ADD8E6; font-weight: 700; display: block; white-space: normal;">
+                                    style="background-color: #ADD8E6; display: block; white-space: normal;">
                                     Emerging Knowledge
                                 </span>
                             </div>
                             <div class="col-md-3 text-center">
                                 <span class="badge bg-success text-dark text-center fw-bolder fs-6 px-2 py-3 text-break w-100"
-                                    style="font-weight: 700; display: block; white-space: normal;">
+                                    style="display: block; white-space: normal;">
                                     Understanding
                                 </span>
                             </div>
                             <div class="col-md-3 text-center">
                                 <span class="badge bg-warning text-dark text-center fw-bolder fs-6 px-2 py-3 text-break w-100"
-                                    style="font-weight: 700; display: block; white-space: normal;">
+                                    style="display: block; white-space: normal;">
                                     Early Application
                                 </span>
                             </div>
                             <div class="col-md-3 text-center">
                                 <span class="badge bg-danger text-dark text-center fw-bolder fs-6 px-2 py-3 text-break w-100"
-                                    style="font-weight: 700; display: block; white-space: normal;">
+                                    style="display: block; white-space: normal;">
                                     Advanced Application
                                 </span>
                             </div>
