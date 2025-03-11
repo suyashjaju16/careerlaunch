@@ -104,6 +104,10 @@ td {
 	outline: 5px solid #323c48;
 }
 
+.bg-light-blue{
+	background-color: #ADD8E6!important;
+}
+
 .progress-bar{
 	overflow: unset !important;
 	border-radius: 0;

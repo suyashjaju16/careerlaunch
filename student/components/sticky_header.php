@@ -4,8 +4,15 @@
             <div class="card-body py-md-4 py-2">
 
                 <div class="row align-items-center">
-                    <div class="col-md-3 col-12 text-center text-md-left mb-2 mb-md-0">
+                    <!-- <div class="col-md-3 col-12 text-center text-md-left mb-2 mb-md-0">
                         <h4 class="text-black">NACE Career Readiness Level</h4>
+                    </div> -->
+
+                    <div class="col-md-3 col-12 text-center text-md-left mb-2 mb-md-0 d-flex align-items-center justify-content-between">
+                        <h4 class="text-black mb-0">NACE Career Readiness Level</h4>
+                        <a tabindex="0" href="#" class="d-md-none text-dark fs-3 popover-trigger" onclick="return false;">
+                            <i class="mdi mdi-information-outline"></i>
+                        </a>
                     </div>
 
                     <div class="col-md-8 col-12">
@@ -57,19 +64,9 @@
                         </div>
                     </div>
                     <!-- Info Icon (Popover) -->
-                    <div class="col-md-1 col-12 text-center mt-2 mt-md-0">
-                        <a tabindex="0" class="info-icon" href="#" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="right" data-bs-trigger="focus"
-                            title="Career Readiness Levels"
-                            data-bs-content="
-                            <div class='badge text-dark px-3 py-2 fw-bold' style='background-color: rgb(60, 164, 254);'>Emerging Knowledge</div>
-                            <p class='mt-2 mb-2 text-black'>The student has an emerging awareness of the behavior.</p>
-                            <div class='badge bg-success text-dark px-3 py-2 fw-bold'>Understanding</div>
-                            <p class='mt-2 mb-2 text-black'>The student demonstrates an understanding of the behavior.</p>
-                            <div class='badge bg-warning text-dark px-3 py-2 fw-bold'>Early Application</div>
-                            <p class='mt-2 mb-2 text-black'>The student sometimes applies the behavior.</p>
-                            <div class='badge bg-danger text-dark px-3 py-2 fw-bold'>Advanced Application</div>
-                            <p class='mt-2 mb-2 text-black'>The behavior is consistent and integrated into workplace behaviors.</p>">
-                            <i class="bi bi-info-circle fs-2 text-dark"></i>
+                    <div class="col-sm-1 d-none d-md-flex justify-content-center align-content-center">
+                        <a href="#" class="text-dark fs-1 popover-trigger" onclick="return false;">
+                            <i class="mdi mdi-information-outline"></i>
                         </a>
                     </div>
                 </div>
@@ -78,12 +75,43 @@
     </div>
 </div>
 
+<!-- Hidden Popover Content (Stored in a Single Place) -->
+<div id="popover-content" class="d-none">
+    <div class='badge text-dark px-3 py-2 fw-bold bg-light-blue'>Emerging Knowledge</div>
+    <p class='mt-2 mb-2 text-black'>The student has an emerging awareness of the behavior, its importance, and related concepts.</p>
+    <div class='badge bg-success text-dark px-3 py-2 fw-bold'>Understanding</div>
+    <p class='mt-2 mb-2 text-black'>The student demonstrates an understanding of the behavior and related concepts.</p>
+    <div class='badge bg-warning text-dark px-3 py-2 fw-bold'>Early Application</div>
+    <p class='mt-2 mb-2 text-black'>The student sometimes applies the behavior.</p>
+    <div class='badge bg-danger text-dark px-3 py-2 fw-bold'>Advanced Application</div>
+    <p class='mt-2 mb-2 text-black'>The behavior is consistent and integrated into the student’s workplace behaviors.</p>
+</div>
 
+<!-- Enable Bootstrap Popovers & Set Triggers Based on Screen Size -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-            return new bootstrap.Popover(popoverTriggerEl);
+        var popoverContent = document.getElementById('popover-content').innerHTML;
+
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('.popover-trigger'));
+
+        popoverTriggerList.forEach(function (popoverTriggerEl) {
+            var triggerType = window.innerWidth < 768 ? 'click' : 'hover focus'; // Click for mobile, hover for desktop
+
+            new bootstrap.Popover(popoverTriggerEl, {
+                html: true,
+                content: popoverContent,
+                trigger: triggerType
+            });
+        });
+
+        // Close popovers when clicking outside (For mobile)
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.popover-trigger')) {
+                var popovers = document.querySelectorAll('.popover');
+                popovers.forEach(function (popover) {
+                    popover.remove(); // Removes all open popovers when clicking outside
+                });
+            }
         });
     });
 </script>
