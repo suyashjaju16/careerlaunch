@@ -42,4 +42,6 @@ if(isset( $_GET['type'])){
     $implementation_time = $_GET['type'];
 }
 
+echo json_encode($data);
+
 ?>

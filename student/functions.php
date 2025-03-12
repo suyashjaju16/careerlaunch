@@ -1,16 +1,47 @@
 <?php 
-function fetch_data($url, $data) {
+function fetch_data($url, $data,$type="POST") {
     $ch = curl_init($url);
     $payload = json_encode($data);
-    
     curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $type);
+    
     
     $response = curl_exec($ch);
     curl_close($ch);
     return $response;
     // echo json_encode($response);
+}
+
+function extractIdFromUrl($url) {
+    $pattern = "/\/([a-f0-9\-]+)\/logo\//";
+    if (preg_match($pattern, $url, $matches)) {
+        return $matches[1];
+    }
+    return null;
+}
+
+function createRecommendationsJson($id) {
+    $jsondata = new stdClass();
+    $jsondata->filters = new stdClass();
+    $jsondata->filters->organization_id = $id;
+
+    return $jsondata;
+}
+
+function fetchRecommendations($url) {
+    $json = file_get_contents($url);
+    if ($json === false) {
+        return ['error' => 'Unable to fetch data'];
+    }
+
+    $data = json_decode($json, true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        return ['error' => 'Invalid JSON format'];
+    }
+
+    return $data;
 }
 
 function verifyLevel($data, $category, $subCategory, $key) {
