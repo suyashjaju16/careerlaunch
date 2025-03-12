@@ -385,7 +385,7 @@ function createBarChart(container, question) {
 
 function renderCharts() {
     const barChartQuestions = {
-        'demographicChart1': 'what degree/certificate/class year are you currently enrolled?',
+        'demographicChart1': 'At what degree/certificate/class year are you currently enrolled?',
         'demographicChart3': 'Which of the following categories would you use to best describe yourself?',
         'demographicChart4': 'What is your parent(s) or caregiver(s) highest level of education in the United States?',
         'demographicChart9': 'Have you ever served on active duty in the U.S. Armed Forces, Reserves, or National Guard?',
