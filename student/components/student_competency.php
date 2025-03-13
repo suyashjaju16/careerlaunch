@@ -74,8 +74,7 @@
 
                                             <div class="card border-2">
                                                 <div class="card-body" style="color:black">
-                                                <?= $recommendations["Career_&_Self_Development"] ?>
-
+                                                <?= $recommendations["Career & Self Development"] ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -154,7 +153,7 @@
 
                                         <div class="card border-2">
                                             <div class="card-body" style="color:black">
-                                                 <?= $recommendations["Critical_Thinking"] ?>
+                                                 <?= $recommendations["Critical Thinking"] ?>
                                             </div>
                                         </div>
                                     </div>
@@ -210,7 +209,7 @@
 
                                             <div class="card border-2">
                                                 <div class="card-body" style="color:black">
-                                                    <?= $recommendations["Equity_&_Inclusion"] ?>
+                                                    <?= $recommendations["Equity & Inclusion"] ?>
                                                 </div>
                                             </div>
                                         </div>

@@ -17,7 +17,6 @@ $recommendations_json = json_decode(fetch_data(API_CUSTOM_RECOMMENDATIONS_ENDPOI
 $url = $recommendations_json["recommendation_url"] != null ? $recommendations_json["recommendation_url"] : STANDARD_RECOMMENDATIONS_URL;
 $recommendations = fetchRecommendations($url);
 // echo "<pre>".json_encode($recommendations)."</pre>";
-
 if(isset($student_details["Evaluator Email"]) && $student_details["Evaluator Email"] != null)
     $filters->evaluator_email = $student_details["Evaluator Email"];
 $data = $filters;
