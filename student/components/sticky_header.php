@@ -8,8 +8,8 @@
                         <h4 class="text-black">NACE Career Readiness Level</h4>
                     </div> -->
 
-                    <div class="col-md-3 col-12 text-center text-md-left mb-2 mb-md-0 d-flex align-items-center justify-content-between">
-                        <h4 class="text-black mb-0 px-md-2">NACE Career Readiness Level</h4>
+                    <div class="col-md-3 col-12 text-center text-md-left d-flex align-items-center justify-content-between">
+                        <h4 class="text-black mb-0 p-2">NACE Career Readiness Level</h4>
                         <a tabindex="0" href="#" class="d-md-none text-dark fs-3 popover-trigger" onclick="return false;">
                             <i class="mdi mdi-information-outline"></i>
                         </a>
@@ -62,6 +62,7 @@
                             <span class="fw-bold text-dark small" >75</span>
                             <span class="fw-bold text-dark small" style="transform: translateX(-50%);">100</span>
                         </div>
+
                     </div>
                     <!-- Info Icon (Popover) -->
                     <div class="col-sm-1 d-none d-md-flex justify-content-center align-content-center">

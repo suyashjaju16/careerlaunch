@@ -2,7 +2,7 @@
                             <?php 
                             $eval_pad = $competency_data['overall_career_readiness_results']['evaluator'] == null ? "" : "pt-0";
                             ?>
-                            <div class="card-body px-3 py-md-4 py-0">
+                            <div class="card-body py-md-4 py-0">
                                 <?php 
                                 if($competency_data["overall_career_readiness_results"]["evaluator"] != null){ 
                                     ?>
@@ -29,13 +29,13 @@
                                 ?>
                                 <div class="row align-items-center" >
 
-                                    <div class="col-md-3 col-12 px-0 px-md-3">
-                                        <div class="d-flex flex-row flex-md-column align-items-center justify-content-center m-0 p-3 mx-md-3 desktop-rounded"
-                                            style="background-color: #323c48; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                                    <div class="col-md-3 col-12 ">
+                                        <div class="d-flex flex-row flex-md-column align-items-center justify-content-center p-2 mobile-competency-name"
+                                            style="background-color: #323c48; border-radius: 20px;">
 
                                             <img class="img-fluid" src="./assets/images/ocr.png" style="height: 50px; width: 50px; object-fit: contain;">
 
-                                            <h4 class="ms-2 ms-md-0 mt-md-2 mb-0 text-white text-nowrap text-center">Overall Career Readiness</h4>
+                                            <h4 class="ms-2 ms-md-0 mt-md-2 mb-0 text-white text-wrap text-center">Overall Career Readiness</h4>
                                         </div>
                                     </div>
 

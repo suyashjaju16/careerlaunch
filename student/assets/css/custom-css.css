@@ -12,15 +12,14 @@
 		left: -15px;
 		
 	}
-}
 
+	.mobile-competency-name{
 
-
-@media (min-width: 768px) { /* Apply only for md and larger */
-    .desktop-rounded {
-        border-bottom-left-radius: 20px !important;
-        border-bottom-right-radius: 20px !important;
-    }
+		margin-left: calc(-1 * var(--bs-card-spacer-x)) !important;
+  		margin-right: calc(-1 * var(--bs-card-spacer-x)) !important;
+		border-bottom-right-radius: 0 !important;
+		border-bottom-left-radius: 0 !important;
+	}
 }
 
 
@@ -43,12 +42,49 @@ td {
 }
 
 .accordion-button:not(.collapsed) {
-    background-color: #fff;
+    background-color: transparent;
+    box-shadow: none;
 }
 
-.accordion-item .icon-text p {
-    color: white !important;
+.accordion-button {
+    --bs-accordion-btn-icon-width: 46px;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    margin: auto;
+    padding: 0.5rem;
 }
+
+/* .accordion-button::after {
+    margin: auto;
+} */
+
+.accordion-button span {
+    margin-top: 5px;
+}
+
+/* .progress {
+    overflow: visible;
+} */
+
+/* .progress span.badge {
+    padding: 4px 8px;
+} */
+
+@media (max-width: 767px) {
+    .rounded-start, .rounded-end {
+        border-radius: 10px !important;
+    }
+    .row.align-items-center {
+        flex-direction: column !important;
+        text-align: center;
+    }
+    .row.align-items-center > div {
+        width: 100%;
+        border-radius: 10px !important;
+    }
+}
+
 
 .animated-progress.progress-bar{
 	overflow: unset !important;
@@ -92,21 +128,12 @@ td {
 		-6px -6px 12px #ffffff38 !important;
 }
 
-.accordion-button{
-	--bs-accordion-btn-icon-width: 46px;
-}
-
 .f-800{
 	font-weight: 800;
 }
 
 .f-600{
 	font-weight: 600;
-}
-
-
-.btn-up.accordion-button::after{
-	margin-top: -65px!important;
 }
 
 .card-title{

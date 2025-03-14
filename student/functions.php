@@ -108,66 +108,58 @@ function generate_competency($level,$color) {
     }
     }
     
-    function generate_competency_results($competency_data, $competency,$color, $label, $icon, $competency_tag){
-    // echo $GLOBALS["implementation_time"];
-    if(isset($competency_data[$competency_tag])){
-    // echo $competency_tag;
-    echo '<div class="row align-items-center p-0 w-100">
-        <div class="col-sm-3 d-flex p-3 mb-0 align-items-center card align-content-center"
-            style="background-color:'.$color.'!important">
-            <img class="img-fluid" src="'.$icon.'" style="height: 70px;width: 70px;margin: auto;">
-            <h3 class="px-2 icon-text text-dark mb-0" style="color: white!important;font-size: 18px;font-weight: 700;">
-                '.$label.'
-            </h3>
-        </div>
-        <div class="col-sm-9 p-3" style="margin-top:20px;">';
-        // echo json_encode($competency_data["evaluator"]);
-        // echo json_encode($competency_data[$competency]['pre'] != null);
-            if(json_encode($competency_data["evaluator"]) == "true")
-            {
-                $value = intval(json_encode($competency_data[$competency]["evaluator"])) > 0 ? intval(json_encode($competency_data[$competency]["evaluator"])) : "";
-            echo '<div class="progress px-3 mb-3 bg-white evalu" style="margin-bottom:32px!important;margin-left:20px">
-                <div class="progress-bar animated-progress bg-dark " role="progressbar"
-                    data-width="'.(intval(json_encode($competency_data[$competency]["evaluator"]))-3).'" aria-valuemin="0"
-                    aria-valuemax="100">
+    function generate_competency_results($competency_data, $competency, $color, $label, $icon, $competency_tag) {
+        if (isset($competency_data[$competency_tag])) {
+            echo '
+                <div class="col-md-3 col-12">
+                    <div class="d-flex flex-row flex-md-column align-items-center justify-content-center p-2 mobile-competency-name" style="background-color:'.$color.';border-radius: 20px;">
+                        <img class="img-fluid me-2" src="'.$icon.'" style="height:40px;width:40px;">
+                        <span class="ms-2 ms-md-0 mt-md-2 mb-0 text-white text-wrap text-break text-center">'.$label.'</span>
+                    </div>
                 </div>
-                <div class="progress-value" style="background-color:#000;font-size:16px">
-                    '.$value.'
-                </div>
-            </div>';
+                <div class="col-md-8 col-12 py-4">
+            ';
+    
+            if (!empty($competency_data["evaluator"])) {
+                $evaluator_value = intval($competency_data[$competency]["evaluator"]);
+                echo '
+                    <div class="progress position-relative" style="height:8px;">
+                        <div class="progress-bar bg-dark" role="progressbar" style="width:'.$evaluator_value.'%;" aria-valuenow="'.$evaluator_value.'" aria-valuemin="0" aria-valuemax="100"></div>
+                        <span class="position-absolute top-50 translate-middle-y badge bg-dark rounded-pill" style="right:'.(100 - $evaluator_value).'%;font-size:12px;">
+                            '.$evaluator_value.'
+                        </span>
+                    </div>
+                ';
             }
-            if(json_encode($competency_data["pre"]) == "true")
-            {
-                $value = intval(json_encode($competency_data[$competency]["pre"])) > 0 ? intval(json_encode($competency_data[$competency]["pre"])) : "";
-            // $pre = json_encode($competency_data["evaluator"]) == "true" ? "hide" : "";
-            // echo "Pre : ".$pre;
-            $pre_hide = $competency_data[$competency]['evaluator'] == null ? "" : "display:none";
-            // echo $self_label;
-            echo '<div class="progress px-3 pre-bar mb-3 bg-white" style="margin-bottom:32px!important;margin-left:20px;'.$pre_hide.'">
-                <div class="progress-bar animated-progress" role="progressbar"
-                    data-width="'.(intval(json_encode($competency_data[$competency]["pre"]))-3).'" aria-valuemin="0"
-                    aria-valuemax="100" style="background-color:'.$color.'">
-                </div>
-                <div class="progress-value" style="font-size:16px;background-color:'.$color.'">
-                    '.$value.'
-                </div>
-            </div>';
+    
+            if (!empty($competency_data["pre"])) {
+                $pre_value = intval($competency_data[$competency]["pre"]);
+                echo '
+                    <div class="progress pre-bar bg-white">
+                        <div class="progress-bar animated-progress" role="progressbar" data-width="'.$pre_value.'" aria-valuemin="0" aria-valuemax="100"
+                        style="width:'.$pre_value.'%;background-color:'.$color.'; max-width: 100%" ></div>
+                        <div class="progress-value mobile-circle" style="background-color:'.$color.';">
+                            '.$pre_value.'
+                        </div>
+                    </div>
+                ';
             }
-            if(json_encode($competency_data["post"]) == "true")
-            {
-                $value = intval(json_encode($competency_data[$competency]["post"])) > 0 ? intval(json_encode($competency_data[$competency]["post"])) : "";
-            echo '<div class="progress px-3 post-bar bg-white" style="margin-bottom:32px!important;margin-left:20px">
-                <div class="progress-bar animated-progress" role="progressbar"
-                    data-width="'.(intval(json_encode($competency_data[$competency]["post"]))-3).'" aria-valuemin="0"
-                    aria-valuemax="100" style="background-color:'.$color.'">
-                </div>
-                <div class="progress-value" style="background-color:'.$color.';font-size:16px">
-                    '.$value.'
-                </div>
-            </div>';
+    
+            if (!empty($competency_data["post"])) {
+                $post_value = intval($competency_data[$competency]["post"]);
+                echo '
+                    <div class="progress position-relative mt-3" style="height:8px;">
+                        <div class="progress-bar" role="progressbar" style="width:'.$post_value.'%;background-color:'.$color.';" aria-valuenow="'.$post_value.'" aria-valuemin="0" aria-valuemax="100"></div>
+                        <span class="position-absolute top-50 translate-middle-y badge rounded-pill text-white" style="right:'.(100 - $post_value).'%;background-color:'.$color.';font-size:12px;">
+                            '.$post_value.'
+                        </span>
+                    </div>
+                ';
             }
-            echo '</div>
-    </div>';
+    
+            echo '
+            </div>';
+        }
     }
-    }
+    
 ?>
