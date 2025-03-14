@@ -50,14 +50,13 @@ function generate_competency($level,$color) {
     foreach($level as $key => $value)
     {
     echo '
-    <div class="card border-2" style="box-shadow: 7px 7px 14px 0px rgba(0,0,0,0.15);">
-        <div class="card-body">
-            <div class="row w-100 align-items-center">
-                <div class="col-sm-3 text-center mb-0 align-content-center">
-                    <p class="px-2 icon-text text-dark mb-0" style="font-size: 18px;font-weight: 700;">'.$key.'
+        <div class="card-body competency py-0">
+            <div class="row align-items-center py-2 py-md-3">
+                <div class="col-md-3 col-12 text-center text-md-left d-flex align-items-center justify-content-between">
+                    <p class="text-dark mb-0 py-1 px-0 p-md-2 fw-bold">'.$key.'
                     </p>
                 </div>
-                <div class="col-sm-9 mt-4 p-0">';
+                <div class="col-md-8 col-12 py-3">';
                 // echo json_encode($value);
                     if(isset($value["evaluator"]) && $value["evaluator"] != null){
                         $eval_hide = returnLevel($value['evaluator']) < 1 ? "display:none!important;" : "";
@@ -75,17 +74,16 @@ function generate_competency($level,$color) {
                     }
                     if(isset($value["pre"]) && $value["pre"] != null){
                         $pre_hide = isset($value['evaluator']) ? "display:none" : "";
-                    echo '<div class="progress pre-bar mb-3 bg-white" style="width:90%;margin-bottom:32px!important;margin:auto;'.$pre_hide.'">
-                        <div class="progress-bar animated-progress" role="progressbar"
-                            data-width="'.returnLevel($value['pre']).'" aria-valuemin="0" aria-valuemax="100"
-                            style="max-width:90%;background-color:'.$color.'">
-                        </div>
-                        <div class="progress-value" style="background-color:'.$color.';font-size:16px">
-                        </div>
-                        <p style="position:relative;margin-top:-8px;left:1%;font-size:18px;color:black">
-                            <b>'.$value["pre"].'</b>
-                        </p>
-                    </div>';
+                    echo '<div class="progress pre-bar bg-white" style="'.$pre_hide.'">
+                            <div class="progress-bar animated-progress" role="progressbar"
+                                data-width="'.returnLevel($value['pre']).'" aria-valuemin="0" aria-valuemax="100"
+                                style="width:'.returnLevel($value['pre']).'%;max-width:100%;background-color:'.$color.'">
+                            </div>
+                            <div class="progress-value mobile-circle"
+                                style="background-color:'.$color.'">
+                                '.$pre_value.'
+                            </div>
+                        </div>';
                     }
                     if(isset($value["post"]) && $value["post"] != null){
                     echo '<div class="progress mb-3 bg-white" style="width:90%;margin:auto">
@@ -102,8 +100,7 @@ function generate_competency($level,$color) {
                     }
                     echo '</div>
             </div>
-        </div>
-    </div>';
+        </div>';
     }
     }
     }
@@ -114,10 +111,10 @@ function generate_competency($level,$color) {
                 <div class="col-md-3 col-12">
                     <div class="d-flex flex-row flex-md-column align-items-center justify-content-center p-2 mobile-competency-name" style="background-color:'.$color.';border-radius: 20px;">
                         <img class="img-fluid me-2" src="'.$icon.'" style="height:40px;width:40px;">
-                        <span class="ms-2 ms-md-0 mt-md-2 mb-0 text-white text-wrap text-break text-center">'.$label.'</span>
+                        <span class="ms-2 ms-md-0 mt-md-2 mb-0 text-white text-wrap text-break text-center fw-bold">'.$label.'</span>
                     </div>
                 </div>
-                <div class="col-md-8 col-12 py-4">
+                <div class="col-md-8 col-12 py-5">
             ';
     
             if (!empty($competency_data["evaluator"])) {

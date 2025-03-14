@@ -20,6 +20,14 @@
 		border-bottom-right-radius: 0 !important;
 		border-bottom-left-radius: 0 !important;
 	}
+
+	.accordion-button {
+		--bs-accordion-btn-icon-width: 30px !important;
+	}
+
+	.accordion-button-wrapper{
+		border-top: 1px solid #0000001f;
+	}
 }
 
 
@@ -41,50 +49,32 @@ td {
     /* text-align: center !important; */
 }
 
+.accordion {
+	background-color: transparent;
+}
+
 .accordion-button:not(.collapsed) {
     background-color: transparent;
     box-shadow: none;
 }
 
 .accordion-button {
-    --bs-accordion-btn-icon-width: 46px;
+    --bs-accordion-btn-icon-width: 40px;
+	width: auto;
     justify-content: center;
-    width: 46px;
-    height: 46px;
     margin: auto;
-    padding: 0.5rem;
+	padding: 0.2rem;
 }
 
-/* .accordion-button::after {
-    margin: auto;
-} */
-
-.accordion-button span {
-    margin-top: 5px;
+.accordion-body {
+	padding: 0;
+	.competency .row {
+		border-top: #0000001f solid 1px;
+	}
+	.competency .row:last-child {
+		border-bottom: #0000001f solid 1px;
+	}
 }
-
-/* .progress {
-    overflow: visible;
-} */
-
-/* .progress span.badge {
-    padding: 4px 8px;
-} */
-
-@media (max-width: 767px) {
-    .rounded-start, .rounded-end {
-        border-radius: 10px !important;
-    }
-    .row.align-items-center {
-        flex-direction: column !important;
-        text-align: center;
-    }
-    .row.align-items-center > div {
-        width: 100%;
-        border-radius: 10px !important;
-    }
-}
-
 
 .animated-progress.progress-bar{
 	overflow: unset !important;

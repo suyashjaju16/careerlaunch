@@ -35,11 +35,11 @@
 
                                             <img class="img-fluid" src="./assets/images/ocr.png" style="height: 50px; width: 50px; object-fit: contain;">
 
-                                            <h4 class="ms-2 ms-md-0 mt-md-2 mb-0 text-white text-wrap text-center">Overall Career Readiness</h4>
+                                            <h4 class="ms-2 ms-md-0 mt-md-2 mb-0 text-white text-wrap text-center fw-bold">Overall Career Readiness</h4>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-8 col-12 py-4">
+                                    <div class="col-md-8 col-12 py-5">
                                         <?php
                                         $evaluator_value = intval(json_encode($competency_data["overall_career_readiness_results"]["evaluator"])); 
                                         if($competency_data["evaluator"])
