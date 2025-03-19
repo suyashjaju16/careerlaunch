@@ -109,22 +109,23 @@ function generate_competency($level,$color) {
         if (isset($competency_data[$competency_tag])) {
             echo '
                 <div class="col-md-3 col-12">
-                    <div class="d-flex flex-row flex-md-column align-items-center justify-content-center p-2 mobile-competency-name" style="background-color:'.$color.';border-radius: 20px;">
-                        <img class="img-fluid me-2" src="'.$icon.'" style="height:40px;width:40px;">
-                        <span class="ms-2 ms-md-0 mt-md-2 mb-0 text-white text-wrap text-break text-center fw-bold">'.$label.'</span>
+                    <div class="d-flex flex-row flex-md-column align-items-center justify-content-center px-2 py-3 mobile-competency-name" style="background-color:'.$color.';border-radius: 20px;">
+                        <img class="img-fluid me-2" src="'.$icon.'" >
+                        <span class="ms-2 ms-md-0 mt-md-2 mb-0 text-white text-wrap text-break text-center fw-bold fs-5">'.$label.'</span>
                     </div>
                 </div>
-                <div class="col-md-8 col-12 py-5">
+                <div class="col-md-8 col-12 py-5 py-md-0">
             ';
     
             if (!empty($competency_data["evaluator"])) {
                 $evaluator_value = intval($competency_data[$competency]["evaluator"]);
                 echo '
-                    <div class="progress position-relative" style="height:8px;">
-                        <div class="progress-bar bg-dark" role="progressbar" style="width:'.$evaluator_value.'%;" aria-valuenow="'.$evaluator_value.'" aria-valuemin="0" aria-valuemax="100"></div>
-                        <span class="position-absolute top-50 translate-middle-y badge bg-dark rounded-pill" style="right:'.(100 - $evaluator_value).'%;font-size:12px;">
+                    <div class="progress pre-bar bg-white bar-data">
+                        <div class="progress-bar animated-progress" role="progressbar" data-width="'.$evaluator_value.'" aria-valuemin="0" aria-valuemax="100"
+                        style="width:'.$evaluator_value.'%;background-color:'.$color.'; max-width: 100%" ></div>
+                        <div class="progress-value mobile-circle" style="background-color:'.$color.';">
                             '.$evaluator_value.'
-                        </span>
+                        </div>
                     </div>
                 ';
             }
@@ -132,7 +133,7 @@ function generate_competency($level,$color) {
             if (!empty($competency_data["pre"])) {
                 $pre_value = intval($competency_data[$competency]["pre"]);
                 echo '
-                    <div class="progress pre-bar bg-white">
+                    <div class="progress pre-bar bg-white bar-data bar-data">
                         <div class="progress-bar animated-progress" role="progressbar" data-width="'.$pre_value.'" aria-valuemin="0" aria-valuemax="100"
                         style="width:'.$pre_value.'%;background-color:'.$color.'; max-width: 100%" ></div>
                         <div class="progress-value mobile-circle" style="background-color:'.$color.';">
@@ -145,11 +146,12 @@ function generate_competency($level,$color) {
             if (!empty($competency_data["post"])) {
                 $post_value = intval($competency_data[$competency]["post"]);
                 echo '
-                    <div class="progress position-relative mt-3" style="height:8px;">
-                        <div class="progress-bar" role="progressbar" style="width:'.$post_value.'%;background-color:'.$color.';" aria-valuenow="'.$post_value.'" aria-valuemin="0" aria-valuemax="100"></div>
-                        <span class="position-absolute top-50 translate-middle-y badge rounded-pill text-white" style="right:'.(100 - $post_value).'%;background-color:'.$color.';font-size:12px;">
+                    <div class="progress pre-bar bg-white bar-data">
+                        <div class="progress-bar animated-progress" role="progressbar" data-width="'.$post_value.'" aria-valuemin="0" aria-valuemax="100"
+                        style="width:'.$post_value.'%;background-color:'.$color.'; max-width: 100%" ></div>
+                        <div class="progress-value mobile-circle" style="background-color:'.$color.';">
                             '.$post_value.'
-                        </span>
+                        </div>
                     </div>
                 ';
             }

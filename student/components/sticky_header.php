@@ -8,8 +8,8 @@
                         <h4 class="text-black">NACE Career Readiness Level</h4>
                     </div> -->
 
-                    <div class="col-md-3 col-12 text-center text-md-left d-flex align-items-center justify-content-between">
-                        <h4 class="text-black mb-0 p-2">NACE Career Readiness Level</h4>
+                    <div class="col-md-3 col-12 text-center text-md-left d-flex align-items-center justify-content-center header-title">
+                        <h3 class="text-black mb-0 fs-5">NACE Career Readiness Level</h3>
                         <a tabindex="0" href="#" class="d-md-none text-dark fs-3 popover-trigger" onclick="return false;">
                             <i class="mdi mdi-information-outline"></i>
                         </a>
@@ -17,50 +17,89 @@
 
                     <div class="col-md-8 col-12">
 
-                        <div class="d-none d-md-flex row gx-4 px-3 justify-content-between">
-                            <div class="col-md-3 text-center">
-                                <span class="badge text-dark text-center fw-bolder fs-6 px-2 py-3 text-break w-100"
-                                    style="background-color: #ADD8E6; display: block; white-space: normal;">
+                        <div class="d-none d-md-flex row gx-2 px-2 justify-content-between align-items-center mb-3 progress-bar-labels">
+                            <div class="col-md-3 text-center ">
+                                <span class="badge text-dark text-center fw-bolder fs-6 p-1 text-break w-100"
+                                    style="background-color: #ADD8E6;">
                                     Emerging Knowledge
                                 </span>
                             </div>
                             <div class="col-md-3 text-center">
-                                <span class="badge bg-success text-dark text-center fw-bolder fs-6 px-2 py-3 text-break w-100"
-                                    style="display: block; white-space: normal;">
+                                <span class="badge bg-success text-dark text-center fw-bolder fs-6 p-1 text-break w-100">
                                     Understanding
                                 </span>
                             </div>
                             <div class="col-md-3 text-center">
-                                <span class="badge bg-warning text-dark text-center fw-bolder fs-6 px-2 py-3 text-break w-100"
-                                    style="display: block; white-space: normal;">
+                                <span class="badge bg-warning text-dark text-center fw-bolder fs-6 p-1 text-break w-100">
                                     Early Application
                                 </span>
                             </div>
                             <div class="col-md-3 text-center">
-                                <span class="badge bg-danger text-dark text-center fw-bolder fs-6 px-2 py-3 text-break w-100"
-                                    style="display: block; white-space: normal;">
+                                <span class="badge bg-danger text-dark text-center fw-bolder fs-6 p-1 text-break w-100">
                                     Advanced Application
                                 </span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex d-md-none row text-center gy-3 px-3 pb-3 mb-3 mt-1" style="border-top: #0000001f solid 1px; border-bottom: #0000001f solid 1px;">
+                            <div class="col-6 d-flex align-items-center">
+                                <span class="badge me-2 rounded bg-primary" style="width: 20px; height: 20px;">&nbsp;</span>
+                                <span class="text-dark fw-bold">Emerging Knowledge</span>
+                            </div>
+                            <div class="col-6 d-flex align-items-center">
+                                <span class="badge me-2 rounded bg-warning" style="width: 20px; height: 20px;">&nbsp;</span>
+                                <span class="text-dark fw-bold">Early Application</span>
+                            </div>
+                            <div class="col-6 d-flex align-items-center">
+                                <span class="badge me-2 rounded bg-success" style="width: 20px; height: 20px;">&nbsp;</span>
+                                <span class="text-dark fw-bold">Understanding</span>
+                            </div>
+                            <div class="col-6 d-flex align-items-center">
+                                <span class="badge me-2 rounded bg-danger" style="width: 20px; height: 20px;">&nbsp;</span>
+                                <span class="text-dark fw-bold">Advanced Application</span>
                             </div>
                         </div>
 
 
 
                         <!-- Progress Bar -->
-                        <div class="progress mt-2" style="height: 18px;">
-                            <div class="progress-bar" style="width: 25%; background-color: #ADD8E6; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-right: none;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            <div class="progress-bar bg-success" style="width: 25%; border-radius: 0;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            <div class="progress-bar bg-warning" style="width: 25%; border-radius: 0;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            <div class="progress-bar bg-danger" style="width: 25%; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-left: none;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        <!-- <div class="d-flex align-items-center d-md-none" style="height: 12px;">
+                            <div class="mx-1" ></div>
+                            <div class="mx-1 bg-success" ></div>
+                            <div class="mx-1 bg-warning" ></div>
+                            <div class="mx-1 bg-danger" ></div>
+                        </div> -->
+
+                        <div class="d-flex align-items-center justify-content-between d-md-none" style="height: 12px;">
+                            <div class="flex-fill mx-1 rounded-pill h-100" style="background-color:#3c9bfb;"></div>
+                            <div class="flex-fill mx-1 rounded-pill h-100 bg-success" ></div>
+                            <div class="flex-fill mx-1 rounded-pill h-100 bg-warning" ></div>
+                            <div class="flex-fill mx-1 rounded-pill h-100 bg-danger" ></div>
+                        </div>
+
+                        <div class="mt-2">
+
+                            <div class="ruler mt-0">
+                                <div class="tick"></div>
+                                <!-- 0% -->
+                                <div class="tick" style="left:calc(25% - 1px);"></div>
+                                <!-- 25% -->
+                                <div class="tick" style="left:calc(50% - 1px);"></div>
+                                <!-- 50% -->
+                                <div class="tick" style="left:calc(75% - 1px);"></div>
+                                <!-- 75% -->
+                                <div class="tick" style="left:calc(100% - 2px);"></div>
+                                <!-- 100% -->
+                            </div>
                         </div>
 
                         <!-- Ruler Values (Aligned Precisely) -->
-                        <div class="d-flex justify-content-between mt-1" style=" width: 102% !important;">
-                            <span class="fw-bold text-dark small" >0</span>
-                            <span class="fw-bold text-dark small" >25</span>
-                            <span class="fw-bold text-dark small" >50</span>
-                            <span class="fw-bold text-dark small" >75</span>
-                            <span class="fw-bold text-dark small" style="transform: translateX(-50%);">100</span>
+                        <div class="d-flex justify-content-between mt-1" style="margin-left: -3px; ">
+                            <span class="fw-bold text-dark small" style=" padding-right:8px;">0</span>
+                            <span class="fw-bold text-dark small" style=" padding-left:5px;">25</span>
+                            <span class="fw-bold text-dark small" style=" padding-left:10px;">50</span>
+                            <span class="fw-bold text-dark small" style=" padding-left:10px;">75</span>
+                            <span class="fw-bold text-dark small" style="margin-right:-5px;">100</span>
                         </div>
 
                     </div>

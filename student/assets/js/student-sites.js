@@ -2,7 +2,7 @@
 function eval_toggle() {
     // $(".evalu").hide()
     if (document.getElementById('evaluator_switch').checked) {
-        $(".evalu").show();
+        $(".Evaluator-data").show();
         $(".pre-bar").hide();
         // $(".post-bar").hide();
         $(".pre-label").html("Self");
@@ -10,7 +10,7 @@ function eval_toggle() {
     } else {
         $(".pre-bar").show();
         $(".post-bar").show();
-        $(".evalu").hide();
+        $(".Evaluator-data").hide();
         $(".pre-label").html("Pre");
         $(".post-label").html("Post");
     }

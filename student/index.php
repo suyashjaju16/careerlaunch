@@ -36,11 +36,11 @@ $selected_filter = isset($_POST['filterData']) ? $_POST['filterData'] : '';
             <div class="container-fluid">
                 <?php include("./components/sticky_header.php"); ?>
                 <div class="row">
-                    <div class="col-12 px-0">
+                    <div class="col-12 px-0 overall-career-readiness-section">
                         <?php include("./components/overall_career_readiness.php"); ?>
                     </div>
                     <div class="col-12 px-0" >
-                        <div class="card">
+                        <div class="card student-competency-section">
                             <?php include("./components/student_competency.php") ?>
 
                             <hr style="opacity:1">

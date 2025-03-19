@@ -18,7 +18,7 @@
         <div id="collapseCommunication" class="accordion-collapse collapse" aria-labelledby="headingCommunication" data-bs-parent="#accordionFlushExample">
             <div class="accordion-body">
                 <?= generate_competency($competency_data["communication"], "#3ca4fe"); ?>
-                <div class="card-body py-4">
+                <div class="card-body pb-1 pt-3">
                     <h4 class="card-title text-black mb-3 fw-bold px-2">
                         Recommendations
                     </h4>
@@ -78,7 +78,7 @@
         </div>
     </div>
 
-    <div class="py-4 d-md-none"></div>
+    <div class="py-3 d-md-none"></div>
 
     <div class="accordion-item">
         <h2 class="accordion-header card-body py-md-4 py-0" id="headingCommunication">
