@@ -11,10 +11,6 @@
 	.header-title{
 		justify-content: space-between !important;
 	}
-
-	.progress{
-		margin-bottom: 10px !important;
-	}
 	
 	.progress-value.mobile-circle {
 		font-size: 14px;
@@ -24,7 +20,10 @@
 		margin-top: -12px;
 		position: relative;
 		left: -15px;
-		
+	}
+
+	.animated-progress.progress-bar{
+		min-width: 15px !important;
 	}
 
 	.mobile-competency-name{
@@ -53,6 +52,22 @@
 			border-radius: 20px;
 			box-shadow: 0 2px 4px rgba(0,0,0,.08);
 		}
+	}
+
+	.competency .progress:not(:last-child) {
+		margin-bottom: 40px !important; /* or padding, margin, etc. */
+	}
+
+	.competency .progress:last-child {
+		margin-bottom: 30px !important; /* or padding, margin, etc. */
+	}
+
+	.progress-label {
+		top: 15px !important; 
+	}
+
+	.pb-4-5-mobile{
+		padding-bottom: 2.5rem !important;
 	}
 }
 
@@ -112,6 +127,7 @@ td {
 	flex-shrink: 0;
 	overflow: unset !important;
 	border-radius: 10px;
+	min-width: 19px;
 }
 
 .progress-bar-labels span {
@@ -123,6 +139,24 @@ td {
 .progress{
 	overflow: unset!important;
 	margin-bottom: 14px;
+	position: relative;
+}
+
+.progress-label {
+    position: absolute;
+    top: 20px; 
+    white-space: nowrap;
+	animation: progress-label-animation 1s ease-out forwards;
+}
+
+.competency .progress:not(:last-child) {
+	margin-bottom: 50px; /* or padding, margin, etc. */
+}
+
+.evaluator-data{
+	.progress-bar, .progress-value{
+		background-color: #000;
+	}
 }
 
 .progress-value {
@@ -307,6 +341,15 @@ select {
 	}
 }
 
+@keyframes progress-label-animation {
+	from {
+	  left: 0;
+	}
+	to {
+	  left: var(--final-left);
+	}
+  }
+
 .recommendations-headings {
 	font-size: 16px !important;
 }
@@ -328,6 +371,11 @@ select {
 	margin-bottom: 2.0rem !important;
 }
 
-.bar-data + .bar-data {
-	margin-top: 2.0rem !important;
+.competency_result .bar-data:not(:last-child) {
+	margin-bottom: 2.0rem !important; /* or padding, margin, etc. */
 }
+
+.custom-pb-2{
+	padding-bottom: 0.5rem !important;
+}
+

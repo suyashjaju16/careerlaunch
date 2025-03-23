@@ -2,7 +2,7 @@
     <div class="accordion-item">
         <h2 class="accordion-header card-body competency_result py-md-4 py-0" id="headingCommunication">
             <div class="row align-items-center">
-                <?= generate_competency_results($competency_data, "communication_results", "#3ca4fe", "Communication", "./assets/images/nace-icons/nace-communication-black-line-art-icon.png", "communication") ?>
+                <?= generate_competency_results($competency_data, "communication_results", "communication", "Communication", "./assets/images/nace-icons/nace-communication-black-line-art-icon.png", "communication") ?>
                 <div class="col-md-1 col-12 d-flex flex-row flex-md-column align-items-center justify-content-center py-2 py-md-0 accordion-button-wrapper">
                     <button class="accordion-button collapsed btn-up"
                             type="button" data-bs-toggle="collapse"
@@ -17,7 +17,7 @@
         </h2>
         <div id="collapseCommunication" class="accordion-collapse collapse" aria-labelledby="headingCommunication" data-bs-parent="#accordionFlushExample">
             <div class="accordion-body">
-                <?= generate_competency($competency_data["communication"], "#3ca4fe"); ?>
+                <?= generate_competency($competency_data["communication"], "communication"); ?>
                 <div class="card-body pb-1 pt-3">
                     <h4 class="card-title text-black mb-3 fw-bold px-2">
                         Recommendations

@@ -1,0 +1,78 @@
+:root {
+    /* Brand Colors */
+    --primary-color: #000333;
+    --accent-color: #01a2b2;
+    --highlight-color: #ffb601;
+    --danger-color: #e66060;
+  
+    /* Greys */
+    --light-grey: #f3f5f6;
+    --dark-grey: #323c48;
+  
+    /* Typography */
+    --heading-color: #12171dbf;
+    --text-color: #000000;
+  
+    /* Progress States */
+    --low: #01a2b2;
+    --mid: #66d202;
+    --high: #ffb601;
+    --very-high: #e66060;
+
+    /* Overall Career Readiness */
+    --overall-career-readiness: #323c48;
+
+    /* Communication */
+    --communication-pre: #56a9dd;
+    --communication-post: #4588b1;
+
+    /* Teamwork */
+    --teamwork-pre: #e06b60;
+    --teamwork-post: #b3554c;
+
+    /* Career & Self-Development */
+    --career-development-pre: #e3bb54;
+    --career-development-post: #b69043;
+
+    /* Professionalism */
+    --professionalism-pre: #609866;
+    --professionalism-post: #4d7a51;
+
+    /* Leadership */
+    --leadership-pre: #796258;
+    --leadership-post: #614e46;
+
+    /* Critical Thinking */
+    --critical-thinking-pre: #705181;
+    --critical-thinking-post: #5a4167;
+
+    /* Technology */
+    --technology-pre: #3c4b6c;
+    --technology-post: #303c56;
+
+}
+
+/* ========= Background Utility Classes ========= */
+
+.bg-overall-career-readiness        { background-color: var(--overall-career-readiness) !important; }
+
+.bg-communication-pre              { background-color: var(--communication-pre) !important; }
+.bg-communication-post             { background-color: var(--communication-post) !important; }
+
+.bg-teamwork-pre                   { background-color: var(--teamwork-pre) !important; }
+.bg-teamwork-post                  { background-color: var(--teamwork-post) !important; }
+
+.bg-career-development-pre         { background-color: var(--career-development-pre) !important; }
+.bg-career-development-post        { background-color: var(--career-development-post) !important; }
+
+.bg-professionalism-pre            { background-color: var(--professionalism-pre) !important; }
+.bg-professionalism-post           { background-color: var(--professionalism-post) !important; }
+
+.bg-leadership-pre                 { background-color: var(--leadership-pre) !important; }
+.bg-leadership-post                { background-color: var(--leadership-post) !important; }
+
+.bg-critical-thinking-pre          { background-color: var(--critical-thinking-pre) !important; }
+.bg-critical-thinking-post         { background-color: var(--critical-thinking-post) !important; }
+
+.bg-technology-pre                 { background-color: var(--technology-pre) !important; }
+.bg-technology-post                { background-color: var(--technology-post) !important; }

@@ -42,21 +42,21 @@
                         </div>
 
                         <div class="d-flex d-md-none row text-center gy-3 px-3 pb-3 mb-3 mt-1" style="border-top: #0000001f solid 1px; border-bottom: #0000001f solid 1px;">
-                            <div class="col-6 d-flex align-items-center">
-                                <span class="badge me-2 rounded bg-primary" style="width: 20px; height: 20px;">&nbsp;</span>
-                                <span class="text-dark fw-bold">Emerging Knowledge</span>
+                            <div class="col-6 d-flex align-items-center pe-2 ps-0">
+                                <span class="badge me-2 rounded bg-primary" style="min-width: 20px; min-height: 20px;">&nbsp;</span>
+                                <span class="text-dark fw-bold text-break mx-auto">Emerging Knowledge</span>
                             </div>
-                            <div class="col-6 d-flex align-items-center">
-                                <span class="badge me-2 rounded bg-warning" style="width: 20px; height: 20px;">&nbsp;</span>
-                                <span class="text-dark fw-bold">Early Application</span>
+                            <div class="col-6 d-flex align-items-center pe-2 ps-0">
+                                <span class="badge me-2 rounded bg-warning" style="min-width: 20px; min-height: 20px;">&nbsp;</span>
+                                <span class="text-dark fw-bold text-break mx-auto">Early Application</span>
                             </div>
-                            <div class="col-6 d-flex align-items-center">
-                                <span class="badge me-2 rounded bg-success" style="width: 20px; height: 20px;">&nbsp;</span>
-                                <span class="text-dark fw-bold">Understanding</span>
+                            <div class="col-6 d-flex align-items-center pe-2 ps-0">
+                                <span class="badge me-2 rounded bg-success" style="min-width: 20px; min-height: 20px;">&nbsp;</span>
+                                <span class="text-dark fw-bold text-break mx-auto">Understanding</span>
                             </div>
-                            <div class="col-6 d-flex align-items-center">
-                                <span class="badge me-2 rounded bg-danger" style="width: 20px; height: 20px;">&nbsp;</span>
-                                <span class="text-dark fw-bold">Advanced Application</span>
+                            <div class="col-6 d-flex align-items-center pe-2 ps-0">
+                                <span class="badge me-2 rounded bg-danger" style="min-width: 20px; min-height: 20px;">&nbsp;</span>
+                                <span class="text-dark fw-bold text-break mx-auto">Advanced Application</span>
                             </div>
                         </div>
 

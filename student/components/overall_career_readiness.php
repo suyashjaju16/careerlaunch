@@ -2,31 +2,8 @@
     <?php 
     $eval_pad = $competency_data['overall_career_readiness_results']['evaluator'] == null ? "" : "pt-0";
     ?>
-    <div class="card-body py-md-4 pt-0 pb-4">
-        <?php 
-        if($competency_data["overall_career_readiness_results"]["evaluator"] != null){ 
-            ?>
-        <div class="row p-0 mt-2">
-            <div class="col-sm-12 p-0">
-                <div class="d-flex float-end align-content-center">
-                    <div class="mt-1">
-                        <h5 class="font-size-14 text-black"> Evaluator Data</h5>
-                    </div>
-                    <div style="margin-left:5px">
-                        <div class="form-check form-switch" style="width:fit-content!important">
-                            <input class="form-check-input bg-success" type="checkbox"
-                                role="switch" id="evaluator_switch" onclick="eval_toggle()"
-                                checked>
-                            <label class="form-check-label"
-                                for="flexSwitchCheckChecked"></label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php } 
-        
-        ?>
+    <div class="card-body py-md-4 pt-0 pb-4 overall-career-readiness-card">
+
         <div class="row align-items-center" >
 
             <div class="col-md-3 col-12 ">
@@ -48,33 +25,56 @@
                     $pre_value = intval(json_encode($competency_data["overall_career_readiness_results"]["pre"]));
                     $post_value = intval(json_encode($competency_data["overall_career_readiness_results"]["post"]));
 
-                    function renderProgressBar($condition, $value, $label, &$firstBar) {
+                    function renderProgressBar($condition, $value, $label, &$firstBar, $true_label = "self") {
                         if($condition) {
-                            echo "<div class='$label-data mt-1'>";
+                            echo "<div class='$true_label-data mt-1'>";
                             if($firstBar) {
-                                echo "<h5 class='text-dark fs-5 mb-3 fw-bold'>{$label}</h5>";
+                                echo "<h5 class='text-dark fs-5 mb-3 fw-bold $true_label-label'>{$label}</h5>";
                                 echo "<div class='progress bg-white position-relative'>";
                             } else {
                                 echo "<div class='progress bg-white position-relative'>";
                             }
 
-                            echo "<div class='progress-bar' role='progressbar' style='width:{$value}%; background-color:".returnColor($value).";'></div>";
-                            echo "<div class='progress-value mobile-circle' style='background-color:".returnColor($value).";'>{$value}</div>";
+                            echo "<div class='progress-bar animated-progress' data-width='{$value}' role='progressbar' style='width:{$value}%; background-color:".returnColor($value, $true_label).";'></div>";
+                            echo "<div class='progress-value mobile-circle' style='background-color:".returnColor($value, $true_label).";'>{$value}</div>";
                             echo "</div>";
 
-                            // if(!$attached) {
-                            //     echo "<h5 class='text-dark fs-5 mt-3 fw-bold'>{$label}</h5>";
-                            // }
                             echo "</div>";
                         }
                     }
 
-                    renderProgressBar($competency_data["evaluator"], $evaluator_value, "Evaluator", $firstBar);
-                    renderProgressBar($competency_data["pre"], $pre_value, $competency_data["overall_career_readiness_results"]['evaluator'] == null ? "Pre" : "Self", $firstBar);
-                    renderProgressBar($competency_data["post"], $post_value, $competency_data["overall_career_readiness_results"]['evaluator'] == null ? "Post" : "Self", $firstBar);
+                    renderProgressBar($competency_data["evaluator"], $evaluator_value, "Evaluator", $firstBar, "evaluator");
+                    renderProgressBar($competency_data["pre"], $pre_value, $competency_data["overall_career_readiness_results"]['evaluator'] == null ? "Pre" : "Self", $firstBar, "pre");
+                    renderProgressBar($competency_data["post"], $post_value, $competency_data["overall_career_readiness_results"]['evaluator'] == null ? "Post" : "Self", $firstBar, "post");
                 ?>
             </div>
 
         </div>
+
+        <?php 
+        if($competency_data["overall_career_readiness_results"]["evaluator"] != null){ 
+            ?>
+        <div class="row p-0 m-0 evaluator-switch">
+            <div class="col-sm-12 p-0">
+                <div class="d-flex float-end align-content-center">
+                    <div class="mt-1">
+                        <h5 class="font-size-14 text-black"> Evaluator Data</h5>
+                    </div>
+                    <div style="margin-left:5px">
+                        <div class="form-check form-switch" style="width:fit-content!important">
+                            <input class="form-check-input bg-success" type="checkbox"
+                                role="switch" id="evaluator_switch" onclick="eval_toggle()"
+                                checked>
+                            <label class="form-check-label"
+                                for="flexSwitchCheckChecked"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php } 
+        
+        ?>
+
     </div>
 </div>
