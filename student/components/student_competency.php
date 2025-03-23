@@ -25,51 +25,7 @@
 
                     <div class="card border-2">
                         <div class="card-body" style="color:black">
-                            <p class="recommendations-headings" dir="ltr"><strong>Engage in Class
-                                    Discussions</strong></p>
-                            <p dir="ltr">💬 Actively participate in class discussions and group
-                                projects. When possible, prepare insightful questions and
-                                comments beforehand to contribute meaningfully to the
-                                conversation. You will deepen your understanding of the subject
-                                matter and improve your communication skills.</p>
-                            <p class="recommendations-headings" dir="ltr">
-                                <strong><br></strong><strong>Be Mindful of Nonverbal
-                                    Communication</strong>
-                            </p>
-                            <p dir="ltr">👀 Pay attention to your body language, facial
-                                expressions, and eye contact during interactions, as well as the
-                                nonverbal communication of others. <a class="text-primary"
-                                    href="https://www.google.com/" target="_blank">Advance tip
-                                </a>: mirror positive
-                                nonverbal cues of others to show understanding and
-                                attentiveness.</p>
-                            <p class="recommendations-headings" dir="ltr">
-                                <strong><br></strong><strong>Prepare and Deliver
-                                    Presentations</strong>
-                            </p>
-                            <p dir="ltr">🎤 Volunteer to present in class, at meetings, or other
-                                situations to practice your verbal and non-verbal communication
-                                skills. By honing your presentation behaviors, you become a more
-                                effective communicator.</p>
-                            <p class="recommendations-headings" dir="ltr">
-                                <strong><br></strong><strong>Practice Active Listening
-                                    Skills</strong>
-                            </p>
-                            <p dir="ltr">👂Practice active listening during conversations by
-                                giving your full attention to the speaker and genuinely engaging
-                                with their message. Avoid interrupting and focus on
-                                understanding their perspective before formulating a response.
-                                Reflect back on what the speaker has said to demonstrate
-                                comprehension and empathy. You will build strong relationships
-                                when you consistently use active listening behaviors. </p>
-                            <p class="recommendations-headings" dir="ltr">
-                                <strong><br></strong><strong>Talk to Professionals in
-                                    Career Roles that Interest You</strong>
-                            </p>
-                            <p dir="ltr">🕵🏼 Set up time to talk with professionals in careers
-                                you're interested in to gain information. Utilize your school
-                                resources and guidance from your career center to connect with
-                                individuals in your desired field.</p>
+                            <?= $recommendations["Communication"] ?>
                         </div>
                     </div>
                 </div>
@@ -81,80 +37,269 @@
     <div class="py-3 d-md-none"></div>
 
     <div class="accordion-item">
-        <h2 class="accordion-header card-body py-md-4 py-0" id="headingCommunication">
+        <h2 class="accordion-header card-body competency_result py-md-4 py-0" id="flush-headingTwo">
             <div class="row align-items-center">
-                <?= generate_competency_results($competency_data, "communication_results", "#3ca4fe", "Communication", "./assets/images/nace-icons/nace-communication-black-line-art-icon.png", "communication") ?>
-                <div class="col-md-1 col-12 d-flex flex-row flex-md-column align-items-center justify-content-center">
-                    <button class="accordion-button collapsed btn-up "
+                <?= generate_competency_results($competency_data, "teamwork_results", "teamwork", "Teamwork","./assets/images/nace-icons/nace-teamwork-black-line-art-icon.png","teamwork") ?>
+                <div class="col-md-1 col-12 d-flex flex-row flex-md-column align-items-center justify-content-center py-2 py-md-0 accordion-button-wrapper">
+                    <button class="accordion-button collapsed btn-up"
                             type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseCommunication"
-                            aria-expanded="false" aria-controls="collapseCommunication">
-                        <span class="d-md-none text-nowrap px-2 text-dark fs-6">Read More</span>
+                            data-bs-target="#flush-collapseTwo"
+                            aria-expanded="false" aria-controls="flush-collapseTwo">
+                        <span class="d-md-none text-nowrap px-2 text-dark fs-6 fw-bold">View All</span>
                     </button>
                 </div>
             </div>
             
 
         </h2>
-        <div id="collapseCommunication" class="accordion-collapse collapse" aria-labelledby="headingCommunication" data-bs-parent="#accordionFlushExample">
+        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
             <div class="accordion-body">
-                <?= generate_competency($competency_data["communication"], "#3ca4fe"); ?>
-                <h5 class="card-title text-black mb-3">
-                    Recommendations
-                </h5>
+                <?= generate_competency($competency_data["teamwork"], "teamwork"); ?>
+                <div class="card-body pb-1 pt-3">
+                    <h4 class="card-title text-black mb-3 fw-bold px-2">
+                        Recommendations
+                    </h4>
 
-                <div class="card border-2">
-                    <div class="card-body" style="color:black">
-                        <p class="recommendations-headings" dir="ltr"><strong>Engage in Class
-                                Discussions</strong></p>
-                        <p dir="ltr">💬 Actively participate in class discussions and group
-                            projects. When possible, prepare insightful questions and
-                            comments beforehand to contribute meaningfully to the
-                            conversation. You will deepen your understanding of the subject
-                            matter and improve your communication skills.</p>
-                        <p class="recommendations-headings" dir="ltr">
-                            <strong><br></strong><strong>Be Mindful of Nonverbal
-                                Communication</strong>
-                        </p>
-                        <p dir="ltr">👀 Pay attention to your body language, facial
-                            expressions, and eye contact during interactions, as well as the
-                            nonverbal communication of others. <a class="text-primary"
-                                href="https://www.google.com/" target="_blank">Advance tip
-                            </a>: mirror positive
-                            nonverbal cues of others to show understanding and
-                            attentiveness.</p>
-                        <p class="recommendations-headings" dir="ltr">
-                            <strong><br></strong><strong>Prepare and Deliver
-                                Presentations</strong>
-                        </p>
-                        <p dir="ltr">🎤 Volunteer to present in class, at meetings, or other
-                            situations to practice your verbal and non-verbal communication
-                            skills. By honing your presentation behaviors, you become a more
-                            effective communicator.</p>
-                        <p class="recommendations-headings" dir="ltr">
-                            <strong><br></strong><strong>Practice Active Listening
-                                Skills</strong>
-                        </p>
-                        <p dir="ltr">👂Practice active listening during conversations by
-                            giving your full attention to the speaker and genuinely engaging
-                            with their message. Avoid interrupting and focus on
-                            understanding their perspective before formulating a response.
-                            Reflect back on what the speaker has said to demonstrate
-                            comprehension and empathy. You will build strong relationships
-                            when you consistently use active listening behaviors. </p>
-                        <p class="recommendations-headings" dir="ltr">
-                            <strong><br></strong><strong>Talk to Professionals in
-                                Career Roles that Interest You</strong>
-                        </p>
-                        <p dir="ltr">🕵🏼 Set up time to talk with professionals in careers
-                            you're interested in to gain information. Utilize your school
-                            resources and guidance from your career center to connect with
-                            individuals in your desired field.</p>
+                    <div class="card border-2">
+                        <div class="card-body" style="color:black">
+                            <?= $recommendations["Teamwork"] ?>
+                        </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
+
+    <div class="py-3 d-md-none"></div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header card-body competency_result py-md-4 py-0" id="flush-headingThree">
+            <div class="row align-items-center">
+                <?= generate_competency_results($competency_data, "self_development_results","career-development", "Career & Self Development","./assets/images/nace-icons/nace-career-and-self-development-black-line-art-icon.png","self_development") ?>
+                <div class="col-md-1 col-12 d-flex flex-row flex-md-column align-items-center justify-content-center py-2 py-md-0 accordion-button-wrapper">
+                    <button class="accordion-button collapsed btn-up"
+                            type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseThree"
+                            aria-expanded="false" aria-controls="flush-collapseThree">
+                        <span class="d-md-none text-nowrap px-2 text-dark fs-6 fw-bold">View All</span>
+                    </button>
+                </div>
+            </div>
+            
+
+        </h2>
+        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <?= generate_competency($competency_data["self_development"], "career-development"); ?>
+                <div class="card-body pb-1 pt-3">
+                    <h4 class="card-title text-black mb-3 fw-bold px-2">
+                        Recommendations
+                    </h4>
+
+                    <div class="card border-2">
+                        <div class="card-body" style="color:black">
+                            <?= $recommendations["Career & Self Development"] ?>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="py-3 d-md-none"></div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header card-body competency_result py-md-4 py-0" id="flush-headingFour">
+            <div class="row align-items-center">
+                <?= generate_competency_results($competency_data, "professionalism_results","professionalism", "Professionalism","./assets/images/nace-icons/nace-professionalism-black-line-art-icon.png","professionalism") ?>
+                <div class="col-md-1 col-12 d-flex flex-row flex-md-column align-items-center justify-content-center py-2 py-md-0 accordion-button-wrapper">
+                    <button class="accordion-button collapsed btn-up"
+                            type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseFour"
+                            aria-expanded="false" aria-controls="flush-collapseFour">
+                        <span class="d-md-none text-nowrap px-2 text-dark fs-6 fw-bold">View All</span>
+                    </button>
+                </div>
+            </div>
+            
+
+        </h2>
+        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <?= generate_competency($competency_data["professionalism"], "professionalism"); ?>
+                <div class="card-body pb-1 pt-3">
+                    <h4 class="card-title text-black mb-3 fw-bold px-2">
+                        Recommendations
+                    </h4>
+
+                    <div class="card border-2">
+                        <div class="card-body" style="color:black">
+                            <?= $recommendations["Professionalism"] ?>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="py-3 d-md-none"></div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header card-body competency_result py-md-4 py-0" id="flush-headingFive">
+            <div class="row align-items-center">
+                <?= generate_competency_results($competency_data, "leadership_results","leadership", "Leadership","./assets/images/nace-icons/nace-leadership-black-line-art-icon.png","leadership") ?>
+                <div class="col-md-1 col-12 d-flex flex-row flex-md-column align-items-center justify-content-center py-2 py-md-0 accordion-button-wrapper">
+                    <button class="accordion-button collapsed btn-up"
+                            type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseFive"
+                            aria-expanded="false" aria-controls="flush-collapseFive">
+                        <span class="d-md-none text-nowrap px-2 text-dark fs-6 fw-bold">View All</span>
+                    </button>
+                </div>
+            </div>
+            
+
+        </h2>
+        <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <?= generate_competency($competency_data["leadership"], "leadership"); ?>
+                <div class="card-body pb-1 pt-3">
+                    <h4 class="card-title text-black mb-3 fw-bold px-2">
+                        Recommendations
+                    </h4>
+
+                    <div class="card border-2">
+                        <div class="card-body" style="color:black">
+                            <?= $recommendations["Leadership"] ?>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="py-3 d-md-none"></div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header card-body competency_result py-md-4 py-0" id="flush-headingSix">
+            <div class="row align-items-center">
+                <?= generate_competency_results($competency_data, "critical_thinking_results","critical-thinking", "Critical Thinking","./assets/images/nace-icons/nace-critical-thinking-black-line-art-icon.png","critical_thinking") ?>
+                <div class="col-md-1 col-12 d-flex flex-row flex-md-column align-items-center justify-content-center py-2 py-md-0 accordion-button-wrapper">
+                    <button class="accordion-button collapsed btn-up"
+                            type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseSix"
+                            aria-expanded="false" aria-controls="flush-collapseSix">
+                        <span class="d-md-none text-nowrap px-2 text-dark fs-6 fw-bold">View All</span>
+                    </button>
+                </div>
+            </div>
+            
+
+        </h2>
+        <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <?= generate_competency($competency_data["critical_thinking"], "critical-thinking"); ?>
+                <div class="card-body pb-1 pt-3">
+                    <h4 class="card-title text-black mb-3 fw-bold px-2">
+                        Recommendations
+                    </h4>
+
+                    <div class="card border-2">
+                        <div class="card-body" style="color:black">
+                            <?= $recommendations["Critical Thinking"] ?>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="py-3 d-md-none"></div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header card-body competency_result py-md-4 py-0" id="flush-headingSeven">
+            <div class="row align-items-center">
+            <?= generate_competency_results($competency_data, "technology_results","technology", "Technology","./assets/images/nace-icons/nace-technology-black-line-art-icon.png","technology") ?>
+                <div class="col-md-1 col-12 d-flex flex-row flex-md-column align-items-center justify-content-center py-2 py-md-0 accordion-button-wrapper">
+                    <button class="accordion-button collapsed btn-up"
+                            type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseSeven"
+                            aria-expanded="false" aria-controls="flush-collapseSeven">
+                        <span class="d-md-none text-nowrap px-2 text-dark fs-6 fw-bold">View All</span>
+                    </button>
+                </div>
+            </div>
+            
+
+        </h2>
+        <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <?= generate_competency($competency_data["technology"], "technology"); ?>
+                <div class="card-body pb-1 pt-3">
+                    <h4 class="card-title text-black mb-3 fw-bold px-2">
+                        Recommendations
+                    </h4>
+
+                    <div class="card border-2">
+                        <div class="card-body" style="color:black">
+                            <?= $recommendations["Technology"] ?>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="py-3 d-md-none"></div>
+
+    <?php 
+        if(isset($competency_data["equity"])){                                
+    ?>
+        <div class="accordion-item">
+            <h2 class="accordion-header card-body competency_result py-md-4 py-0" id="flush-headingEight">
+                <div class="row align-items-center">
+                <?= generate_competency_results($competency_data, "equity_results","equity", "Equity & Inclusion","./assets/images/nace-icons/nace-equity-and-inclusion-black-line-art-icon.png","equity") ?>
+                    <div class="col-md-1 col-12 d-flex flex-row flex-md-column align-items-center justify-content-center py-2 py-md-0 accordion-button-wrapper">
+                        <button class="accordion-button collapsed btn-up"
+                                type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseEight"
+                                aria-expanded="false" aria-controls="flush-collapseEight">
+                            <span class="d-md-none text-nowrap px-2 text-dark fs-6 fw-bold">View All</span>
+                        </button>
+                    </div>
+                </div>
+                
+
+            </h2>
+            <div id="flush-collapseEight" class="accordion-collapse collapse" aria-labelledby="flush-headingEight" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <?= generate_competency($competency_data["equity"], "equity"); ?>
+                    <div class="card-body pb-1 pt-3">
+                        <h4 class="card-title text-black mb-3 fw-bold px-2">
+                            Recommendations
+                        </h4>
+
+                        <div class="card border-2">
+                            <div class="card-body" style="color:black">
+                                <?= $recommendations["Equity & Inclusion"] ?>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    <?php 
+        }
+    ?>
+
+    <div class="py-3 d-md-none"></div>
 
     <!-- Repeat this structure for each competency -->
 </div>

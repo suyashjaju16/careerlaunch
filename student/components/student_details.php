@@ -73,7 +73,7 @@
                                             </h5>
                                             <div class="d-flex align-items-center justify-content-center">
                                                 <i class="mdi mdi-email me-2" style="font-size:18px;"></i>
-                                                <h5 class="m-0">
+                                                <h5 class="m-0 text-break">
                                                     <?= isset($student_details['Evaluator Email']) ? $student_details['Evaluator Email'] : "N/A" ?>
                                                 </h5>
                                             </div>

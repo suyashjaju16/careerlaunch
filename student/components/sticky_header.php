@@ -20,7 +20,7 @@
                         <div class="d-none d-md-flex row gx-2 px-2 justify-content-between align-items-center mb-3 progress-bar-labels">
                             <div class="col-md-3 text-center ">
                                 <span class="badge text-dark text-center fw-bolder fs-6 p-1 text-break w-100"
-                                    style="background-color: #ADD8E6;">
+                                    style="background-color: #01a2b2;">
                                     Emerging Knowledge
                                 </span>
                             </div>
@@ -43,7 +43,7 @@
 
                         <div class="d-flex d-md-none row text-center gy-3 px-3 pb-3 mb-3 mt-1" style="border-top: #0000001f solid 1px; border-bottom: #0000001f solid 1px;">
                             <div class="col-6 d-flex align-items-center pe-2 ps-0">
-                                <span class="badge me-2 rounded bg-primary" style="min-width: 20px; min-height: 20px;">&nbsp;</span>
+                                <span class="badge me-2 rounded" style="min-width: 20px; min-height: 20px; background: #01a2b2">&nbsp;</span>
                                 <span class="text-dark fw-bold text-break mx-auto">Emerging Knowledge</span>
                             </div>
                             <div class="col-6 d-flex align-items-center pe-2 ps-0">
@@ -117,7 +117,7 @@
 
 <!-- Hidden Popover Content (Stored in a Single Place) -->
 <div id="popover-content" class="d-none">
-    <div class='badge text-dark px-3 py-2 fw-bold bg-light-blue'>Emerging Knowledge</div>
+    <div class='badge text-dark px-3 py-2 fw-bold bg-emerging'>Emerging Knowledge</div>
     <p class='mt-2 mb-2 text-black'>The student has an emerging awareness of the behavior, its importance, and related concepts.</p>
     <div class='badge bg-success text-dark px-3 py-2 fw-bold'>Understanding</div>
     <p class='mt-2 mb-2 text-black'>The student demonstrates an understanding of the behavior and related concepts.</p>
