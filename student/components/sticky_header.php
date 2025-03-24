@@ -20,22 +20,22 @@
 
                         <div class="d-none d-md-flex row gx-2 px-2 justify-content-between align-items-center mb-3 progress-bar-labels">
                             <div class="col-md-3 text-center ">
-                                <span class="badge text-dark text-center fw-bolder fs-6 p-1 text-break w-100 bg-emerging">
+                                <span class="badge text-black text-center fw-bolder fs-6 p-1 text-break w-100 bg-emerging">
                                     Emerging Knowledge
                                 </span>
                             </div>
                             <div class="col-md-3 text-center">
-                                <span class="badge bg-success text-dark text-center fw-bolder fs-6 p-1 text-break w-100">
+                                <span class="badge bg-success text-black text-center fw-bolder fs-6 p-1 text-break w-100">
                                     Understanding
                                 </span>
                             </div>
                             <div class="col-md-3 text-center">
-                                <span class="badge bg-warning text-dark text-center fw-bolder fs-6 p-1 text-break w-100">
+                                <span class="badge bg-warning text-black text-center fw-bolder fs-6 p-1 text-break w-100">
                                     Early Application
                                 </span>
                             </div>
                             <div class="col-md-3 text-center">
-                                <span class="badge bg-danger text-dark text-center fw-bolder fs-6 p-1 text-break w-100">
+                                <span class="badge bg-danger text-black text-center fw-bolder fs-6 p-1 text-break w-100">
                                     Advanced Application
                                 </span>
                             </div>
@@ -95,12 +95,12 @@
                         </div>
 
                         <!-- Ruler Values (Aligned Precisely) -->
-                        <div class="d-flex justify-content-between mt-1" style="margin-left: -3px; ">
-                            <span class="fw-bold text-dark small" style=" padding-right:8px;">0</span>
-                            <span class="fw-bold text-dark small" style=" padding-left:5px;">25</span>
-                            <span class="fw-bold text-dark small" style=" padding-left:10px;">50</span>
-                            <span class="fw-bold text-dark small" style=" padding-left:10px;">75</span>
-                            <span class="fw-bold text-dark small" style="margin-right:-5px;">100</span>
+                        <div class="d-flex justify-content-between mt-2" style="margin-left: -3px; ">
+                            <span class="fw-bold text-black fw-bolder small" style=" padding-right:8px;">0</span>
+                            <span class="fw-bold text-black fw-bolder small" style=" padding-left:5px;">25</span>
+                            <span class="fw-bold text-black fw-bolder small" style=" padding-left:10px;">50</span>
+                            <span class="fw-bold text-black fw-bolder small" style=" padding-left:10px;">75</span>
+                            <span class="fw-bold text-black fw-bolder small" style="margin-right:-5px;">100</span>
                         </div>
 
                     </div>
@@ -118,14 +118,14 @@
 
 <!-- Hidden Popover Content (Stored in a Single Place) -->
 <div id="popover-content" class="d-none">
-    <div class='badge text-dark px-3 py-2 fw-bold bg-emerging'>Emerging Knowledge</div>
-    <p class='mt-2 mb-2 text-black'>The student has an emerging awareness of the behavior, its importance, and related concepts.</p>
-    <div class='badge bg-success text-dark px-3 py-2 fw-bold'>Understanding</div>
-    <p class='mt-2 mb-2 text-black'>The student demonstrates an understanding of the behavior and related concepts.</p>
-    <div class='badge bg-warning text-dark px-3 py-2 fw-bold'>Early Application</div>
-    <p class='mt-2 mb-2 text-black'>The student sometimes applies the behavior.</p>
-    <div class='badge bg-danger text-dark px-3 py-2 fw-bold'>Advanced Application</div>
-    <p class='mt-2 mb-2 text-black'>The behavior is consistent and integrated into the student’s workplace behaviors.</p>
+    <div class='badge text-black px-3 py-2 fw-bold bg-emerging fs-5'>Emerging Knowledge</div>
+    <p class='mt-2 mb-2 fs-6 text-black'>The student has an emerging awareness of the behavior, its importance, and related concepts.</p>
+    <div class='badge bg-success text-black px-3 py-2 fw-bold  fs-5'>Understanding</div>
+    <p class='mt-2 mb-2 fs-6 text-black'>The student demonstrates an understanding of the behavior and related concepts.</p>
+    <div class='badge bg-warning text-black px-3 py-2 fw-bold  fs-5'>Early Application</div>
+    <p class='mt-2 mb-2 fs-6 text-black'>The student sometimes applies the behavior.</p>
+    <div class='badge bg-danger text-black px-3 py-2 fw-bold  fs-5'>Advanced Application</div>
+    <p class='mt-2 mb-2 fs-6 text-black'>The behavior is consistent and integrated into the student’s workplace behaviors.</p>
 </div>
 
 <!-- Enable Bootstrap Popovers & Set Triggers Based on Screen Size -->

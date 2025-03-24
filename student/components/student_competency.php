@@ -256,11 +256,13 @@
         </div>
     </div>
 
-    <div class="py-3 d-md-none"></div>
-
     <?php 
         if(isset($competency_data["equity"])){                                
     ?>
+
+        <div class="py-3 d-md-none"></div>
+
+
         <div class="accordion-item">
             <h2 class="accordion-header card-body competency_result py-md-4 py-0" id="flush-headingEight">
                 <div class="row align-items-center">
@@ -299,8 +301,6 @@
         }
     ?>
 
-    <div class="py-3 d-md-none"></div>
-
     <!-- Repeat this structure for each competency -->
 </div>
 
@@ -324,6 +324,13 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    var accordionItems = document.querySelectorAll('.accordion .accordion-item');
+    if (accordionItems.length > 0) {
+        accordionItems[accordionItems.length - 1].style.borderBottom = 'none';
+    }
 });
 </script>
 

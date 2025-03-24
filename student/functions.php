@@ -95,11 +95,13 @@ function generate_competency($level,$competency_label) {
 
         if (!empty($value["evaluator"])) {
             $evaluator_value = returnLevel($value["evaluator"]);
+            $opacityClass = ($value["evaluator"] === "Not Observed") ? "opacity-50" : ""; 
+            $opacityClassProgressBar = ($value["evaluator"] === "Not Observed") ? "opacity-0" : "";
             echo '
                     <div class="progress evaluator-data bg-white bar-data">
-                        <div class="progress-bar animated-progress" role="progressbar" data-width="'.$evaluator_value.'" aria-valuemin="0" aria-valuemax="100"
+                        <div class="progress-bar animated-progress '.$opacityClassProgressBar.'" role="progressbar" data-width="'.$evaluator_value.'" aria-valuemin="0" aria-valuemax="100"
                         style="width:'.$evaluator_value.'%; max-width: 100%" ></div>
-                        <div class="progress-value mobile-circle" ></div>
+                        <div class="progress-value mobile-circle '.$opacityClass.'" ></div>
                         <div class="progress-label fs-6 fw-bolder text-dark" data-percent="'.$evaluator_value.'">'.$value["evaluator"].'</div>
                     </div>
             ';
