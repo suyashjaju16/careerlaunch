@@ -15,7 +15,7 @@
             
 
         </h2>
-        <div id="collapseCommunication" class="accordion-collapse collapse" aria-labelledby="headingCommunication" data-bs-parent="#accordionFlushExample">
+        <div id="collapseCommunication" class="accordion-collapse collapse" aria-labelledby="headingCommunication" >
             <div class="accordion-body">
                 <?= generate_competency($competency_data["communication"], "communication"); ?>
                 <div class="card-body pb-1 pt-3">
@@ -52,7 +52,7 @@
             
 
         </h2>
-        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" >
             <div class="accordion-body">
                 <?= generate_competency($competency_data["teamwork"], "teamwork"); ?>
                 <div class="card-body pb-1 pt-3">
@@ -89,7 +89,7 @@
             
 
         </h2>
-        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" >
             <div class="accordion-body">
                 <?= generate_competency($competency_data["self_development"], "career-development"); ?>
                 <div class="card-body pb-1 pt-3">
@@ -126,7 +126,7 @@
             
 
         </h2>
-        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" >
             <div class="accordion-body">
                 <?= generate_competency($competency_data["professionalism"], "professionalism"); ?>
                 <div class="card-body pb-1 pt-3">
@@ -163,7 +163,7 @@
             
 
         </h2>
-        <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+        <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" >
             <div class="accordion-body">
                 <?= generate_competency($competency_data["leadership"], "leadership"); ?>
                 <div class="card-body pb-1 pt-3">
@@ -200,7 +200,7 @@
             
 
         </h2>
-        <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+        <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" >
             <div class="accordion-body">
                 <?= generate_competency($competency_data["critical_thinking"], "critical-thinking"); ?>
                 <div class="card-body pb-1 pt-3">
@@ -237,7 +237,7 @@
             
 
         </h2>
-        <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
+        <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven" >
             <div class="accordion-body">
                 <?= generate_competency($competency_data["technology"], "technology"); ?>
                 <div class="card-body pb-1 pt-3">
@@ -277,7 +277,7 @@
                 
 
             </h2>
-            <div id="flush-collapseEight" class="accordion-collapse collapse" aria-labelledby="flush-headingEight" data-bs-parent="#accordionFlushExample">
+            <div id="flush-collapseEight" class="accordion-collapse collapse" aria-labelledby="flush-headingEight" >
                 <div class="accordion-body">
                     <?= generate_competency($competency_data["equity"], "equity"); ?>
                     <div class="card-body pb-1 pt-3">
@@ -303,3 +303,27 @@
 
     <!-- Repeat this structure for each competency -->
 </div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    const accordions = document.querySelectorAll('.accordion-collapse');
+
+    accordions.forEach(function (accordion) {
+        const collapseId = accordion.id;
+        const button = document.querySelector(`button[data-bs-target="#${collapseId}"]`);
+        const span = button?.querySelector('.d-md-none');
+
+        if (button && span) {
+            accordion.addEventListener('show.bs.collapse', function () {
+                span.textContent = 'Close';
+            });
+
+            accordion.addEventListener('hide.bs.collapse', function () {
+                span.textContent = 'View All';
+            });
+        }
+    });
+});
+</script>
+
