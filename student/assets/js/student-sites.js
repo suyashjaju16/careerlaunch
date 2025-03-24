@@ -1,7 +1,7 @@
 
 function eval_toggle() {
     // $(".evalu").hide()
-    if (document.getElementById('evaluator_switch').checked) {
+    if (document.getElementById('evaluator_switch')?.checked) {
         $(".evaluator-data").show();
         $(".pre-data").hide();
         $(".pre-label").html("Self");

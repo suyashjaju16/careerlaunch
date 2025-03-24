@@ -1,7 +1,7 @@
 <div id="sticky-sentinel" style="height: 1px;"></div>
 <div class="row sticky-top">
     <div class="col-12 px-0">
-        <div class="card">
+        <div class="card sticky-header-card">
             <div class="card-body py-md-4 py-2">
 
                 <div class="row align-items-center">
@@ -154,6 +154,31 @@
                 });
             }
         });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const sentinel = document.getElementById('sticky-sentinel');
+        const stickyCard = document.querySelector('.sticky-header-card');
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+
+                if (entry.isIntersecting) {
+                    stickyCard.classList.remove('sticky-top-active');
+                } else {
+                    stickyCard.classList.add('sticky-top-active');
+                }
+            },
+            {
+                root: null,
+                threshold: 0,
+            }
+        );
+
+        if (sentinel) {
+            observer.observe(sentinel);
+        }
+        
     });
 
     // document.addEventListener("DOMContentLoaded", function () {

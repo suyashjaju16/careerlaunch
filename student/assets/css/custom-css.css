@@ -126,6 +126,11 @@ td {
 	object-fit: contain;
 }
 
+.sticky-top-active {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
 .accordion {
 	background-color: transparent;
 }
