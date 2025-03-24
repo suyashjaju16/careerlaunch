@@ -21,7 +21,7 @@
                         <div class="d-none d-md-flex row gx-2 px-2 justify-content-between align-items-center mb-3 progress-bar-labels">
                             <div class="col-md-3 text-center ">
                                 <span class="badge text-dark text-center fw-bolder fs-6 p-1 text-break w-100 bg-emerging">
-                                    Emerging Knowledger
+                                    Emerging Knowledge
                                 </span>
                             </div>
                             <div class="col-md-3 text-center">
@@ -45,19 +45,19 @@
                         <div id="mobile-labels" class="d-flex d-md-none row text-center gy-3 px-3 pb-3 mb-3 mt-1" style=" border-bottom: #0000001f solid 1px;">
                             <div class="col-6 d-flex align-items-center pe-2 ps-0">
                                 <span class="badge me-2 rounded bg-emerging" style="min-width: 20px; min-height: 20px;">&nbsp;</span>
-                                <span class="text-dark fw-bold text-break mx-auto">Emerging Knowledge</span>
+                                <span class="text-dark fw-bold flex-grow-1 text-nowrap">Emerging Knowledge</span>
                             </div>
                             <div class="col-6 d-flex align-items-center pe-2 ps-0">
                                 <span class="badge me-2 rounded bg-warning" style="min-width: 20px; min-height: 20px;">&nbsp;</span>
-                                <span class="text-dark fw-bold text-break mx-auto">Early Application</span>
+                                <span class="text-dark fw-bold flex-grow-1 text-nowrap">Early Application</span>
                             </div>
                             <div class="col-6 d-flex align-items-center pe-2 ps-0">
                                 <span class="badge me-2 rounded bg-success" style="min-width: 20px; min-height: 20px;">&nbsp;</span>
-                                <span class="text-dark fw-bold text-break mx-auto">Understanding</span>
+                                <span class="text-dark fw-bold flex-grow-1 text-nowrap">Understanding</span>
                             </div>
                             <div class="col-6 d-flex align-items-center pe-2 ps-0">
                                 <span class="badge me-2 rounded bg-danger" style="min-width: 20px; min-height: 20px;">&nbsp;</span>
-                                <span class="text-dark fw-bold text-break mx-auto">Advanced Application</span>
+                                <span class="text-dark fw-bold flex-grow-1 text-nowrap">Advanced Application</span>
                             </div>
                         </div>
 
@@ -156,44 +156,44 @@
         });
     });
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const sentinel = document.getElementById('sticky-sentinel');
-        const mobileLabels = document.getElementById('mobile-labels');
-        const stickyTop = document.querySelector('.sticky-top');
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     const sentinel = document.getElementById('sticky-sentinel');
+    //     const mobileLabels = document.getElementById('mobile-labels');
+    //     const stickyTop = document.querySelector('.sticky-top');
 
-        // Set a baseline height when the page loads
-        function setStickyMinHeight() {
-            const stickyHeight = stickyTop.offsetHeight;
-            stickyTop.style.minHeight = `${stickyHeight}px`;
-        }
+    //     // Set a baseline height when the page loads
+    //     function setStickyMinHeight() {
+    //         const stickyHeight = stickyTop.offsetHeight;
+    //         stickyTop.style.minHeight = `${stickyHeight}px`;
+    //     }
 
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                const isSticky = !entry.isIntersecting;
+    //     const observer = new IntersectionObserver(
+    //         ([entry]) => {
+    //             const isSticky = !entry.isIntersecting;
 
-                if (isSticky) {
-                    mobileLabels.classList.add('collapsed'); // Collapse smoothly
-                } else {
-                    mobileLabels.classList.remove('collapsed'); // Expand smoothly
-                }
-            },
-            {
-                root: null,
-                threshold: 0,
-            }
-        );
+    //             if (isSticky) {
+    //                 mobileLabels.classList.add('collapsed'); // Collapse smoothly
+    //             } else {
+    //                 mobileLabels.classList.remove('collapsed'); // Expand smoothly
+    //             }
+    //         },
+    //         {
+    //             root: null,
+    //             threshold: 0,
+    //         }
+    //     );
 
-        if (sentinel && mobileLabels) {
-            observer.observe(sentinel);
-            setStickyMinHeight(); // Set min-height on page load
-        }
+    //     if (sentinel && mobileLabels) {
+    //         observer.observe(sentinel);
+    //         setStickyMinHeight(); // Set min-height on page load
+    //     }
 
-        window.addEventListener('resize', () => {
-            if (window.innerWidth >= 768) {
-                mobileLabels.classList.remove('collapsed'); // Show on desktop
-            }
-        });
-    });
+    //     window.addEventListener('resize', () => {
+    //         if (window.innerWidth >= 768) {
+    //             mobileLabels.classList.remove('collapsed'); // Show on desktop
+    //         }
+    //     });
+    // });
 
 
 </script>

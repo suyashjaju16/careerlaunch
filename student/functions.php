@@ -88,7 +88,7 @@ function generate_competency($level,$competency_label) {
         <div class="card-body competency py-0">
             <div class="row align-items-center py-2 py-md-3">
                 <div class="col-md-3 col-12 text-center text-md-left d-flex align-items-center justify-content-center">
-                    <div class="text-dark mb-0 pt-2 pb-3 px-0 p-md-2 fw-bold fs-5">'.$key.'
+                    <div class="text-dark mb-0 pt-2 pb-3 px-0 p-md-2 fw-bolder fs-5">'.$key.'
                     </div>
                 </div>
                 <div class="col-md-8 col-12 py-3">';

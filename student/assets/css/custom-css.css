@@ -55,7 +55,7 @@
 	}
 
 	.competency .progress:not(:last-child) {
-		margin-bottom: 40px !important; /* or padding, margin, etc. */
+		margin-bottom: 43px !important; /* or padding, margin, etc. */
 	}
 
 	.competency .progress:last-child {
@@ -63,7 +63,7 @@
 	}
 
 	.progress-label {
-		top: 15px !important; 
+		top: 18px !important; 
 	}
 
 	.pb-4-5-mobile{
@@ -86,6 +86,13 @@
 		padding-bottom: 0 !important;
 		max-height: 0;
 		opacity: 0;
+	}
+
+	#mobile-labels span.text-dark {
+		text-align: left !important;
+		white-space: nowrap; /* Prevent text wrapping */
+		display: block; /* Ensure it takes full width */
+		font-size: clamp(1px, 3vw, 14px); /* Adjust size between 1px and 14px */
 	}
 }
 
@@ -168,13 +175,13 @@ td {
 
 .progress-label {
     position: absolute;
-    top: 20px; 
+    top: 23px; 
     white-space: nowrap;
 	animation: progress-label-animation 1s ease-out forwards;
 }
 
 .competency .progress:not(:last-child) {
-	margin-bottom: 50px; /* or padding, margin, etc. */
+	margin-bottom: 53px; /* or padding, margin, etc. */
 }
 
 .evaluator-data{
