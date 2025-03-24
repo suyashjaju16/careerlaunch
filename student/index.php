@@ -10,13 +10,12 @@ include("payload.php");
 //Fetch Student Details
 $student_details = json_decode(fetch_data(API_STUDENT_DETAILS_ENDPOINT,$data),true);
 
-// Example usage
 $org_id = extractIdFromUrl($student_details["Logo"]);
 $recommendations_data = createRecommendationsJson($org_id);
 $recommendations_json = json_decode(fetch_data(API_CUSTOM_RECOMMENDATIONS_ENDPOINT,$recommendations_data,"GET"),true);
 $url = $recommendations_json["recommendation_url"] != null ? $recommendations_json["recommendation_url"] : STANDARD_RECOMMENDATIONS_URL;
 $recommendations = fetchRecommendations($url);
-// echo "<pre>".json_encode($recommendations)."</pre>";
+
 if(isset($student_details["Evaluator Email"]) && $student_details["Evaluator Email"] != null)
     $filters->evaluator_email = $student_details["Evaluator Email"];
 $data = $filters;
@@ -43,15 +42,21 @@ $selected_filter = isset($_POST['filterData']) ? $_POST['filterData'] : '';
             <div class="container-fluid">
                 <?php include("./components/sticky_header.php"); ?>
                 <div class="row">
-                    <div class="col-sm-12 p-0">
+                    <div class="col-12 px-0 overall-career-readiness-section">
                         <?php include("./components/overall_career_readiness.php"); ?>
                     </div>
-                    <div class="row card p-3" style="margin-bottom:80px;margin:auto">
-                        <?php include("./components/student_competency.php") ?>
+                    <div class="col-12 px-0" >
+                        <div class="card student-competency-section">
+                            <?php include("./components/student_competency.php") ?>
 
-                        <hr style="opacity:1">
-                        <?php include("./components/footer.php"); ?>
-
+                            <hr style="opacity:1">
+                            <?php include("./components/footer.php"); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
                     
 </body>
 

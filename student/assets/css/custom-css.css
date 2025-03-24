@@ -1,3 +1,81 @@
+
+
+@media (max-width: 767px) { /* Apply only for sm and smaller */
+
+	.mobile-competency-name .img-fluid {
+		height: 40px !important; 
+		width: 40px !important; 
+		object-fit: contain;
+	}
+
+	.header-title{
+		justify-content: space-between !important;
+	}
+	
+	.progress-value.mobile-circle {
+		font-size: 14px;
+		height: 30px;
+		width: 30px;
+		line-height: 30px;
+		margin-top: -12px;
+		position: relative;
+		left: -30px;
+	}
+
+	.animated-progress.progress-bar{
+		min-width: 30px !important;
+	}
+
+	.mobile-competency-name{
+
+		margin-left: calc(-1 * var(--bs-card-spacer-x)) !important;
+  		margin-right: calc(-1 * var(--bs-card-spacer-x)) !important;
+		border-bottom-right-radius: 0 !important;
+		border-bottom-left-radius: 0 !important;
+	}
+
+	.accordion-button {
+		--bs-accordion-btn-icon-width: 30px !important;
+	}
+
+	.accordion-button-wrapper{
+		border-top: 1px solid #0000001f;
+	}
+
+	.student-competency-section{
+		background-color: transparent;
+		border: none;
+		box-shadow: none;
+
+		.accordion-item{
+			background: white;
+			border-radius: 20px;
+			box-shadow: 0 2px 4px rgba(0,0,0,.08);
+		}
+	}
+
+	.competency .progress:not(:last-child) {
+		margin-bottom: 40px !important; /* or padding, margin, etc. */
+	}
+
+	.competency .progress:last-child {
+		margin-bottom: 30px !important; /* or padding, margin, etc. */
+	}
+
+	.progress-label {
+		top: 15px !important; 
+	}
+
+	.pb-4-5-mobile{
+		padding-bottom: 2.5rem !important;
+	}
+
+	.student-evaluator-details div{
+		text-align: center !important;
+	}
+}
+
+
 .card {
     border-radius: 20px !important;
 }
@@ -16,30 +94,95 @@ td {
     /* text-align: center !important; */
 }
 
-.accordion-button:not(.collapsed) {
-    background-color: #fff;
+.org-logo {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 140px;
 }
 
-.accordion-item .icon-text p {
-    color: white !important;
+.mobile-competency-name .img-fluid {
+	height: 70px; 
+	width: 70px; 
+	object-fit: contain;
+}
+
+.accordion {
+	background-color: transparent;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.accordion-button {
+    --bs-accordion-btn-icon-width: 40px;
+	width: auto;
+    justify-content: center;
+    margin: auto;
+	padding: 0.2rem;
+}
+
+.accordion-body {
+	padding: 0;
+	.competency .row {
+		border-top: #0000001f solid 1px;
+	}
+	.competency .row:last-child {
+		border-bottom: #0000001f solid 1px;
+	}
+}
+
+.animated-progress.progress-bar{
+	flex-shrink: 0;
+	overflow: unset !important;
+	border-radius: 10px;
+	min-width: 38px;
+}
+
+.progress-bar-labels span {
+	display: block; 
+	white-space: normal;
+	line-height: 1.2rem;
+}
+
+.progress{
+	overflow: unset!important;
+	margin-bottom: 14px;
+	position: relative;
+}
+
+.progress-label {
+    position: absolute;
+    top: 20px; 
+    white-space: nowrap;
+	animation: progress-label-animation 1s ease-out forwards;
+}
+
+.competency .progress:not(:last-child) {
+	margin-bottom: 50px; /* or padding, margin, etc. */
+}
+
+.evaluator-data{
+	.progress-bar, .progress-value{
+		background-color: #000;
+	}
 }
 
 .progress-value {
+	flex-shrink: 0;
+	font-size: 16px;
     background-color: #01a2b2;
     border-radius: 50%;
-    height: 40px;
-    width: 40px;
+    height: 38px;
+    width: 38px;
     text-align: center;
     line-height: 38px;
     z-index: 3;
-    /* position: absolute; */
     color: white;
-    /* margin-left: 70%; */
-    margin-top: -18px;
-    /* border: solid;
-    border-color: black; */
-	position: relative!important;
-	left: -1%!important;;
+    margin-top: -16px;
+	position: relative;
+	left: -38px;
 	
 }
 
@@ -60,21 +203,12 @@ td {
 		-6px -6px 12px #ffffff38 !important;
 }
 
-.accordion-button{
-	--bs-accordion-btn-icon-width: 46px;
-}
-
 .f-800{
 	font-weight: 800;
 }
 
 .f-600{
 	font-weight: 600;
-}
-
-
-.btn-up.accordion-button::after{
-	margin-top: -65px!important;
 }
 
 .card-title{
@@ -104,13 +238,8 @@ td {
 	outline: 5px solid #323c48;
 }
 
-.progress-bar{
-	overflow: unset !important;
-	border-radius: 10px!important;
-}
-
-.progress{
-overflow: unset!important;
+.bg-light-blue{
+	background-color: #ADD8E6!important;
 }
 
 .form-switch .form-check-input{
@@ -121,8 +250,7 @@ overflow: unset!important;
 	position: relative;
 	width: 100%;
 	height: 2px;
-	background-color: #eaeaea;
-	border: 1px solid #000;
+	background-color: #000;
 }
 
 .tick {
@@ -133,7 +261,7 @@ overflow: unset!important;
 	background-color: #000;
 }
 
-.tick:nth-child(1) {
+/* .tick:nth-child(1) {
 	left: -1px;
 	width: 3.5px;
 }
@@ -154,8 +282,7 @@ overflow: unset!important;
 	left: 100%;
 	margin-left: -1px;
 	width: 3.5px
-		/* Adjust to center the last tick */
-}
+} */
 
 .digit-ruler {
 	position: relative;
@@ -224,6 +351,15 @@ select {
 	}
 }
 
+@keyframes progress-label-animation {
+	from {
+	  left: 0;
+	}
+	to {
+	  left: var(--final-left);
+	}
+  }
+
 .recommendations-headings {
 	font-size: 16px !important;
 }
@@ -240,3 +376,16 @@ select {
 .bg-dark {
 	background-color: #000 !important;
 }
+
+.mb-4-5{
+	margin-bottom: 2.0rem !important;
+}
+
+.competency_result .bar-data:not(:last-child) {
+	margin-bottom: 2.0rem !important; /* or padding, margin, etc. */
+}
+
+.custom-pb-2{
+	padding-bottom: 0.5rem !important;
+}
+

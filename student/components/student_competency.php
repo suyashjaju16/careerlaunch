@@ -1,220 +1,305 @@
 <div class="accordion accordion-flush" id="accordionFlushExample">
-                            <div class="accordion accordion-flush" id="accordionFlushExample">
-                                <div class="accordion-item" style="border-top:0px!important">
-                                    <h2 class="accordion-header" id="flush-headingZero">
-                                        <button class="accordion-button collapsed btn-up" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseZero"
-                                            aria-expanded="false" aria-controls="flush-collapseZero">
+    <div class="accordion-item">
+        <h2 class="accordion-header card-body competency_result py-md-4 py-0" id="headingCommunication">
+            <div class="row align-items-center">
+                <?= generate_competency_results($competency_data, "communication_results", "communication", "Communication", "./assets/images/nace-icons/nace-communication-black-line-art-icon.png", "communication") ?>
+                <div class="col-md-1 col-12 d-flex flex-row flex-md-column align-items-center justify-content-center py-2 py-md-0 accordion-button-wrapper">
+                    <button class="accordion-button collapsed btn-up"
+                            type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseCommunication"
+                            aria-expanded="false" aria-controls="collapseCommunication">
+                        <span class="d-md-none text-nowrap px-2 text-dark fs-6 fw-bold">View All</span>
+                    </button>
+                </div>
+            </div>
+            
 
-                                            <?= generate_competency_results($competency_data, "communication_results","#3ca4fe", "Communication", "./assets/images/nace-icons/nace-communication-black-line-art-icon.png","communication") ?>
-                                        </button>
-                                    </h2>
-                                    <div id="flush-collapseZero" class="accordion-collapse collapse"
-                                        aria-labelledby="flush-flush-collapseZero"
-                                        data-bs-parent="#accordionFlushExample">
-                                        <?= generate_competency($competency_data["communication"],"#3ca4fe"); ?>
-                                        <h5 class="card-title text-black mb-3">
-                                            Recommendations
-                                        </h5>
+        </h2>
+        <div id="collapseCommunication" class="accordion-collapse collapse" aria-labelledby="headingCommunication" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <?= generate_competency($competency_data["communication"], "communication"); ?>
+                <div class="card-body pb-1 pt-3">
+                    <h4 class="card-title text-black mb-3 fw-bold px-2">
+                        Recommendations
+                    </h4>
 
-                                        <div class="card border-2">
-                                            <div class="card-body" style="color:black">
-                                                <?= $recommendations["Communication"] ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="card border-2">
+                        <div class="card-body" style="color:black">
+                            <?= $recommendations["Communication"] ?>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
 
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-headingTwo">
-                                        <button class="accordion-button collapsed btn-up" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
-                                            aria-expanded="false" aria-controls="flush-collapseTwo">
-                                            <?= generate_competency_results($competency_data, "teamwork_results","#E06B60", "Teamwork","./assets/images/nace-icons/nace-teamwork-black-line-art-icon.png","teamwork") ?>
-                                        </button>
-                                    </h2>
-                                    <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                                        aria-labelledby="flush-flush-collapseTwo"
-                                        data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">
-                                            <?= generate_competency($competency_data["teamwork"], "#E06B60"); ?>
+    <div class="py-3 d-md-none"></div>
 
-                                            <h5 class="card-title text-black mb-3">
-                                                Recommendations
-                                            </h5>
+    <div class="accordion-item">
+        <h2 class="accordion-header card-body competency_result py-md-4 py-0" id="flush-headingTwo">
+            <div class="row align-items-center">
+                <?= generate_competency_results($competency_data, "teamwork_results", "teamwork", "Teamwork","./assets/images/nace-icons/nace-teamwork-black-line-art-icon.png","teamwork") ?>
+                <div class="col-md-1 col-12 d-flex flex-row flex-md-column align-items-center justify-content-center py-2 py-md-0 accordion-button-wrapper">
+                    <button class="accordion-button collapsed btn-up"
+                            type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseTwo"
+                            aria-expanded="false" aria-controls="flush-collapseTwo">
+                        <span class="d-md-none text-nowrap px-2 text-dark fs-6 fw-bold">View All</span>
+                    </button>
+                </div>
+            </div>
+            
 
-                                            <div class="card border-2">
-                                                <div class="card-body" style="color:black">
+        </h2>
+        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <?= generate_competency($competency_data["teamwork"], "teamwork"); ?>
+                <div class="card-body pb-1 pt-3">
+                    <h4 class="card-title text-black mb-3 fw-bold px-2">
+                        Recommendations
+                    </h4>
 
-                                                <?= $recommendations["Teamwork"] ?>
+                    <div class="card border-2">
+                        <div class="card-body" style="color:black">
+                            <?= $recommendations["Teamwork"] ?>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+    <div class="py-3 d-md-none"></div>
 
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-headingOne">
-                                        <button class="accordion-button collapsed btn-up" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
-                                            aria-expanded="false" aria-controls="flush-collapseOne">
-                                            <?= generate_competency_results($competency_data, "self_development_results","#f8b603", "Career & Self Development","./assets/images/nace-icons/nace-career-and-self-development-black-line-art-icon.png","self_development") ?>
-                                        </button>
-                                    </h2>
-                                    <div id="flush-collapseOne" class="accordion-collapse collapse"
-                                        aria-labelledby="flush-flush-collapseOne"
-                                        data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">
-                                            <?= generate_competency($competency_data["self_development"],"#f8b603"); ?>
+    <div class="accordion-item">
+        <h2 class="accordion-header card-body competency_result py-md-4 py-0" id="flush-headingThree">
+            <div class="row align-items-center">
+                <?= generate_competency_results($competency_data, "self_development_results","career-development", "Career & Self Development","./assets/images/nace-icons/nace-career-and-self-development-black-line-art-icon.png","self_development") ?>
+                <div class="col-md-1 col-12 d-flex flex-row flex-md-column align-items-center justify-content-center py-2 py-md-0 accordion-button-wrapper">
+                    <button class="accordion-button collapsed btn-up"
+                            type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseThree"
+                            aria-expanded="false" aria-controls="flush-collapseThree">
+                        <span class="d-md-none text-nowrap px-2 text-dark fs-6 fw-bold">View All</span>
+                    </button>
+                </div>
+            </div>
+            
 
-                                            <h5 class="card-title text-black mb-3">
-                                                Recommendations
-                                            </h5>
+        </h2>
+        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <?= generate_competency($competency_data["self_development"], "career-development"); ?>
+                <div class="card-body pb-1 pt-3">
+                    <h4 class="card-title text-black mb-3 fw-bold px-2">
+                        Recommendations
+                    </h4>
 
-                                            <div class="card border-2">
-                                                <div class="card-body" style="color:black">
-                                                <?= $recommendations["Career & Self Development"] ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="card border-2">
+                        <div class="card-body" style="color:black">
+                            <?= $recommendations["Career & Self Development"] ?>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
 
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-headingFour">
-                                        <button class="accordion-button collapsed btn-up" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseFour"
-                                            aria-expanded="false" aria-controls="flush-collapseFour">
-                                            <?= generate_competency_results($competency_data, "professionalism_results","#609866", "Professionalism","./assets/images/nace-icons/nace-professionalism-black-line-art-icon.png","professionalism") ?>
-                                        </button>
-                                    </h2>
-                                    <div id="flush-collapseFour" class="accordion-collapse collapse"
-                                        aria-labelledby="flush-flush-collapseFour"
-                                        data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">
-                                            <?= generate_competency($competency_data["professionalism"],"#609866"); ?>
-                                            <h5 class="card-title text-black mb-3">
-                                                Recommendations
-                                            </h5>
+    <div class="py-3 d-md-none"></div>
 
-                                            <div class="card border-2">
-                                                <div class="card-body" style="color:black">
-                                                <?= $recommendations["Professionalism"] ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header card-body competency_result py-md-4 py-0" id="flush-headingFour">
+            <div class="row align-items-center">
+                <?= generate_competency_results($competency_data, "professionalism_results","professionalism", "Professionalism","./assets/images/nace-icons/nace-professionalism-black-line-art-icon.png","professionalism") ?>
+                <div class="col-md-1 col-12 d-flex flex-row flex-md-column align-items-center justify-content-center py-2 py-md-0 accordion-button-wrapper">
+                    <button class="accordion-button collapsed btn-up"
+                            type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseFour"
+                            aria-expanded="false" aria-controls="flush-collapseFour">
+                        <span class="d-md-none text-nowrap px-2 text-dark fs-6 fw-bold">View All</span>
+                    </button>
+                </div>
+            </div>
+            
 
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-headingFive">
-                                        <button class="accordion-button collapsed btn-up" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseFive"
-                                            aria-expanded="false" aria-controls="flush-collapseFive">
-                                            <?= generate_competency_results($competency_data, "leadership_results","#796258", "Leadership","./assets/images/nace-icons/nace-leadership-black-line-art-icon.png","leadership") ?>
-                                        </button>
-                                    </h2>
-                                </div>
-                                <div id="flush-collapseFive" class="accordion-collapse collapse"
-                                    aria-labelledby="flush-flush-collapseFive" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">
-                                        <?= generate_competency($competency_data["leadership"],"#796258"); ?>
-                                        <h5 class="card-title text-black mb-3">
-                                            Recommendations
-                                        </h5>
+        </h2>
+        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <?= generate_competency($competency_data["professionalism"], "professionalism"); ?>
+                <div class="card-body pb-1 pt-3">
+                    <h4 class="card-title text-black mb-3 fw-bold px-2">
+                        Recommendations
+                    </h4>
 
-                                        <div class="card border-2">
-                                            <div class="card-body" style="color:black">
-                                                <?= $recommendations["Leadership"] ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="card border-2">
+                        <div class="card-body" style="color:black">
+                            <?= $recommendations["Professionalism"] ?>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
 
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-headingSix">
-                                        <button class="accordion-button collapsed btn-up" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseSix"
-                                            aria-expanded="false" aria-controls="flush-collapseSix">
-                                            <?= generate_competency_results($competency_data, "critical_thinking_results","#705181", "Critical Thinking","./assets/images/nace-icons/nace-critical-thinking-black-line-art-icon.png","critical_thinking") ?>
-                                        </button>
-                                    </h2>
-                                </div>
+    <div class="py-3 d-md-none"></div>
 
-                                <div id="flush-collapseSix" class="accordion-collapse collapse"
-                                    aria-labelledby="flush-flush-collapseSix" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">
-                                        <?= generate_competency($competency_data["critical_thinking"],"#705181"); ?>
+    <div class="accordion-item">
+        <h2 class="accordion-header card-body competency_result py-md-4 py-0" id="flush-headingFive">
+            <div class="row align-items-center">
+                <?= generate_competency_results($competency_data, "leadership_results","leadership", "Leadership","./assets/images/nace-icons/nace-leadership-black-line-art-icon.png","leadership") ?>
+                <div class="col-md-1 col-12 d-flex flex-row flex-md-column align-items-center justify-content-center py-2 py-md-0 accordion-button-wrapper">
+                    <button class="accordion-button collapsed btn-up"
+                            type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseFive"
+                            aria-expanded="false" aria-controls="flush-collapseFive">
+                        <span class="d-md-none text-nowrap px-2 text-dark fs-6 fw-bold">View All</span>
+                    </button>
+                </div>
+            </div>
+            
 
-                                        <h5 class="card-title text-black mb-3">
-                                            Recommendations
-                                        </h5>
+        </h2>
+        <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <?= generate_competency($competency_data["leadership"], "leadership"); ?>
+                <div class="card-body pb-1 pt-3">
+                    <h4 class="card-title text-black mb-3 fw-bold px-2">
+                        Recommendations
+                    </h4>
 
-                                        <div class="card border-2">
-                                            <div class="card-body" style="color:black">
-                                                 <?= $recommendations["Critical Thinking"] ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="card border-2">
+                        <div class="card-body" style="color:black">
+                            <?= $recommendations["Leadership"] ?>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
 
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-headingSeven">
-                                        <button class="accordion-button collapsed btn-up" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven"
-                                            aria-expanded="false" aria-controls="flush-collapseSeven">
-                                            <?= generate_competency_results($competency_data, "technology_results","#3c4b6c", "Technology","./assets/images/nace-icons/nace-technology-black-line-art-icon.png","technology") ?>
-                                        </button>
-                                    </h2>
-                                    <div id="flush-collapseSeven" class="accordion-collapse collapse"
-                                        aria-labelledby="flush-flush-collapseSeven"
-                                        data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">
-                                            <?= generate_competency($competency_data["technology"],"#3c4b6c"); ?>
+    <div class="py-3 d-md-none"></div>
 
-                                            <h5 class="card-title text-black mb-3">
-                                                Recommendations
-                                            </h5>
+    <div class="accordion-item">
+        <h2 class="accordion-header card-body competency_result py-md-4 py-0" id="flush-headingSix">
+            <div class="row align-items-center">
+                <?= generate_competency_results($competency_data, "critical_thinking_results","critical-thinking", "Critical Thinking","./assets/images/nace-icons/nace-critical-thinking-black-line-art-icon.png","critical_thinking") ?>
+                <div class="col-md-1 col-12 d-flex flex-row flex-md-column align-items-center justify-content-center py-2 py-md-0 accordion-button-wrapper">
+                    <button class="accordion-button collapsed btn-up"
+                            type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseSix"
+                            aria-expanded="false" aria-controls="flush-collapseSix">
+                        <span class="d-md-none text-nowrap px-2 text-dark fs-6 fw-bold">View All</span>
+                    </button>
+                </div>
+            </div>
+            
 
-                                            <div class="card border-2">
-                                                <div class="card-body" style="color:black">
-                                                <?= $recommendations["Technology"] ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+        </h2>
+        <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <?= generate_competency($competency_data["critical_thinking"], "critical-thinking"); ?>
+                <div class="card-body pb-1 pt-3">
+                    <h4 class="card-title text-black mb-3 fw-bold px-2">
+                        Recommendations
+                    </h4>
 
-                                <?php 
-                                    if(isset($competency_data["equity"])){                                
-                                ?>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-headingEight">
-                                        <button class="accordion-button collapsed btn-up" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseEight"
-                                            aria-expanded="false" aria-controls="flush-collapseEight">
-                                            <?= generate_competency_results($competency_data, "equity_results","#ad3131", "Equity & Inclusion","./assets/images/nace-icons/nace-equity-and-inclusion-black-line-art-icon.png","equity") ?>
-                                        </button>
-                                    </h2>
-                                    <div id="flush-collapseEight" class="accordion-collapse collapse"
-                                        aria-labelledby="flush-flush-collapseEight"
-                                        data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">
-                                            <?= isset($competency_data["equity"]) ? generate_competency($competency_data["equity"],"#ad3131") : "" ?>
+                    <div class="card border-2">
+                        <div class="card-body" style="color:black">
+                            <?= $recommendations["Critical Thinking"] ?>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
 
-                                            <h5 class="card-title text-black mb-3">
-                                                Recommendations
-                                            </h5>
+    <div class="py-3 d-md-none"></div>
 
-                                            <div class="card border-2">
-                                                <div class="card-body" style="color:black">
-                                                    <?= $recommendations["Equity & Inclusion"] ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php } ?>
+    <div class="accordion-item">
+        <h2 class="accordion-header card-body competency_result py-md-4 py-0" id="flush-headingSeven">
+            <div class="row align-items-center">
+            <?= generate_competency_results($competency_data, "technology_results","technology", "Technology","./assets/images/nace-icons/nace-technology-black-line-art-icon.png","technology") ?>
+                <div class="col-md-1 col-12 d-flex flex-row flex-md-column align-items-center justify-content-center py-2 py-md-0 accordion-button-wrapper">
+                    <button class="accordion-button collapsed btn-up"
+                            type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseSeven"
+                            aria-expanded="false" aria-controls="flush-collapseSeven">
+                        <span class="d-md-none text-nowrap px-2 text-dark fs-6 fw-bold">View All</span>
+                    </button>
+                </div>
+            </div>
+            
+
+        </h2>
+        <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <?= generate_competency($competency_data["technology"], "technology"); ?>
+                <div class="card-body pb-1 pt-3">
+                    <h4 class="card-title text-black mb-3 fw-bold px-2">
+                        Recommendations
+                    </h4>
+
+                    <div class="card border-2">
+                        <div class="card-body" style="color:black">
+                            <?= $recommendations["Technology"] ?>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="py-3 d-md-none"></div>
+
+    <?php 
+        if(isset($competency_data["equity"])){                                
+    ?>
+        <div class="accordion-item">
+            <h2 class="accordion-header card-body competency_result py-md-4 py-0" id="flush-headingEight">
+                <div class="row align-items-center">
+                <?= generate_competency_results($competency_data, "equity_results","equity", "Equity & Inclusion","./assets/images/nace-icons/nace-equity-and-inclusion-black-line-art-icon.png","equity") ?>
+                    <div class="col-md-1 col-12 d-flex flex-row flex-md-column align-items-center justify-content-center py-2 py-md-0 accordion-button-wrapper">
+                        <button class="accordion-button collapsed btn-up"
+                                type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseEight"
+                                aria-expanded="false" aria-controls="flush-collapseEight">
+                            <span class="d-md-none text-nowrap px-2 text-dark fs-6 fw-bold">View All</span>
+                        </button>
+                    </div>
+                </div>
+                
+
+            </h2>
+            <div id="flush-collapseEight" class="accordion-collapse collapse" aria-labelledby="flush-headingEight" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <?= generate_competency($competency_data["equity"], "equity"); ?>
+                    <div class="card-body pb-1 pt-3">
+                        <h4 class="card-title text-black mb-3 fw-bold px-2">
+                            Recommendations
+                        </h4>
+
+                        <div class="card border-2">
+                            <div class="card-body" style="color:black">
+                                <?= $recommendations["Equity & Inclusion"] ?>
                             </div>
                         </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    <?php 
+        }
+    ?>
+
+    <div class="py-3 d-md-none"></div>
+
+    <!-- Repeat this structure for each competency -->
+</div>

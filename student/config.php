@@ -19,8 +19,6 @@ define('API_STUDENT_DETAILS_ENDPOINT', API_BASE_URL . '/student-details');
 define('API_STUDENT_COMPETENCY_ENDPOINT', API_BASE_URL . '/student-competency');
 define('API_CUSTOM_RECOMMENDATIONS_ENDPOINT', API_BASE_URL . '/get-organization-records');
 
-
-
 // AWS Configuration
 // define('AWS_REGION', 'us-west-2');
 // define('AWS_BUCKET_NAME', 'your-s3-bucket-name');
