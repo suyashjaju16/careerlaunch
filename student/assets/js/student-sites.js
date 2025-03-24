@@ -37,7 +37,17 @@ function positionProgressLabels(scope = document) {
 
         if (parentWidth === 0 || labelWidth === 0) return;
 
+        const circle = label.previousElementSibling?.classList.contains("progress-value")
+            ? label.previousElementSibling
+            : null;
+
+        const circleWidth = circle?.offsetWidth || 15;
+
+        // Calculate the raw left value based on percentage
         let left = (percent / 100) * parentWidth - labelWidth / 2;
+
+        // Adjust for half the progress-value width
+        left -= circleWidth / 2;
 
         // Clamp
         if (left < 0) left = 0;

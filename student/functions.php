@@ -61,9 +61,9 @@ function returnColor($val, $true_label = "self" ) {
 function returnLevel($level) {
     return isset($level) ? 
         ($level == "Not Observed" ? "0" : 
-        ($level == "Emerging" ? "10.5" : 
-        ($level == "Understanding" ? "35.5" : 
-        ($level == "Early" ? "60" : "85.5")))) : null;
+        ($level == "Emerging" ? "0" : 
+        ($level == "Understanding" ? "33" : 
+        ($level == "Early" ? "67" : "100")))) : null;
 }
 
 // Function to generate filters with selected value

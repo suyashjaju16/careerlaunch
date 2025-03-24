@@ -19,11 +19,11 @@
 		line-height: 30px;
 		margin-top: -12px;
 		position: relative;
-		left: -15px;
+		left: -30px;
 	}
 
 	.animated-progress.progress-bar{
-		min-width: 15px !important;
+		min-width: 30px !important;
 	}
 
 	.mobile-competency-name{
@@ -69,6 +69,10 @@
 	.pb-4-5-mobile{
 		padding-bottom: 2.5rem !important;
 	}
+
+	.student-evaluator-details div{
+		text-align: center !important;
+	}
 }
 
 
@@ -88,6 +92,12 @@ th {
 td {
     padding: 12px !important;
     /* text-align: center !important; */
+}
+
+.org-logo {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 140px;
 }
 
 .mobile-competency-name .img-fluid {
@@ -127,7 +137,7 @@ td {
 	flex-shrink: 0;
 	overflow: unset !important;
 	border-radius: 10px;
-	min-width: 19px;
+	min-width: 38px;
 }
 
 .progress-bar-labels span {
@@ -172,7 +182,7 @@ td {
     color: white;
     margin-top: -16px;
 	position: relative;
-	left: -19px;
+	left: -38px;
 	
 }
 

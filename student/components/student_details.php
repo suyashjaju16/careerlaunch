@@ -54,31 +54,32 @@
                         </div>
                     </div>
 
-                    <?php 
-                    // echo $student_details["work_experience"];
-                    if(isset($student_details["Evaluator Relation"])){                            
-                        ?>
+
                     <div class="row mt-3">
+                        <?php 
+                        // echo $student_details["work_experience"];
+                        if(isset($student_details["Evaluator Relation"])){                            
+                        ?>
 
                         <div class="col-12 col-md-8" >
                             <div class="card border-1">
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12 col-md-6 text-center mb-2">
+                                    <div class="row student-evaluator-details">
+                                        <div class="col-12 col-md-7 mb-2">
                                             <h5> <b> Evaluator:
                                                     <?= isset($student_details["Evaluator Relation"]) ? $student_details['Evaluator Relation'] : "" ?>
                                                 </b>
                                             </h5>
                                             <h5><?= isset($student_details["Evaluator Name"]) ? $student_details['Evaluator Name'] : "Not Assigned" ?>
                                             </h5>
-                                            <div class="d-flex align-items-center justify-content-center">
-                                                <i class="mdi mdi-email me-2" style="font-size:18px;"></i>
+                                            <!-- <div class="d-flex align-items-center"> -->
                                                 <h5 class="m-0 text-break">
+                                                    <i class="mdi mdi-email me-1" style="font-size:1.125rem;"></i>
                                                     <?= isset($student_details['Evaluator Email']) ? $student_details['Evaluator Email'] : "N/A" ?>
                                                 </h5>
-                                            </div>
+                                            <!-- </div> -->
                                         </div>
-                                        <div class="col-12 col-md-6 text-center mt-3 my-md-auto">
+                                        <div class="col-12 col-md-5 mt-3 my-md-auto ">
                                             <h5><b>Work Experience</b></h5>
                                             <h5><?= $student_details['work_experience'] ?></h5>
                                         </div>
@@ -87,24 +88,29 @@
 
                             </div>
                         </div>
-                        <div class="col-12 col-md-4 text-end mt-3 mt-md-0 d-none d-md-block"
-                        style="margin-left: auto; margin-right: 0; max-height: 50px;">
-                            <img src="<?= $student_details['Logo'] == 'NULL' ? 'assets/images/logo.png' : $student_details['Logo'] ?>"
-                                class="img-fluid rounded" alt="Org Logo" style="max-height: inherit;"
-                                >
+                        <div class="col-md-1 d-none d-md-block"></div>
+                        <div class="col-12 col-md-3 d-none d-md-block mt-md-0">
+                            <div class="w-100 d-flex align-items-center justify-content-end">
+                                <img src="<?= $student_details['Logo'] == 'NULL' ? 'assets/images/logo.png' : $student_details['Logo'] ?>"
+                                    class="img-fluid org-logo rounded" alt="Org Logo">
+                            </div>
                         </div>
-                    </div>
-                    <?php } 
+
+                        <?php } 
                         else{
-                            ?>
-                    <div class="col-12 col-md-4  text-end mt-3 mt-md-0 d-none d-md-block"
-                    style="margin-left: auto; margin-right: 0; max-height: 50px;">
-                        <img src="<?= $student_details['Logo'] == 'NULL' ? 'assets/images/logo.png' : $student_details['Logo'] ?>"
-                            class="img-fluid rounded" alt="<?= $student_details['Organisation'] ?>" style="max-height: inherit;"
-                        >
-                    </div>
+                        ?>
+
+                        <div class="col-12 col-md-9" ></div>
+                        <div class="col-12 col-md-3 d-none d-md-block mt-md-0">
+                            <div class="w-100 d-flex align-items-center justify-content-end">
+                                <img src="<?= $student_details['Logo'] == 'NULL' ? 'assets/images/logo.png' : $student_details['Logo'] ?>"
+                                    class="img-fluid org-logo rounded" alt="<?= $student_details['Organisation'] ?>">
+                            </div>
+                        </div>
                     <?php
                         }
                         ?>
+
+                    </div>
                 </div>
             </div>
