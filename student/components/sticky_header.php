@@ -23,9 +23,9 @@
                                 ['text' => 'Emerging Knowledge', 'class' => 'bg-emerging'],
                                 ['text' => 'Understanding', 'class' => 'bg-success'],
                                 ['text' => 'Early Application', 'class' => 'bg-warning'],
-                                ['text' => 'Advanced Application', 'color' => 'bg-danger'],
+                                ['text' => 'Advanced Application', 'class' => 'bg-danger'],
                             ];
-                            // echo get_ruler_labels($labels);
+                            echo get_ruler_labels($labels);
                         ?> 
 
                         <?php echo get_ruler_html(); ?>

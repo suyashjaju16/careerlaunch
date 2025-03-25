@@ -1,3 +1,20 @@
+document.addEventListener("DOMContentLoaded", function () {
+    let stickyHeader = document.querySelector(".sticky-top");
+    let stickyHeight = stickyHeader.offsetHeight;
+    let studentCompetencySection = document.querySelector(".student-competency-section");
+
+    window.addEventListener("scroll", function () {
+        let sectionRect = studentCompetencySection.getBoundingClientRect() ;
+
+        if (sectionRect.bottom < stickyHeight) {
+            // If the bottom of .student-competency-section is above the viewport, hide the sticky header
+            stickyHeader.classList.add("hide-sticky");
+        } else {
+            // If it's still in view, show the sticky header
+            stickyHeader.classList.remove("hide-sticky");
+        }
+    });
+});
 
 function eval_toggle() {
     // $(".evalu").hide()

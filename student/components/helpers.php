@@ -27,17 +27,21 @@ function get_ruler_html() {
 }
 
 function get_ruler_labels($labels) {
+    $count = count($labels);
+    $colSizeDesktop = $count > 0 ? 12 / $count : 12;
+    $colSizeMobile = $count == 1 ? 12 : ($count == 2 ? 6 : 6);
+    
     $desktop_labels = '';
     $mobile_labels = '';
     $color_bars = '';
 
     foreach ($labels as $label) {
-        $bgClass = isset($label['class']) ? '.$label['class'].' : '';
+        $bgClass = isset($label['class']) ? $label['class'] : '';
         $bgColor = isset($label['color']) ? 'background-color:'.$label['color'].';' : '';
 
-        $desktop_labels .= '<div class="col-md-3 text-center"><span class="badge text-black text-center fw-bolder fs-6 p-1 text-break w-100 '.$bgClass.'" style="'.$bgColor.'">'.$label['text'].'</span></div>';
+        $desktop_labels .= '<div class="col-md-'.$colSizeDesktop.' text-center"><span class="badge text-black text-center fw-bolder fs-6 p-1 text-break w-100 '.$bgClass.'" style="'.$bgColor.'">'.$label['text'].'</span></div>';
 
-        $mobile_labels .= '<div class="col-6 d-flex align-items-center pe-2 ps-0"><span class="badge me-2 rounded '.$bgClass.'" style="min-width: 20px; min-height: 20px; '.$bgColor.'">&nbsp;</span><span class="text-dark fw-bold flex-grow-1 text-nowrap">'.$label['text'].'</span></div>';
+        $mobile_labels .= '<div class="col-'.$colSizeMobile.' d-flex align-items-center pe-2 ps-0"><span class="badge me-2 rounded fs-6 '.$bgClass.'" style="min-width: 20px; min-height: 20px; max-height: 20px '.$bgColor.'">&nbsp;</span><span class="text-dark fw-bold flex-grow-1 text-break">'.$label['text'].'</span></div>';
 
         $color_bars .= '<div class="flex-fill mx-1 rounded-pill h-100 '.$bgClass.'" style="'.$bgColor.'"></div>';
     }

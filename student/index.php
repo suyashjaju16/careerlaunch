@@ -50,65 +50,28 @@ $selected_filter = isset($_POST['filterData']) ? $_POST['filterData'] : '';
                     <div class="col-12 px-0" >
                         <div class="card student-competency-section">
                             <?php include("./components/student_competency.php") ?>
-                            <?php
-    skill_level_component(
-        'Social Capital Skills',
-        './assets/icons/social_capital.png',
-        48, // Pre Score (optional, use null if not applicable)
-        70, // Post Score
-        'Emerging Social Capital Development',
-        'Advanced Social Capital Development',
-        50,
-        null,
-        "You're on the right path - keep going! You are starting to grasp the importance of social capital skills...",
-        [
-            "Attend workshops and events hosted by your career center...",
-            "Initiate career conversations with professors...",
-            "Reach out to industry professionals..."
-        ]
-    );
-
-    skill_level_component(
-        'Life Design Mindsets',
-        './assets/icons/life_design.png',
-        null,
-        70,
-        'Fixed Mindset',
-        'Growth Mindset',
-        50,
-        './assets/images/user.png',
-        "Having a growth mindset helps you to adapt and embrace challenges...",
-        [
-            "Reflect regularly on your progress...",
-            "Practice gratitude journaling to cultivate positivity...",
-            "Engage in mentorship opportunities..."
-        ]
-    );
-
-    skill_level_component(
-        'Career Mobility Best Practices',
-        './assets/icons/career_mobility.png',
-        null,
-        70,
-        'Emerging Best Practices',
-        'Advanced Best Practices',
-        50,
-        null,
-        "By actively engaging with career mobility best practices...",
-        [
-            "Attend career fairs and networking sessions...",
-            "Regularly update your resume...",
-            "Conduct informational interviews..."
-        ]
-    );
-    ?>
-                            <hr style="opacity:1">
-                            <?php include("./components/footer.php"); ?>
+                        </div>
+                    </div>
+                    <div class="col-12 px-0" >
+                        <div class="card student-competency-section">
+                            <?= skill_level_component(
+                                    $competency_data,
+                                    'Social Capital Skills',
+                                    'Emerging Social Capital Development',
+                                    'Advanced Social Capital Development',
+                                    [
+                                        $recommendations["Technology"] ?? "<p>No recommendations available</p>",
+                                        $recommendations["Critical Thinking"] ?? "<p>No recommendations available</p>",
+                                    ],
+                                    $recommendations
+                                ); 
+                            ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <?php include("./components/footer.php"); ?>
     </div>
                     
 </body>

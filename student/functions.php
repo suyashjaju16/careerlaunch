@@ -141,17 +141,21 @@ function generate_competency($level,$competency_label) {
     }
     }
     
-    function generate_competency_results($competency_data, $competency, $color_label, $label, $icon, $competency_tag) {
+    function generate_competency_results($competency_data, $competency, $color_label, $label, $icon, $competency_tag, $orders = null) {
         if (isset($competency_data[$competency_tag])) {
             $post_color_suffix = "post";
+
+            $order_name = $orders ? 'order-md-'.$orders['desktop'][0].' order-'.$orders['mobile'][0] : '';
+            $order_progress = $orders ? 'order-md-'.$orders['desktop'][1].' order-'.$orders['mobile'][1] : '';
+        
             echo '
-                <div class="col-md-3 col-12">
+                <div class="col-md-3 col-12 '.$order_name.'">
                     <div class="d-flex flex-row flex-md-column align-items-center justify-content-center px-2 py-3 mobile-competency-name bg-'.$color_label.'-pre" style="border-radius: 20px;">
                         <img class="img-fluid me-2" src="'.$icon.'" >
                         <span class="ms-2 ms-md-0 mt-md-2 mb-0 text-white text-wrap text-break text-center fw-bold fs-5">'.$label.'</span>
                     </div>
                 </div>
-                <div class="col-md-8 col-12 pt-5 pb-4-5-mobile py-md-0">
+                <div class="col-md-8 col-12 pt-5 pb-4-5-mobile py-md-0 '.$order_progress.'">
             ';
     
             if (!empty($competency_data["evaluator"])) {

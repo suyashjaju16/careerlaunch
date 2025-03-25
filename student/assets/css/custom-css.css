@@ -42,6 +42,7 @@
 		border-top: 1px solid #0000001f;
 	}
 
+
 	.student-competency-section{
 		background-color: transparent;
 		border: none;
@@ -74,25 +75,15 @@
 		text-align: center !important;
 	}
 
-	#mobile-labels {
-		transition: max-height 0.4s ease, opacity 0.3s ease;
-		overflow: hidden;
-		max-height: 500px; /* enough to show full content */
-		opacity: 1;
-		will-change: max-height, opacity;;
-	}
-	
-	#mobile-labels.collapsed {
-		padding-bottom: 0 !important;
-		max-height: 0;
-		opacity: 0;
-	}
-
 	#mobile-labels span.text-dark {
 		text-align: left !important;
-		white-space: nowrap; /* Prevent text wrapping */
-		display: block; /* Ensure it takes full width */
-		font-size: clamp(1px, 3vw, 14px); /* Adjust size between 1px and 14px */
+		display: block;
+		font-size: clamp(1px, 3vw, 16px);
+	}
+
+	.sticky-header-card #mobile-labels span.text-dark {
+		white-space: nowrap !important;
+		font-weight: 700;
 	}
 }
 
@@ -153,7 +144,7 @@ td {
 	.competency .row {
 		border-top: #0000001f solid 1px;
 	}
-	.competency .row:last-child {
+	.competency:last-child .row {
 		border-bottom: #0000001f solid 1px;
 	}
 }
@@ -412,5 +403,14 @@ select {
 
 .custom-pb-2{
 	padding-bottom: 0.5rem !important;
+}
+
+.hide-sticky {
+	transform: translateY(-100%);
+	transition: transform 0.3s ease-in-out;
+}
+
+.sticky-top {
+	transition: transform 0.4s ease-in-out; /* Smooth transition for both show and hide */
 }
 
