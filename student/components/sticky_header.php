@@ -18,90 +18,17 @@
 
                     <div class="col-md-8 col-12">
 
-                        <div class="d-none d-md-flex row gx-2 px-2 justify-content-between align-items-center mb-3 progress-bar-labels">
-                            <div class="col-md-3 text-center ">
-                                <span class="badge text-black text-center fw-bolder fs-6 p-1 text-break w-100 bg-emerging">
-                                    Emerging Knowledge
-                                </span>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <span class="badge bg-success text-black text-center fw-bolder fs-6 p-1 text-break w-100">
-                                    Understanding
-                                </span>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <span class="badge bg-warning text-black text-center fw-bolder fs-6 p-1 text-break w-100">
-                                    Early Application
-                                </span>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <span class="badge bg-danger text-black text-center fw-bolder fs-6 p-1 text-break w-100">
-                                    Advanced Application
-                                </span>
-                            </div>
-                        </div>
+                        <?php 
+                            $labels = [
+                                ['text' => 'Emerging Knowledge', 'class' => 'bg-emerging'],
+                                ['text' => 'Understanding', 'class' => 'bg-success'],
+                                ['text' => 'Early Application', 'class' => 'bg-warning'],
+                                ['text' => 'Advanced Application', 'color' => 'bg-danger'],
+                            ];
+                            // echo get_ruler_labels($labels);
+                        ?> 
 
-                        <div class="d-block d-md-none mt-1" style="border-top: #0000001f solid 1px;"></div>
-                        <div id="mobile-labels" class="d-flex d-md-none row text-center gy-3 px-3 pb-3 mb-3 mt-1" style=" border-bottom: #0000001f solid 1px;">
-                            <div class="col-6 d-flex align-items-center pe-2 ps-0">
-                                <span class="badge me-2 rounded bg-emerging" style="min-width: 20px; min-height: 20px;">&nbsp;</span>
-                                <span class="text-dark fw-bold flex-grow-1 text-nowrap">Emerging Knowledge</span>
-                            </div>
-                            <div class="col-6 d-flex align-items-center pe-2 ps-0">
-                                <span class="badge me-2 rounded bg-warning" style="min-width: 20px; min-height: 20px;">&nbsp;</span>
-                                <span class="text-dark fw-bold flex-grow-1 text-nowrap">Early Application</span>
-                            </div>
-                            <div class="col-6 d-flex align-items-center pe-2 ps-0">
-                                <span class="badge me-2 rounded bg-success" style="min-width: 20px; min-height: 20px;">&nbsp;</span>
-                                <span class="text-dark fw-bold flex-grow-1 text-nowrap">Understanding</span>
-                            </div>
-                            <div class="col-6 d-flex align-items-center pe-2 ps-0">
-                                <span class="badge me-2 rounded bg-danger" style="min-width: 20px; min-height: 20px;">&nbsp;</span>
-                                <span class="text-dark fw-bold flex-grow-1 text-nowrap">Advanced Application</span>
-                            </div>
-                        </div>
-
-
-
-                        <!-- Progress Bar -->
-                        <!-- <div class="d-flex align-items-center d-md-none" style="height: 12px;">
-                            <div class="mx-1" ></div>
-                            <div class="mx-1 bg-success" ></div>
-                            <div class="mx-1 bg-warning" ></div>
-                            <div class="mx-1 bg-danger" ></div>
-                        </div> -->
-
-                        <div class="d-flex align-items-center justify-content-between d-md-none" style="height: 12px;">
-                            <div class="flex-fill mx-1 rounded-pill h-100 bg-emerging" ></div>
-                            <div class="flex-fill mx-1 rounded-pill h-100 bg-success" ></div>
-                            <div class="flex-fill mx-1 rounded-pill h-100 bg-warning" ></div>
-                            <div class="flex-fill mx-1 rounded-pill h-100 bg-danger" ></div>
-                        </div>
-
-                        <div class="mt-2">
-
-                            <div class="ruler mt-0">
-                                <div class="tick"></div>
-                                <!-- 0% -->
-                                <div class="tick" style="left:calc(25% - 1px);"></div>
-                                <!-- 25% -->
-                                <div class="tick" style="left:calc(50% - 1px);"></div>
-                                <!-- 50% -->
-                                <div class="tick" style="left:calc(75% - 1px);"></div>
-                                <!-- 75% -->
-                                <div class="tick" style="left:calc(100% - 2px);"></div>
-                                <!-- 100% -->
-                            </div>
-                        </div>
-
-                        <!-- Ruler Values (Aligned Precisely) -->
-                        <div class="d-flex justify-content-between mt-2" style="margin-left: -3px; ">
-                            <span class="fw-bold text-black fw-bolder small" style=" padding-right:8px;">0</span>
-                            <span class="fw-bold text-black fw-bolder small" style=" padding-left:5px;">25</span>
-                            <span class="fw-bold text-black fw-bolder small" style=" padding-left:10px;">50</span>
-                            <span class="fw-bold text-black fw-bolder small" style=" padding-left:10px;">75</span>
-                            <span class="fw-bold text-black fw-bolder small" style="margin-right:-5px;">100</span>
-                        </div>
+                        <?php echo get_ruler_html(); ?>
 
                     </div>
                     <!-- Info Icon (Popover) -->
