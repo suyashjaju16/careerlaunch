@@ -98,9 +98,9 @@ function generate_competency($level,$competency_label) {
             $opacityClass = ($value["evaluator"] === "Not Observed") ? "opacity-50" : ""; 
             $opacityClassProgressBar = ($value["evaluator"] === "Not Observed") ? "opacity-0" : "";
             echo '
-                    <div class="progress evaluator-data bg-white bar-data">
+                    <div class="progress evaluator-data bg-white bar-data w-100">
                         <div class="progress-bar animated-progress '.$opacityClassProgressBar.'" role="progressbar" data-width="'.$evaluator_value.'" aria-valuemin="0" aria-valuemax="100"
-                        style="width:'.$evaluator_value.'%; max-width: 100%" ></div>
+                        style="width:'.$evaluator_value.'%; "></div>
                         <div class="progress-value mobile-circle '.$opacityClass.'" ></div>
                         <div class="progress-label fs-6 fw-bolder text-dark" data-percent="'.$evaluator_value.'">'.$value["evaluator"].'</div>
                     </div>
@@ -112,7 +112,7 @@ function generate_competency($level,$competency_label) {
             echo '
                     <div class="progress pre-data bg-white bar-data bar-data">
                         <div class="progress-bar animated-progress bg-'.$competency_label.'-pre" role="progressbar" data-width="'.$pre_value.'" aria-valuemin="0" aria-valuemax="100"
-                        style="width:'.$pre_value.'%; max-width: 100%" ></div>
+                        style="width:'.$pre_value.'%;"></div>
                         <div class="progress-value mobile-circle bg-'.$competency_label.'-pre" ></div>
                         <div class="progress-label fs-6 fw-bolder text-dark" data-percent="'.$pre_value.'">'.$value["pre"].'</div>
                     </div>
@@ -127,7 +127,7 @@ function generate_competency($level,$competency_label) {
             echo '
                     <div class="progress post-data bg-white bar-data">
                         <div class="progress-bar animated-progress bg-'.$competency_label.'-'.$post_color_suffix.'" role="progressbar" data-width="'.$post_value.'" aria-valuemin="0" aria-valuemax="100"
-                        style="width:'.$post_value.'%; max-width: 100%" ></div>
+                        style="width:'.$post_value.'%;" ></div>
                         <div class="progress-value mobile-circle bg-'.$competency_label.'-'.$post_color_suffix.'" ></div>
                         <div class="progress-label fs-6 fw-bolder text-dark" data-percent="'.$post_value.'">'.$value["post"].'</div>
                     </div>
@@ -163,7 +163,7 @@ function generate_competency($level,$competency_label) {
                 echo '
                     <div class="progress evaluator-data bg-white bar-data">
                         <div class="progress-bar animated-progress" role="progressbar" data-width="'.$evaluator_value.'" aria-valuemin="0" aria-valuemax="100"
-                        style="width:'.$evaluator_value.'%; max-width: 100%" ></div>
+                        style="width:'.$evaluator_value.'%;" ></div>
                         <div class="progress-value mobile-circle" >
                             '.$evaluator_value.'
                         </div>
@@ -176,7 +176,7 @@ function generate_competency($level,$competency_label) {
                 echo '
                     <div class="progress pre-data bg-white bar-data bar-data">
                         <div class="progress-bar animated-progress bg-'.$color_label.'-pre" role="progressbar" data-width="'.$pre_value.'" aria-valuemin="0" aria-valuemax="100"
-                        style="width:'.$pre_value.'%; max-width: 100%" ></div>
+                        style="width:'.$pre_value.'%;" ></div>
                         <div class="progress-value mobile-circle bg-'.$color_label.'-pre" >
                             '.$pre_value.'
                         </div>
@@ -192,7 +192,7 @@ function generate_competency($level,$competency_label) {
                 echo '
                     <div class="progress post-data bg-white bar-data">
                         <div class="progress-bar animated-progress bg-'.$color_label.'-'.$post_color_suffix.'" role="progressbar" data-width="'.$post_value.'" aria-valuemin="0" aria-valuemax="100"
-                        style="width:'.$post_value.'%; max-width: 100%" ></div>
+                        style="width:'.$post_value.'%;" ></div>
                         <div class="progress-value mobile-circle bg-'.$color_label.'-'.$post_color_suffix.'" >
                             '.$post_value.'
                         </div>

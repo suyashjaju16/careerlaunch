@@ -52,22 +52,6 @@ $selected_filter = isset($_POST['filterData']) ? $_POST['filterData'] : '';
                             <?php include("./components/student_competency.php") ?>
                         </div>
                     </div>
-                    <div class="col-12 px-0" >
-                        <div class="card student-competency-section">
-                            <?= skill_level_component(
-                                    $competency_data,
-                                    'Social Capital Skills',
-                                    'Emerging Social Capital Development',
-                                    'Advanced Social Capital Development',
-                                    [
-                                        $recommendations["Technology"] ?? "<p>No recommendations available</p>",
-                                        $recommendations["Critical Thinking"] ?? "<p>No recommendations available</p>",
-                                    ],
-                                    $recommendations
-                                ); 
-                            ?>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

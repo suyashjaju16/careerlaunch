@@ -43,40 +43,46 @@ document.querySelectorAll('.overall-career-readiness-card').forEach(parent => {
 });
 
 function positionProgressLabels(scope = document) {
-    scope.querySelectorAll(".progress-label").forEach(function (label) {
-        const percent = parseFloat(label.dataset.percent);
-        const parent = label.parentElement;
+    const parent = document.querySelector("#primary-ruler");
+    requestAnimationFrame(() => {
+        scope.querySelectorAll(".progress-label").forEach(function (label) {
+            const percent = parseFloat(label.dataset.percent);
 
-        if (isNaN(percent) || !parent) return;
+            if (isNaN(percent) || !parent) return;
 
-        const parentWidth = parent.offsetWidth;
-        const labelWidth = label.offsetWidth;
+            let parentWidth = parent.getBoundingClientRect().width;
+            const labelWidth = label.offsetWidth;
+            const computedStyle = window.getComputedStyle(parent);
+            const paddingLeft = parseFloat(computedStyle.paddingLeft);
+            parentWidth = parent.offsetWidth - 2*paddingLeft;
+            console.log(parentWidth, labelWidth);
 
-        if (parentWidth === 0 || labelWidth === 0) return;
+            if (parentWidth === 0 || labelWidth === 0) return;
 
-        const circle = label.previousElementSibling?.classList.contains("progress-value")
-            ? label.previousElementSibling
-            : null;
+            const circle = label.previousElementSibling?.classList.contains("progress-value")
+                ? label.previousElementSibling
+                : null;
 
-        const circleWidth = circle?.offsetWidth || 15;
+            const circleWidth = circle?.offsetWidth || 15;
 
-        // Calculate the raw left value based on percentage
-        let left = (percent / 100) * parentWidth - labelWidth / 2;
+            // Calculate the raw left value based on percentage
+            let left = (percent / 100) * parentWidth - labelWidth / 2;
 
-        // Adjust for half the progress-value width
-        left -= circleWidth / 2;
+            // Adjust for half the progress-value width
+            // left -= circleWidth / 2;
 
-        // Clamp
-        if (left < 0) left = 0;
-        if (left + labelWidth > parentWidth) left = parentWidth - labelWidth;
-        label.style.setProperty('--final-left', `${left}px`);
+            // Clamp
+            if (left < 0) left = 0;
+            if (left + labelWidth > parentWidth) left = parentWidth - labelWidth;
+            label.style.setProperty('--final-left', `${left}px`);
 
-        // Animate label positioning
-        // label.style.left = `0px`;
+            // Animate label positioning
+            // label.style.left = `0px`;
 
-        // label.style.animation = 'none';
-        // void label.offsetWidth; // force reflow
-        // label.style.animation = 'progress-label-animation 0.6s ease-out forwards';
+            // label.style.animation = 'none';
+            // void label.offsetWidth; // force reflow
+            // label.style.animation = 'progress-label-animation 0.6s ease-out forwards';
+        });
     });
 }
 

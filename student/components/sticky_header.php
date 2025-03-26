@@ -16,7 +16,7 @@
                         </a>
                     </div>
 
-                    <div class="col-md-8 col-12">
+                    <div class="col-md-8 col-12" id="primary-ruler">
 
                         <?php 
                             $labels = [

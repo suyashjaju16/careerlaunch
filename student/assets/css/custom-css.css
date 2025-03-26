@@ -19,11 +19,12 @@
 		line-height: 30px;
 		margin-top: -12px;
 		position: relative;
-		left: -30px;
+		left: -15px;
 	}
 
 	.animated-progress.progress-bar{
-		min-width: 30px !important;
+		min-width: 15px !important;
+		max-width: calc(100% - 15px) !important;
 	}
 
 	.mobile-competency-name{
@@ -153,7 +154,8 @@ td {
 	flex-shrink: 0;
 	overflow: unset !important;
 	border-radius: 10px;
-	min-width: 38px;
+	min-width: 19px;
+	max-width: calc(100% - 19px);
 }
 
 .progress-bar-labels span {
@@ -198,7 +200,7 @@ td {
     color: white;
     margin-top: -16px;
 	position: relative;
-	left: -38px;
+	left: -19px;
 	
 }
 
